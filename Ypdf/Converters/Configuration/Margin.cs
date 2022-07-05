@@ -1,4 +1,4 @@
-﻿namespace Ypdf.Converters.Config
+﻿namespace Ypdf.Converters.Configuration
 {
     public class Margin
     {

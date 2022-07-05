@@ -1,12 +1,15 @@
 ﻿using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
 using iText.Layout.Properties;
 
-namespace Ypdf.Converters.Config
+namespace Ypdf.Converters.Configuration
 {
     public struct PageParameters
     {
-        public Margin? Margin { get; set; }
+        public int CompressionLevel { get; set; }
         public bool AutoIncreaseSize { get; set; }
+
+        public Margin? Margin { get; set; }
         public HorizontalAlignment HorizontalAlignment { get; set; }
 
         private PageSize? _size = null;
@@ -33,8 +36,10 @@ namespace Ypdf.Converters.Config
 
         public PageParameters()
         {
-            Margin = null;
+            CompressionLevel = CompressionConstants.UNDEFINED_COMPRESSION;
             AutoIncreaseSize = true;
+
+            Margin = null;
             HorizontalAlignment = HorizontalAlignment.CENTER;
         }
     }

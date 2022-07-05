@@ -4,7 +4,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using Ypdf.Converters.Config;
+using Ypdf.Converters.Configuration;
 
 namespace Ypdf.Converters
 {
@@ -19,7 +19,12 @@ namespace Ypdf.Converters
                 .Select(t => new Image(ImageDataFactory.Create(t)))
                 .ToArray();
 
-            var destDoc = new PdfDocument(new PdfWriter(destPath));
+            var pdfWriter = new PdfWriter(destPath);
+
+            if (pageParameters.CompressionLevel != CompressionConstants.UNDEFINED_COMPRESSION)
+                pdfWriter.SetCompressionLevel(pageParameters.CompressionLevel);
+
+            var destDoc = new PdfDocument(pdfWriter);
             var doc = new Document(destDoc);
 
             if (pageParameters.Margin is not null)
