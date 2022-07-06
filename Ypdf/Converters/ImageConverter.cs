@@ -15,6 +15,13 @@ namespace Ypdf.Converters
             if (inputPaths is null)
                 throw new ArgumentNullException(nameof(inputPaths));
 
+            if (inputPaths.Length == 0)
+            {
+                var emptyDoc = new PdfDocument(new PdfWriter(destPath));
+                emptyDoc.Close();
+                return;
+            }
+
             Image[] images = inputPaths
                 .Select(t => new Image(ImageDataFactory.Create(t)))
                 .ToArray();

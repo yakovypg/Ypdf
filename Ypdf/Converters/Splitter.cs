@@ -42,6 +42,12 @@ namespace Ypdf.Converters
             if (ranges is null)
                 throw new ArgumentNullException(nameof(ranges));
 
+            if (ranges.Length == 0)
+            {
+                Split();
+                return;
+            }
+
             PageRange[] pageRanges = ranges.Select(t => new PageRange(t)).ToArray();
             IList<PdfDocument> docs = ExtractPageRanges(pageRanges);
 

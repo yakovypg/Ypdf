@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,8 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="itext7" Version="7.2.3" />
     <PackageReference Include="Mono.Options" Version="6.12.0.148" />
   </ItemGroup>
+
+  <Target Name="CopyPythonTools" AfterTargets="AfterBuild">
+	<Copy SourceFiles="../PythonTools/ImageExtractor.py" DestinationFolder="$(OutDir)" />
+  </Target>
+  <Target Name="CopyPythonToolsOnPublish" AfterTargets="Publish">
+	<Copy SourceFiles="../PythonTools/ImageExtractor.py" DestinationFolder="$(PublishDir)" />
+  </Target>
 
 </Project>

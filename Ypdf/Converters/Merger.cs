@@ -10,6 +10,9 @@ namespace Ypdf.Converters
             if (inputPaths is null)
                 throw new ArgumentNullException(nameof(inputPaths));
 
+            if (inputPaths.Length < 2)
+                throw new ArgumentException("At least two files are needed to merge.");
+
             var destDoc = new PdfDocument(new PdfWriter(destPath));
             var merger = new PdfMerger(destDoc);
 
