@@ -2,16 +2,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>07f44822-9bbd-45fa-9fba-e0a357429948</ProjectGuid>
+    <ProjectGuid>70062e60-fd04-4796-9ec4-835fd5a2fe90</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ImageExtractor.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>PythonTools</Name>
     <RootNamespace>PythonTools</RootNamespace>
-    <InterpreterId>MSBuild|PythonToolsEnvironment|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,17 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ImageExtractor.py" />
-  </ItemGroup>
-  <ItemGroup>
-    <Interpreter Include="PythonToolsEnvironment\">
-      <Id>PythonToolsEnvironment</Id>
-      <Version>3.9</Version>
-      <Description>PythonToolsEnvironment (Python 3.9 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
+    <Compile Include="TextExtractor.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

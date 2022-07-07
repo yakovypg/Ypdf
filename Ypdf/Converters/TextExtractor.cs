@@ -2,6 +2,8 @@
 using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using System.Text;
+using Ypdf.Configuration;
+using Ypdf.Runtime.Python;
 
 namespace Ypdf.Converters
 {
@@ -29,6 +31,12 @@ namespace Ypdf.Converters
 
             pdfDoc.Close();
             File.WriteAllText(destPath, textBuilder.ToString());
+        }
+
+        public static void ExtractByPython(string destPath, string inputPath)
+        {
+            var executor = new PythonExecutor(true, true, Console.Out);
+            executor.Execute($"{ToolInfo.PYTHON_TEXT_EXTRACTOR} {destPath} {inputPath}");
         }
     }
 }

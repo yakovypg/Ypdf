@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonTools", "PythonTools\PythonTools.pyproj", "{07F44822-9BBD-45FA-9FBA-E0A357429948}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonTools", "PythonTools\PythonTools.pyproj", "{70062E60-FD04-4796-9EC4-835FD5A2FE90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,8 +22,8 @@ Global
 		{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07F44822-9BBD-45FA-9FBA-E0A357429948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07F44822-9BBD-45FA-9FBA-E0A357429948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70062E60-FD04-4796-9EC4-835FD5A2FE90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70062E60-FD04-4796-9EC4-835FD5A2FE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

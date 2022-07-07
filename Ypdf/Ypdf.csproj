@@ -18,9 +18,11 @@
 
   <Target Name="CopyPythonTools" AfterTargets="AfterBuild">
 	<Copy SourceFiles="../PythonTools/ImageExtractor.py" DestinationFolder="$(OutDir)" />
+	<Copy SourceFiles="../PythonTools/TextExtractor.py" DestinationFolder="$(OutDir)" />
   </Target>
   <Target Name="CopyPythonToolsOnPublish" AfterTargets="Publish">
 	<Copy SourceFiles="../PythonTools/ImageExtractor.py" DestinationFolder="$(PublishDir)" />
+	<Copy SourceFiles="../PythonTools/TextExtractor.py" DestinationFolder="$(OutDir)" />
   </Target>
 
 </Project>

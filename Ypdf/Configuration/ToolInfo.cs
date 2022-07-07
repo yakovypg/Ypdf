@@ -4,7 +4,8 @@ namespace Ypdf.Configuration
 {
     internal static class ToolInfo
     {
-        public const string PyImageExtractor = "ImageExtractor.py";
+        public const string PYTHON_IMAGE_EXTRACTOR = "ImageExtractor.py";
+        public const string PYTHON_TEXT_EXTRACTOR = "TextExtractor.py";
 
         public static string WorkingDirectory { get; }
         public static string TempDirectory { get; }

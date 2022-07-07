@@ -24,7 +24,7 @@ namespace Ypdf.Converters
                 ErrorDataConverter = t => t != null && t.Contains("pages") ? $"\n{t}" : t
             };
 
-            executor.Execute($"{ToolInfo.PyImageExtractor} {destDir} {paths}");
+            executor.Execute($"{ToolInfo.PYTHON_IMAGE_EXTRACTOR} {destDir} {paths}");
         }
     }
 }
