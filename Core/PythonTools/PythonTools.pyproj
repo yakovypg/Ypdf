@@ -22,8 +22,11 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ImageExtractor.py" />
-    <Compile Include="TextExtractor.py" />
+    <Compile Include="Extractors\ImageExtractor.py" />
+    <Compile Include="Extractors\TextExtractor.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extractors\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

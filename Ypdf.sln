@@ -3,14 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ypdf", "Ypdf\Ypdf.csproj", "{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{53D874A9-840C-455C-BE95-527CF9ED5A17}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{158B7979-BABE-40A2-AAC9-293A3096E9B7}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{B5505981-FDE8-4314-A352-9A46D45CC4F1}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonTools", "PythonTools\PythonTools.pyproj", "{70062E60-FD04-4796-9EC4-835FD5A2FE90}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonTools", "Core\PythonTools\PythonTools.pyproj", "{70062E60-FD04-4796-9EC4-835FD5A2FE90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ypdf", "Applications\Ypdf\Ypdf.csproj", "{E49DD0EB-4394-4254-9AFA-AC661726012A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,15 +17,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40851AB8-AC3A-4E66-B1FA-B3FD9BFE5EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{70062E60-FD04-4796-9EC4-835FD5A2FE90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{70062E60-FD04-4796-9EC4-835FD5A2FE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49DD0EB-4394-4254-9AFA-AC661726012A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49DD0EB-4394-4254-9AFA-AC661726012A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49DD0EB-4394-4254-9AFA-AC661726012A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49DD0EB-4394-4254-9AFA-AC661726012A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{70062E60-FD04-4796-9EC4-835FD5A2FE90} = {53D874A9-840C-455C-BE95-527CF9ED5A17}
+		{E49DD0EB-4394-4254-9AFA-AC661726012A} = {B5505981-FDE8-4314-A352-9A46D45CC4F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FDF4881-7237-47C8-B684-2C8C8C70169D}
