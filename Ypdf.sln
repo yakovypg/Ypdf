@@ -11,6 +11,10 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonTools", "Core\PythonT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ypdf", "Applications\Ypdf\Ypdf.csproj", "{E49DD0EB-4394-4254-9AFA-AC661726012A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YpdfLib", "Core\YpdfLib\YpdfLib.csproj", "{E12BDB33-CB97-4FAD-BA28-6A924AB4E5BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuntimeLib", "Core\RuntimeLib\RuntimeLib.csproj", "{C5362839-BFDF-49BC-9E00-4D159654C989}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{E49DD0EB-4394-4254-9AFA-AC661726012A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E49DD0EB-4394-4254-9AFA-AC661726012A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E49DD0EB-4394-4254-9AFA-AC661726012A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E12BDB33-CB97-4FAD-BA28-6A924AB4E5BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E12BDB33-CB97-4FAD-BA28-6A924AB4E5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E12BDB33-CB97-4FAD-BA28-6A924AB4E5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E12BDB33-CB97-4FAD-BA28-6A924AB4E5BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5362839-BFDF-49BC-9E00-4D159654C989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5362839-BFDF-49BC-9E00-4D159654C989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5362839-BFDF-49BC-9E00-4D159654C989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5362839-BFDF-49BC-9E00-4D159654C989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +42,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{70062E60-FD04-4796-9EC4-835FD5A2FE90} = {53D874A9-840C-455C-BE95-527CF9ED5A17}
 		{E49DD0EB-4394-4254-9AFA-AC661726012A} = {B5505981-FDE8-4314-A352-9A46D45CC4F1}
+		{E12BDB33-CB97-4FAD-BA28-6A924AB4E5BD} = {53D874A9-840C-455C-BE95-527CF9ED5A17}
+		{C5362839-BFDF-49BC-9E00-4D159654C989} = {53D874A9-840C-455C-BE95-527CF9ED5A17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FDF4881-7237-47C8-B684-2C8C8C70169D}

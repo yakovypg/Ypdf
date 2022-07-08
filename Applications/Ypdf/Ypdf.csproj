@@ -12,6 +12,10 @@
     <PackageReference Include="Mono.Options" Version="6.12.0.148" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\YpdfLib\YpdfLib.csproj" />
+  </ItemGroup>
+
   <Target Name="CopyPythonTools" AfterTargets="AfterBuild">
 	<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(OutDir)" />
 	<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)" />
