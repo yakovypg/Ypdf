@@ -33,7 +33,7 @@ namespace YpdfLib.Designers
                     PdfPage curPage = pdfDoc.GetPage(pageNum);
                     Rectangle curPageSize = curPage.GetPageSize();
                     PdfWatermarkAnnotation annotation = CreateWatermarkAnnotation(pdfDoc, curPageSize, watermark);
-                    
+
                     curPage.AddAnnotation(annotation);
                 }
             }

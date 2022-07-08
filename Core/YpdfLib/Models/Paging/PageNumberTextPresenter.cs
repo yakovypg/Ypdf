@@ -2,7 +2,7 @@
 {
     public class PageNumberTextPresenter : IPageNumberTextPresenter
     {
-        public static readonly PageNumberTextPresenter DefaultPresenter = new ((pageNum, numOfPages) => pageNum.ToString());
+        public static readonly PageNumberTextPresenter DefaultPresenter = new((pageNum, numOfPages) => pageNum.ToString());
         public static readonly PageNumberTextPresenter FractionalPresenter = new((pageNum, numOfPages) => $"{pageNum}/{numOfPages}");
         public static readonly PageNumberTextPresenter VerbalPresenter = new((pageNum, numOfPages) => $"page {pageNum} of {numOfPages}");
 

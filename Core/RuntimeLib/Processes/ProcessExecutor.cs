@@ -26,7 +26,8 @@ namespace RuntimeLib.Processes
             {
                 if (RedirectStandardError)
                 {
-                    process.ErrorDataReceived += (sender, e) => {
+                    process.ErrorDataReceived += (sender, e) =>
+                    {
                         if (e.Data == null)
                             errorWaitHandle.Set();
                         else
@@ -36,7 +37,8 @@ namespace RuntimeLib.Processes
 
                 if (RedirectStandardOutput)
                 {
-                    process.OutputDataReceived += (sender, e) => {
+                    process.OutputDataReceived += (sender, e) =>
+                    {
                         if (e.Data == null)
                             outputWaitHandle.Set();
                         else
