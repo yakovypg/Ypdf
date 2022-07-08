@@ -37,7 +37,6 @@ namespace YpdfLib.Designers
             }
 
             doc.Close();
-            pdfDoc.Close();
         }
 
         private static Paragraph CreatePageNumParagraph(Rectangle pageSize, IMargin docMargin, Text numText, IPageNumberStyle numStyle)

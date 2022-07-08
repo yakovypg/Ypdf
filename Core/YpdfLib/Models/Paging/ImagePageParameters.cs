@@ -5,15 +5,15 @@ using YpdfLib.Models.Design;
 
 namespace YpdfLib.Models.Paging
 {
-    public class PageParameters : IPageParameters
+    public class ImagePageParameters : IImagePageParameters
     {
-        public int CompressionLevel { get; }
-        public bool AutoIncreaseSize { get; }
+        public int CompressionLevel { get; set; }
+        public bool AutoIncreaseSize { get; set; }
 
-        public IMargin? Margin { get; }
-        public HorizontalAlignment HorizontalAlignment { get; }
+        public IMargin? Margin { get; set; }
+        public HorizontalAlignment HorizontalAlignment { get; set; }
 
-        private readonly PageSize? _size = null;
+        private PageSize? _size = null;
         public PageSize? Size
         {
             get
@@ -32,13 +32,16 @@ namespace YpdfLib.Models.Paging
 
                 return new PageSize(width, height);
             }
+            set
+            {
+                _size = value;
+            }
         }
 
-        public PageParameters(PageSize? size = null, HorizontalAlignment horizontalAlignment = HorizontalAlignment.CENTER, IMargin? margin = null,
+        public ImagePageParameters(PageSize? size = null, HorizontalAlignment horizontalAlignment = HorizontalAlignment.CENTER, IMargin? margin = null,
             bool autoIncreaseSize = true, int compressionLevel = CompressionConstants.UNDEFINED_COMPRESSION)
         {
-            _size = size;
-
+            Size = size;
             HorizontalAlignment = horizontalAlignment;
             Margin = margin;
             AutoIncreaseSize = autoIncreaseSize;

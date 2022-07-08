@@ -1,28 +1,54 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="itext7" Version="7.2.3" />
-    <PackageReference Include="Mono.Options" Version="6.12.0.148" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="itext7" Version="7.2.3" />
+		<PackageReference Include="Mono.Options" Version="6.12.0.148" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\YpdfLib\YpdfLib.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Core\YpdfLib\YpdfLib.csproj" />
+	</ItemGroup>
 
-  <Target Name="CopyPythonTools" AfterTargets="AfterBuild">
-	<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(OutDir)" />
-	<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)" />
-  </Target>
-  <Target Name="CopyPythonToolsOnPublish" AfterTargets="Publish">
-	<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(PublishDir)" />
-	<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)" />
-  </Target>
+	<Target Name="CopyPythonTools" AfterTargets="AfterBuild">
+		<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(OutDir)" />
+		<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)" />
+	</Target>
+	<Target Name="CopyPythonToolsOnPublish" AfterTargets="Publish">
+		<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(PublishDir)" />
+		<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(PublishDir)" />
+	</Target>
+
+	<ItemGroup>
+		<CopyRobotoFonts Include="../../Components/Fonts/roboto/*.*" />
+	</ItemGroup>
+
+	<Target Name="CopyRobotoFonts" AfterTargets="AfterBuild">
+		<Copy
+			SourceFiles="@(CopyRobotoFonts)"
+			DestinationFolder="$(OutDir)/Fonts/roboto"
+			SkipUnchangedFiles="true"
+			OverwriteReadOnlyFiles="true"
+			Retries="3"
+			RetryDelayMilliseconds="300">
+		</Copy>
+	</Target>
+
+	<Target Name="CopyRobotoFontsOnPublish" AfterTargets="Publish">
+		<Copy
+			SourceFiles="@(CopyRobotoFonts)"
+			DestinationFolder="$(PublishDir)/Fonts/roboto"
+			SkipUnchangedFiles="true"
+			OverwriteReadOnlyFiles="true"
+			Retries="3"
+			RetryDelayMilliseconds="300">
+		</Copy>
+	</Target>
 
 </Project>

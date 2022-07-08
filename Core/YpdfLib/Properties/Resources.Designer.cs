@@ -61,6 +61,15 @@ namespace YpdfLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fonts.
+        /// </summary>
+        internal static string FONTS_DIRECTORY {
+            get {
+                return ResourceManager.GetString("FONTS_DIRECTORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ImageExtractor.py.
         /// </summary>
         internal static string PYTHON_IMAGE_EXTRACTOR {

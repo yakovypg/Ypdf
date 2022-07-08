@@ -11,7 +11,7 @@ namespace YpdfLib.Imaging
 {
     public static class ImageInserter
     {
-        public static void ConvertToPdf(string destPath, IPageParameters pageParams, params string[] inputFiles)
+        public static void ConvertToPdf(string destPath, IImagePageParameters pageParams, params string[] inputFiles)
         {
             if (inputFiles is null)
                 throw new ArgumentNullException(nameof(inputFiles));
@@ -51,10 +51,9 @@ namespace YpdfLib.Imaging
             }
 
             doc.Close();
-            destDoc.Close();
         }
 
-        private static void AddImageDependentPagesToDoc(PdfDocument doc, IPageParameters pageParams, IEnumerable<Image> images)
+        private static void AddImageDependentPagesToDoc(PdfDocument doc, IImagePageParameters pageParams, IEnumerable<Image> images)
         {
             foreach (var image in images)
             {
