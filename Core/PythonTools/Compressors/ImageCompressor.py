@@ -75,7 +75,7 @@ if __name__ == "__main__":
     
     parser.add_argument("-i", "--input-images", nargs='+', help="Images to compress", required=True)
     parser.add_argument("-o", "--output-path", help="Compressed image path", default=None)
-    parser.add_argument("-O", "--output-directory", help="Directory for saving compressed images", default=None)
+    parser.add_argument("-O", "--output-directory", help="Directory for saving compressed images", default="")
     parser.add_argument("-e", "--extension", help="Extension in which the images will be converted", default=None)
     parser.add_argument("-q", "--quality", type=float, help="Output image quality [from 0.0 (worst) to 0.95 (best)]. Default is 0.75", default=0.75)
     parser.add_argument("-s", "--size-factor", type=float, help="Resizing factor (setting to X will multiply width & height by X). Default is 1.0", default=1.0)
@@ -83,9 +83,6 @@ if __name__ == "__main__":
     parser.add_argument("-H", "--height", type=int, help="New height of the image. Make sure to set it with the `width` parameter", default=None)
     
     args = parser.parse_args()
-    
-    if not args.output_directory:
-        args.output_directory = ""
         
     if args.output_path:
         compressImage(args.input_images[0], args.output_path, args.quality, args.size_factor, args.width, args.height)

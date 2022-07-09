@@ -36,7 +36,7 @@ namespace YpdfLib.Extractors
             var executor = new PythonExecutor(true, true, Console.Out);
             string pythonTextExtractorPath = Properties.Resources.PYTHON_TEXT_EXTRACTOR;
 
-            executor.Execute($"{pythonTextExtractorPath} {destPath} {inputFile}");
+            executor.Execute($"{pythonTextExtractorPath} -i {inputFile} -o {destPath}");
         }
 
         private static string ExtractTextFromPage(PdfPage page)
