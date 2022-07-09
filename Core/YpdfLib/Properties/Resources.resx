@@ -121,6 +121,10 @@
     <value>Fonts</value>
     <comment>Directory where fonts are stored</comment>
   </data>
+  <data name="PYTHON_IMAGE_COMPRESSOR" xml:space="preserve">
+    <value>ImageCompressor.py</value>
+    <comment>Path to the ImageCompressor.py</comment>
+  </data>
   <data name="PYTHON_IMAGE_EXTRACTOR" xml:space="preserve">
     <value>ImageExtractor.py</value>
     <comment>Path to the ImageExtractor.py</comment>
@@ -128,5 +132,9 @@
   <data name="PYTHON_TEXT_EXTRACTOR" xml:space="preserve">
     <value>TextExtractor.py</value>
     <comment>Path to the TextExtractor.py</comment>
+  </data>
+  <data name="TEMP_DIRECTORY" xml:space="preserve">
+    <value>Temp</value>
+    <comment>Directory for storing temporary objects</comment>
   </data>
 </root>

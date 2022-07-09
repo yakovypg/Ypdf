@@ -70,6 +70,15 @@ namespace YpdfLib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ImageCompressor.py.
+        /// </summary>
+        internal static string PYTHON_IMAGE_COMPRESSOR {
+            get {
+                return ResourceManager.GetString("PYTHON_IMAGE_COMPRESSOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ImageExtractor.py.
         /// </summary>
         internal static string PYTHON_IMAGE_EXTRACTOR {
@@ -84,6 +93,15 @@ namespace YpdfLib.Properties {
         internal static string PYTHON_TEXT_EXTRACTOR {
             get {
                 return ResourceManager.GetString("PYTHON_TEXT_EXTRACTOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Temp.
+        /// </summary>
+        internal static string TEMP_DIRECTORY {
+            get {
+                return ResourceManager.GetString("TEMP_DIRECTORY", resourceCulture);
             }
         }
     }

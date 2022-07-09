@@ -19,10 +19,12 @@
 	<Target Name="CopyPythonTools" AfterTargets="AfterBuild">
 		<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(OutDir)" />
 		<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)" />
+		<Copy SourceFiles="../../Core/PythonTools/Compressors/ImageCompressor.py" DestinationFolder="$(OutDir)" />
 	</Target>
 	<Target Name="CopyPythonToolsOnPublish" AfterTargets="Publish">
 		<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(PublishDir)" />
 		<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(PublishDir)" />
+		<Copy SourceFiles="../../Core/PythonTools/Compressors/ImageCompressor.py" DestinationFolder="$(PublishDir)" />
 	</Target>
 
 	<ItemGroup>
