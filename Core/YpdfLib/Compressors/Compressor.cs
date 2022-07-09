@@ -53,7 +53,7 @@ namespace YpdfLib.Compressors
 
                         string compressedImgPath = compressedImages[imageIndex++];
                         ImageData compressedImgData = ImageDataFactory.Create(compressedImgPath);
-                        
+
                         Image compressedImg = new(compressedImgData);
                         PdfStream compressedImgStream = compressedImg.GetXObject().GetPdfObject();
 

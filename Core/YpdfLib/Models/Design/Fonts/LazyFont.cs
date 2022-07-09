@@ -4,8 +4,8 @@ namespace YpdfLib.Models.Design.Fonts
 {
     internal class LazyFont : ILazyFont
     {
-        private string _path;
-        private string _encoding;
+        private readonly string _path;
+        private readonly string _encoding;
 
         public string Name { get; }
 

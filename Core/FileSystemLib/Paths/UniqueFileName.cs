@@ -5,7 +5,7 @@
         public string Extension { get; }
         public string WorkingDirectory { get; }
 
-        public UniqueFileName(string extension, string workingDirectory) 
+        public UniqueFileName(string extension, string workingDirectory)
             : base(t => File.Exists(Path.Combine(workingDirectory, t)), $".{extension}")
         {
             Extension = extension;
