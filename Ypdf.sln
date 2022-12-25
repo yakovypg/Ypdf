@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{16880FF8-5C76-4D58-9030-7C6D9A4EA049}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ypdf", "Applications\ypdf\ypdf.csproj", "{B742C4A5-8B20-40A6-8C66-B5B273F9AFCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{D7C4022A-FAA1-4F24-B1A6-1888E4A72131}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedConfig", "Configuration\SharedConfig\SharedConfig.shproj", "{3D5B3752-C40B-4F6E-8756-3A3E00C67575}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C88F07F3-549F-4349-A2B9-EB766B4A696A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExecutionLib", "Core\ExecutionLib\ExecutionLib.csproj", "{5F2EA573-240D-4608-89D6-7B95A154B6D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileSystemLib", "Core\FileSystemLib\FileSystemLib.csproj", "{233609EE-6DC4-4588-B2E3-1989FF887BA8}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonTools", "Core\PythonTools\PythonTools.pyproj", "{70062E60-FD04-4796-9EC4-835FD5A2FE90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuntimeLib", "Core\RuntimeLib\RuntimeLib.csproj", "{54E9017A-6BCC-4C2B-B7AF-D0771A6BFF98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YpdfLib", "Core\YpdfLib\YpdfLib.csproj", "{A8F7B6A8-21F4-4299-9E08-80052395C3CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{7F9937D7-F80C-40DD-B1D9-937540F96F2A}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B742C4A5-8B20-40A6-8C66-B5B273F9AFCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B742C4A5-8B20-40A6-8C66-B5B273F9AFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B742C4A5-8B20-40A6-8C66-B5B273F9AFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B742C4A5-8B20-40A6-8C66-B5B273F9AFCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F2EA573-240D-4608-89D6-7B95A154B6D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F2EA573-240D-4608-89D6-7B95A154B6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F2EA573-240D-4608-89D6-7B95A154B6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F2EA573-240D-4608-89D6-7B95A154B6D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{233609EE-6DC4-4588-B2E3-1989FF887BA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233609EE-6DC4-4588-B2E3-1989FF887BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233609EE-6DC4-4588-B2E3-1989FF887BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233609EE-6DC4-4588-B2E3-1989FF887BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70062E60-FD04-4796-9EC4-835FD5A2FE90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70062E60-FD04-4796-9EC4-835FD5A2FE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E9017A-6BCC-4C2B-B7AF-D0771A6BFF98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E9017A-6BCC-4C2B-B7AF-D0771A6BFF98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E9017A-6BCC-4C2B-B7AF-D0771A6BFF98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E9017A-6BCC-4C2B-B7AF-D0771A6BFF98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F7B6A8-21F4-4299-9E08-80052395C3CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F7B6A8-21F4-4299-9E08-80052395C3CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F7B6A8-21F4-4299-9E08-80052395C3CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F7B6A8-21F4-4299-9E08-80052395C3CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B742C4A5-8B20-40A6-8C66-B5B273F9AFCD} = {16880FF8-5C76-4D58-9030-7C6D9A4EA049}
+		{3D5B3752-C40B-4F6E-8756-3A3E00C67575} = {D7C4022A-FAA1-4F24-B1A6-1888E4A72131}
+		{5F2EA573-240D-4608-89D6-7B95A154B6D6} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
+		{233609EE-6DC4-4588-B2E3-1989FF887BA8} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
+		{70062E60-FD04-4796-9EC4-835FD5A2FE90} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
+		{54E9017A-6BCC-4C2B-B7AF-D0771A6BFF98} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
+		{A8F7B6A8-21F4-4299-9E08-80052395C3CF} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {427A2228-5613-4DB6-926C-61E3256840F9}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Configuration\SharedConfig\SharedConfig.projitems*{3d5b3752-c40b-4f6e-8756-3a3e00c67575}*SharedItemsImports = 13
+		Configuration\SharedConfig\SharedConfig.projitems*{a8f7b6a8-21f4-4299-9e08-80052395c3cf}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal
