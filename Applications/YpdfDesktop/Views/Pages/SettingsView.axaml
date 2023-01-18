@@ -2,6 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:vm="using:YpdfDesktop.ViewModels"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
@@ -18,15 +21,17 @@
 			</Style>
 			<Style Selector="ComboBox">
 				<Setter Property="Width" Value="150" />
+				<Setter Property="Cursor" Value="Hand" />
 			</Style>
 		</Grid.Styles>
 		
 		<Grid.RowDefinitions>
-			<RowDefinition Height="28" />
+			<RowDefinition Height="30" />
+			<RowDefinition Height="29" />
 			<RowDefinition Height="5" />
-			<RowDefinition Height="28" />
+			<RowDefinition Height="29" />
 			<RowDefinition Height="5" />
-			<RowDefinition Height="28" />
+			<RowDefinition Height="29" />
 			<RowDefinition />
 			<RowDefinition Height="30" />
 		</Grid.RowDefinitions>
@@ -36,30 +41,77 @@
 			<ColumnDefinition Width="150" />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		
-		<TextBlock Grid.Row="0" Grid.Column="0" Text="Language" />
-		<TextBlock Grid.Row="2" Grid.Column="0" Text="Theme" />
-		<TextBlock Grid.Row="4" Grid.Column="0" Text="Python alias" />
 
-		<ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+		<TextBlock
+			Grid.ColumnSpan="3"
+			Text="{Binding AppVersion}"
+			FontWeight="SemiBold"
+			FontSize="15"
+			VerticalAlignment="Top"
+			HorizontalAlignment="Center">
+		</TextBlock>
+		
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="Language" />
+		<TextBlock Grid.Row="3" Grid.Column="0" Text="Theme" />
+		<TextBlock Grid.Row="5" Grid.Column="0" Text="Python alias" />
+
+		<ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="0">
 			<ComboBoxItem>English</ComboBoxItem>
 		</ComboBox>
-		<ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="0">
+		<ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="0">
 			<ComboBoxItem>Light</ComboBoxItem>
 		</ComboBox>
 		<TextBox
-			Grid.Row="4"
+			Grid.Row="5"
 			Grid.Column="1"
 			Text="{Binding PythonAlias, Mode=TwoWay}">
 		</TextBox>
 
 		<Button
-			Grid.Row="6"
+			Grid.Row="7"
 			Grid.ColumnSpan="3"
 			Content="Save"
 			Width="120"
 			HorizontalContentAlignment="Center"
-			HorizontalAlignment="Center">
+			HorizontalAlignment="Center"
+			Command="{Binding SaveSettingsCommand}">
 		</Button>
+
+		<Grid Grid.Row="7" Grid.Column="2">
+			<Grid.Styles>
+				<Style Selector="Grid > img|Icon">
+					<Setter Property="Cursor" Value="Hand" />
+					<Setter Property="FontSize" Value="21" />
+					<Setter Property="Margin" Value="5, 0, 0, 0" />
+					<Setter Property="Foreground" Value="{DynamicResource IconBackground}" />
+				</Style>
+			</Grid.Styles>
+
+			<Grid.Resources>
+				<SolidColorBrush x:Key="IconBackground">#292177</SolidColorBrush>
+			</Grid.Resources>
+			
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="26" />
+				<ColumnDefinition Width="26" />
+			</Grid.ColumnDefinitions>
+
+			<img:Icon Grid.Column="1" Name="VkIcon" Value="fa-brands fa-vk">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="VkIcon">
+						<ia:InvokeCommandAction Command="{Binding OpenVkPageCommand}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+			</img:Icon>
+			
+			<img:Icon Grid.Column="2" Name="GitHubIcon" Value="fa-brands fa-github">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="GitHubIcon">
+						<ia:InvokeCommandAction Command="{Binding OpenGitHubPageCommand}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+			</img:Icon>
+		</Grid>
 	</Grid>
 </UserControl>

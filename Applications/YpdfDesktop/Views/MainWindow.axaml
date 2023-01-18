@@ -10,7 +10,7 @@
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
 		Width="800" Height="450"
-		MinWidth="400" MinHeight="300"
+		MinWidth="390" MinHeight="300"
         x:Class="YpdfDesktop.Views.MainWindow"
         Icon="/Assets/ypdf-logo.ico"
         Title="Ypdf-Desktop">
