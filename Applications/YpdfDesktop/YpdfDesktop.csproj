@@ -30,4 +30,7 @@
     <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="5.8.0" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\YpdfLib\YpdfLib.csproj" />
+  </ItemGroup>
 </Project>

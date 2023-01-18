@@ -22,7 +22,7 @@
 	<Grid Background="AliceBlue">	
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="120" />
-			<ColumnDefinition/>
+			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 		
 		<StackPanel Grid.Column="0" Orientation="Vertical" Background="{DynamicResource PanelBackground}">
@@ -110,9 +110,15 @@
 		</StackPanel>
 		
 		<Grid Grid.Column="1">
-			<pages:FavoriteToolsView IsVisible="{Binding IsFavoriteToolsVisible}"/>
-			<pages:ToolsView IsVisible="{Binding IsToolsVisible}"/>
-			<pages:SettingsView IsVisible="{Binding IsSettingsVisible}"/>
+			<UniformGrid IsVisible="{Binding IsFavoriteToolsVisible}">
+				<pages:FavoriteToolsView DataContext="{Binding FavoriteToolsVM}" />
+			</UniformGrid>
+			<UniformGrid IsVisible="{Binding IsToolsVisible}">
+				<pages:ToolsView DataContext="{Binding ToolsVM}" />
+			</UniformGrid>
+			<UniformGrid IsVisible="{Binding IsSettingsVisible}">
+				<pages:SettingsView DataContext="{Binding SettingsVM}" />
+			</UniformGrid>
 		</Grid>
 	</Grid>
 

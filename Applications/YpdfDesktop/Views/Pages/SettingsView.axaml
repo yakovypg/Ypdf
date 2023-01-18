@@ -2,9 +2,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="using:YpdfDesktop.ViewModels"
+             mc:Ignorable="d"
+			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.SettingsView">
 
-	<Grid>
+	<Design.DataContext>
+		<vm:SettingsViewModel />
+	</Design.DataContext>
+
+	<Grid Margin="10, 5">
+		<Grid.Styles>
+			<Style Selector="TextBlock">
+				<Setter Property="VerticalAlignment" Value="Center" />
+			</Style>
+			<Style Selector="ComboBox">
+				<Setter Property="Width" Value="150" />
+			</Style>
+		</Grid.Styles>
+		
+		<Grid.RowDefinitions>
+			<RowDefinition Height="28" />
+			<RowDefinition Height="5" />
+			<RowDefinition Height="28" />
+			<RowDefinition Height="5" />
+			<RowDefinition Height="28" />
+			<RowDefinition />
+			<RowDefinition Height="30" />
+		</Grid.RowDefinitions>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="150" />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="Language" />
+		<TextBlock Grid.Row="2" Grid.Column="0" Text="Theme" />
+		<TextBlock Grid.Row="4" Grid.Column="0" Text="Python alias" />
+
+		<ComboBox Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+			<ComboBoxItem>English</ComboBoxItem>
+		</ComboBox>
+		<ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="0">
+			<ComboBoxItem>Light</ComboBoxItem>
+		</ComboBox>
+		<TextBox
+			Grid.Row="4"
+			Grid.Column="1"
+			Text="{Binding PythonAlias, Mode=TwoWay}">
+		</TextBox>
+
+		<Button
+			Grid.Row="6"
+			Grid.ColumnSpan="3"
+			Content="Save"
+			Width="120"
+			HorizontalContentAlignment="Center"
+			HorizontalAlignment="Center">
+		</Button>
 	</Grid>
 </UserControl>
