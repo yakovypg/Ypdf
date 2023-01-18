@@ -11,7 +11,7 @@
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
-    <None Remove="Assets\ypdf-logo.png" />
+    <None Remove="Assets\ypdf-logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.
