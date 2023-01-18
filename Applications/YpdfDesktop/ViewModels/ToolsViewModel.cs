@@ -54,20 +54,18 @@ namespace YpdfDesktop.ViewModels
             Tools.Add(new Tool("split", "fa-scissors"));
             Tools.Add(new Tool("merge", "fa-copy"));
             Tools.Add(new Tool("compress", "fa-compress"));
-            Tools.Add(new Tool("remove pages", "fa-cog"));
-            Tools.Add(new Tool("reorder pages", "fa-cog"));
-            Tools.Add(new Tool("rotate pages", "fa-cog"));
+            Tools.Add(new Tool("handle pages", "fa-table"));
             Tools.Add(new Tool("crop pages", "fa-crop"));
             Tools.Add(new Tool("divide pages", "fa-columns"));
             Tools.Add(new Tool("add page nums", "fa-sort-numeric-down"));
             Tools.Add(new Tool("add watermark", "fa-paint-brush"));
-            Tools.Add(new Tool("remove watermark", "fa-eraser"));
+            Tools.Add(new Tool("rm watermark", "fa-eraser"));
             Tools.Add(new Tool("image2pdf", "fa-file-pdf"));
             Tools.Add(new Tool("text2pdf", "fa-file-pdf"));
             Tools.Add(new Tool("extract images", "fa-file-image"));
             Tools.Add(new Tool("extract text", "fa-file-alt"));
             Tools.Add(new Tool("set password", "fa-lock"));
-            Tools.Add(new Tool("remove password", "fa-unlock"));
+            Tools.Add(new Tool("rm password", "fa-unlock"));
         }
     }
 }

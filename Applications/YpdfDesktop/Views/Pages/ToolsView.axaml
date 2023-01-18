@@ -8,7 +8,7 @@
 			 xmlns:models="clr-namespace:YpdfDesktop.Models"
 			 xmlns:vm="using:YpdfDesktop.ViewModels"
              mc:Ignorable="d"
-			 d:DesignWidth="601" d:DesignHeight="450"
+			 d:DesignWidth="600" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.ToolsView">
 
 	<Design.DataContext>
@@ -23,7 +23,7 @@
 						<ItemsPresenter Items="{Binding Tools}">
 							<ItemsPresenter.ItemsPanel>
 								<ItemsPanelTemplate>
-									<WrapPanel ItemWidth="100" ItemHeight="90" />
+									<WrapPanel ItemWidth="120" ItemHeight="90" />
 								</ItemsPanelTemplate>
 							</ItemsPresenter.ItemsPanel>
 						</ItemsPresenter>
