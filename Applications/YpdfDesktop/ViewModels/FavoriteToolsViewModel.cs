@@ -1,6 +1,6 @@
 ﻿namespace YpdfDesktop.ViewModels
 {
-    internal class FavoriteToolsViewModel : ViewModelBase
+    public class FavoriteToolsViewModel : ViewModelBase
     {
     }
 }

@@ -8,7 +8,6 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
     <None Remove="Assets\ypdf-logo.ico" />
@@ -27,7 +26,9 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.18" />
+    <PackageReference Include="Projektanker.Icons.Avalonia" Version="5.8.0" />
     <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="5.8.0" />
+    <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="5.8.0" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
   </ItemGroup>
   <ItemGroup>

@@ -15,11 +15,11 @@ namespace YpdfDesktop.ViewModels
 
         #region ViewModels
 
-        private readonly SettingsViewModel _favoritesToolsVM = new();
-        public SettingsViewModel FavoritesToolsVM => _favoritesToolsVM;
+        private readonly FavoriteToolsViewModel _favoritesToolsVM = new();
+        public FavoriteToolsViewModel FavoritesToolsVM => _favoritesToolsVM;
 
-        private readonly SettingsViewModel _toolsVN = new();
-        public SettingsViewModel ToolsVN => _toolsVN;
+        private readonly ToolsViewModel _toolsVM = new();
+        public ToolsViewModel ToolsVM => _toolsVM;
 
         private readonly SettingsViewModel _settingsVM = new();
         public SettingsViewModel SettingsVM => _settingsVM;
