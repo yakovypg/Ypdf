@@ -10,26 +10,26 @@ Graphic version is currently under development.
 ### Tool features
 
 With this tool you will be able to perform the following actions:
+- Split PDF document
+- Merge PDF documents
 - Compress PDF document
 - Copy PDF document
 - Remove pages from PDF document
-- Merge PDF documents
 - Move PDF document page
 - Reorder PDF document pages
 - Rotate PDF document pages
 - Crop PDF document pages
 - Divide PDF document pages
-- Split PDF document
-- Convert text to PDF document
 - Add page numbers to PDF document
 - Add watermark to PDF document
 - Remove watermark from PDF document
+- Convert images to PDF document
+- Convert text to PDF document
 - Extract images from PDF document
 - Extract text from PDF document
-- Compress images
-- Convert images to PDF document
 - Set password to PDF document
 - Remove password from PDF document
+- Compress images
 
 ### Release usage
 
@@ -294,6 +294,47 @@ ypdf config --python-alias=python3 --save-config=true
 The following global variables are available:
 - python-alias
 
+### Split PDF document
+
+Splitting the PDF document.
+
+Splitting ranges are specified after the -p parameter. Parts of the PDF document will be placed
+in a directory that can be specified after the -O parameter. [Here](#parameters-parsing) you can 
+read about the format of the input parameters.
+
+```
+ypdf split -i inputPath.pdf -O outputDirectoryPath -p 1-3 -p 6 -p 8-10
+```
+
+If you do not specify splitting ranges, the PDF document will be split into parts by default 
+size.
+
+```
+ypdf split -i inputPath.pdf -O outputDirectoryPath
+```
+
+You can also specify the size of these parts using the --spit-part parameter. It can be either 
+a number or a simple expression that uses only multiplication.
+
+```
+ypdf split -i inputPath.pdf -O outputDirectoryPath --split-part=1024*1024*3
+```
+
+### Merge PDF documents
+
+Merging the PDF documents.
+
+```
+ypdf merge -f inputPath1.pdf -f inputPath2.pdf -o outputPath.pdf
+```
+
+You can also specify the directory from which the files will be taken using the --files-from 
+parameter and the pattern that these files should satisfy using the --file-pattern parameter.
+
+```
+ypdf merge --files-from=pathToDir1 --files-from=pathToDir2 --file-pattern=*.pdf -o outputPath.pdf
+```
+
 ### Compress PDF document
 
 Compressing the PDF document by compressing the images contained in it.
@@ -352,21 +393,6 @@ Pages are specified after the -p parameter and can be either single numbers or r
 
 ```
 ypdf remove-pages -i inputPath.pdf -o outputPath.pdf -p 1-3 -p 5 -p 7-10
-```
-
-### Merge PDF documents
-
-Merging the PDF documents.
-
-```
-ypdf merge -f inputPath1.pdf -f inputPath2.pdf -o outputPath.pdf
-```
-
-You can also specify the directory from which the files will be taken using the --files-from 
-parameter and the pattern that these files should satisfy using the --file-pattern parameter.
-
-```
-ypdf merge --files-from=pathToDir1 --files-from=pathToDir2 --file-pattern=*.pdf -o outputPath.pdf
 ```
 
 ### Move PDF document page
@@ -449,59 +475,6 @@ and the third and fourth pages into two parts vertically with a shift of the div
 
 ```
 ypdf divide -i inputPath.pdf -o outputPath.pdf --division=1:horizontal --division=3-4:vertical,100
-```
-
-### Split PDF document
-
-Splitting the PDF document.
-
-Splitting ranges are specified after the -p parameter. Parts of the PDF document will be placed
-in a directory that can be specified after the -O parameter. [Here](#parameters-parsing) you can 
-read about the format of the input parameters.
-
-```
-ypdf split -i inputPath.pdf -O outputDirectoryPath -p 1-3 -p 6 -p 8-10
-```
-
-If you do not specify splitting ranges, the PDF document will be split into parts by default 
-size.
-
-```
-ypdf split -i inputPath.pdf -O outputDirectoryPath
-```
-
-You can also specify the size of these parts using the --spit-part parameter. It can be either 
-a number or a simple expression that uses only multiplication.
-
-```
-ypdf split -i inputPath.pdf -O outputDirectoryPath --split-part=1024*1024*3
-```
-
-### Convert text to PDF document
-
-Converting text to the PDF document.
-
-```
-ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf
-```
-
-You can specify margins, text alignment and PDF document pages size after the -m, -A and 
---page-size parameters. You can also set the page size using the --page-width and 
---page-height parameters. [Here](#parameters-parsing) you can read about the format of the 
-input parameters.
-
-```
-ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf -m 50,100,50,100 -A right --page-size=a4
-```
-
-You can also [configure the font](#font-configuration).
-
-```
-ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf -s 24 --font-family=times_bold --font-color=blue --font-opacity=0.5
-```
-
-```
-ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf --font-path=D://Fonts//Roboto-light.ttf --font-encoding identity_h
 ```
 
 ### Add page numbers to PDF document
@@ -618,6 +591,60 @@ numbers are not specified, the watermark will be removed from all pages of the P
 ypdf remove-watermark-annotation -i inputPath.pdf -o outputPath.pdf -p 1 -p 5-10
 ```
 
+### Convert images to PDF document
+
+Converting the images to the PDF document.
+
+```
+ypdf image-to-pdf -f inputPath1.png -f inputPath2.jpg -o outputPath.pdf
+```
+
+You can specify PDF document pages size, auto increasing PDF document pages size, images 
+margins, images horizontal alignment and images rotation angle after the --page-size, 
+--image-autoincrease-size, -m, --image-h-alignment and -a parameters. You can also specify 
+the PDF documnet pages size using the --page-width and --page-height parameters. 
+[Here](#parameters-parsing) you can read about the format of the input parameters.
+
+Please note that automatic page resizing does not take into account image rotation.
+
+```
+ypdf image-to-pdf -f inputPath1.png -f inputPath2.jpg -o outputPath.pdf --page-size=a4 --image-autoincrease-size=false -m 10 --image-h-alignment=left
+```
+
+You can also specify the directory from which the files will be taken using the --files-from 
+parameter and the pattern that these files should satisfy using the --file-pattern parameter.
+
+```
+ypdf image-to-pdf --files-from=pathToDir1 --files-from=pathToDir2 --file-pattern=*.jpg -o outputPath.pdf
+```
+
+### Convert text to PDF document
+
+Converting text to the PDF document.
+
+```
+ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf
+```
+
+You can specify margins, text alignment and PDF document pages size after the -m, -A and 
+--page-size parameters. You can also set the page size using the --page-width and 
+--page-height parameters. [Here](#parameters-parsing) you can read about the format of the 
+input parameters.
+
+```
+ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf -m 50,100,50,100 -A right --page-size=a4
+```
+
+You can also [configure the font](#font-configuration).
+
+```
+ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf -s 24 --font-family=times_bold --font-color=blue --font-opacity=0.5
+```
+
+```
+ypdf text-to-pdf -i inputPath.txt -o outputPath.pdf --font-path=D://Fonts//Roboto-light.ttf --font-encoding identity_h
+```
+
 ### Extract images from PDF document
 
 Extracting images from the PDF document.
@@ -644,6 +671,39 @@ java 8, python 3 and some of its packages are installed.
 
 ```
 ypdf extract-text-tika -i inputPath.pdf -o outputPath.txt
+```
+
+### Set password to PDF document
+
+Setting password to the PDF document.
+
+You can specify PDF document password using the --password parameter. In this case, the same 
+user password and the owner password will be set. You can also specify the user password and 
+the owner password using the --user-password and --owner-password parameters.
+
+```
+ypdf set-password -i inputPath.pdf -o outputPath.pdf --password=samePassword
+```
+
+```
+ypdf set-password -i inputPath.pdf -o outputPath.pdf --user-password=user --owner-password=admin
+```
+
+You can also specify the encryption algorithm using the --encryption-algorithm parameter.
+
+```
+ypdf set-password -i inputPath.pdf -o outputPath.pdf --user-password=user --owner-password=admin --encryption-algorithm=aes_128
+```
+
+### Remove password from PDF document
+
+Removing password from the PDF document.
+
+You should specify the PDF document password using one of the following parameters: 
+--password, --user-password, --owner-password.
+
+```
+ypdf remove-password -i inputPath.pdf -o outputPath.pdf --password=12345
 ```
 
 ### Compress images
@@ -699,64 +759,4 @@ parameter and the pattern that these files should satisfy using the --file-patte
 
 ```
 ypdf compress-images --files-from=pathToDir1 --files-from=pathToDir2 --file-pattern=*.png -O outputDirectoryPath
-```
-
-### Convert images to PDF document
-
-Converting the images to the PDF document.
-
-```
-ypdf image-to-pdf -f inputPath1.png -f inputPath2.jpg -o outputPath.pdf
-```
-
-You can specify PDF document pages size, auto increasing PDF document pages size, images 
-margins, images horizontal alignment and images rotation angle after the --page-size, 
---image-autoincrease-size, -m, --image-h-alignment and -a parameters. You can also specify 
-the PDF documnet pages size using the --page-width and --page-height parameters. 
-[Here](#parameters-parsing) you can read about the format of the input parameters.
-
-Please note that automatic page resizing does not take into account image rotation.
-
-```
-ypdf image-to-pdf -f inputPath1.png -f inputPath2.jpg -o outputPath.pdf --page-size=a4 --image-autoincrease-size=false -m 10 --image-h-alignment=left
-```
-
-You can also specify the directory from which the files will be taken using the --files-from 
-parameter and the pattern that these files should satisfy using the --file-pattern parameter.
-
-```
-ypdf image-to-pdf --files-from=pathToDir1 --files-from=pathToDir2 --file-pattern=*.jpg -o outputPath.pdf
-```
-
-### Set password to PDF document
-
-Setting password to the PDF document.
-
-You can specify PDF document password using the --password parameter. In this case, the same 
-user password and the owner password will be set. You can also specify the user password and 
-the owner password using the --user-password and --owner-password parameters.
-
-```
-ypdf set-password -i inputPath.pdf -o outputPath.pdf --password=samePassword
-```
-
-```
-ypdf set-password -i inputPath.pdf -o outputPath.pdf --user-password=user --owner-password=admin
-```
-
-You can also specify the encryption algorithm using the --encryption-algorithm parameter.
-
-```
-ypdf set-password -i inputPath.pdf -o outputPath.pdf --user-password=user --owner-password=admin --encryption-algorithm=aes_128
-```
-
-### Remove password from PDF document
-
-Removing password from the PDF document.
-
-You should specify the PDF document password using one of the following parameters: 
---password, --user-password, --owner-password.
-
-```
-ypdf remove-password -i inputPath.pdf -o outputPath.pdf --password=12345
 ```
