@@ -1,8 +1,8 @@
-﻿using Avalonia.Input;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
+using YpdfDesktop.Infrastructure.Support;
 using YpdfDesktop.Models;
 
 namespace YpdfDesktop.ViewModels
@@ -17,14 +17,19 @@ namespace YpdfDesktop.ViewModels
         #endregion
 
         public ObservableCollection<Tool> Tools { get; }
+        public ObservableCollection<Tool> FavoriteTools { get; }
 
         // Flag to prevent calling the ShowToolPage method
         private bool _isChangeToolAffiliationToFavoritesMethodInvoked = false;
 
-        public ToolsViewModel()
+        public ToolsViewModel() : this(null, null)
         {
-            Tools = new ObservableCollection<Tool>();
-            AddTools();
+        }
+
+        public ToolsViewModel(ObservableCollection<Tool>? tools, ObservableCollection<Tool>? favoriteTools = null)
+        {
+            Tools = tools ?? SupportedTools.Get();
+            FavoriteTools = favoriteTools ?? new ObservableCollection<Tool>();
 
             ChangeToolAffiliationToFavoritesCommand = ReactiveCommand.Create<string>(ChangeToolAffiliationToFavorites);
             ShowToolPageCommand = ReactiveCommand.Create<string>(ShowToolPage);
@@ -33,8 +38,14 @@ namespace YpdfDesktop.ViewModels
         private void ChangeToolAffiliationToFavorites(string toolName)
         {
             _isChangeToolAffiliationToFavoritesMethodInvoked = true;
-            
+
             Tool tool = Tools.First(t => t.Name == toolName);
+
+            if (tool.IsFavorite)
+                FavoriteTools.Remove(tool);
+            else
+                FavoriteTools.Add(tool);
+            
             tool.IsFavorite = !tool.IsFavorite;
         }
 
@@ -45,27 +56,8 @@ namespace YpdfDesktop.ViewModels
                 _isChangeToolAffiliationToFavoritesMethodInvoked = false;
                 return;
             }
-            
-            Tool tool = Tools.First(t => t.Name == toolName);
-        }
 
-        private void AddTools()
-        {
-            Tools.Add(new Tool("split", "fa-scissors"));
-            Tools.Add(new Tool("merge", "fa-copy"));
-            Tools.Add(new Tool("compress", "fa-compress"));
-            Tools.Add(new Tool("handle pages", "fa-table"));
-            Tools.Add(new Tool("crop pages", "fa-crop"));
-            Tools.Add(new Tool("divide pages", "fa-columns"));
-            Tools.Add(new Tool("add page nums", "fa-sort-numeric-down"));
-            Tools.Add(new Tool("add watermark", "fa-paint-brush"));
-            Tools.Add(new Tool("rm watermark", "fa-eraser"));
-            Tools.Add(new Tool("image2pdf", "fa-file-pdf"));
-            Tools.Add(new Tool("text2pdf", "fa-file-pdf"));
-            Tools.Add(new Tool("extract images", "fa-file-image"));
-            Tools.Add(new Tool("extract text", "fa-file-alt"));
-            Tools.Add(new Tool("set password", "fa-lock"));
-            Tools.Add(new Tool("rm password", "fa-unlock"));
+            Tool tool = Tools.First(t => t.Name == toolName);
         }
     }
 }

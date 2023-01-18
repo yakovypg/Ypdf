@@ -111,7 +111,7 @@
 		
 		<Grid Grid.Column="1">
 			<UniformGrid IsVisible="{Binding IsFavoriteToolsVisible}">
-				<pages:FavoriteToolsView DataContext="{Binding FavoriteToolsVM}" />
+				<pages:ToolsView DataContext="{Binding FavoritesToolsVM}" />
 			</UniformGrid>
 			<UniformGrid IsVisible="{Binding IsToolsVisible}">
 				<pages:ToolsView DataContext="{Binding ToolsVM}" />

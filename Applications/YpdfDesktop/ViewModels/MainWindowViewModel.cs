@@ -1,5 +1,8 @@
 using ReactiveUI;
+using System.Collections.ObjectModel;
 using System.Reactive;
+using YpdfDesktop.Infrastructure.Support;
+using YpdfDesktop.Models;
 
 namespace YpdfDesktop.ViewModels
 {
@@ -15,13 +18,13 @@ namespace YpdfDesktop.ViewModels
 
         #region ViewModels
 
-        private readonly FavoriteToolsViewModel _favoritesToolsVM = new();
-        public FavoriteToolsViewModel FavoritesToolsVM => _favoritesToolsVM;
+        private readonly ToolsViewModel _favoritesToolsVM;
+        public ToolsViewModel FavoritesToolsVM => _favoritesToolsVM;
 
-        private readonly ToolsViewModel _toolsVM = new();
+        private readonly ToolsViewModel _toolsVM;
         public ToolsViewModel ToolsVM => _toolsVM;
 
-        private readonly SettingsViewModel _settingsVM = new();
+        private readonly SettingsViewModel _settingsVM;
         public SettingsViewModel SettingsVM => _settingsVM;
 
         #endregion
@@ -51,8 +54,18 @@ namespace YpdfDesktop.ViewModels
 
         #endregion Properties
 
+        private readonly ObservableCollection<Tool> _allTools;
+        private readonly ObservableCollection<Tool> _favoritesTools;
+
         public MainWindowViewModel()
         {
+            _allTools = SupportedTools.Get();
+            _favoritesTools = new ObservableCollection<Tool>();
+            
+            _favoritesToolsVM = new ToolsViewModel(_favoritesTools, _favoritesTools);
+            _toolsVM = new ToolsViewModel(_allTools, _favoritesTools);
+            _settingsVM = new SettingsViewModel();
+
             ShowFavoriteToolsCommand = ReactiveCommand.Create(ShowFavoriteTools);
             ShowToolsCommand = ReactiveCommand.Create(ShowTools);
             ShowSettingsCommand = ReactiveCommand.Create(ShowSettings);
