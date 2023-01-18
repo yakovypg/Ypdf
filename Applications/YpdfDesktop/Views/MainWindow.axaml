@@ -1,21 +1,119 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:YpdfDesktop.ViewModels"
+		xmlns:pages="using:YpdfDesktop.Views.Pages"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
         mc:Ignorable="d"
 		d:DesignWidth="800" d:DesignHeight="450"
 		Width="800" Height="450"
-		MinWidth="400"
-		MinHeight="300"
+		MinWidth="400" MinHeight="300"
         x:Class="YpdfDesktop.Views.MainWindow"
         Icon="/Assets/ypdf-logo.png"
         Title="Ypdf-Desktop">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
-	<Grid Background="AliceBlue"></Grid>
+	<Grid Background="AliceBlue">	
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="120" />
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		
+		<StackPanel Grid.Column="0" Orientation="Vertical" Background="{DynamicResource PanelBackground}">
+			<StackPanel.Styles>
+				<Style Selector="Grid">
+					<Setter Property="Height" Value="90" />
+					<Setter Property="Cursor" Value="Hand" />
+				</Style>
+				<Style Selector="Grid > img|Icon">
+					<Setter Property="FontSize" Value="35" />
+					<Setter Property="Foreground" Value="{DynamicResource GridIconBackground}" />
+				</Style>
+				<Style Selector="TextBlock">
+					<Setter Property="HorizontalAlignment" Value="Center" />
+				</Style>
+			</StackPanel.Styles>
+			
+			<StackPanel.Resources>
+				<SolidColorBrush x:Key="PanelBackground">#EE9BA2E4</SolidColorBrush>
+				<SolidColorBrush x:Key="GridIconBackground">#292177</SolidColorBrush>
+				<SolidColorBrush x:Key="GridDefaultBackground">#EE9BA2E4</SolidColorBrush>
+				<SolidColorBrush x:Key="GridEnteredBackground">#EEB3ADF0</SolidColorBrush>
+			</StackPanel.Resources>
+			
+			<Grid Name="FavoriteToolsGrid">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="FavoriteToolsGrid">
+						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{DynamicResource GridEnteredBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="FavoriteToolsGrid">
+						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{DynamicResource GridDefaultBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="FavoriteToolsGrid">
+						<ia:InvokeCommandAction Command="{Binding ShowFavoriteToolsCommand}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+				
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition Height="20" />
+				</Grid.RowDefinitions>
+				<img:Icon Grid.Row="0" Value="fa-star" FontSize="35" />
+				<TextBlock Grid.Row="1" Text="Favorites" />
+			</Grid>
+			<Grid Name="ToolsGrid">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolsGrid">
+						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{DynamicResource GridEnteredBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="ToolsGrid">
+						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{DynamicResource GridDefaultBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="ToolsGrid">
+						<ia:InvokeCommandAction Command="{Binding ShowToolsCommand}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+				
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition Height="20" />
+				</Grid.RowDefinitions>
+				<img:Icon Grid.Row="0" Value="fa-wrench" FontSize="35" />
+				<TextBlock Grid.Row="1" Text="Tools" />
+			</Grid>
+			<Grid Name="SettingsGrid">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="SettingsGrid">
+						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{DynamicResource GridEnteredBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="SettingsGrid">
+						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{DynamicResource GridDefaultBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="SettingsGrid">
+						<ia:InvokeCommandAction Command="{Binding ShowSettingsCommand}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition Height="20" />
+				</Grid.RowDefinitions>
+				<img:Icon Grid.Row="0" Value="fa-cog" FontSize="35" />
+				<TextBlock Grid.Row="1" Text="Settings" />
+			</Grid>
+		</StackPanel>
+		
+		<Grid Grid.Column="1">
+			<pages:FavoriteToolsView IsVisible="{Binding IsFavoriteToolsVisible}"/>
+			<pages:ToolsView IsVisible="{Binding IsToolsVisible}"/>
+			<pages:SettingsView IsVisible="{Binding IsSettingsVisible}"/>
+		</Grid>
+	</Grid>
 
 </Window>

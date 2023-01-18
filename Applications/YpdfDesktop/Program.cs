@@ -1,5 +1,7 @@
 using Avalonia;
 using Avalonia.ReactiveUI;
+using Projektanker.Icons.Avalonia;
+using Projektanker.Icons.Avalonia.FontAwesome;
 using System;
 
 namespace YpdfDesktop
@@ -18,7 +20,8 @@ namespace YpdfDesktop
                 .Configure<App>()
                 .UsePlatformDetect()
                 .LogToTrace()
-                .UseReactiveUI();
+                .UseReactiveUI()
+                .WithIcons(c => c.Register<FontAwesomeIconProvider>());
         }
     }
 }
