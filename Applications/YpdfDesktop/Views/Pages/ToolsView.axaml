@@ -33,32 +33,31 @@
 
 			<ItemsControl.DataTemplates>
 				<DataTemplate DataType="{x:Type models:Tool}">
-					<Border BorderThickness="1" BorderBrush="DarkGray" Margin="3" Cursor="Hand">
+					<Border BorderThickness="1" BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}" Margin="3" Cursor="Hand">
 						<Border.Styles>
 							<Style Selector="TextBlock">
 								<Setter Property="VerticalAlignment" Value="Center" />
 								<Setter Property="HorizontalAlignment" Value="Center" />
+								<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 							</Style>
 						</Border.Styles>
 
-						<Border.Resources>
-							<SolidColorBrush x:Key="GridIconBackground">#EE17254B</SolidColorBrush>
-							<SolidColorBrush x:Key="GridDefaultBackground">#EECFE0DF</SolidColorBrush>
-							<SolidColorBrush x:Key="GridEnteredBackground">#EEB3ADF0</SolidColorBrush>
-						</Border.Resources>
-
-						<Grid Name="ToolGrid" Background="{DynamicResource GridDefaultBackground}">
+						<Grid Name="ToolGrid" Background="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
 							<i:Interaction.Behaviors>
 								<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolGrid">
-									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{DynamicResource GridEnteredBackground}" />
+									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileEnteredBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 								</ia:EventTriggerBehavior>
 								<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="ToolGrid">
-									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{DynamicResource GridDefaultBackground}" />
+									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 								</ia:EventTriggerBehavior>
 								<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="ToolGrid">
+									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTilePressedBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+								</ia:EventTriggerBehavior>
+								<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="ToolGrid">
+									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 									<ia:InvokeCommandAction
 										Command="{Binding DataContext.ShowToolPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-										CommandParameter="{Binding Name}">
+										CommandParameter="{Binding Type}">
 									</ia:InvokeCommandAction>
 								</ia:EventTriggerBehavior>
 							</i:Interaction.Behaviors>
@@ -82,7 +81,7 @@
 									<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="FavoriteIcon">
 										<ia:InvokeCommandAction
 											Command="{Binding DataContext.ChangeToolAffiliationToFavoritesCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-											CommandParameter="{Binding Name}">
+											CommandParameter="{Binding Type}">
 										</ia:InvokeCommandAction>
 									</ia:EventTriggerBehavior>
 								</i:Interaction.Behaviors>
@@ -94,10 +93,14 @@
 								FontSize="30"
 								Opacity="0.88"
 								Margin="0, 10, 0, 0"
-								Foreground="{DynamicResource GridIconBackground}">
+								Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileIconForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
 							</img:Icon>
-							
-							<TextBlock Grid.Row="1" Text="{Binding Name}" />
+
+							<TextBlock
+								Grid.Row="1"
+								Text="{Binding Name}"
+								Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+							</TextBlock>
 						</Grid>
 					</Border>
 				</DataTemplate>

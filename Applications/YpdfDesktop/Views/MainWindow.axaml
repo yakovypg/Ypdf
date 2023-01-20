@@ -19,13 +19,19 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-	<Grid Background="AliceBlue">	
+	<i:Interaction.Behaviors>
+		<ia:EventTriggerBehavior EventName="Closing">
+			<ia:InvokeCommandAction Command="{Binding SaveUIConfigurationCommand}" />
+		</ia:EventTriggerBehavior>
+	</i:Interaction.Behaviors>
+
+	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}">	
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="120" />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 		
-		<StackPanel Grid.Column="0" Orientation="Vertical" Background="{DynamicResource PanelBackground}">
+		<StackPanel Grid.Column="0" Orientation="Vertical" Background="{Binding SettingsVM.Theme.PanelSelectorBackground}">
 			<StackPanel.Styles>
 				<Style Selector="Grid">
 					<Setter Property="Height" Value="90" />
@@ -33,30 +39,28 @@
 				</Style>
 				<Style Selector="Grid > img|Icon">
 					<Setter Property="FontSize" Value="35" />
-					<Setter Property="Foreground" Value="{DynamicResource GridIconBackground}" />
+					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.PanelSelectorIconForeground}" />
 				</Style>
 				<Style Selector="TextBlock">
 					<Setter Property="HorizontalAlignment" Value="Center" />
+					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.PanelSelectorTextForeground}" />
 				</Style>
 			</StackPanel.Styles>
-			
-			<StackPanel.Resources>
-				<SolidColorBrush x:Key="PanelBackground">#EE9BA2E4</SolidColorBrush>
-				<SolidColorBrush x:Key="GridIconBackground">#292177</SolidColorBrush>
-				<SolidColorBrush x:Key="GridDefaultBackground">#EE9BA2E4</SolidColorBrush>
-				<SolidColorBrush x:Key="GridEnteredBackground">#EEB3ADF0</SolidColorBrush>
-			</StackPanel.Resources>
 			
 			<Grid Name="FavoriteToolsGrid">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="FavoriteToolsGrid">
-						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{DynamicResource GridEnteredBackground}" />
+						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="FavoriteToolsGrid">
-						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{DynamicResource GridDefaultBackground}" />
+						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="FavoriteToolsGrid">
+						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FavoriteToolsGrid">
 						<ia:InvokeCommandAction Command="{Binding ShowFavoriteToolsCommand}" />
+						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
 				
@@ -64,19 +68,25 @@
 					<RowDefinition/>
 					<RowDefinition Height="20" />
 				</Grid.RowDefinitions>
+				
 				<img:Icon Grid.Row="0" Value="fa-star" FontSize="35" />
-				<TextBlock Grid.Row="1" Text="Favorites" />
+				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Favorites}" />
 			</Grid>
+			
 			<Grid Name="ToolsGrid">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolsGrid">
-						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{DynamicResource GridEnteredBackground}" />
+						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="ToolsGrid">
-						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{DynamicResource GridDefaultBackground}" />
+						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="ToolsGrid">
+						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="ToolsGrid">
 						<ia:InvokeCommandAction Command="{Binding ShowToolsCommand}" />
+						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
 				
@@ -84,19 +94,25 @@
 					<RowDefinition/>
 					<RowDefinition Height="20" />
 				</Grid.RowDefinitions>
+				
 				<img:Icon Grid.Row="0" Value="fa-wrench" FontSize="35" />
-				<TextBlock Grid.Row="1" Text="Tools" />
+				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tools}" />
 			</Grid>
+			
 			<Grid Name="SettingsGrid">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="SettingsGrid">
-						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{DynamicResource GridEnteredBackground}" />
+						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="SettingsGrid">
-						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{DynamicResource GridDefaultBackground}" />
+						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="SettingsGrid">
+						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="SettingsGrid">
 						<ia:InvokeCommandAction Command="{Binding ShowSettingsCommand}" />
+						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
 
@@ -104,8 +120,9 @@
 					<RowDefinition/>
 					<RowDefinition Height="20" />
 				</Grid.RowDefinitions>
+				
 				<img:Icon Grid.Row="0" Value="fa-cog" FontSize="35" />
-				<TextBlock Grid.Row="1" Text="Settings" />
+				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Settings}" />
 			</Grid>
 		</StackPanel>
 		

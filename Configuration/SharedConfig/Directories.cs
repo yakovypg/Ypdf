@@ -7,6 +7,8 @@
         public const string FONTS = "Fonts";
         public const string CONFIG = "Config";
         public const string SCRIPTS = "Scripts";
+        public const string LOCALES = "Locales";
+        public const string THEMES = "Themes";
 
         static Directories()
         {
@@ -20,6 +22,8 @@
             PrepareDirectory(FONTS);
             PrepareDirectory(CONFIG);
             PrepareDirectory(SCRIPTS);
+            PrepareDirectory(LOCALES);
+            PrepareDirectory(THEMES);
         }
 
         private static void PrepareDirectory(string path)

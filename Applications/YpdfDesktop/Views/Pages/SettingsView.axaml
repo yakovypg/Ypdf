@@ -5,6 +5,8 @@
 			 xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:localization="using:YpdfDesktop.Models.Localization"
+			 xmlns:themes="using:YpdfDesktop.Models.Themes"
 			 xmlns:vm="using:YpdfDesktop.ViewModels"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
@@ -27,23 +29,24 @@
 		
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30" />
-			<RowDefinition Height="29" />
+			<RowDefinition Height="30" />
 			<RowDefinition Height="5" />
-			<RowDefinition Height="29" />
+			<RowDefinition Height="30" />
 			<RowDefinition Height="5" />
-			<RowDefinition Height="29" />
+			<RowDefinition Height="30" />
 			<RowDefinition />
 			<RowDefinition Height="30" />
 		</Grid.RowDefinitions>
 
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="100" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="10" />
 			<ColumnDefinition Width="150" />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 
 		<TextBlock
-			Grid.ColumnSpan="3"
+			Grid.ColumnSpan="4"
 			Text="{Binding AppVersion}"
 			FontWeight="SemiBold"
 			FontSize="15"
@@ -51,45 +54,54 @@
 			HorizontalAlignment="Center">
 		</TextBlock>
 		
-		<TextBlock Grid.Row="1" Grid.Column="0" Text="Language" />
-		<TextBlock Grid.Row="3" Grid.Column="0" Text="Theme" />
-		<TextBlock Grid.Row="5" Grid.Column="0" Text="Python alias" />
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Locale.Language}" />
+		<TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Locale.Theme}" />
+		<TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Locale.PythonAlias}" />
 
-		<ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="0">
-			<ComboBoxItem>English</ComboBoxItem>
+		<ComboBox Name="LocalesComboBox" Grid.Row="1" Grid.Column="2" SelectedIndex="0" Items="{Binding Locales}" SelectedItem="{Binding Locale}">		
+			<ComboBox.ItemTemplate>
+				<DataTemplate DataType="{x:Type localization:Locale}">
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
 		</ComboBox>
-		<ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="0">
-			<ComboBoxItem>Light</ComboBoxItem>
+		
+		<ComboBox Name="ThemesComboBox" Grid.Row="3" Grid.Column="2" SelectedIndex="0" Items="{Binding Themes}" SelectedItem="{Binding Theme}">		
+			<ComboBox.ItemTemplate>
+				<DataTemplate DataType="{x:Type themes:WindowTheme}">
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
 		</ComboBox>
+		
 		<TextBox
 			Grid.Row="5"
-			Grid.Column="1"
+			Grid.Column="2"
 			Text="{Binding PythonAlias, Mode=TwoWay}">
 		</TextBox>
 
 		<Button
 			Grid.Row="7"
-			Grid.ColumnSpan="3"
-			Content="Save"
+			Grid.ColumnSpan="4"
+			Content="{Binding Locale.Save}"
 			Width="120"
 			HorizontalContentAlignment="Center"
 			HorizontalAlignment="Center"
 			Command="{Binding SaveSettingsCommand}">
 		</Button>
 
-		<Grid Grid.Row="7" Grid.Column="2">
+		<Grid Grid.Row="7" Grid.Column="3">
 			<Grid.Styles>
-				<Style Selector="Grid > img|Icon">
+				<Style Selector="UniformGrid">
 					<Setter Property="Cursor" Value="Hand" />
-					<Setter Property="FontSize" Value="21" />
 					<Setter Property="Margin" Value="5, 0, 0, 0" />
-					<Setter Property="Foreground" Value="{DynamicResource IconBackground}" />
+					<Setter Property="Background" Value="Transparent" />
+				</Style>
+				<Style Selector="UniformGrid > img|Icon">
+					<Setter Property="FontSize" Value="21" />
+					<Setter Property="Foreground" Value="{Binding Theme.LinkIconForeground}" />
 				</Style>
 			</Grid.Styles>
-
-			<Grid.Resources>
-				<SolidColorBrush x:Key="IconBackground">#292177</SolidColorBrush>
-			</Grid.Resources>
 			
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
@@ -97,21 +109,25 @@
 				<ColumnDefinition Width="26" />
 			</Grid.ColumnDefinitions>
 
-			<img:Icon Grid.Column="1" Name="VkIcon" Value="fa-brands fa-vk">
+			<UniformGrid Name="VkIcon" Grid.Column="1">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="VkIcon">
 						<ia:InvokeCommandAction Command="{Binding OpenVkPageCommand}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
-			</img:Icon>
-			
-			<img:Icon Grid.Column="2" Name="GitHubIcon" Value="fa-brands fa-github">
+
+				<img:Icon Value="fa-brands fa-vk" />
+			</UniformGrid>
+
+			<UniformGrid Name="GitHubIcon" Grid.Column="2">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="GitHubIcon">
 						<ia:InvokeCommandAction Command="{Binding OpenGitHubPageCommand}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
-			</img:Icon>
+
+				<img:Icon Value="fa-brands fa-github" />
+			</UniformGrid>
 		</Grid>
 	</Grid>
 </UserControl>

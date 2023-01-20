@@ -1,8 +1,14 @@
 using ReactiveUI;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
-using YpdfDesktop.Infrastructure.Support;
+using YpdfDesktop.Infrastructure.Default;
+using YpdfDesktop.Infrastructure.Services;
 using YpdfDesktop.Models;
+using YpdfDesktop.Models.Configuration;
+using YpdfDesktop.Models.Localization;
+using YpdfDesktop.Models.Themes;
 
 namespace YpdfDesktop.ViewModels
 {
@@ -10,6 +16,7 @@ namespace YpdfDesktop.ViewModels
     {
         #region Commands
 
+        public ReactiveCommand<Unit, Unit> SaveUIConfigurationCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowFavoriteToolsCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowToolsCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowSettingsCommand { get; }
@@ -18,57 +25,120 @@ namespace YpdfDesktop.ViewModels
 
         #region ViewModels
 
-        private readonly ToolsViewModel _favoritesToolsVM;
-        public ToolsViewModel FavoritesToolsVM => _favoritesToolsVM;
-
-        private readonly ToolsViewModel _toolsVM;
-        public ToolsViewModel ToolsVM => _toolsVM;
-
-        private readonly SettingsViewModel _settingsVM;
-        public SettingsViewModel SettingsVM => _settingsVM;
+        public ToolsViewModel FavoritesToolsVM { get; }
+        public ToolsViewModel ToolsVM { get; }
+        public SettingsViewModel SettingsVM { get; }
 
         #endregion
 
-        #region Properties
+        #region Reactive Properties
 
         private bool _isFavoriteToolsVisible = true;
         public bool IsFavoriteToolsVisible
         {
             get => _isFavoriteToolsVisible;
-            set => this.RaiseAndSetIfChanged(ref _isFavoriteToolsVisible, value);
+            private set => this.RaiseAndSetIfChanged(ref _isFavoriteToolsVisible, value);
         }
 
         private bool _isToolsVisible = false;
         public bool IsToolsVisible
         {
             get => _isToolsVisible;
-            set => this.RaiseAndSetIfChanged(ref _isToolsVisible, value);
+            private set => this.RaiseAndSetIfChanged(ref _isToolsVisible, value);
         }
 
         private bool _isSettingsVisible = false;
         public bool IsSettingsVisible
         {
             get => _isSettingsVisible;
-            set => this.RaiseAndSetIfChanged(ref _isSettingsVisible, value);
+            private set => this.RaiseAndSetIfChanged(ref _isSettingsVisible, value);
         }
 
         #endregion Properties
 
-        private readonly ObservableCollection<Tool> _allTools;
-        private readonly ObservableCollection<Tool> _favoritesTools;
-
         public MainWindowViewModel()
         {
-            _allTools = SupportedTools.Get();
-            _favoritesTools = new ObservableCollection<Tool>();
-            
-            _favoritesToolsVM = new ToolsViewModel(_favoritesTools, _favoritesTools);
-            _toolsVM = new ToolsViewModel(_allTools, _favoritesTools);
-            _settingsVM = new SettingsViewModel();
+            SharedConfig.Directories.Prepare();
+            SharedConfig.Files.Prepare();
 
+            SettingsVM = new SettingsViewModel();
+
+            var allTools = DefaultTools.Get(SettingsVM.Locale, SettingsVM.Theme);
+            var favoritesTools = new ObservableCollection<Tool>();
+
+            FavoritesToolsVM = new ToolsViewModel(SettingsVM, favoritesTools, favoritesTools);
+            ToolsVM = new ToolsViewModel(SettingsVM, allTools, favoritesTools);
+
+            SettingsVM.LocaleUpdated += FavoritesToolsVM.UpdateLocale;
+            SettingsVM.LocaleUpdated += ToolsVM.UpdateLocale;
+            SettingsVM.ThemeUpdated += FavoritesToolsVM.UpdateTheme;
+            SettingsVM.ThemeUpdated += ToolsVM.UpdateTheme;
+
+            SaveUIConfigurationCommand = ReactiveCommand.Create(SaveUIConfiguration);
             ShowFavoriteToolsCommand = ReactiveCommand.Create(ShowFavoriteTools);
             ShowToolsCommand = ReactiveCommand.Create(ShowTools);
             ShowSettingsCommand = ReactiveCommand.Create(ShowSettings);
+
+            LoadUIConfiguration();
+        }
+
+        #region Private Methods
+
+        private void LoadUIConfiguration()
+        {
+            if (!UIConfigService.TryLoadUIConfiguration(out UIConfig config))
+                return;
+
+            if (config.SelectedLocaleId is not null)
+            {
+                Locale? selectedLocale = SettingsVM.Locales.FirstOrDefault(t => t.Id == config.SelectedLocaleId);
+
+                if (selectedLocale is not null)
+                    SettingsVM.Locale = selectedLocale;
+                else if (SettingsVM.Locales.Count > 0)
+                    SettingsVM.Locale = SettingsVM.Locales[0];
+
+            }
+
+            if (config.SelectedThemeId is not null)
+            {
+                WindowTheme? selectedTheme = SettingsVM.Themes.FirstOrDefault(t => t.Id == config.SelectedThemeId);
+
+                if (selectedTheme is not null)
+                    SettingsVM.Theme = selectedTheme;
+                else if (SettingsVM.Themes.Count > 0)
+                    SettingsVM.Theme = SettingsVM.Themes[0];
+            }
+
+            if (config.FavoriteTools is not null)
+            {
+                foreach (ToolType toolType in config.FavoriteTools)
+                {
+                    Tool? tool = ToolsVM.Tools.FirstOrDefault(t => t.Type == toolType);
+
+                    if (tool is not null)
+                    {
+                        tool.IsFavorite = true;
+                        FavoritesToolsVM.FavoriteTools.Add(tool);
+                    }
+                }
+            }
+        }
+
+        private void SaveUIConfiguration()
+        {
+            List<ToolType> favoriteTools = FavoritesToolsVM.FavoriteTools
+                .Select(t => t.Type)
+                .ToList();
+
+            var config = new UIConfig()
+            {
+                SelectedLocaleId = SettingsVM.Locale.Id,
+                SelectedThemeId = SettingsVM.Theme.Id,
+                FavoriteTools = favoriteTools
+            };
+
+            _ = UIConfigService.TrySaveUIConfiguration(config);
         }
 
         private void ShowFavoriteTools()
@@ -95,5 +165,7 @@ namespace YpdfDesktop.ViewModels
             IsToolsVisible = false;
             IsSettingsVisible = false;
         }
+
+        #endregion
     }
 }

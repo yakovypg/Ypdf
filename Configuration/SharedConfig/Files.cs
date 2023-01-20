@@ -4,6 +4,7 @@
     {
         public static readonly string Readme = Path.Combine(Directories.DOCS, "README.md");
         public static readonly string PythonAlias = Path.Combine(Directories.CONFIG, "python-alias.txt");
+        public static readonly string UIConfig = Path.Combine(Directories.CONFIG, "ui-config.json");
 
         static Files()
         {
@@ -14,6 +15,7 @@
         {
             PrepareFile(Readme);
             PrepareFile(PythonAlias);
+            PrepareFile(UIConfig);
         }
 
         private static void PrepareFile(string path)

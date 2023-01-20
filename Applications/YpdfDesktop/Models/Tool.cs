@@ -7,8 +7,15 @@ namespace YpdfDesktop.Models
 {
     public class Tool : ReactiveModel, ITool, IEquatable<Tool?>
     {
-        public string Name { get; }
         public string IconName { get; }
+        public ToolType Type { get; }
+
+        private string _name = string.Empty;
+        public string Name
+        {
+            get => _name;
+            set => RaiseAndSetIfChanged(ref _name, value);
+        }
 
         private bool _isFavorite = false;
         public bool IsFavorite
@@ -20,8 +27,8 @@ namespace YpdfDesktop.Models
                     return;
 
                 StarBrush = value
-                    ? Brushes.DarkOrange
-                    : Brushes.Gray;
+                    ? FavoriteStarBrush
+                    : NotFavoriteStarBrush;
             }
         }
 
@@ -32,10 +39,47 @@ namespace YpdfDesktop.Models
             private set => RaiseAndSetIfChanged(ref _starBrush, value);
         }
 
-        public Tool(string name, string iconName, bool isFavorite = false)
+        private ISolidColorBrush _favoriteStarBrush = Brushes.DarkOrange;
+        public ISolidColorBrush FavoriteStarBrush
         {
-            Name = name;
-            IconName = iconName;
+            get => _favoriteStarBrush;
+            set
+            {
+                if (!RaiseAndSetIfChanged(ref _favoriteStarBrush, value))
+                    return;
+
+                if (IsFavorite)
+                    StarBrush = value;
+            }
+        }
+
+        private ISolidColorBrush _notFavoriteStarBrush = Brushes.Gray;
+        public ISolidColorBrush NotFavoriteStarBrush
+        {
+            get => _notFavoriteStarBrush;
+            set
+            {
+                if (!RaiseAndSetIfChanged(ref _notFavoriteStarBrush, value))
+                    return;
+
+                if (!IsFavorite)
+                    StarBrush = value;
+            }
+        }
+
+        public Tool(string? name, string? iconName, ToolType type, bool isFavorite = false)
+            : this(name, iconName, type, Brushes.DarkOrange, Brushes.Gray, isFavorite)
+        {
+        }
+
+        public Tool(string? name, string? iconName, ToolType type, ISolidColorBrush favoriteStarBrush,
+            ISolidColorBrush notFavoriteStarBrush, bool isFavorite = false)
+        {
+            Name = name ?? string.Empty;
+            IconName = iconName ?? string.Empty;
+            Type = type;
+            FavoriteStarBrush = favoriteStarBrush;
+            NotFavoriteStarBrush = notFavoriteStarBrush;
             IsFavorite = isFavorite;
         }
 
@@ -44,8 +88,11 @@ namespace YpdfDesktop.Models
             return other is not null &&
                    Name == other.Name &&
                    IconName == other.IconName &&
-                   _isFavorite == other._isFavorite &&
-                   EqualityComparer<ISolidColorBrush>.Default.Equals(_starBrush, other._starBrush);
+                   Type == other.Type &&
+                   IsFavorite == other.IsFavorite &&
+                   EqualityComparer<ISolidColorBrush>.Default.Equals(StarBrush, other.StarBrush) &&
+                   EqualityComparer<ISolidColorBrush>.Default.Equals(FavoriteStarBrush, other.FavoriteStarBrush) &&
+                   EqualityComparer<ISolidColorBrush>.Default.Equals(NotFavoriteStarBrush, other.NotFavoriteStarBrush);
         }
 
         public override bool Equals(object? obj)
@@ -55,7 +102,8 @@ namespace YpdfDesktop.Models
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Name, IconName, _isFavorite, _starBrush);
+            return HashCode.Combine(Name, IconName, Type, IsFavorite, StarBrush,
+                FavoriteStarBrush, NotFavoriteStarBrush);
         }
 
         public static bool operator ==(Tool? left, Tool? right)
