@@ -16,12 +16,122 @@ namespace YpdfDesktop.ViewModels
 
         public ReactiveCommand<ToolType, Unit> ChangeToolAffiliationToFavoritesCommand { get; }
         public ReactiveCommand<ToolType, Unit> ShowToolPageCommand { get; }
+        public ReactiveCommand<Unit, Unit> HideAllToolsPagesCommand { get; }
 
         #endregion
 
         #region ViewModels
 
         public SettingsViewModel SettingsVM { get; }
+
+        #endregion
+
+        #region Reactive Properties
+
+        private bool _isSplitViewVisible = false;
+        public bool IsSplitViewVisible
+        {
+            get => _isSplitViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isSplitViewVisible, value);
+        }
+
+        private bool _isMergeViewVisible = false;
+        public bool IsMergeViewVisible
+        {
+            get => _isMergeViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isMergeViewVisible, value);
+        }
+
+        private bool _isCompressViewVisible = false;
+        public bool IsCompressViewVisible
+        {
+            get => _isCompressViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isCompressViewVisible, value);
+        }
+
+        private bool _isHandlePagesViewVisible = false;
+        public bool IsHandlePagesViewVisible
+        {
+            get => _isHandlePagesViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isHandlePagesViewVisible, value);
+        }
+
+        private bool _isCropPagesViewVisible = false;
+        public bool IsCropPagesViewVisible
+        {
+            get => _isCropPagesViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isCropPagesViewVisible, value);
+        }
+
+        private bool _isDividePagesViewVisible = false;
+        public bool IsDividePagesViewVisible
+        {
+            get => _isDividePagesViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isDividePagesViewVisible, value);
+        }
+
+        private bool _isAddPageNumbersViewVisible = false;
+        public bool IsAddPageNumbersViewVisible
+        {
+            get => _isAddPageNumbersViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isAddPageNumbersViewVisible, value);
+        }
+
+        private bool _isAddWatermarkViewVisible = false;
+        public bool IsAddWatermarkViewVisible
+        {
+            get => _isAddWatermarkViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isAddWatermarkViewVisible, value);
+        }
+
+        private bool _isRemoveWatermarkViewVisible = false;
+        public bool IsRemoveWatermarkViewVisible
+        {
+            get => _isRemoveWatermarkViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isRemoveWatermarkViewVisible, value);
+        }
+
+        private bool _isImageToPdfViewVisible = false;
+        public bool IsImageToPdfViewVisible
+        {
+            get => _isImageToPdfViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isImageToPdfViewVisible, value);
+        }
+
+        private bool _isTextToPdfViewVisible = false;
+        public bool IsTextToPdfViewVisible
+        {
+            get => _isTextToPdfViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isTextToPdfViewVisible, value);
+        }
+
+        private bool _isExtractImagesViewVisible = false;
+        public bool IsExtractImagesViewVisible
+        {
+            get => _isExtractImagesViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isExtractImagesViewVisible, value);
+        }
+
+        private bool _isExtractTextViewVisible = false;
+        public bool IsExtractTextViewVisible
+        {
+            get => _isExtractTextViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isExtractTextViewVisible, value);
+        }
+
+        private bool _isSetPasswordViewVisible = false;
+        public bool IsSetPasswordViewVisible
+        {
+            get => _isSetPasswordViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isSetPasswordViewVisible, value);
+        }
+
+        private bool _isRemovePasswordViewVisible = false;
+        public bool IsRemovePasswordViewVisible
+        {
+            get => _isRemovePasswordViewVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isRemovePasswordViewVisible, value);
+        }
 
         #endregion
 
@@ -57,6 +167,7 @@ namespace YpdfDesktop.ViewModels
 
             ChangeToolAffiliationToFavoritesCommand = ReactiveCommand.Create<ToolType>(ChangeToolAffiliationToFavorites);
             ShowToolPageCommand = ReactiveCommand.Create<ToolType>(ShowToolPage);
+            HideAllToolsPagesCommand = ReactiveCommand.Create(HideAllToolsPages);
         }
 
         #region Public Methods
@@ -110,7 +221,10 @@ namespace YpdfDesktop.ViewModels
         {
             _isChangeToolAffiliationToFavoritesMethodInvoked = true;
 
-            Tool tool = Tools.First(t => t.Type == toolType);
+            Tool? tool = Tools.FirstOrDefault(t => t.Type == toolType);
+
+            if (tool is null)
+                return;
 
             if (tool.IsFavorite)
                 FavoriteTools.Remove(tool);
@@ -128,7 +242,47 @@ namespace YpdfDesktop.ViewModels
                 return;
             }
 
-            Tool tool = Tools.First(t => t.Type == toolType);
+            if (!Tools.Any(t => t.Type == toolType))
+                return;
+
+            switch (toolType)
+            {
+                case ToolType.Split: IsSplitViewVisible = true; break;
+                case ToolType.Merge: IsMergeViewVisible = true; break;
+                case ToolType.Compress: IsCompressViewVisible = true; break;
+                case ToolType.HandlePages: IsHandlePagesViewVisible = true; break;
+                case ToolType.CropPages: IsCropPagesViewVisible = true; break;
+                case ToolType.DividePages: IsDividePagesViewVisible = true; break;
+                case ToolType.AddPageNumbers: IsAddPageNumbersViewVisible = true; break;
+                case ToolType.AddWatermark: IsAddWatermarkViewVisible = true; break;
+                case ToolType.RemoveWatermark: IsRemoveWatermarkViewVisible = true; break;
+                case ToolType.ImageToPdf: IsImageToPdfViewVisible = true; break;
+                case ToolType.TextToPdf: IsTextToPdfViewVisible = true; break;
+                case ToolType.ExtractImages: IsExtractImagesViewVisible = true; break;
+                case ToolType.ExtractText: IsExtractTextViewVisible = true; break;
+                case ToolType.SetPassword: IsSetPasswordViewVisible = true; break;
+                case ToolType.RemovePassword: IsRemovePasswordViewVisible = true; break;
+                default: break;
+            }
+        }
+
+        private void HideAllToolsPages()
+        {
+            IsSplitViewVisible = false;
+            IsMergeViewVisible = false;
+            IsCompressViewVisible = false;
+            IsHandlePagesViewVisible = false;
+            IsCropPagesViewVisible = false;
+            IsDividePagesViewVisible = false;
+            IsAddPageNumbersViewVisible = false;
+            IsAddWatermarkViewVisible = false;
+            IsRemoveWatermarkViewVisible = false;
+            IsImageToPdfViewVisible = false;
+            IsTextToPdfViewVisible = false;
+            IsExtractImagesViewVisible = false;
+            IsExtractTextViewVisible = false;
+            IsSetPasswordViewVisible = false;
+            IsRemovePasswordViewVisible = false;
         }
 
         #endregion

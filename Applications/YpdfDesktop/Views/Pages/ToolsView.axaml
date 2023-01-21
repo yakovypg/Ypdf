@@ -6,6 +6,7 @@
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:models="clr-namespace:YpdfDesktop.Models"
+			 xmlns:toolPages="using:YpdfDesktop.Views.Pages.Tools"
 			 xmlns:vm="using:YpdfDesktop.ViewModels"
              mc:Ignorable="d"
 			 d:DesignWidth="600" d:DesignHeight="450"
@@ -55,6 +56,9 @@
 								</ia:EventTriggerBehavior>
 								<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="ToolGrid">
 									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+									<ia:InvokeCommandAction
+										Command="{Binding DataContext.HideAllToolsPagesCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+									</ia:InvokeCommandAction>
 									<ia:InvokeCommandAction
 										Command="{Binding DataContext.ShowToolPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
 										CommandParameter="{Binding Type}">
@@ -106,5 +110,22 @@
 				</DataTemplate>
 			</ItemsControl.DataTemplates>
 		</ItemsControl>
+
+		<toolPages:SplitView IsVisible="{Binding IsSplitViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:MergeView IsVisible="{Binding IsMergeViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:CompressView IsVisible="{Binding IsCompressViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:HandlePagesView IsVisible="{Binding IsHandlePagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:CropPagesView IsVisible="{Binding IsCropPagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:DividePagesView IsVisible="{Binding IsDividePagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:AddPageNumbersView IsVisible="{Binding IsAddPageNumbersViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:AddWatermarkView IsVisible="{Binding IsAddWatermarkViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:RemoveWatermarkView IsVisible="{Binding IsRemoveWatermarkViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:ImageToPdfView IsVisible="{Binding IsImageToPdfViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:TextToPdfView IsVisible="{Binding IsTextToPdfViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:ExtractImagesView IsVisible="{Binding IsExtractImagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:ExtractTextView IsVisible="{Binding IsExtractTextViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:SetPasswordView IsVisible="{Binding IsSetPasswordViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
+		<toolPages:RemovePasswordView IsVisible="{Binding IsRemovePasswordViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}" />
 	</Grid>
+	
 </UserControl>

@@ -37,4 +37,7 @@
     <ProjectReference Include="..\..\Core\ExecutionLib\ExecutionLib.csproj" />
     <ProjectReference Include="..\..\Core\YpdfLib\YpdfLib.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Pages\Tools\TextToPdfView.axaml" />
+  </ItemGroup>
 </Project>

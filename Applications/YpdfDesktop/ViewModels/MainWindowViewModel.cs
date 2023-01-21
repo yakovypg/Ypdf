@@ -25,7 +25,7 @@ namespace YpdfDesktop.ViewModels
 
         #region ViewModels
 
-        public ToolsViewModel FavoritesToolsVM { get; }
+        public ToolsViewModel FavoriteToolsVM { get; }
         public ToolsViewModel ToolsVM { get; }
         public SettingsViewModel SettingsVM { get; }
 
@@ -66,12 +66,12 @@ namespace YpdfDesktop.ViewModels
             var allTools = DefaultTools.Get(SettingsVM.Locale, SettingsVM.Theme);
             var favoritesTools = new ObservableCollection<Tool>();
 
-            FavoritesToolsVM = new ToolsViewModel(SettingsVM, favoritesTools, favoritesTools);
+            FavoriteToolsVM = new ToolsViewModel(SettingsVM, favoritesTools, favoritesTools);
             ToolsVM = new ToolsViewModel(SettingsVM, allTools, favoritesTools);
 
-            SettingsVM.LocaleUpdated += FavoritesToolsVM.UpdateLocale;
+            SettingsVM.LocaleUpdated += FavoriteToolsVM.UpdateLocale;
             SettingsVM.LocaleUpdated += ToolsVM.UpdateLocale;
-            SettingsVM.ThemeUpdated += FavoritesToolsVM.UpdateTheme;
+            SettingsVM.ThemeUpdated += FavoriteToolsVM.UpdateTheme;
             SettingsVM.ThemeUpdated += ToolsVM.UpdateTheme;
 
             SaveUIConfigurationCommand = ReactiveCommand.Create(SaveUIConfiguration);
@@ -119,7 +119,7 @@ namespace YpdfDesktop.ViewModels
                     if (tool is not null)
                     {
                         tool.IsFavorite = true;
-                        FavoritesToolsVM.FavoriteTools.Add(tool);
+                        FavoriteToolsVM.FavoriteTools.Add(tool);
                     }
                 }
             }
@@ -127,7 +127,7 @@ namespace YpdfDesktop.ViewModels
 
         private void SaveUIConfiguration()
         {
-            List<ToolType> favoriteTools = FavoritesToolsVM.FavoriteTools
+            List<ToolType> favoriteTools = FavoriteToolsVM.FavoriteTools
                 .Select(t => t.Type)
                 .ToList();
 

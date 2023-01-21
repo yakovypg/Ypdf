@@ -1,12 +1,12 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:YpdfDesktop.ViewModels"
-		xmlns:pages="using:YpdfDesktop.Views.Pages"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
 		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
         xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+		xmlns:vm="using:YpdfDesktop.ViewModels"
+		xmlns:pages="using:YpdfDesktop.Views.Pages"
         mc:Ignorable="d"
 		d:DesignWidth="720" d:DesignHeight="450"
 		Width="720" Height="450"
@@ -59,6 +59,8 @@
 						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FavoriteToolsGrid">
+						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
+						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
 						<ia:InvokeCommandAction Command="{Binding ShowFavoriteToolsCommand}" />
 						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
@@ -85,6 +87,8 @@
 						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="ToolsGrid">
+						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
+						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
 						<ia:InvokeCommandAction Command="{Binding ShowToolsCommand}" />
 						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
@@ -111,6 +115,8 @@
 						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
 					</ia:EventTriggerBehavior>
 					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="SettingsGrid">
+						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
+						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
 						<ia:InvokeCommandAction Command="{Binding ShowSettingsCommand}" />
 						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
@@ -128,7 +134,7 @@
 		
 		<Grid Grid.Column="1">
 			<UniformGrid IsVisible="{Binding IsFavoriteToolsVisible}">
-				<pages:ToolsView DataContext="{Binding FavoritesToolsVM}" />
+				<pages:ToolsView DataContext="{Binding FavoriteToolsVM}" />
 			</UniformGrid>
 			<UniformGrid IsVisible="{Binding IsToolsVisible}">
 				<pages:ToolsView DataContext="{Binding ToolsVM}" />
