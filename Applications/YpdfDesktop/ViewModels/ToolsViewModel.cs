@@ -195,7 +195,7 @@ namespace YpdfDesktop.ViewModels
                     ToolType.ExtractImages => locale.ExtractImages ?? string.Empty,
                     ToolType.ExtractText => locale.ExtractText ?? string.Empty,
                     ToolType.SetPassword => locale.SetPassword ?? string.Empty,
-                    ToolType.RemovePassword => locale.RemovePassword ?? string.Empty,         
+                    ToolType.RemovePassword => locale.RemovePassword ?? string.Empty,
                     _ => string.Empty,
                 };
             }
@@ -230,7 +230,7 @@ namespace YpdfDesktop.ViewModels
                 FavoriteTools.Remove(tool);
             else
                 FavoriteTools.Add(tool);
-            
+
             tool.IsFavorite = !tool.IsFavorite;
         }
 

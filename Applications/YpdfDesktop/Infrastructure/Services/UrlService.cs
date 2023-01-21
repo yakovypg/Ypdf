@@ -8,7 +8,7 @@ namespace YpdfDesktop.Infrastructure.Services
         {
             if (string.IsNullOrEmpty(url))
                 return false;
-            
+
             try
             {
                 var startInfo = new ProcessStartInfo(url) { UseShellExecute = true };
