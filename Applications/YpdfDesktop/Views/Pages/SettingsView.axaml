@@ -7,7 +7,7 @@
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:localization="using:YpdfDesktop.Models.Localization"
 			 xmlns:themes="using:YpdfDesktop.Models.Themes"
-			 xmlns:vm="using:YpdfDesktop.ViewModels"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.SettingsView">
@@ -20,6 +20,7 @@
 		<Grid.Styles>
 			<Style Selector="TextBlock">
 				<Setter Property="VerticalAlignment" Value="Center" />
+				<Setter Property="Foreground" Value="{Binding Theme.ExplorerTextForeground}" />
 			</Style>
 			<Style Selector="ComboBox">
 				<Setter Property="Width" Value="150" />
@@ -87,6 +88,8 @@
 			Width="120"
 			HorizontalContentAlignment="Center"
 			HorizontalAlignment="Center"
+			Background="{Binding Theme.ButtonBackground}"
+			Foreground="{Binding Theme.ButtonForeground}"
 			Command="{Binding SaveSettingsCommand}">
 		</Button>
 

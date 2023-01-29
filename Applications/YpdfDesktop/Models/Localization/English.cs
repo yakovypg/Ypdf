@@ -17,6 +17,13 @@
             PythonAlias = "Python path/alias";
             Save = "Save";
 
+            From = "From";
+            To = "To";
+            Execute = "Execute";
+            Reset = "Reset";
+            File = "File";
+            Output = "Output";
+
             Split = "split";
             Merge = "merge";
             Compress = "compress";

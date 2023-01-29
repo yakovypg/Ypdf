@@ -11,7 +11,7 @@ using YpdfDesktop.Models;
 using YpdfDesktop.Models.Localization;
 using YpdfDesktop.Models.Themes;
 
-namespace YpdfDesktop.ViewModels
+namespace YpdfDesktop.ViewModels.Pages
 {
     public class SettingsViewModel : ViewModelBase
     {

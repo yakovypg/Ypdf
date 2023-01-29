@@ -7,11 +7,22 @@ namespace YpdfDesktop.Models.Themes
 {
     public class WindowTheme : IWindowTheme
     {
-        public string Id { get; }
+        public string Id { get; set; }
         public string Name { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? ExplorerBackground { get; set; }
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ExplorerSplitterBackground { get; set; }
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ExplorerTextForeground { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonBackground { get; set; }
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonForeground { get; set; }
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonIconForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? LinkIconForeground { get; set; }

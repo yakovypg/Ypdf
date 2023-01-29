@@ -9,6 +9,7 @@ using YpdfDesktop.Models;
 using YpdfDesktop.Models.Configuration;
 using YpdfDesktop.Models.Localization;
 using YpdfDesktop.Models.Themes;
+using YpdfDesktop.ViewModels.Pages;
 
 namespace YpdfDesktop.ViewModels
 {

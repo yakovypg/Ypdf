@@ -16,6 +16,13 @@ namespace YpdfDesktop.Models.Localization
         public string? PythonAlias { get; set; }
         public string? Save { get; set; }
 
+        public string? From { get; set; }
+        public string? To { get; set; }
+        public string? Execute { get; set; }
+        public string? Reset { get; set; }
+        public string? File { get; set; }
+        public string? Output { get; set; }
+
         public string? Split { get; set; }
         public string? Merge { get; set; }
         public string? Compress { get; set; }

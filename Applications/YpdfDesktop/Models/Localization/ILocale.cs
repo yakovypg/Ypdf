@@ -14,6 +14,13 @@
         string? PythonAlias { get; set; }
         string? Save { get; set; }
 
+        string? From { get; set; }
+        string? To { get; set; }
+        string? Execute { get; set; }
+        string? Reset { get; set; }
+        string? File { get; set; }
+        string? Output { get; set; }
+
         string? Split { get; set; }
         string? Merge { get; set; }
         string? Compress { get; set; }

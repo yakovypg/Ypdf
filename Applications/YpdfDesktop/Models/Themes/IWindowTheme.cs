@@ -8,6 +8,12 @@ namespace YpdfDesktop.Models.Themes
         string Name { get; set; }
 
         ISolidColorBrush? ExplorerBackground { get; set; }
+        ISolidColorBrush? ExplorerSplitterBackground { get; set; }
+        ISolidColorBrush? ExplorerTextForeground { get; set; }
+
+        ISolidColorBrush? ButtonBackground { get; set; }
+        ISolidColorBrush? ButtonForeground { get; set; }
+        ISolidColorBrush? ButtonIconForeground { get; set; }
 
         ISolidColorBrush? LinkIconForeground { get; set; }
         ISolidColorBrush? FavoriteStarIconForeground { get; set; }

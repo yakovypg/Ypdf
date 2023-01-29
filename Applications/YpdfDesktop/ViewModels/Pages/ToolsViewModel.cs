@@ -7,8 +7,9 @@ using YpdfDesktop.Infrastructure.Default;
 using YpdfDesktop.Models;
 using YpdfDesktop.Models.Localization;
 using YpdfDesktop.Models.Themes;
+using YpdfDesktop.ViewModels.Pages.Tools;
 
-namespace YpdfDesktop.ViewModels
+namespace YpdfDesktop.ViewModels.Pages
 {
     public class ToolsViewModel : ViewModelBase
     {
@@ -23,6 +24,10 @@ namespace YpdfDesktop.ViewModels
         #region ViewModels
 
         public SettingsViewModel SettingsVM { get; }
+
+        public SplitViewModel SplitVM { get; }
+        public MergeViewModel MergeVM { get; }
+        public CompressViewModel CompressVM { get; }
 
         #endregion
 
@@ -161,6 +166,10 @@ namespace YpdfDesktop.ViewModels
         public ToolsViewModel(SettingsViewModel settingsVM, ObservableCollection<Tool>? tools, ObservableCollection<Tool>? favoriteTools = null)
         {
             SettingsVM = settingsVM;
+
+            SplitVM = new SplitViewModel(settingsVM);
+            MergeVM = new MergeViewModel();
+            CompressVM = new CompressViewModel();
 
             Tools = tools ?? DefaultTools.Get(settingsVM.Locale, settingsVM.Theme);
             FavoriteTools = favoriteTools ?? new ObservableCollection<Tool>();

@@ -10,7 +10,7 @@
         mc:Ignorable="d"
 		d:DesignWidth="720" d:DesignHeight="450"
 		Width="720" Height="450"
-		MinWidth="390" MinHeight="300"
+		MinWidth="480" MinHeight="300"
         x:Class="YpdfDesktop.Views.MainWindow"
         Icon="/Assets/ypdf-logo.ico"
         Title="Ypdf-Desktop">
@@ -25,7 +25,7 @@
 		</ia:EventTriggerBehavior>
 	</i:Interaction.Behaviors>
 
-	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}">	
+	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="120" />
 			<ColumnDefinition />
