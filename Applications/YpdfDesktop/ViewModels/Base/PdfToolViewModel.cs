@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Threading;
 using ExecutionLib.Configuration;
 using ExecutionLib.Execution;
 using ExecutionLib.Informing.Logging;
@@ -51,30 +52,31 @@ namespace YpdfDesktop.ViewModels.Base
             return msgResult == ButtonResult.Yes;
         }
 
-        protected void Execute(ToolType toolType, YpdfConfig config)
+        protected void Execute(ToolType toolType, YpdfConfig config, bool checkOutputPath)
         {
-            var executor = new PdfToolExecutor(config);
-
-            string[] inputFiles = config.PathsConfig.AllInputFiles
-                .Select(t => Path.GetFileName(t))
-                .ToArray();
-
-            string? toolIcon = ToolInfoService.GetIconName(toolType);
-            string? toolName = ToolInfoService.GetToolName(toolType, SettingsVM.Locale);
-
-            Task executionTask = new Task(() =>
+            if (!checkOutputPath)
             {
-                IExecutionInfo executionInfo = executor.PrepareExecute(false, false);
-                executor.Execute(executionInfo);
+                Execute(toolType, config);
+                return;
+            }
+
+            _ = VerifyOutputPath(config.PathsConfig.OutputPath).ContinueWith(t =>
+            {
+                if (t.Result)
+                {
+                    Execute(toolType, config);
+                }
+                else
+                {
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        string? message = SettingsVM.Locale.FileExistsMessage;
+                        string? path = config.PathsConfig.OutputPath;
+
+                        MainWindowMessage.ShowErrorDialog($"{message}: {path}");
+                    });
+                }
             });
-
-            var taskExecutionInfo = new TaskExecutionInfo(toolName, toolIcon, inputFiles, executionTask);
-            TasksVM.Tasks.Add(taskExecutionInfo);
-
-            var textWriter = new ToolOutputWriter(taskExecutionInfo);
-            executor.Logger = new ExecutionLogger(textWriter);
-
-            executionTask.Start();
         }
 
         protected static Task<string[]?> GetPdfFilePath()
@@ -105,6 +107,36 @@ namespace YpdfDesktop.ViewModels.Base
             return WindowFinder.FindMainWindow() is Window mainWindow
                 ? dialog.ShowAsync(mainWindow)
                 : new Task<string?>(() => null);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void Execute(ToolType toolType, YpdfConfig config)
+        {
+            var executor = new PdfToolExecutor(config);
+
+            string[] inputFiles = config.PathsConfig.AllInputFiles
+                .Select(t => Path.GetFileName(t))
+                .ToArray();
+
+            string? toolIcon = ToolInfoService.GetIconName(toolType);
+            string? toolName = ToolInfoService.GetToolName(toolType, SettingsVM.Locale);
+
+            Task executionTask = new Task(() =>
+            {
+                IExecutionInfo executionInfo = executor.PrepareExecute(false, false);
+                executor.Execute(executionInfo);
+            });
+
+            var taskExecutionInfo = new TaskExecutionInfo(toolName, toolIcon, inputFiles, executionTask);
+            TasksVM.Tasks.Add(taskExecutionInfo);
+
+            var textWriter = new ToolOutputWriter(taskExecutionInfo);
+            executor.Logger = new ExecutionLogger(textWriter);
+
+            executionTask.Start();
         }
 
         #endregion

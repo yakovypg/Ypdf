@@ -43,7 +43,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             private set => this.RaiseAndSetIfChanged(ref _filePath, value);
         }
 
-        private string _outputDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private string _outputDirectoryPath = string.Empty;
         public string OutputDirectoryPath
         {
             get => _outputDirectoryPath;
@@ -103,6 +103,10 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                         throw new FileLoadException(SettingsVM.Locale.FileEmptyMessage, path);
 
                     PageRanges.Clear();
+                    PageRanges.Add(new Models.Enumeration.Range(1, filePages));
+
+                    if (string.IsNullOrEmpty(OutputDirectoryPath))
+                        OutputDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                     _filePages = filePages;
                     FilePath = path;
@@ -142,23 +146,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                     config.Pages.Add(new PageRange(range.Start, range.End));
             }
 
-            _ = VerifyOutputPath(config.PathsConfig.OutputPath).ContinueWith(t =>
-            {
-                if (t.Result)
-                {
-                    Execute(ToolType.Split, config);
-                }
-                else
-                {
-                    Dispatcher.UIThread.Post(() =>
-                    {
-                        string? message = SettingsVM.Locale.FileExistsMessage;
-                        string? path = config.PathsConfig.OutputPath;
-
-                        MainWindowMessage.ShowErrorDialog($"{message}: {path}");
-                    });
-                }
-            });
+            Execute(ToolType.Split, config, true);
         }
 
         private void Reset()
