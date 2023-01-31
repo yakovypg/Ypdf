@@ -1,5 +1,4 @@
-﻿using System;
-using YpdfDesktop.Models;
+﻿using YpdfDesktop.Models;
 using YpdfDesktop.Models.Localization;
 
 namespace YpdfDesktop.Infrastructure.Services

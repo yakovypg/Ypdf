@@ -39,7 +39,7 @@
             ExtractText = "extract text";
             SetPassword = "set password";
             RemovePassword = "rm password";
-            
+
             FileEmptyMessage = "File is empty";
             FileExistsMessage = "File already exists";
             ReplaceItMessage = "Replace it";

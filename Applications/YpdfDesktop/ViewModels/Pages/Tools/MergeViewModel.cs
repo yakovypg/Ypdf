@@ -1,5 +1,4 @@
-﻿using ExecutionLib.Configuration;
-using YpdfDesktop.ViewModels.Base;
+﻿using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
