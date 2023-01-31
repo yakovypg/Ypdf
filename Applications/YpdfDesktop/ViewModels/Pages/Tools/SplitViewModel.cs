@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Media;
 using Avalonia.Threading;
 using ExecutionLib.Configuration;
 using ExecutionLib.Execution;
@@ -8,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Infrastructure.Search;
@@ -100,7 +98,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             {
                 AllowMultiple = false,
                 Title = "Select PDF file",
-                
+
                 Filters = new List<FileDialogFilter>()
                 {
                     new FileDialogFilter() { Name = "PDF Documents", Extensions = new List<string>() { "pdf" } }
@@ -110,7 +108,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             if (WindowFinder.FindMainWindow() is not Window mainWindow)
                 return;
 
-            dialog.ShowAsync(mainWindow).ContinueWith(t =>
+            _ = dialog.ShowAsync(mainWindow).ContinueWith(t =>
             {
                 if (t.Result is null || t.Result.Length == 0)
                     return;
@@ -135,8 +133,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                 }
                 catch (Exception ex)
                 {
-                    Dispatcher.UIThread.Post(() => new QuickMessage(ex.Message).ShowError());
-                    return;
+                    Dispatcher.UIThread.Post(() => MainWindowMessage.ShowErrorDialog(ex.Message));
                 }
             });
         }
@@ -151,7 +148,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             if (WindowFinder.FindMainWindow() is not Window mainWindow)
                 return;
 
-            dialog.ShowAsync(mainWindow).ContinueWith(t =>
+            _ = dialog.ShowAsync(mainWindow).ContinueWith(t =>
             {
                 if (t.Result is null || string.IsNullOrEmpty(t.Result) || !Directory.Exists(t.Result))
                     return;

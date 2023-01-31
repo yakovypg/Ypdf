@@ -120,7 +120,7 @@ namespace YpdfDesktop.ViewModels.Pages
             }
             catch (Exception ex)
             {
-                new QuickMessage(ex.Message).ShowError();
+                MainWindowMessage.ShowErrorDialog(ex.Message);
             }
         }
 

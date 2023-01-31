@@ -168,8 +168,8 @@ namespace YpdfDesktop.ViewModels.Pages
             SettingsVM = settingsVM;
 
             SplitVM = new SplitViewModel(settingsVM);
-            MergeVM = new MergeViewModel();
-            CompressVM = new CompressViewModel();
+            MergeVM = new MergeViewModel(settingsVM);
+            CompressVM = new CompressViewModel(settingsVM);
 
             Tools = tools ?? DefaultTools.Get(settingsVM.Locale, settingsVM.Theme);
             FavoriteTools = favoriteTools ?? new ObservableCollection<Tool>();
