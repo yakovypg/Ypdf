@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using YpdfDesktop.Models;
+using YpdfDesktop.Models.Informing;
 
 namespace YpdfDesktop.Infrastructure.Services
 {

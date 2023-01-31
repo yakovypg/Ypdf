@@ -1,14 +1,11 @@
-﻿namespace YpdfDesktop.ViewModels.Pages.Tools
+﻿using ExecutionLib.Configuration;
+using YpdfDesktop.ViewModels.Base;
+
+namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class MergeViewModel : ViewModelBase
+    public class MergeViewModel : PdfToolViewModel
     {
         #region Commands
-
-        #endregion
-
-        #region View Models
-
-        public SettingsViewModel SettingsVM { get; }
 
         #endregion
 
@@ -17,13 +14,12 @@
         #endregion
 
         // Constructor for Designer
-        public MergeViewModel() : this(new SettingsViewModel())
+        public MergeViewModel() : this(new SettingsViewModel(), new TasksViewModel())
         {
         }
 
-        public MergeViewModel(SettingsViewModel settingsVM)
+        public MergeViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
-            SettingsVM = settingsVM;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace ExecutionLib.Execution
 
         #region Executing
 
-        public ExecutionInfo PrepareExecute()
+        public ExecutionInfo PrepareExecute(bool checkOutputPath = true, bool correctPaths = true)
         {
             if (string.IsNullOrEmpty(_config.PdfTool))
                 return new ExecutionInfo(new NoFileProcessingToolException());
@@ -50,9 +50,14 @@ namespace ExecutionLib.Execution
             {
                 _config.PathsConfig.PreparePaths();
 
-                CheckOutputPath();
-                CorrectInputFile();
-                CorrectFilePaths();
+                if (checkOutputPath)
+                    CheckOutputPath();
+
+                if (correctPaths)
+                {
+                    CorrectInputFile();
+                    CorrectFilePaths();
+                }
             }
             catch (Exception ex)
             {

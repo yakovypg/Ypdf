@@ -1,4 +1,4 @@
-﻿namespace YpdfDesktop.Models
+﻿namespace YpdfDesktop.Models.Informing
 {
     public interface IAppInfo
     {

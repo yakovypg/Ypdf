@@ -1,14 +1,10 @@
-﻿namespace YpdfDesktop.ViewModels.Pages.Tools
+﻿using YpdfDesktop.ViewModels.Base;
+
+namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class CompressViewModel : ViewModelBase
+    public class CompressViewModel : PdfToolViewModel
     {
         #region Commands
-
-        #endregion
-
-        #region View Models
-
-        public SettingsViewModel SettingsVM { get; }
 
         #endregion
 
@@ -17,13 +13,12 @@
         #endregion
 
         // Constructor for Designer
-        public CompressViewModel() : this(new SettingsViewModel())
+        public CompressViewModel() : this(new SettingsViewModel(), new TasksViewModel())
         {
         }
 
-        public CompressViewModel(SettingsViewModel settingsVM)
+        public CompressViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
-            SettingsVM = settingsVM;
         }
     }
 }

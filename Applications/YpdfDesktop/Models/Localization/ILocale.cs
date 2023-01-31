@@ -36,5 +36,9 @@
         string? ExtractText { get; set; }
         string? SetPassword { get; set; }
         string? RemovePassword { get; set; }
+
+        string? FileEmptyMessage { get; set; }
+        string? FileExistsMessage { get; set; }
+        string? ReplaceItMessage { get; set; }
     }
 }

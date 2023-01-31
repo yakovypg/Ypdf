@@ -2,7 +2,7 @@
 
 namespace YpdfDesktop.Models.Configuration
 {
-    public class UIConfig
+    public class UIConfig : IUIConfig
     {
         public string? SelectedLocaleId { get; set; }
         public string? SelectedThemeId { get; set; }

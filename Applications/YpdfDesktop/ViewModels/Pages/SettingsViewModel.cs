@@ -7,9 +7,10 @@ using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Infrastructure.Default;
 using YpdfDesktop.Infrastructure.Services;
-using YpdfDesktop.Models;
+using YpdfDesktop.Models.Informing;
 using YpdfDesktop.Models.Localization;
 using YpdfDesktop.Models.Themes;
+using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages
 {

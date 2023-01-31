@@ -1,22 +1,20 @@
-﻿using Avalonia.Controls;
-using Avalonia.Threading;
+﻿using Avalonia.Threading;
 using ExecutionLib.Configuration;
-using ExecutionLib.Execution;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
-using YpdfDesktop.Infrastructure.Search;
+using YpdfDesktop.Models;
 using YpdfDesktop.Models.Enumeration;
+using YpdfDesktop.ViewModels.Base;
 using YpdfLib.Informing;
 using YpdfLib.Models.Enumeration;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class SplitViewModel : ViewModelBase
+    public class SplitViewModel : PdfToolViewModel
     {
         #region Commands
 
@@ -26,12 +24,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         public ReactiveCommand<Unit, Unit> SelectOutputDirectoryCommand { get; }
         public ReactiveCommand<Unit, Unit> AddPageRangeCommand { get; }
         public ReactiveCommand<IRange, Unit> DeletePageRangeCommand { get; }
-
-        #endregion
-
-        #region View Models
-
-        public SettingsViewModel SettingsVM { get; }
 
         #endregion
 
@@ -73,13 +65,12 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         #endregion
 
         // Constructor for Designer
-        public SplitViewModel() : this(new SettingsViewModel())
+        public SplitViewModel() : this(new SettingsViewModel(), new TasksViewModel())
         {
         }
 
-        public SplitViewModel(SettingsViewModel settingsVM)
+        public SplitViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
-            SettingsVM = settingsVM;
             PageRanges = new ObservableCollection<IRange>();
 
             ExecuteCommand = ReactiveCommand.Create(Execute);
@@ -94,21 +85,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private void SelectFile()
         {
-            var dialog = new OpenFileDialog()
-            {
-                AllowMultiple = false,
-                Title = "Select PDF file",
-
-                Filters = new List<FileDialogFilter>()
-                {
-                    new FileDialogFilter() { Name = "PDF Documents", Extensions = new List<string>() { "pdf" } }
-                }
-            };
-
-            if (WindowFinder.FindMainWindow() is not Window mainWindow)
-                return;
-
-            _ = dialog.ShowAsync(mainWindow).ContinueWith(t =>
+            _ = GetPdfFilePath().ContinueWith(t =>
             {
                 if (t.Result is null || t.Result.Length == 0)
                     return;
@@ -123,7 +100,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                     int filePages = PdfInfo.GetPageCount(path);
 
                     if (filePages == 0)
-                        throw new FileLoadException("File is empty.", path);
+                        throw new FileLoadException(SettingsVM.Locale.FileEmptyMessage, path);
 
                     PageRanges.Clear();
 
@@ -140,15 +117,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private void SelectOutputDirectory()
         {
-            var dialog = new OpenFolderDialog()
-            {
-                Title = "Select output directory path"
-            };
-
-            if (WindowFinder.FindMainWindow() is not Window mainWindow)
-                return;
-
-            _ = dialog.ShowAsync(mainWindow).ContinueWith(t =>
+            _ = GetDirectoryPath().ContinueWith(t =>
             {
                 if (t.Result is null || string.IsNullOrEmpty(t.Result) || !Directory.Exists(t.Result))
                     return;
@@ -173,15 +142,23 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                     config.Pages.Add(new PageRange(range.Start, range.End));
             }
 
-            var executor = new PdfToolExecutor(config)
+            _ = VerifyOutputPath(config.PathsConfig.OutputPath).ContinueWith(t =>
             {
-                Logger = null,
-                FileExistsQuestion = null,
-                ApplyCorrectionsQuestion = null
-            };
+                if (t.Result)
+                {
+                    Execute(ToolType.Split, config);
+                }
+                else
+                {
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        string? message = SettingsVM.Locale.FileExistsMessage;
+                        string? path = config.PathsConfig.OutputPath;
 
-            IExecutionInfo executionInfo = executor.PrepareExecute();
-            executor.Execute(executionInfo);
+                        MainWindowMessage.ShowErrorDialog($"{message}: {path}");
+                    });
+                }
+            });
         }
 
         private void Reset()

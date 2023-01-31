@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YpdfDesktop.Models
+namespace YpdfDesktop.Models.Informing
 {
     public class AppInfo : IAppInfo, IEquatable<AppInfo?>
     {

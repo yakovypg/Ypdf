@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using System;
-using YpdfDesktop.ViewModels;
+using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop
 {
