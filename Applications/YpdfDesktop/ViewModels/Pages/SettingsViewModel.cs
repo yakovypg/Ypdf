@@ -65,6 +65,13 @@ namespace YpdfDesktop.ViewModels.Pages
             set => this.RaiseAndSetIfChanged(ref _appVersion, value);
         }
 
+        private bool _resetAfterExecution = false;
+        public bool ResetAfterExecution
+        {
+            get => _resetAfterExecution;
+            set => this.RaiseAndSetIfChanged(ref _resetAfterExecution, value);
+        }
+
         private string _pythonAlias = string.Empty;
         public string PythonAlias
         {

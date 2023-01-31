@@ -20,5 +20,19 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         public MergeViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
         }
+
+        #region Protected Methods
+
+        protected override void Execute()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
     }
 }

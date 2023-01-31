@@ -16,6 +16,7 @@
             Theme = "Theme";
             PythonAlias = "Python path/alias";
             Save = "Save";
+            ResetAfterExecution = "Reset after execution";
 
             From = "From";
             To = "To";
@@ -39,6 +40,9 @@
             ExtractText = "extract text";
             SetPassword = "set password";
             RemovePassword = "rm password";
+
+            Yes = "Yes";
+            No = "No";
 
             FileEmptyMessage = "File is empty";
             FileExistsMessage = "File already exists";

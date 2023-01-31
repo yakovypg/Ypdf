@@ -15,6 +15,7 @@ namespace YpdfDesktop.Models.Localization
         public string? Theme { get; set; }
         public string? PythonAlias { get; set; }
         public string? Save { get; set; }
+        public string? ResetAfterExecution { get; set; }
 
         public string? From { get; set; }
         public string? To { get; set; }
@@ -38,6 +39,9 @@ namespace YpdfDesktop.Models.Localization
         public string? ExtractText { get; set; }
         public string? SetPassword { get; set; }
         public string? RemovePassword { get; set; }
+
+        public string? Yes { get; set; }
+        public string? No { get; set; }
 
         public string? FileEmptyMessage { get; set; }
         public string? FileExistsMessage { get; set; }

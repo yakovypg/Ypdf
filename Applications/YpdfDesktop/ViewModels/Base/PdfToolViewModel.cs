@@ -33,6 +33,13 @@ namespace YpdfDesktop.ViewModels.Base
             TasksVM = tasksVM;
         }
 
+        #region Abstract Methods
+
+        protected abstract void Execute();
+        protected abstract void Reset();
+
+        #endregion
+
         #region Protected Methods
 
         protected async Task<bool> VerifyOutputPath(string? path)
@@ -65,6 +72,9 @@ namespace YpdfDesktop.ViewModels.Base
                 if (t.Result)
                 {
                     Execute(toolType, config);
+
+                    if (SettingsVM.ResetAfterExecution)
+                        Reset();
                 }
                 else
                 {

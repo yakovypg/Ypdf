@@ -112,6 +112,11 @@ namespace YpdfDesktop.ViewModels
                     SettingsVM.Theme = SettingsVM.Themes[0];
             }
 
+            if (config.ResetAfterExecution is not null)
+            {
+                SettingsVM.ResetAfterExecution = config.ResetAfterExecution.Value;
+            }
+
             if (config.FavoriteTools is not null)
             {
                 foreach (ToolType toolType in config.FavoriteTools)
@@ -137,6 +142,7 @@ namespace YpdfDesktop.ViewModels
             {
                 SelectedLocaleId = SettingsVM.Locale.Id,
                 SelectedThemeId = SettingsVM.Theme.Id,
+                ResetAfterExecution = SettingsVM.ResetAfterExecution,
                 FavoriteTools = favoriteTools
             };
 

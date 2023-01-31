@@ -13,6 +13,7 @@
         string? Theme { get; set; }
         string? PythonAlias { get; set; }
         string? Save { get; set; }
+        string? ResetAfterExecution { get; set; }
 
         string? From { get; set; }
         string? To { get; set; }
@@ -36,6 +37,9 @@
         string? ExtractText { get; set; }
         string? SetPassword { get; set; }
         string? RemovePassword { get; set; }
+
+        string? Yes { get; set; }
+        string? No { get; set; }
 
         string? FileEmptyMessage { get; set; }
         string? FileExistsMessage { get; set; }

@@ -81,6 +81,40 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             DeletePageRangeCommand = ReactiveCommand.Create<IRange>(DeletePageRange);
         }
 
+        #region Protected Methods
+
+        protected override void Execute()
+        {
+            var config = new YpdfConfig()
+            {
+                PdfTool = "split"
+            };
+
+            config.PathsConfig.InputPath = FilePath;
+            config.PathsConfig.OutputDirectory = OutputDirectoryPath;
+
+            foreach (var range in PageRanges)
+            {
+                if (range.IsCorrect)
+                    config.Pages.Add(new PageRange(range.Start, range.End));
+            }
+
+            Execute(ToolType.Split, config, true);
+        }
+
+        protected override void Reset()
+        {
+            PageRanges.Clear();
+
+            FilePath = string.Empty;
+            OutputDirectoryPath = string.Empty;
+            IsFileSelected = false;
+
+            _filePages = 0;
+        }
+
+        #endregion
+
         #region Private Methods
 
         private void SelectFile()
@@ -128,36 +162,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
                 OutputDirectoryPath = t.Result;
             });
-        }
-
-        private void Execute()
-        {
-            var config = new YpdfConfig()
-            {
-                PdfTool = "split"
-            };
-
-            config.PathsConfig.InputPath = FilePath;
-            config.PathsConfig.OutputDirectory = OutputDirectoryPath;
-
-            foreach (var range in PageRanges)
-            {
-                if (range.IsCorrect)
-                    config.Pages.Add(new PageRange(range.Start, range.End));
-            }
-
-            Execute(ToolType.Split, config, true);
-        }
-
-        private void Reset()
-        {
-            PageRanges.Clear();
-
-            FilePath = string.Empty;
-            OutputDirectoryPath = string.Empty;
-            IsFileSelected = false;
-
-            _filePages = 0;
         }
 
         private void AddPageRange()
