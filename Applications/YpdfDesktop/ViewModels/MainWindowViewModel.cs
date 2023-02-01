@@ -22,6 +22,7 @@ namespace YpdfDesktop.ViewModels
         public ReactiveCommand<Unit, Unit> ShowFavoriteToolsCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowToolsCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowSettingsCommand { get; }
+        public ReactiveCommand<Unit, Unit> ShowTasksCommand { get; }
 
         #endregion
 
@@ -30,6 +31,7 @@ namespace YpdfDesktop.ViewModels
         public ToolsViewModel FavoriteToolsVM { get; }
         public ToolsViewModel ToolsVM { get; }
         public SettingsViewModel SettingsVM { get; }
+        public TasksViewModel TasksVM { get; }
 
         #endregion
 
@@ -56,6 +58,13 @@ namespace YpdfDesktop.ViewModels
             private set => this.RaiseAndSetIfChanged(ref _isSettingsVisible, value);
         }
 
+        private bool _isTasksVisible = false;
+        public bool IsTasksVisible
+        {
+            get => _isTasksVisible;
+            private set => this.RaiseAndSetIfChanged(ref _isTasksVisible, value);
+        }
+
         #endregion Properties
 
         public MainWindowViewModel()
@@ -64,12 +73,13 @@ namespace YpdfDesktop.ViewModels
             SharedConfig.Files.Prepare();
 
             SettingsVM = new SettingsViewModel();
+            TasksVM = new TasksViewModel();
 
             var allTools = DefaultTools.Get(SettingsVM.Locale, SettingsVM.Theme);
             var favoritesTools = new ObservableCollection<Tool>();
 
-            FavoriteToolsVM = new ToolsViewModel(SettingsVM, favoritesTools, favoritesTools);
-            ToolsVM = new ToolsViewModel(SettingsVM, allTools, favoritesTools);
+            FavoriteToolsVM = new ToolsViewModel(SettingsVM, TasksVM, favoritesTools, favoritesTools);
+            ToolsVM = new ToolsViewModel(SettingsVM, TasksVM, allTools, favoritesTools);
 
             SettingsVM.LocaleUpdated += FavoriteToolsVM.UpdateLocale;
             SettingsVM.LocaleUpdated += ToolsVM.UpdateLocale;
@@ -80,6 +90,7 @@ namespace YpdfDesktop.ViewModels
             ShowFavoriteToolsCommand = ReactiveCommand.Create(ShowFavoriteTools);
             ShowToolsCommand = ReactiveCommand.Create(ShowTools);
             ShowSettingsCommand = ReactiveCommand.Create(ShowSettings);
+            ShowTasksCommand = ReactiveCommand.Create(ShowTasks);
 
             LoadUIConfiguration();
         }
@@ -167,11 +178,18 @@ namespace YpdfDesktop.ViewModels
             IsSettingsVisible = true;
         }
 
+        private void ShowTasks()
+        {
+            HideAllPages();
+            IsTasksVisible = true;
+        }
+
         private void HideAllPages()
         {
             IsFavoriteToolsVisible = false;
             IsToolsVisible = false;
             IsSettingsVisible = false;
+            IsTasksVisible = false;
         }
 
         #endregion

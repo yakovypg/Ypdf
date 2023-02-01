@@ -157,18 +157,18 @@ namespace YpdfDesktop.ViewModels.Pages
         #endregion
 
         // Constructor for Designer
-        public ToolsViewModel() : this(new SettingsViewModel(), null, null)
+        public ToolsViewModel() : this(new SettingsViewModel(), new TasksViewModel(), null, null)
         {
         }
 
-        public ToolsViewModel(SettingsViewModel settingsVM) : this(settingsVM, null, null)
+        public ToolsViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : this(settingsVM, tasksVM, null, null)
         {
         }
 
-        public ToolsViewModel(SettingsViewModel settingsVM, ObservableCollection<Tool>? tools, ObservableCollection<Tool>? favoriteTools = null)
+        public ToolsViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM, ObservableCollection<Tool>? tools, ObservableCollection<Tool>? favoriteTools = null)
         {
             SettingsVM = settingsVM;
-            TasksVM = new TasksViewModel();
+            TasksVM = tasksVM;
 
             SplitVM = new SplitViewModel(settingsVM, TasksVM);
             MergeVM = new MergeViewModel(settingsVM, TasksVM);

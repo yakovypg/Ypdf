@@ -11,6 +11,7 @@
             Favorites = "Favorites";
             Tools = "Tools";
             Settings = "Settings";
+            Tasks = "Tasks";
 
             Language = "Language";
             Theme = "Theme";

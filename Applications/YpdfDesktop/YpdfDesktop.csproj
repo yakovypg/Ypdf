@@ -40,4 +40,7 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Pages\Tools\TextToPdfView.axaml" />
   </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Pages\TasksView.axaml" />
+  </ItemGroup>
 </Project>

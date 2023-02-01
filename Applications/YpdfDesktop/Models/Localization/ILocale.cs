@@ -8,6 +8,7 @@
         string? Favorites { get; set; }
         string? Tools { get; set; }
         string? Settings { get; set; }
+        string? Tasks { get; set; }
 
         string? Language { get; set; }
         string? Theme { get; set; }

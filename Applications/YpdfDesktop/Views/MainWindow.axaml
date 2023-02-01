@@ -10,7 +10,7 @@
         mc:Ignorable="d"
 		d:DesignWidth="720" d:DesignHeight="450"
 		Width="720" Height="450"
-		MinWidth="480" MinHeight="300"
+		MinWidth="480" MinHeight="390"
         x:Class="YpdfDesktop.Views.MainWindow"
         Icon="/Assets/ypdf-logo.ico"
         Title="Ypdf-Desktop">
@@ -130,6 +130,34 @@
 				<img:Icon Grid.Row="0" Value="fa-cog" FontSize="35" />
 				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Settings}" />
 			</Grid>
+
+			<Grid Name="TasksGrid">
+				<i:Interaction.Behaviors>
+					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="TasksGrid">
+						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="TasksGrid">
+						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="TasksGrid">
+						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
+					</ia:EventTriggerBehavior>
+					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="TasksGrid">
+						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
+						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
+						<ia:InvokeCommandAction Command="{Binding ShowTasksCommand}" />
+						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
+					</ia:EventTriggerBehavior>
+				</i:Interaction.Behaviors>
+
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition Height="20" />
+				</Grid.RowDefinitions>
+
+				<img:Icon Grid.Row="0" Value="fa-list-alt" FontSize="35" />
+				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tasks}" />
+			</Grid>
 		</StackPanel>
 		
 		<Grid Grid.Column="1">
@@ -141,6 +169,9 @@
 			</UniformGrid>
 			<UniformGrid IsVisible="{Binding IsSettingsVisible}">
 				<pages:SettingsView DataContext="{Binding SettingsVM}" />
+			</UniformGrid>
+			<UniformGrid IsVisible="{Binding IsTasksVisible}">
+				<pages:TasksView DataContext="{Binding TasksVM}" />
 			</UniformGrid>
 		</Grid>
 	</Grid>

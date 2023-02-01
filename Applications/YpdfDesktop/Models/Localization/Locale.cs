@@ -10,6 +10,7 @@ namespace YpdfDesktop.Models.Localization
         public string? Favorites { get; set; }
         public string? Tools { get; set; }
         public string? Settings { get; set; }
+        public string? Tasks { get; set; }
 
         public string? Language { get; set; }
         public string? Theme { get; set; }
