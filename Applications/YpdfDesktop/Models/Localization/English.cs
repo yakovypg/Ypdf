@@ -19,6 +19,10 @@
             Save = "Save";
             ResetAfterExecution = "Reset after execution";
 
+            Running = "Running";
+            Completed = "Completed";
+            Faulted = "Faulted";
+
             From = "From";
             To = "To";
             Execute = "Execute";

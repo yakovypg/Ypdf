@@ -9,6 +9,8 @@ namespace YpdfDesktop.Models.Themes
 
         ISolidColorBrush? ExplorerBackground { get; set; }
         ISolidColorBrush? ExplorerSplitterBackground { get; set; }
+        ISolidColorBrush? ExplorerMenuBackground { get; set; }
+        ISolidColorBrush? ExplorerMenuTextForeground { get; set; }
         ISolidColorBrush? ExplorerTextForeground { get; set; }
 
         ISolidColorBrush? ButtonBackground { get; set; }
@@ -32,5 +34,10 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? ToolTileDefaultBackground { get; set; }
         ISolidColorBrush? ToolTileEnteredBackground { get; set; }
         ISolidColorBrush? ToolTilePressedBackground { get; set; }
+
+        ISolidColorBrush? InputFilesTileBackground { get; set; }
+        ISolidColorBrush? RunningStatusBrush { get; set; }
+        ISolidColorBrush? CompletedStatusBrush { get; set; }
+        ISolidColorBrush? FaultedStatusBrush { get; set; }
     }
 }

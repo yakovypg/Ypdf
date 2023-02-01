@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+			 xmlns:models="clr-namespace:YpdfDesktop.Models.Informing"
              xmlns:vm="using:YpdfDesktop.ViewModels.Pages"
 			 mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
@@ -12,7 +14,103 @@
 	</Design.DataContext>
 	
 	<Grid>
-		<TextBlock Text="Taks" />
+		<Grid RowDefinitions="1*, 30">
+			<ListBox Grid.Row="0" Background="{Binding SettingsVM.Theme.ExplorerBackground}" Items="{Binding Tasks}">
+				<ListBox.Resources>
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush">#220078D7</SolidColorBrush>
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush">#330078D7</SolidColorBrush>
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush">#440078D7</SolidColorBrush>
+				</ListBox.Resources>
+
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type models:ToolExecutionInfo}">
+						<Grid ColumnDefinitions="100, 1*">
+							<Border BorderThickness="1" Height="85" MaxHeight="85" VerticalAlignment="Top" BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ListBox}}">
+								<Border.Styles>
+									<Style Selector="Grid">
+										<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									</Style>
+									<Style Selector="Grid > img|Icon">
+										<Setter Property="FontSize" Value="30" />
+										<Setter Property="Opacity" Value="0.88" />
+										<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.ToolTileIconForeground, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									</Style>
+									<Style Selector="TextBlock.toolName">
+										<Setter Property="Margin" Value="0, 0, 0, 8" />
+										<Setter Property="VerticalAlignment" Value="Center" />
+										<Setter Property="HorizontalAlignment" Value="Center" />
+										<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									</Style>
+								</Border.Styles>
+								
+								<Grid Grid.Column="0" RowDefinitions="1*, 20">
+									<img:Icon Grid.Row="0" Value="{Binding ToolIcon}" />
+									<TextBlock Grid.Row="1" Classes="toolName" Text="{Binding ToolName}" />
+								</Grid>
+							</Border>
+
+							<Grid Grid.Column="1" Margin="10, 0, 0, 0" RowDefinitions="35, 1*">
+								<Grid.Styles>
+									<Style Selector="TextBlock.inputFiles">
+										<Setter Property="Margin" Value="8, 8, 8, 22" />
+										<Setter Property="VerticalAlignment" Value="Top" />
+										<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.ExplorerTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									</Style>
+								</Grid.Styles>
+
+								<Border Grid.Row="0" BorderThickness="1" Background="{Binding DataContext.SettingsVM.Theme.InputFilesTileBackground, RelativeSource={RelativeSource AncestorType=ListBox}}" BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ListBox}}">
+									<Grid ColumnDefinitions="1*, 50">
+										<ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto">
+											<TextBlock Classes="inputFiles" Text="{Binding InputFilesPresenter}" />
+										</ScrollViewer>
+
+										<Grid Grid.Column="1" Margin="10, 0, 0, 0" Background="{Binding StatusBrush}">
+											<img:Icon
+												FontSize="19"
+												Opacity="0.88"
+												Value="{Binding StatusIcon}"
+												Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileIconForeground, RelativeSource={RelativeSource AncestorType=ListBox}}">
+											</img:Icon>
+										</Grid>	
+									</Grid>
+								</Border>
+								
+								<Expander Grid.Row="1" Header="{Binding DataContext.SettingsVM.Locale.Output, RelativeSource={RelativeSource AncestorType=ListBox}}">								
+									<ScrollViewer Height="150"
+												  Padding="0, 0, 20, 20"
+												  HorizontalScrollBarVisibility="Auto"
+												  VerticalScrollBarVisibility="Auto">
+										
+										<TextBlock Text="{Binding ToolOutput}" />
+									</ScrollViewer>
+								</Expander>
+							</Grid>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+			
+			<Grid Grid.Row="1" Height="32" Background="{Binding SettingsVM.Theme.ExplorerMenuBackground}">
+				<Grid.Styles>
+					<Style Selector="TextBlock">
+						<Setter Property="VerticalAlignment" Value="Center" />
+						<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerMenuTextForeground}" />
+					</Style>
+					<Style Selector="TextBlock.value">
+						<Setter Property="Margin" Value="5, 0, 15, 0" />
+					</Style>
+				</Grid.Styles>
+
+				<StackPanel Orientation="Horizontal" Margin="10, 0">
+					<TextBlock Text="{Binding SettingsVM.Locale.Running}" />
+					<TextBlock Text="{Binding RunningTasksCount}" Classes="value" />
+					<TextBlock Text="{Binding SettingsVM.Locale.Completed}" />
+					<TextBlock Text="{Binding CompletedTasksCount}" Classes="value" />
+					<TextBlock Text="{Binding SettingsVM.Locale.Faulted}" />
+					<TextBlock Text="{Binding FaultedTasksCount}" Classes="value" />
+				</StackPanel>
+			</Grid>
+		</Grid>
 	</Grid>
 	
 </UserControl>

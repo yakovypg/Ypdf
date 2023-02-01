@@ -8,12 +8,12 @@ namespace YpdfDesktop.Infrastructure.Logging
 {
     internal class ToolOutputWriter : TextWriter
     {
-        private readonly TaskExecutionInfo _taskExecutionInfo;
+        private readonly ToolExecutionInfo _taskExecutionInfo;
 
         public override Encoding Encoding => Encoding.Unicode;
         public override IFormatProvider FormatProvider => CultureInfo.InvariantCulture;
 
-        public ToolOutputWriter(TaskExecutionInfo taskExecutionInfo)
+        public ToolOutputWriter(ToolExecutionInfo taskExecutionInfo)
         {
             _taskExecutionInfo = taskExecutionInfo;
         }

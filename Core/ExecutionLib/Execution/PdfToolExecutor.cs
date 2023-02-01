@@ -21,6 +21,12 @@ namespace ExecutionLib.Execution
         private readonly YpdfConfig _config;
         private readonly Dictionary<string, Action<YpdfConfig>> _commands;
 
+        public delegate void ExecutionSuccessfullyCompletedHandler();
+        public event ExecutionSuccessfullyCompletedHandler? ExecutionSuccessfullyCompleted;
+
+        public delegate void ExecutionFaultedHandler();
+        public event ExecutionFaultedHandler? ExecutionFaulted;
+
         public IExecutionLogger? Logger { get; set; }
         public IFileExistsUserAnswerDispatcher? FileExistsQuestion { get; set; }
         public IApplyCorrectionsUserAnswerDispatcher? ApplyCorrectionsQuestion { get; set; }
@@ -74,12 +80,14 @@ namespace ExecutionLib.Execution
             if (!executionInfo.CanExecute)
             {
                 Logger?.LogError(executionInfo.Exception?.Message);
+                ExecutionFaulted?.Invoke();
                 return;
             }
 
             try
             {
                 executionInfo.Executor?.Invoke(_config);
+                ExecutionSuccessfullyCompleted?.Invoke();
             }
             catch (Exception ex)
             {
@@ -97,6 +105,8 @@ namespace ExecutionLib.Execution
                     }
                     catch { }
                 }
+
+                ExecutionFaulted?.Invoke();
             }
         }
 

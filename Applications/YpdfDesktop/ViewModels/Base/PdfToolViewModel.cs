@@ -140,11 +140,36 @@ namespace YpdfDesktop.ViewModels.Base
                 executor.Execute(executionInfo);
             });
 
-            var taskExecutionInfo = new TaskExecutionInfo(toolName, toolIcon, inputFiles, executionTask);
-            TasksVM.Tasks.Add(taskExecutionInfo);
+            var taskExecutionInfo = new ToolExecutionInfo(toolName, toolIcon, inputFiles, executionTask, ToolExecutionStatus.Running)
+            {
+                StatusBrush = ToolInfoService.GetExecutionStatusColor(ToolExecutionStatus.Running, SettingsVM.Theme)
+            };
+
+            taskExecutionInfo.StatusChanged += newStatus =>
+            {
+                taskExecutionInfo.StatusBrush = ToolInfoService.GetExecutionStatusColor(newStatus, SettingsVM.Theme);
+            };
+
+            TasksVM.Tasks.Insert(0, taskExecutionInfo);
 
             var textWriter = new ToolOutputWriter(taskExecutionInfo);
             executor.Logger = new ExecutionLogger(textWriter);
+
+            executor.ExecutionFaulted += () =>
+            {
+                taskExecutionInfo.MakeFaulted();
+
+                TasksVM.RunningTasksCount--;
+                TasksVM.FaultedTasksCount++;
+            };
+
+            executor.ExecutionSuccessfullyCompleted += () =>
+            {
+                taskExecutionInfo.MakeCompleted();
+
+                TasksVM.RunningTasksCount--;
+                TasksVM.CompletedTasksCount++;
+            };
 
             executionTask.Start();
         }

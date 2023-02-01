@@ -12,6 +12,8 @@ namespace YpdfDesktop.Models.Themes
         {
             ExplorerBackground = SolidColorBrush.Parse("#F0F8FF");
             ExplorerSplitterBackground = SolidColorBrush.Parse("#D3D3D3");
+            ExplorerMenuBackground = SolidColorBrush.Parse("#D3D3D3");
+            ExplorerMenuTextForeground = SolidColorBrush.Parse("#000000");
             ExplorerTextForeground = SolidColorBrush.Parse("#000000");
 
             ButtonBackground = SolidColorBrush.Parse("#D3D3D3");
@@ -35,6 +37,11 @@ namespace YpdfDesktop.Models.Themes
             ToolTileDefaultBackground = SolidColorBrush.Parse("#EECFE0DF");
             ToolTileEnteredBackground = SolidColorBrush.Parse("#EEB3ADF0");
             ToolTilePressedBackground = SolidColorBrush.Parse("#EE877EE7");
+
+            InputFilesTileBackground = SolidColorBrush.Parse("#F2F2F2");
+            RunningStatusBrush = SolidColorBrush.Parse("#EECFCFE0");
+            CompletedStatusBrush = SolidColorBrush.Parse("#EECFE0DF");
+            FaultedStatusBrush = SolidColorBrush.Parse("#EEE0CFCF");
         }
     }
 }

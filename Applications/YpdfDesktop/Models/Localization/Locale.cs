@@ -18,6 +18,10 @@ namespace YpdfDesktop.Models.Localization
         public string? Save { get; set; }
         public string? ResetAfterExecution { get; set; }
 
+        public string? Running { get; set; }
+        public string? Completed { get; set; }
+        public string? Faulted { get; set; }
+
         public string? From { get; set; }
         public string? To { get; set; }
         public string? Execute { get; set; }

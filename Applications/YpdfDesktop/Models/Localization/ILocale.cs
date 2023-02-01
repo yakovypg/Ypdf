@@ -16,6 +16,10 @@
         string? Save { get; set; }
         string? ResetAfterExecution { get; set; }
 
+        string? Running { get; set; }
+        string? Completed { get; set; }
+        string? Faulted { get; set; }
+
         string? From { get; set; }
         string? To { get; set; }
         string? Execute { get; set; }

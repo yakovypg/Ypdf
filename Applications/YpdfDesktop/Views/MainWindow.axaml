@@ -67,7 +67,7 @@
 				</i:Interaction.Behaviors>
 				
 				<Grid.RowDefinitions>
-					<RowDefinition/>
+					<RowDefinition />
 					<RowDefinition Height="20" />
 				</Grid.RowDefinitions>
 				
@@ -95,7 +95,7 @@
 				</i:Interaction.Behaviors>
 				
 				<Grid.RowDefinitions>
-					<RowDefinition/>
+					<RowDefinition />
 					<RowDefinition Height="20" />
 				</Grid.RowDefinitions>
 				
@@ -123,7 +123,7 @@
 				</i:Interaction.Behaviors>
 
 				<Grid.RowDefinitions>
-					<RowDefinition/>
+					<RowDefinition />
 					<RowDefinition Height="20" />
 				</Grid.RowDefinitions>
 				
@@ -151,7 +151,7 @@
 				</i:Interaction.Behaviors>
 
 				<Grid.RowDefinitions>
-					<RowDefinition/>
+					<RowDefinition />
 					<RowDefinition Height="20" />
 				</Grid.RowDefinitions>
 

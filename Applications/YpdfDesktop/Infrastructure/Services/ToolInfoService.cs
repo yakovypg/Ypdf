@@ -1,5 +1,8 @@
-﻿using YpdfDesktop.Models;
+﻿using Avalonia.Media;
+using YpdfDesktop.Models;
+using YpdfDesktop.Models.Informing;
 using YpdfDesktop.Models.Localization;
+using YpdfDesktop.Models.Themes;
 
 namespace YpdfDesktop.Infrastructure.Services
 {
@@ -48,6 +51,30 @@ namespace YpdfDesktop.Infrastructure.Services
                 ToolType.ExtractText => locale.ExtractText,
                 ToolType.SetPassword => locale.SetPassword,
                 ToolType.RemovePassword => locale.RemovePassword,
+
+                _ => null
+            };
+        }
+
+        public static string? GetExecutionStatusIconName(ToolExecutionStatus status)
+        {
+            return status switch
+            {
+                ToolExecutionStatus.Running => "fa-sync",
+                ToolExecutionStatus.Completed => "fa-check",
+                ToolExecutionStatus.Faulted => "fa-xmark",
+
+                _ => null
+            };
+        }
+
+        public static ISolidColorBrush? GetExecutionStatusColor(ToolExecutionStatus status, IWindowTheme theme)
+        {
+            return status switch
+            {
+                ToolExecutionStatus.Running => theme.RunningStatusBrush,
+                ToolExecutionStatus.Completed => theme.CompletedStatusBrush,
+                ToolExecutionStatus.Faulted => theme.FaultedStatusBrush,
 
                 _ => null
             };

@@ -73,7 +73,7 @@ namespace YpdfDesktop.ViewModels
             SharedConfig.Files.Prepare();
 
             SettingsVM = new SettingsViewModel();
-            TasksVM = new TasksViewModel();
+            TasksVM = new TasksViewModel(SettingsVM);
 
             var allTools = DefaultTools.Get(SettingsVM.Locale, SettingsVM.Theme);
             var favoritesTools = new ObservableCollection<Tool>();
