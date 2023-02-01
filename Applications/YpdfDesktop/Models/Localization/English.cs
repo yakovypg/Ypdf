@@ -52,6 +52,8 @@
             FileEmptyMessage = "File is empty";
             FileExistsMessage = "File already exists";
             ReplaceItMessage = "Replace it";
+            UnfinishedTasksMessage = "You have unfinished tasks";
+            ExitWithoutWaitingForCompletionMessage = "Exit without waiting for completion";
         }
     }
 }

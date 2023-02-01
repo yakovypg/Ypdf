@@ -21,16 +21,12 @@
 
 	<i:Interaction.Behaviors>
 		<ia:EventTriggerBehavior EventName="Closing">
-			<ia:InvokeCommandAction Command="{Binding SaveUIConfigurationCommand}" />
+			<ia:InvokeCommandAction Command="{Binding CheckRunningTasksCommand}" PassEventArgsToCommand="True" />
+			<ia:InvokeCommandAction Command="{Binding SaveUIConfigurationCommand}" PassEventArgsToCommand="True" />
 		</ia:EventTriggerBehavior>
 	</i:Interaction.Behaviors>
 
-	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="120" />
-			<ColumnDefinition />
-		</Grid.ColumnDefinitions>
-		
+	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}" ColumnDefinitions="120, 1*">	
 		<StackPanel Grid.Column="0" Orientation="Vertical" Background="{Binding SettingsVM.Theme.PanelSelectorBackground}">
 			<StackPanel.Styles>
 				<Style Selector="Grid">
@@ -47,7 +43,7 @@
 				</Style>
 			</StackPanel.Styles>
 			
-			<Grid Name="FavoriteToolsGrid">
+			<Grid Name="FavoriteToolsGrid" RowDefinitions="1*, 20">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="FavoriteToolsGrid">
 						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
@@ -66,16 +62,11 @@
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
 				
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition Height="20" />
-				</Grid.RowDefinitions>
-				
 				<img:Icon Grid.Row="0" Value="fa-star" FontSize="35" />
 				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Favorites}" />
 			</Grid>
 			
-			<Grid Name="ToolsGrid">
+			<Grid Name="ToolsGrid" RowDefinitions="1*, 20">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolsGrid">
 						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
@@ -94,16 +85,11 @@
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
 				
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition Height="20" />
-				</Grid.RowDefinitions>
-				
 				<img:Icon Grid.Row="0" Value="fa-wrench" FontSize="35" />
 				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tools}" />
 			</Grid>
 			
-			<Grid Name="SettingsGrid">
+			<Grid Name="SettingsGrid" RowDefinitions="1*, 20">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="SettingsGrid">
 						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
@@ -121,17 +107,12 @@
 						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
-
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition Height="20" />
-				</Grid.RowDefinitions>
 				
 				<img:Icon Grid.Row="0" Value="fa-cog" FontSize="35" />
 				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Settings}" />
 			</Grid>
 
-			<Grid Name="TasksGrid">
+			<Grid Name="TasksGrid" RowDefinitions="1*, 20">
 				<i:Interaction.Behaviors>
 					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="TasksGrid">
 						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
@@ -149,11 +130,6 @@
 						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
-
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition Height="20" />
-				</Grid.RowDefinitions>
 
 				<img:Icon Grid.Row="0" Value="fa-list-alt" FontSize="35" />
 				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tasks}" />

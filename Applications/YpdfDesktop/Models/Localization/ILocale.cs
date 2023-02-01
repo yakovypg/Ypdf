@@ -49,5 +49,7 @@
         string? FileEmptyMessage { get; set; }
         string? FileExistsMessage { get; set; }
         string? ReplaceItMessage { get; set; }
+        string? UnfinishedTasksMessage { get; set; }
+        string? ExitWithoutWaitingForCompletionMessage { get; set; }
     }
 }

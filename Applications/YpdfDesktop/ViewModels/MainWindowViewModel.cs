@@ -1,9 +1,15 @@
+using Avalonia.Controls;
+using Avalonia.Threading;
+using MessageBox.Avalonia.Enums;
 using ReactiveUI;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
+using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Infrastructure.Default;
+using YpdfDesktop.Infrastructure.Search;
 using YpdfDesktop.Infrastructure.Services;
 using YpdfDesktop.Models;
 using YpdfDesktop.Models.Configuration;
@@ -18,7 +24,8 @@ namespace YpdfDesktop.ViewModels
     {
         #region Commands
 
-        public ReactiveCommand<Unit, Unit> SaveUIConfigurationCommand { get; }
+        public ReactiveCommand<CancelEventArgs, Unit> CheckRunningTasksCommand { get; }
+        public ReactiveCommand<CancelEventArgs, Unit> SaveUIConfigurationCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowFavoriteToolsCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowToolsCommand { get; }
         public ReactiveCommand<Unit, Unit> ShowSettingsCommand { get; }
@@ -67,6 +74,12 @@ namespace YpdfDesktop.ViewModels
 
         #endregion Properties
 
+        #region Private Fields
+
+        private bool _isRunningTasksChecked = false;
+
+        #endregion
+
         public MainWindowViewModel()
         {
             SharedConfig.Directories.Prepare();
@@ -86,7 +99,8 @@ namespace YpdfDesktop.ViewModels
             SettingsVM.ThemeUpdated += FavoriteToolsVM.UpdateTheme;
             SettingsVM.ThemeUpdated += ToolsVM.UpdateTheme;
 
-            SaveUIConfigurationCommand = ReactiveCommand.Create(SaveUIConfiguration);
+            CheckRunningTasksCommand = ReactiveCommand.Create<CancelEventArgs>(CheckRunningTasks);
+            SaveUIConfigurationCommand = ReactiveCommand.Create<CancelEventArgs>(SaveUIConfiguration);
             ShowFavoriteToolsCommand = ReactiveCommand.Create(ShowFavoriteTools);
             ShowToolsCommand = ReactiveCommand.Create(ShowTools);
             ShowSettingsCommand = ReactiveCommand.Create(ShowSettings);
@@ -143,8 +157,36 @@ namespace YpdfDesktop.ViewModels
             }
         }
 
-        private void SaveUIConfiguration()
+        private void CheckRunningTasks(CancelEventArgs e)
         {
+            if (_isRunningTasksChecked || TasksVM.RunningTasksCount == 0)
+                return;
+
+            if (WindowFinder.FindMainWindow() is not Window window)
+                return;
+
+            string? unfinishedTasksMsg = SettingsVM.Locale.UnfinishedTasksMessage;
+            string? exitWithoutWaitingForCompletionMsg = SettingsVM.Locale.ExitWithoutWaitingForCompletionMessage;
+
+            QuickMessage quickMessage = new($"{unfinishedTasksMsg}. {exitWithoutWaitingForCompletionMsg}?");
+            
+            _ = quickMessage.ShowQuestionDialog(window).ContinueWith(t =>
+            {
+                if (t.Result == ButtonResult.Yes)
+                {
+                    _isRunningTasksChecked = true;
+                    Dispatcher.UIThread.Post(window.Close);
+                }
+            });
+
+            e.Cancel = true;
+        }
+
+        private void SaveUIConfiguration(CancelEventArgs e)
+        {
+            if (e.Cancel)
+                return;
+
             List<ToolType> favoriteTools = FavoriteToolsVM.FavoriteTools
                 .Select(t => t.Type)
                 .ToList();

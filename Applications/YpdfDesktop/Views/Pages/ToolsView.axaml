@@ -44,7 +44,7 @@
 							</Style>
 						</Border.Styles>
 
-						<Grid Name="ToolGrid" Background="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+						<Grid Name="ToolGrid" RowDefinitions="1*, 30" Background="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
 							<i:Interaction.Behaviors>
 								<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolGrid">
 									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileEnteredBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
@@ -66,11 +66,6 @@
 									</ia:InvokeCommandAction>
 								</ia:EventTriggerBehavior>
 							</i:Interaction.Behaviors>
-
-							<Grid.RowDefinitions>
-								<RowDefinition />
-								<RowDefinition Height="30" />
-							</Grid.RowDefinitions>
 
 							<img:Icon
 								Name="FavoriteIcon"
