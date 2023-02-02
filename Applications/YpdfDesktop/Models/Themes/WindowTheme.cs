@@ -122,6 +122,9 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? InputFilesTileBackground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? InputFilesTileTextForeground { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? RunningStatusBrush { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]

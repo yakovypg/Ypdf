@@ -50,6 +50,7 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? ToolTileBackgroundPressed { get; set; }
 
         ISolidColorBrush? InputFilesTileBackground { get; set; }
+        ISolidColorBrush? InputFilesTileTextForeground { get; set; }
         ISolidColorBrush? RunningStatusBrush { get; set; }
         ISolidColorBrush? CompletedStatusBrush { get; set; }
         ISolidColorBrush? FaultedStatusBrush { get; set; }

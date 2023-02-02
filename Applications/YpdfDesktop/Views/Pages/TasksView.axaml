@@ -68,7 +68,7 @@
 										<ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto">
 											<TextBlock Margin="8, 8, 8, 22"
 													   VerticalAlignment="Top"
-													   Foreground="{Binding DataContext.SettingsVM.Theme.ExplorerTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}"
+													   Foreground="{Binding DataContext.SettingsVM.Theme.InputFilesTileTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}"
 													   Text="{Binding InputFilesPresenter}" />
 										</ScrollViewer>
 
