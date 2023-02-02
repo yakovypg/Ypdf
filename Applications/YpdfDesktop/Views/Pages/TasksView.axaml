@@ -38,7 +38,7 @@
 									BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ListBox}}">							
 								<Grid Grid.Column="0"
 									  RowDefinitions="1*, 20"
-									  Background="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ListBox}}">						
+									  Background="{Binding DataContext.SettingsVM.Theme.ToolTileBackground, RelativeSource={RelativeSource AncestorType=ListBox}}">						
 									<img:Icon Grid.Row="0"
 											  FontSize="30"
 											  Opacity="0.88"

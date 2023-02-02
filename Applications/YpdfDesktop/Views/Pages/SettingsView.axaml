@@ -74,7 +74,7 @@
 				  Grid.ColumnSpan="3"
 				  Cursor="Hand"
 				  Content="{Binding Locale.ResetAfterExecution}"
-				  Foreground="{Binding Theme.CheckBoxDefaultForeground}"
+				  Foreground="{Binding Theme.CheckBoxForeground}"
 				  IsChecked="{Binding ResetAfterExecution}">		
 		</CheckBox>
 

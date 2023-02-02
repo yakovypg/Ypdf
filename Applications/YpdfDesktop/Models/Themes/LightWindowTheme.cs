@@ -16,9 +16,9 @@ namespace YpdfDesktop.Models.Themes
             ExplorerMenuBackground = SolidColorBrush.Parse("#D3D3D3");
             ExplorerMenuTextForeground = SolidColorBrush.Parse("#000000");
             ExplorerMenuIconForeground = SolidColorBrush.Parse("#A52A2A");
-            ExplorerMenuTileDefaultBackground = SolidColorBrush.Parse("#D3D3D3");
-            ExplorerMenuTileEnteredBackground = SolidColorBrush.Parse("#AEAEAE");
-            ExplorerMenuTilePressedBackground = SolidColorBrush.Parse("#898989");
+            ExplorerMenuTileBackground = SolidColorBrush.Parse("#D3D3D3");
+            ExplorerMenuTileBackgroundPointerOver = SolidColorBrush.Parse("#AEAEAE");
+            ExplorerMenuTileBackgroundPressed = SolidColorBrush.Parse("#898989");
 
             ButtonBackground = SolidColorBrush.Parse("#CCCCCC");
             ButtonBackgroundPointerOver = SolidColorBrush.Parse("#E6E6E6");
@@ -30,9 +30,9 @@ namespace YpdfDesktop.Models.Themes
             ButtonForegroundDisabled = SolidColorBrush.Parse("#66000000");
             ButtonIconForeground = SolidColorBrush.Parse("#800000");
 
-            CheckBoxDefaultForeground = SolidColorBrush.Parse("#000000");
-            CheckBoxEnteredForeground = SolidColorBrush.Parse("#000000");
-            CheckBoxPressedForeground = SolidColorBrush.Parse("#000000");
+            CheckBoxForeground = SolidColorBrush.Parse("#000000");
+            CheckBoxForegroundPointerOver = SolidColorBrush.Parse("#000000");
+            CheckBoxForegroundPressed = SolidColorBrush.Parse("#000000");
 
             LinkIconForeground = SolidColorBrush.Parse("#292177");
             FavoriteStarIconForeground = SolidColorBrush.Parse("#FF8C00");
@@ -41,16 +41,16 @@ namespace YpdfDesktop.Models.Themes
             PanelSelectorBackground = SolidColorBrush.Parse("#EE9BA2E4");
             PanelSelectorIconForeground = SolidColorBrush.Parse("#292177");
             PanelSelectorTextForeground = SolidColorBrush.Parse("#000000");
-            PanelSelectorTileDefaultBackground = SolidColorBrush.Parse("#EE9BA2E4");
-            PanelSelectorTileEnteredBackground = SolidColorBrush.Parse("#EEB3ADF0");
-            PanelSelectorTilePressedBackground = SolidColorBrush.Parse("#EE877EE7");
+            PanelSelectorTileBackground = SolidColorBrush.Parse("#EE9BA2E4");
+            PanelSelectorTileBackgroundPointerOver = SolidColorBrush.Parse("#EEB3ADF0");
+            PanelSelectorTileBackgroundPressed = SolidColorBrush.Parse("#EE877EE7");
 
             ToolTileBorderBrush = SolidColorBrush.Parse("#C6C6C6");
             ToolTileIconForeground = SolidColorBrush.Parse("#EE17254B");
             ToolTileTextForeground = SolidColorBrush.Parse("#000000");
-            ToolTileDefaultBackground = SolidColorBrush.Parse("#EECFE0DF");
-            ToolTileEnteredBackground = SolidColorBrush.Parse("#EEB3ADF0");
-            ToolTilePressedBackground = SolidColorBrush.Parse("#EE877EE7");
+            ToolTileBackground = SolidColorBrush.Parse("#EECFE0DF");
+            ToolTileBackgroundPointerOver = SolidColorBrush.Parse("#EEB3ADF0");
+            ToolTileBackgroundPressed = SolidColorBrush.Parse("#EE877EE7");
 
             InputFilesTileBackground = SolidColorBrush.Parse("#F2F2F2");
             RunningStatusBrush = SolidColorBrush.Parse("#EECFCFE0");

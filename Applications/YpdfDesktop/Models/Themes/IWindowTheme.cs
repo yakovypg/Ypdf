@@ -13,9 +13,9 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? ExplorerMenuBackground { get; set; }
         ISolidColorBrush? ExplorerMenuTextForeground { get; set; }
         ISolidColorBrush? ExplorerMenuIconForeground { get; set; }
-        ISolidColorBrush? ExplorerMenuTileDefaultBackground { get; set; }
-        ISolidColorBrush? ExplorerMenuTileEnteredBackground { get; set; }
-        ISolidColorBrush? ExplorerMenuTilePressedBackground { get; set; }
+        ISolidColorBrush? ExplorerMenuTileBackground { get; set; }
+        ISolidColorBrush? ExplorerMenuTileBackgroundPointerOver { get; set; }
+        ISolidColorBrush? ExplorerMenuTileBackgroundPressed { get; set; }
 
         ISolidColorBrush? ButtonBackground { get; set; }
         ISolidColorBrush? ButtonBackgroundPointerOver { get; set; }
@@ -27,9 +27,9 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? ButtonForegroundDisabled { get; set; }
         ISolidColorBrush? ButtonIconForeground { get; set; }
 
-        ISolidColorBrush? CheckBoxDefaultForeground { get; set; }
-        ISolidColorBrush? CheckBoxEnteredForeground { get; set; }
-        ISolidColorBrush? CheckBoxPressedForeground { get; set; }
+        ISolidColorBrush? CheckBoxForeground { get; set; }
+        ISolidColorBrush? CheckBoxForegroundPointerOver { get; set; }
+        ISolidColorBrush? CheckBoxForegroundPressed { get; set; }
 
         ISolidColorBrush? LinkIconForeground { get; set; }
         ISolidColorBrush? FavoriteStarIconForeground { get; set; }
@@ -38,16 +38,16 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? PanelSelectorBackground { get; set; }
         ISolidColorBrush? PanelSelectorIconForeground { get; set; }
         ISolidColorBrush? PanelSelectorTextForeground { get; set; }
-        ISolidColorBrush? PanelSelectorTileDefaultBackground { get; set; }
-        ISolidColorBrush? PanelSelectorTileEnteredBackground { get; set; }
-        ISolidColorBrush? PanelSelectorTilePressedBackground { get; set; }
+        ISolidColorBrush? PanelSelectorTileBackground { get; set; }
+        ISolidColorBrush? PanelSelectorTileBackgroundPointerOver { get; set; }
+        ISolidColorBrush? PanelSelectorTileBackgroundPressed { get; set; }
 
         ISolidColorBrush? ToolTileBorderBrush { get; set; }
         ISolidColorBrush? ToolTileIconForeground { get; set; }
         ISolidColorBrush? ToolTileTextForeground { get; set; }
-        ISolidColorBrush? ToolTileDefaultBackground { get; set; }
-        ISolidColorBrush? ToolTileEnteredBackground { get; set; }
-        ISolidColorBrush? ToolTilePressedBackground { get; set; }
+        ISolidColorBrush? ToolTileBackground { get; set; }
+        ISolidColorBrush? ToolTileBackgroundPointerOver { get; set; }
+        ISolidColorBrush? ToolTileBackgroundPressed { get; set; }
 
         ISolidColorBrush? InputFilesTileBackground { get; set; }
         ISolidColorBrush? RunningStatusBrush { get; set; }

@@ -29,13 +29,13 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? ExplorerMenuIconForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? ExplorerMenuTileDefaultBackground { get; set; }
+        public ISolidColorBrush? ExplorerMenuTileBackground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? ExplorerMenuTileEnteredBackground { get; set; }
+        public ISolidColorBrush? ExplorerMenuTileBackgroundPointerOver { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? ExplorerMenuTilePressedBackground { get; set; }
+        public ISolidColorBrush? ExplorerMenuTileBackgroundPressed { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? ButtonBackground { get; set; }
@@ -65,13 +65,13 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? ButtonIconForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? CheckBoxDefaultForeground { get; set; }
+        public ISolidColorBrush? CheckBoxForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? CheckBoxEnteredForeground { get; set; }
+        public ISolidColorBrush? CheckBoxForegroundPointerOver { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? CheckBoxPressedForeground { get; set; }
+        public ISolidColorBrush? CheckBoxForegroundPressed { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? LinkIconForeground { get; set; }
@@ -92,13 +92,13 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? PanelSelectorTextForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? PanelSelectorTileDefaultBackground { get; set; }
+        public ISolidColorBrush? PanelSelectorTileBackground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? PanelSelectorTileEnteredBackground { get; set; }
+        public ISolidColorBrush? PanelSelectorTileBackgroundPointerOver { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? PanelSelectorTilePressedBackground { get; set; }
+        public ISolidColorBrush? PanelSelectorTileBackgroundPressed { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? ToolTileBorderBrush { get; set; }
@@ -110,13 +110,13 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? ToolTileTextForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? ToolTileDefaultBackground { get; set; }
+        public ISolidColorBrush? ToolTileBackground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? ToolTileEnteredBackground { get; set; }
+        public ISolidColorBrush? ToolTileBackgroundPointerOver { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
-        public ISolidColorBrush? ToolTilePressedBackground { get; set; }
+        public ISolidColorBrush? ToolTileBackgroundPressed { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? InputFilesTileBackground { get; set; }

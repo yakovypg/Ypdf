@@ -28,10 +28,10 @@
 		<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding SettingsVM.Theme.ButtonBackgroundPointerOver.Color}" />
 		<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding SettingsVM.Theme.ButtonBackgroundPressed.Color}" />
 		<SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{Binding SettingsVM.Theme.ButtonBackgroundDisabled.Color}" />
-		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxEnteredForeground.Color}" />
-		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxEnteredForeground.Color}" />
-		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxPressedForeground.Color}" />
-		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxPressedForeground.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPressed.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPressed.Color}" />
 	</Window.Resources>
 
 	<i:Interaction.Behaviors>
@@ -50,13 +50,13 @@
 					<Setter Property="Padding" Value="0" />
 					<Setter Property="Cursor" Value="Hand" />
 					<Setter Property="BorderThickness" Value="0" />
-					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileBackground}" />
 				</Style>
 				<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileBackgroundPointerOver}" />
 				</Style>
 				<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
-					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileBackgroundPressed}" />
 				</Style>
 				<Style Selector="Grid > img|Icon">
 					<Setter Property="FontSize" Value="35" />

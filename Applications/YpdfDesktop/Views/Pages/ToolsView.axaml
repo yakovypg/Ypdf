@@ -35,13 +35,13 @@
 					<Setter Property="BorderThickness" Value="1" />
 					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 					<Setter Property="BorderBrush" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
-					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 				</Style>
 				<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileEnteredBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBackgroundPointerOver, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 				</Style>
 				<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
-					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTilePressedBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBackgroundPressed, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 				</Style>
 			</ItemsControl.Styles>
 			
