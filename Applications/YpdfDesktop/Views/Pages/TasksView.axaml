@@ -15,12 +15,18 @@
 	
 	<Grid>
 		<Grid RowDefinitions="1*, 30">
-			<ListBox Grid.Row="0" Background="{Binding SettingsVM.Theme.ExplorerBackground}" Items="{Binding Tasks}">
+			<ListBox Grid.Row="0" Name="TasksListBox" Background="{Binding SettingsVM.Theme.ExplorerBackground}" Items="{Binding Tasks}">
 				<ListBox.Resources>
 					<SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush">#220078D7</SolidColorBrush>
 					<SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush">#330078D7</SolidColorBrush>
 					<SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush">#440078D7</SolidColorBrush>
 				</ListBox.Resources>
+
+				<ListBox.KeyBindings>
+					<KeyBinding Gesture="Delete"
+								Command="{Binding DeleteTasksCommand}"
+								CommandParameter="{Binding ElementName=TasksListBox, Path=SelectedItems}" />
+				</ListBox.KeyBindings>
 
 				<ListBox.ItemTemplate>
 					<DataTemplate DataType="{x:Type models:ToolExecutionInfo}">
@@ -85,7 +91,10 @@
 				</ListBox.ItemTemplate>
 			</ListBox>
 			
-			<Grid Grid.Row="1" Height="32" Background="{Binding SettingsVM.Theme.ExplorerMenuBackground}">
+			<Grid Grid.Row="1"
+				  Height="32"
+				  Background="{Binding SettingsVM.Theme.ExplorerMenuBackground}"
+				  ColumnDefinitions="1*, Auto">
 				<Grid.Styles>
 					<Style Selector="TextBlock">
 						<Setter Property="VerticalAlignment" Value="Center" />
@@ -96,13 +105,44 @@
 					</Style>
 				</Grid.Styles>
 
-				<StackPanel Orientation="Horizontal" Margin="10, 0">
+				<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10, 0">
 					<TextBlock Text="{Binding SettingsVM.Locale.Running}" />
 					<TextBlock Text="{Binding RunningTasksCount}" Classes="value" />
 					<TextBlock Text="{Binding SettingsVM.Locale.Completed}" />
 					<TextBlock Text="{Binding CompletedTasksCount}" Classes="value" />
 					<TextBlock Text="{Binding SettingsVM.Locale.Faulted}" />
 					<TextBlock Text="{Binding FaultedTasksCount}" Classes="value" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="1" Orientation="Horizontal">
+					<StackPanel.Styles>
+						<Style Selector="Button">
+							<Setter Property="Width" Value="35" />
+							<Setter Property="Height" Value="32" />
+							<Setter Property="Padding" Value="0" />
+							<Setter Property="Opacity" Value="0.9" />
+							<Setter Property="FontSize" Value="18" />
+							<Setter Property="Cursor" Value="Hand" />
+							<Setter Property="BorderThickness" Value="0" />
+							<Setter Property="Background" Value="{Binding SettingsVM.Theme.ExplorerMenuBackground}" />
+						</Style>
+						<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+							<Setter Property="Background" Value="DarkGray" />
+						</Style>
+						<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+							<Setter Property="Background" Value="Gray" />
+						</Style>
+						<Style Selector="Button > img|Icon">
+							<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerMenuIconForeground}" />
+						</Style>
+					</StackPanel.Styles>
+
+					<Button img:Attached.Icon="fa-trash-can"
+							Command="{Binding DeleteFinishedTasksCommand}" />
+					
+					<Button img:Attached.Icon="fa-circle-minus"
+							Command="{Binding DeleteTasksCommand}"
+							CommandParameter="{Binding ElementName=TasksListBox, Path=SelectedItems}" />
 				</StackPanel>
 			</Grid>
 		</Grid>

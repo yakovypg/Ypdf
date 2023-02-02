@@ -1,9 +1,11 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using ReactiveUI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Reactive;
 using YpdfDesktop.Models.Informing;
 using YpdfDesktop.ViewModels.Base;
 
@@ -11,6 +13,13 @@ namespace YpdfDesktop.ViewModels.Pages
 {
     public class TasksViewModel : ViewModelBase
     {
+        #region Commands
+
+        public ReactiveCommand<IList, Unit> DeleteTasksCommand { get; }
+        public ReactiveCommand<Unit, Unit> DeleteFinishedTasksCommand { get; }
+
+        #endregion
+
         #region View Models
 
         public SettingsViewModel SettingsVM { get; }
@@ -59,9 +68,24 @@ namespace YpdfDesktop.ViewModels.Pages
             Tasks = new ObservableCollection<ToolExecutionInfo>();
 
             Tasks.CollectionChanged += TasksCollectionChanged;
+
+            DeleteTasksCommand = ReactiveCommand.Create<IList>(DeleteTasks);
+            DeleteFinishedTasksCommand = ReactiveCommand.Create(DeleteFinishedTasks);
         }
 
         #region Private Methods
+
+        private void DeleteTasks(IList tasksList)
+        {
+            IEnumerable<ToolExecutionInfo> tasksToDelete = tasksList.Cast<ToolExecutionInfo>();
+            Tasks.RemoveMany(tasksToDelete);
+        }
+
+        private void DeleteFinishedTasks()
+        {
+            IEnumerable<ToolExecutionInfo> tasksToDelete = Tasks.Where(t => t.Status != ToolExecutionStatus.Running);
+            Tasks.RemoveMany(tasksToDelete);
+        }
 
         private void TasksCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {

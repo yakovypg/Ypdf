@@ -11,10 +11,14 @@ namespace YpdfDesktop.Models.Themes
         protected override void SetBrushes()
         {
             ExplorerBackground = SolidColorBrush.Parse("#F0F8FF");
+            ExplorerTextForeground = SolidColorBrush.Parse("#000000");
             ExplorerSplitterBackground = SolidColorBrush.Parse("#D3D3D3");
             ExplorerMenuBackground = SolidColorBrush.Parse("#D3D3D3");
             ExplorerMenuTextForeground = SolidColorBrush.Parse("#000000");
-            ExplorerTextForeground = SolidColorBrush.Parse("#000000");
+            ExplorerMenuIconForeground = SolidColorBrush.Parse("#A52A2A");
+            ExplorerMenuTileDefaultBackground = SolidColorBrush.Parse("#D3D3D3");
+            ExplorerMenuTileEnteredBackground = SolidColorBrush.Parse("#AEAEAE");
+            ExplorerMenuTilePressedBackground = SolidColorBrush.Parse("#898989");
 
             ButtonBackground = SolidColorBrush.Parse("#D3D3D3");
             ButtonForeground = SolidColorBrush.Parse("#000000");
