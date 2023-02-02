@@ -27,8 +27,13 @@
 		<Grid Grid.Column="0" RowDefinitions="1*, 40">		
 			<ListBox Grid.Row="0" Items="{Binding PageRanges}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
 				<ListBox.Resources>
+					<!--PointerOver-->
+					<SolidColorBrush x:Key="SystemControlHighlightListLowBrush">#19000000</SolidColorBrush>
+					<!--Selected-->
 					<SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush">#220078D7</SolidColorBrush>
+					<!--Selected PointerOver-->
 					<SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush">#330078D7</SolidColorBrush>
+					<!--Selected Pressed-->
 					<SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush">#440078D7</SolidColorBrush>
 				</ListBox.Resources>
 
