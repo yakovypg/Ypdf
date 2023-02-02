@@ -28,20 +28,22 @@
 			</Style>
 		</Grid.Styles>
 
-		<TextBlock
-			Grid.ColumnSpan="4"
-			Text="{Binding AppVersion}"
-			FontWeight="SemiBold"
-			FontSize="15"
-			VerticalAlignment="Top"
-			HorizontalAlignment="Center">
-		</TextBlock>
+		<TextBlock Grid.ColumnSpan="4"
+				   Text="{Binding AppVersion}"
+				   FontWeight="SemiBold"
+				   FontSize="15"
+				   VerticalAlignment="Top"
+				   HorizontalAlignment="Center" />
 		
 		<TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Locale.Language}" />
 		<TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Locale.Theme}" />
 		<TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Locale.PythonAlias}" />
 
-		<ComboBox Name="LocalesComboBox" Grid.Row="1" Grid.Column="2" SelectedIndex="0" Items="{Binding Locales}" SelectedItem="{Binding Locale}">		
+		<ComboBox Grid.Row="1"
+				  Grid.Column="2"
+				  SelectedIndex="0"
+				  Items="{Binding Locales}"
+				  SelectedItem="{Binding Locale}">		
 			<ComboBox.ItemTemplate>
 				<DataTemplate DataType="{x:Type localization:Locale}">
 					<TextBlock Text="{Binding Name}" />
@@ -49,7 +51,11 @@
 			</ComboBox.ItemTemplate>
 		</ComboBox>
 		
-		<ComboBox Name="ThemesComboBox" Grid.Row="3" Grid.Column="2" SelectedIndex="0" Items="{Binding Themes}" SelectedItem="{Binding Theme}">		
+		<ComboBox Grid.Row="3"
+				  Grid.Column="2"
+				  SelectedIndex="0"
+				  Items="{Binding Themes}"
+				  SelectedItem="{Binding Theme}">		
 			<ComboBox.ItemTemplate>
 				<DataTemplate DataType="{x:Type themes:WindowTheme}">
 					<TextBlock Text="{Binding Name}" />
@@ -57,30 +63,24 @@
 			</ComboBox.ItemTemplate>
 		</ComboBox>
 		
-		<TextBox
-			Grid.Row="5"
-			Grid.Column="2"
-			Text="{Binding PythonAlias, Mode=TwoWay}">
-		</TextBox>
+		<TextBox Grid.Row="5"
+				 Grid.Column="2"
+				 Text="{Binding PythonAlias, Mode=TwoWay}" />
 
-		<CheckBox
-			Grid.Row="7"
-			Grid.ColumnSpan="3"
-			Content="{Binding Locale.ResetAfterExecution}"
-			IsChecked="{Binding ResetAfterExecution}">
-		</CheckBox>
+		<CheckBox Grid.Row="7"
+				  Grid.ColumnSpan="3"
+				  Content="{Binding Locale.ResetAfterExecution}"
+				  IsChecked="{Binding ResetAfterExecution}" />
 
-		<Button
-			Grid.Row="9"
-			Grid.ColumnSpan="4"
-			Content="{Binding Locale.Save}"
-			Width="120"
-			HorizontalContentAlignment="Center"
-			HorizontalAlignment="Center"
-			Background="{Binding Theme.ButtonBackground}"
-			Foreground="{Binding Theme.ButtonForeground}"
-			Command="{Binding SaveSettingsCommand}">
-		</Button>
+		<Button Grid.Row="9"
+				Grid.ColumnSpan="4"
+				Width="120"
+				HorizontalAlignment="Center"
+				HorizontalContentAlignment="Center"
+				Content="{Binding Locale.Save}"
+				Background="{Binding Theme.ButtonBackground}"
+				Foreground="{Binding Theme.ButtonForeground}"
+				Command="{Binding SaveSettingsCommand}" />
 
 		<Grid Grid.Row="9" Grid.Column="3" ColumnDefinitions="1*, 26, 26">
 			<Grid.Styles>

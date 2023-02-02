@@ -18,6 +18,12 @@
 	</Design.DataContext>
 
 	<Grid>
+		<Grid.Styles>
+			<Style Selector="UniformGrid">
+				<Setter Property="Background" Value="{Binding SettingsVM.Theme.ExplorerBackground}" />
+			</Style>
+		</Grid.Styles>
+		
 		<ItemsControl Items="{Binding Tools}">
 			<ItemsControl.Template>
 				<ControlTemplate>
@@ -35,15 +41,10 @@
 
 			<ItemsControl.DataTemplates>
 				<DataTemplate DataType="{x:Type models:Tool}">
-					<Border BorderThickness="1" BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}" Margin="3" Cursor="Hand">
-						<Border.Styles>
-							<Style Selector="TextBlock">
-								<Setter Property="VerticalAlignment" Value="Center" />
-								<Setter Property="HorizontalAlignment" Value="Center" />
-								<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
-							</Style>
-						</Border.Styles>
-
+					<Border Margin="3"
+							Cursor="Hand"
+							BorderThickness="1"
+							BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
 						<Grid Name="ToolGrid" RowDefinitions="1*, 30" Background="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
 							<i:Interaction.Behaviors>
 								<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolGrid">
@@ -67,16 +68,14 @@
 								</ia:EventTriggerBehavior>
 							</i:Interaction.Behaviors>
 
-							<img:Icon
-								Name="FavoriteIcon"
-								Value="fa-star"
-								Cursor="Arrow"
-								FontSize="15"
-								Margin="0, 3, 5, 0"
-								Foreground="{Binding StarBrush}"
-								VerticalAlignment="Top"
-								HorizontalAlignment="Right">
-								
+							<img:Icon Name="FavoriteIcon"
+									  Value="fa-star"
+									  Cursor="Arrow"
+									  FontSize="15"
+									  Margin="0, 3, 5, 0"
+									  Foreground="{Binding StarBrush}"
+									  VerticalAlignment="Top"
+									  HorizontalAlignment="Right">					
 								<i:Interaction.Behaviors>
 									<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="FavoriteIcon">
 										<ia:InvokeCommandAction
@@ -87,69 +86,67 @@
 								</i:Interaction.Behaviors>
 							</img:Icon>
 
-							<img:Icon
-								Grid.Row="0"
-								Value="{Binding IconName}"
-								FontSize="30"
-								Opacity="0.88"
-								Margin="0, 10, 0, 0"
-								Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileIconForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
-							</img:Icon>
+							<img:Icon Grid.Row="0"
+									  FontSize="30"
+									  Opacity="0.88"
+									  Margin="0, 10, 0, 0"
+									  Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileIconForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+									  Value="{Binding IconName}" />
 
-							<TextBlock
-								Grid.Row="1"
-								Text="{Binding Name}"
-								Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
-							</TextBlock>
+							<TextBlock Grid.Row="1"
+									   VerticalAlignment="Center"
+									   HorizontalAlignment="Center"
+									   Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+									   Text="{Binding Name}" />
 						</Grid>
 					</Border>
 				</DataTemplate>
 			</ItemsControl.DataTemplates>
 		</ItemsControl>
 
-		<UniformGrid IsVisible="{Binding IsSplitViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsSplitViewVisible}">
 			<toolPages:SplitView DataContext="{Binding SplitVM}" />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsMergeViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsMergeViewVisible}">
 			<toolPages:MergeView DataContext="{Binding MergeVM}" />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsCompressViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsCompressViewVisible}">
 			<toolPages:CompressView DataContext="{Binding CompressVM}" />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsHandlePagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsHandlePagesViewVisible}">
 			<toolPages:HandlePagesView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsCropPagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsCropPagesViewVisible}">
 			<toolPages:CropPagesView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsDividePagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsDividePagesViewVisible}">
 			<toolPages:DividePagesView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsAddPageNumbersViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsAddPageNumbersViewVisible}">
 			<toolPages:AddPageNumbersView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsAddWatermarkViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsAddWatermarkViewVisible}">
 			<toolPages:AddWatermarkView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsRemoveWatermarkViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsRemoveWatermarkViewVisible}">
 			<toolPages:RemoveWatermarkView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsImageToPdfViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsImageToPdfViewVisible}">
 			<toolPages:ImageToPdfView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsTextToPdfViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsTextToPdfViewVisible}">
 			<toolPages:TextToPdfView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsExtractImagesViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsExtractImagesViewVisible}">
 			<toolPages:ExtractImagesView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsExtractTextViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsExtractTextViewVisible}">
 			<toolPages:ExtractTextView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsSetPasswordViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsSetPasswordViewVisible}">
 			<toolPages:SetPasswordView />
 		</UniformGrid>
-		<UniformGrid IsVisible="{Binding IsRemovePasswordViewVisible}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<UniformGrid IsVisible="{Binding IsRemovePasswordViewVisible}">
 			<toolPages:RemovePasswordView />
 		</UniformGrid>
 	</Grid>
