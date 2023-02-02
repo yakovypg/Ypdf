@@ -18,8 +18,18 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? ExplorerMenuTilePressedBackground { get; set; }
 
         ISolidColorBrush? ButtonBackground { get; set; }
+        ISolidColorBrush? ButtonBackgroundPointerOver { get; set; }
+        ISolidColorBrush? ButtonBackgroundPressed { get; set; }
+        ISolidColorBrush? ButtonBackgroundDisabled { get; set; }
         ISolidColorBrush? ButtonForeground { get; set; }
+        ISolidColorBrush? ButtonForegroundPointerOver { get; set; }
+        ISolidColorBrush? ButtonForegroundPressed { get; set; }
+        ISolidColorBrush? ButtonForegroundDisabled { get; set; }
         ISolidColorBrush? ButtonIconForeground { get; set; }
+
+        ISolidColorBrush? CheckBoxDefaultForeground { get; set; }
+        ISolidColorBrush? CheckBoxEnteredForeground { get; set; }
+        ISolidColorBrush? CheckBoxPressedForeground { get; set; }
 
         ISolidColorBrush? LinkIconForeground { get; set; }
         ISolidColorBrush? FavoriteStarIconForeground { get; set; }

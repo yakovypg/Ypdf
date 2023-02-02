@@ -19,6 +19,21 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
+	<Window.Resources>
+		<SolidColorBrush x:Key="ButtonForeground" Color="{Binding SettingsVM.Theme.ButtonForeground.Color}" />
+		<SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding SettingsVM.Theme.ButtonForegroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding SettingsVM.Theme.ButtonForegroundPressed.Color}" />
+		<SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding SettingsVM.Theme.ButtonForegroundDisabled.Color}" />
+		<SolidColorBrush x:Key="ButtonBackground" Color="{Binding SettingsVM.Theme.ButtonBackground.Color}" />
+		<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding SettingsVM.Theme.ButtonBackgroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding SettingsVM.Theme.ButtonBackgroundPressed.Color}" />
+		<SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{Binding SettingsVM.Theme.ButtonBackgroundDisabled.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxEnteredForeground.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxEnteredForeground.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxPressedForeground.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxPressedForeground.Color}" />
+	</Window.Resources>
+
 	<i:Interaction.Behaviors>
 		<ia:EventTriggerBehavior EventName="Closing">
 			<ia:InvokeCommandAction Command="{Binding CheckRunningTasksCommand}" PassEventArgsToCommand="True" />

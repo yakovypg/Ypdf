@@ -26,6 +26,9 @@
 				<Setter Property="Width" Value="150" />
 				<Setter Property="Cursor" Value="Hand" />
 			</Style>
+			<Style Selector="CheckBox">
+				<Setter Property="Foreground" Value="White" />
+			</Style>
 		</Grid.Styles>
 
 		<TextBlock Grid.ColumnSpan="4"
@@ -69,8 +72,11 @@
 
 		<CheckBox Grid.Row="7"
 				  Grid.ColumnSpan="3"
+				  Cursor="Hand"
 				  Content="{Binding Locale.ResetAfterExecution}"
-				  IsChecked="{Binding ResetAfterExecution}" />
+				  Foreground="{Binding Theme.CheckBoxDefaultForeground}"
+				  IsChecked="{Binding ResetAfterExecution}">		
+		</CheckBox>
 
 		<Button Grid.Row="9"
 				Grid.ColumnSpan="4"
@@ -78,8 +84,6 @@
 				HorizontalAlignment="Center"
 				HorizontalContentAlignment="Center"
 				Content="{Binding Locale.Save}"
-				Background="{Binding Theme.ButtonBackground}"
-				Foreground="{Binding Theme.ButtonForeground}"
 				Command="{Binding SaveSettingsCommand}" />
 
 		<Grid Grid.Row="9" Grid.Column="3" ColumnDefinitions="1*, Auto, Auto">

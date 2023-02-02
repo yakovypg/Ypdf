@@ -33,6 +33,7 @@
 					<Setter Property="Padding" Value="0" />
 					<Setter Property="Cursor" Value="Hand" />
 					<Setter Property="BorderThickness" Value="1" />
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 					<Setter Property="BorderBrush" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 				</Style>

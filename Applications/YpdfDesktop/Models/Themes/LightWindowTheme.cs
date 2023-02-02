@@ -20,11 +20,21 @@ namespace YpdfDesktop.Models.Themes
             ExplorerMenuTileEnteredBackground = SolidColorBrush.Parse("#AEAEAE");
             ExplorerMenuTilePressedBackground = SolidColorBrush.Parse("#898989");
 
-            ButtonBackground = SolidColorBrush.Parse("#D3D3D3");
+            ButtonBackground = SolidColorBrush.Parse("#CCCCCC");
+            ButtonBackgroundPointerOver = SolidColorBrush.Parse("#E6E6E6");
+            ButtonBackgroundPressed = SolidColorBrush.Parse("#999999");
+            ButtonBackgroundDisabled = SolidColorBrush.Parse("#CCCCCC");
             ButtonForeground = SolidColorBrush.Parse("#000000");
+            ButtonForegroundPointerOver = SolidColorBrush.Parse("#000000");
+            ButtonForegroundPressed = SolidColorBrush.Parse("#000000");
+            ButtonForegroundDisabled = SolidColorBrush.Parse("#66000000");
             ButtonIconForeground = SolidColorBrush.Parse("#800000");
 
-            LinkIconForeground = PanelSelectorIconForeground = SolidColorBrush.Parse("#292177");
+            CheckBoxDefaultForeground = SolidColorBrush.Parse("#000000");
+            CheckBoxEnteredForeground = SolidColorBrush.Parse("#000000");
+            CheckBoxPressedForeground = SolidColorBrush.Parse("#000000");
+
+            LinkIconForeground = SolidColorBrush.Parse("#292177");
             FavoriteStarIconForeground = SolidColorBrush.Parse("#FF8C00");
             NotFavoriteStarIconForeground = SolidColorBrush.Parse("#808080");
 

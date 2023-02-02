@@ -41,10 +41,37 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? ButtonBackground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonBackgroundPointerOver { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonBackgroundPressed { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonBackgroundDisabled { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? ButtonForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonForegroundPointerOver { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonForegroundPressed { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ButtonForegroundDisabled { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? ButtonIconForeground { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? CheckBoxDefaultForeground { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? CheckBoxEnteredForeground { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? CheckBoxPressedForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? LinkIconForeground { get; set; }

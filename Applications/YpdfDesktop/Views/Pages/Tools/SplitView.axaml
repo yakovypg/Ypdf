@@ -46,13 +46,6 @@
 									<Setter Property="Margin" Value="10, 0" />
 									<Setter Property="TextAlignment" Value="Center" />
 								</Style>
-								<Style Selector="Button">
-									<Setter Property="Height" Value="32" />
-									<Setter Property="FontSize" Value="15" />
-									<Setter Property="Opacity" Value="0.65" />
-									<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ButtonBackground, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-									<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.ButtonIconForeground, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-								</Style>
 							</Grid.Styles>
 
 							<TextBlock Grid.Column="0"
@@ -84,9 +77,18 @@
 							</TextBox>
 
 							<Button Grid.Column="4"
-									img:Attached.Icon="fa-trash"
+									Height="32"
+									FontSize="15"
 									Command="{Binding DataContext.DeletePageRangeCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
-									CommandParameter="{Binding Self}" />
+									CommandParameter="{Binding Self}">
+								<Button.Resources>
+									<SolidColorBrush x:Key="ButtonForeground" Color="{Binding DataContext.SettingsVM.Theme.ButtonIconForeground.Color, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									<SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding DataContext.SettingsVM.Theme.ButtonIconForeground.Color, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									<SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding DataContext.SettingsVM.Theme.ButtonIconForeground.Color, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+								</Button.Resources>
+								
+								<img:Icon Value="fa-trash" Opacity="0.65" />
+							</Button>
 						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
@@ -98,8 +100,6 @@
 						Margin="5"
 						HorizontalAlignment="Center"
 						HorizontalContentAlignment="Center"
-						Background="{Binding SettingsVM.Theme.ButtonBackground}"
-						Foreground="{Binding SettingsVM.Theme.ButtonForeground}"
 						IsEnabled="{Binding IsFileSelected}"
 						Command="{Binding AddPageRangeCommand}" />
 			</Grid>
@@ -109,6 +109,7 @@
 			<Grid.Styles>
 				<Style Selector="TextBlock">
 					<Setter Property="VerticalAlignment" Value="Center" />
+					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
 				</Style>
 				<Style Selector="TextBlock:pointerover">
 					<Setter Property="Cursor" Value="Hand" />
@@ -143,22 +144,22 @@
 
 			<Grid Grid.Row="1" ColumnDefinitions="1*, 1*">
 				<Grid.Styles>
-					<Style Selector="Button">
+					<Style Selector="Button.fb">
 						<Setter Property="MinWidth" Value="110" />
 						<Setter Property="Margin" Value="5" />
 						<Setter Property="HorizontalContentAlignment" Value="Center" />
 						<Setter Property="IsEnabled" Value="{Binding IsFileSelected}" />
-						<Setter Property="Background" Value="{Binding SettingsVM.Theme.ButtonBackground}" />
-						<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ButtonForeground}" />
 					</Style>
 				</Grid.Styles>
 				
 				<Button Grid.Column="0"
+						Classes="fb"
 						Content="{Binding SettingsVM.Locale.Execute}"
 						HorizontalAlignment="Right"
 						Command="{Binding ExecuteCommand}" />
 
 				<Button Grid.Column="1"
+						Classes="fb"
 						Content="{Binding SettingsVM.Locale.Reset}"
 						HorizontalAlignment="Left"
 						Command="{Binding ResetCommand}" />
