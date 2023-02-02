@@ -55,8 +55,11 @@
 								</Style>
 							</Grid.Styles>
 
-							<TextBlock Grid.Column="0" Text="{Binding DataContext.SettingsVM.Locale.From, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-							<TextBlock Grid.Column="2" Text="{Binding DataContext.SettingsVM.Locale.To, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+							<TextBlock Grid.Column="0"
+									   Text="{Binding DataContext.SettingsVM.Locale.From, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+							
+							<TextBlock Grid.Column="2"
+									   Text="{Binding DataContext.SettingsVM.Locale.To, RelativeSource={RelativeSource AncestorType=ListBox}}" />
 
 							<TextBox Name="PageFromTextBox" Grid.Column="1" Text="{Binding Start, Mode=TwoWay}">
 								<i:Interaction.Behaviors>

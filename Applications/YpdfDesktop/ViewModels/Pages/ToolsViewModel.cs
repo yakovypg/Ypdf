@@ -18,7 +18,6 @@ namespace YpdfDesktop.ViewModels.Pages
 
         public ReactiveCommand<ToolType, Unit> ChangeToolAffiliationToFavoritesCommand { get; }
         public ReactiveCommand<ToolType, Unit> ShowToolPageCommand { get; }
-        public ReactiveCommand<Unit, Unit> HideAllToolsPagesCommand { get; }
 
         #endregion
 
@@ -179,7 +178,6 @@ namespace YpdfDesktop.ViewModels.Pages
 
             ChangeToolAffiliationToFavoritesCommand = ReactiveCommand.Create<ToolType>(ChangeToolAffiliationToFavorites);
             ShowToolPageCommand = ReactiveCommand.Create<ToolType>(ShowToolPage);
-            HideAllToolsPagesCommand = ReactiveCommand.Create(HideAllToolsPages);
         }
 
         #region Public Methods
@@ -225,6 +223,25 @@ namespace YpdfDesktop.ViewModels.Pages
             }
         }
 
+        public void HideAllToolsPages()
+        {
+            IsSplitViewVisible = false;
+            IsMergeViewVisible = false;
+            IsCompressViewVisible = false;
+            IsHandlePagesViewVisible = false;
+            IsCropPagesViewVisible = false;
+            IsDividePagesViewVisible = false;
+            IsAddPageNumbersViewVisible = false;
+            IsAddWatermarkViewVisible = false;
+            IsRemoveWatermarkViewVisible = false;
+            IsImageToPdfViewVisible = false;
+            IsTextToPdfViewVisible = false;
+            IsExtractImagesViewVisible = false;
+            IsExtractTextViewVisible = false;
+            IsSetPasswordViewVisible = false;
+            IsRemovePasswordViewVisible = false;
+        }
+
         #endregion
 
         #region Private Methods
@@ -257,6 +274,8 @@ namespace YpdfDesktop.ViewModels.Pages
             if (!Tools.Any(t => t.Type == toolType))
                 return;
 
+            HideAllToolsPages();
+
             switch (toolType)
             {
                 case ToolType.Split: IsSplitViewVisible = true; break;
@@ -276,25 +295,6 @@ namespace YpdfDesktop.ViewModels.Pages
                 case ToolType.RemovePassword: IsRemovePasswordViewVisible = true; break;
                 default: break;
             }
-        }
-
-        private void HideAllToolsPages()
-        {
-            IsSplitViewVisible = false;
-            IsMergeViewVisible = false;
-            IsCompressViewVisible = false;
-            IsHandlePagesViewVisible = false;
-            IsCropPagesViewVisible = false;
-            IsDividePagesViewVisible = false;
-            IsAddPageNumbersViewVisible = false;
-            IsAddWatermarkViewVisible = false;
-            IsRemoveWatermarkViewVisible = false;
-            IsImageToPdfViewVisible = false;
-            IsTextToPdfViewVisible = false;
-            IsExtractImagesViewVisible = false;
-            IsExtractTextViewVisible = false;
-            IsSetPasswordViewVisible = false;
-            IsRemovePasswordViewVisible = false;
         }
 
         #endregion

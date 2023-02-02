@@ -226,8 +226,16 @@ namespace YpdfDesktop.ViewModels
             IsTasksVisible = true;
         }
 
+        private void HideAllToolPages()
+        {
+            FavoriteToolsVM.HideAllToolsPages();
+            ToolsVM.HideAllToolsPages();
+        }
+
         private void HideAllPages()
         {
+            HideAllToolPages();
+
             IsFavoriteToolsVisible = false;
             IsToolsVisible = false;
             IsSettingsVisible = false;

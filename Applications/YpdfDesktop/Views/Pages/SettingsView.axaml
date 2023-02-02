@@ -82,22 +82,25 @@
 				Foreground="{Binding Theme.ButtonForeground}"
 				Command="{Binding SaveSettingsCommand}" />
 
-		<Grid Grid.Row="9" Grid.Column="3" ColumnDefinitions="1*, 26, 26">
+		<Grid Grid.Row="9" Grid.Column="3" ColumnDefinitions="1*, Auto, Auto">
 			<Grid.Styles>
 				<Style Selector="UniformGrid">
 					<Setter Property="Cursor" Value="Hand" />
-					<Setter Property="Margin" Value="5, 0, 0, 0" />
+					<Setter Property="Margin" Value="10, 0, 0, 0" />
 					<Setter Property="Background" Value="Transparent" />
 				</Style>
 				<Style Selector="UniformGrid > img|Icon">
 					<Setter Property="FontSize" Value="21" />
 					<Setter Property="Foreground" Value="{Binding Theme.LinkIconForeground}" />
 				</Style>
+				<Style Selector="UniformGrid:pointerover > img|Icon">
+					<Setter Property="FontSize" Value="23" />
+				</Style>
 			</Grid.Styles>
 
 			<UniformGrid Name="VkIcon" Grid.Column="1">
 				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="VkIcon">
+					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="VkIcon">
 						<ia:InvokeCommandAction Command="{Binding OpenVkPageCommand}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
@@ -107,7 +110,7 @@
 
 			<UniformGrid Name="GitHubIcon" Grid.Column="2">
 				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="GitHubIcon">
+					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="GitHubIcon">
 						<ia:InvokeCommandAction Command="{Binding OpenGitHubPageCommand}" />
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>

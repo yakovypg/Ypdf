@@ -29,9 +29,19 @@
 	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}" ColumnDefinitions="120, 1*">	
 		<StackPanel Grid.Column="0" Orientation="Vertical" Background="{Binding SettingsVM.Theme.PanelSelectorBackground}">
 			<StackPanel.Styles>
-				<Style Selector="Grid">
+				<Style Selector="Button">
+					<Setter Property="Width" Value="120" />
 					<Setter Property="Height" Value="90" />
+					<Setter Property="Padding" Value="0" />
 					<Setter Property="Cursor" Value="Hand" />
+					<Setter Property="BorderThickness" Value="0" />
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
+				</Style>
+				<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
+				</Style>
+				<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
 				</Style>
 				<Style Selector="Grid > img|Icon">
 					<Setter Property="FontSize" Value="35" />
@@ -42,98 +52,34 @@
 					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.PanelSelectorTextForeground}" />
 				</Style>
 			</StackPanel.Styles>
-			
-			<Grid Name="FavoriteToolsGrid" RowDefinitions="1*, 20">
-				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="FavoriteToolsGrid">
-						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="FavoriteToolsGrid">
-						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="FavoriteToolsGrid">
-						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FavoriteToolsGrid">
-						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ShowFavoriteToolsCommand}" />
-						<ia:ChangePropertyAction TargetObject="FavoriteToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-				</i:Interaction.Behaviors>
-				
-				<img:Icon Grid.Row="0" Value="fa-star" FontSize="35" />
-				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Favorites}" />
-			</Grid>
-			
-			<Grid Name="ToolsGrid" RowDefinitions="1*, 20">
-				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolsGrid">
-						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="ToolsGrid">
-						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="ToolsGrid">
-						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="ToolsGrid">
-						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ShowToolsCommand}" />
-						<ia:ChangePropertyAction TargetObject="ToolsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-				</i:Interaction.Behaviors>
-				
-				<img:Icon Grid.Row="0" Value="fa-wrench" FontSize="35" />
-				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tools}" />
-			</Grid>
-			
-			<Grid Name="SettingsGrid" RowDefinitions="1*, 20">
-				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="SettingsGrid">
-						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="SettingsGrid">
-						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="SettingsGrid">
-						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="SettingsGrid">
-						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ShowSettingsCommand}" />
-						<ia:ChangePropertyAction TargetObject="SettingsGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-				</i:Interaction.Behaviors>
-				
-				<img:Icon Grid.Row="0" Value="fa-cog" FontSize="35" />
-				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Settings}" />
-			</Grid>
 
-			<Grid Name="TasksGrid" RowDefinitions="1*, 20">
-				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="TasksGrid">
-						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileEnteredBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="TasksGrid">
-						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="TasksGrid">
-						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTilePressedBackground}" />
-					</ia:EventTriggerBehavior>
-					<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="TasksGrid">
-						<ia:InvokeCommandAction Command="{Binding FavoriteToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ToolsVM.HideAllToolsPagesCommand}" />
-						<ia:InvokeCommandAction Command="{Binding ShowTasksCommand}" />
-						<ia:ChangePropertyAction TargetObject="TasksGrid" PropertyName="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileDefaultBackground}" />
-					</ia:EventTriggerBehavior>
-				</i:Interaction.Behaviors>
+			<Button Command="{Binding ShowFavoriteToolsCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-star" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Favorites}" />
+				</Grid>
+			</Button>
 
-				<img:Icon Grid.Row="0" Value="fa-list-alt" FontSize="35" />
-				<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tasks}" />
-			</Grid>
+			<Button Command="{Binding ShowToolsCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-wrench" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tools}" />
+				</Grid>
+			</Button>
+
+			<Button Command="{Binding ShowSettingsCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-cog" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Settings}" />
+				</Grid>
+			</Button>
+
+			<Button Command="{Binding ShowTasksCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-list-alt" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tasks}" />
+				</Grid>
+			</Button>
 		</StackPanel>
 		
 		<Grid Grid.Column="1">

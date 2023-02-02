@@ -25,6 +25,25 @@
 		</Grid.Styles>
 		
 		<ItemsControl Items="{Binding Tools}">
+			<ItemsControl.Styles>
+				<Style Selector="Button">
+					<Setter Property="Margin" Value="3" />
+					<Setter Property="Width" Value="114" />
+					<Setter Property="Height" Value="84" />
+					<Setter Property="Padding" Value="0" />
+					<Setter Property="Cursor" Value="Hand" />
+					<Setter Property="BorderThickness" Value="1" />
+					<Setter Property="BorderBrush" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+				</Style>
+				<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileEnteredBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+				</Style>
+				<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTilePressedBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+				</Style>
+			</ItemsControl.Styles>
+			
 			<ItemsControl.Template>
 				<ControlTemplate>
 					<ScrollViewer>
@@ -41,33 +60,9 @@
 
 			<ItemsControl.DataTemplates>
 				<DataTemplate DataType="{x:Type models:Tool}">
-					<Border Margin="3"
-							Cursor="Hand"
-							BorderThickness="1"
-							BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
-						<Grid Name="ToolGrid" RowDefinitions="1*, 30" Background="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
-							<i:Interaction.Behaviors>
-								<ia:EventTriggerBehavior EventName="PointerEnter" SourceObject="ToolGrid">
-									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileEnteredBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
-								</ia:EventTriggerBehavior>
-								<ia:EventTriggerBehavior EventName="PointerLeave" SourceObject="ToolGrid">
-									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
-								</ia:EventTriggerBehavior>
-								<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="ToolGrid">
-									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTilePressedBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
-								</ia:EventTriggerBehavior>
-								<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="ToolGrid">
-									<ia:ChangePropertyAction TargetObject="ToolGrid" PropertyName="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileDefaultBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
-									<ia:InvokeCommandAction
-										Command="{Binding DataContext.HideAllToolsPagesCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
-									</ia:InvokeCommandAction>
-									<ia:InvokeCommandAction
-										Command="{Binding DataContext.ShowToolPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-										CommandParameter="{Binding Type}">
-									</ia:InvokeCommandAction>
-								</ia:EventTriggerBehavior>
-							</i:Interaction.Behaviors>
-
+					<Button Command="{Binding DataContext.ShowToolPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+							CommandParameter="{Binding Type}">
+						<Grid RowDefinitions="1*, 30">
 							<img:Icon Name="FavoriteIcon"
 									  Value="fa-star"
 									  Cursor="Arrow"
@@ -75,9 +70,9 @@
 									  Margin="0, 3, 5, 0"
 									  Foreground="{Binding StarBrush}"
 									  VerticalAlignment="Top"
-									  HorizontalAlignment="Right">					
+									  HorizontalAlignment="Right">
 								<i:Interaction.Behaviors>
-									<ia:EventTriggerBehavior EventName="PointerPressed" SourceObject="FavoriteIcon">
+									<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FavoriteIcon">
 										<ia:InvokeCommandAction
 											Command="{Binding DataContext.ChangeToolAffiliationToFavoritesCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
 											CommandParameter="{Binding Type}">
@@ -99,7 +94,7 @@
 									   Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
 									   Text="{Binding Name}" />
 						</Grid>
-					</Border>
+					</Button>
 				</DataTemplate>
 			</ItemsControl.DataTemplates>
 		</ItemsControl>
