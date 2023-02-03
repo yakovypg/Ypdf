@@ -149,7 +149,7 @@
 
 			<Grid Grid.Row="1" ColumnDefinitions="1*, 1*">
 				<Grid.Styles>
-					<Style Selector="Button.fb">
+					<Style Selector="Button">
 						<Setter Property="MinWidth" Value="110" />
 						<Setter Property="Margin" Value="5" />
 						<Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -158,13 +158,11 @@
 				</Grid.Styles>
 				
 				<Button Grid.Column="0"
-						Classes="fb"
 						Content="{Binding SettingsVM.Locale.Execute}"
 						HorizontalAlignment="Right"
 						Command="{Binding ExecuteCommand}" />
 
 				<Button Grid.Column="1"
-						Classes="fb"
 						Content="{Binding SettingsVM.Locale.Reset}"
 						HorizontalAlignment="Left"
 						Command="{Binding ResetCommand}" />

@@ -169,7 +169,7 @@ namespace YpdfDesktop.ViewModels
             string? exitWithoutWaitingForCompletionMsg = SettingsVM.Locale.ExitWithoutWaitingForCompletionMessage;
 
             QuickMessage quickMessage = new($"{unfinishedTasksMsg}. {exitWithoutWaitingForCompletionMsg}?");
-            
+
             _ = quickMessage.ShowQuestionDialog(window).ContinueWith(t =>
             {
                 if (t.Result == ButtonResult.Yes)

@@ -51,5 +51,6 @@
         string? ReplaceItMessage { get; set; }
         string? UnfinishedTasksMessage { get; set; }
         string? ExitWithoutWaitingForCompletionMessage { get; set; }
+        string? SpecifyOutputFilePathMessage { get; set; }
     }
 }

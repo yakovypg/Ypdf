@@ -4,7 +4,6 @@ using ExecutionLib.Configuration;
 using ExecutionLib.Execution;
 using ExecutionLib.Informing.Logging;
 using MessageBox.Avalonia.Enums;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +40,18 @@ namespace YpdfDesktop.ViewModels.Base
         #endregion
 
         #region Protected Methods
+
+        protected static string CorrectOutputFilePath(string outputFilePath, string expectedExtension)
+        {
+            if (string.IsNullOrEmpty(outputFilePath))
+                return outputFilePath;
+
+            string expectedPathEnding = $".{expectedExtension}";
+
+            return !outputFilePath.EndsWith(expectedPathEnding)
+                ? outputFilePath + expectedPathEnding
+                : outputFilePath;
+        }
 
         protected async Task<bool> VerifyOutputPath(string? path)
         {
@@ -87,36 +98,6 @@ namespace YpdfDesktop.ViewModels.Base
                     });
                 }
             });
-        }
-
-        protected static Task<string[]?> GetPdfFilePath()
-        {
-            var dialog = new OpenFileDialog()
-            {
-                AllowMultiple = false,
-                Title = "Select PDF file",
-
-                Filters = new List<FileDialogFilter>()
-                {
-                    new FileDialogFilter() { Name = "PDF Documents", Extensions = new List<string>() { "pdf" } }
-                }
-            };
-
-            return WindowFinder.FindMainWindow() is Window mainWindow
-                ? dialog.ShowAsync(mainWindow)
-                : new Task<string[]?>(() => null);
-        }
-
-        protected static Task<string?> GetDirectoryPath()
-        {
-            var dialog = new OpenFolderDialog()
-            {
-                Title = "Select output directory path"
-            };
-
-            return WindowFinder.FindMainWindow() is Window mainWindow
-                ? dialog.ShowAsync(mainWindow)
-                : new Task<string?>(() => null);
         }
 
         #endregion

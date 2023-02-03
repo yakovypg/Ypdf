@@ -53,6 +53,7 @@ namespace YpdfDesktop.Models.Localization
         public string? ReplaceItMessage { get; set; }
         public string? UnfinishedTasksMessage { get; set; }
         public string? ExitWithoutWaitingForCompletionMessage { get; set; }
+        public string? SpecifyOutputFilePathMessage { get; set; }
 
         public Locale() : this(Guid.NewGuid().ToString())
         {

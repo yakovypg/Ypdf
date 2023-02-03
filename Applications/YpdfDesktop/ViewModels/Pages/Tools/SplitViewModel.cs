@@ -1,5 +1,4 @@
-﻿using Avalonia.Threading;
-using ExecutionLib.Configuration;
+﻿using ExecutionLib.Configuration;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
@@ -119,7 +118,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private void SelectFile()
         {
-            _ = GetPdfFilePath().ContinueWith(t =>
+            _ = DialogProvider.GetPdfFilePaths().ContinueWith(t =>
             {
                 if (t.Result is null || t.Result.Length == 0)
                     return;
@@ -148,14 +147,14 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                 }
                 catch (Exception ex)
                 {
-                    Dispatcher.UIThread.Post(() => MainWindowMessage.ShowErrorDialog(ex.Message));
+                    MainWindowMessage.ShowErrorDialog(ex.Message);
                 }
             });
         }
 
         private void SelectOutputDirectory()
         {
-            _ = GetDirectoryPath().ContinueWith(t =>
+            _ = DialogProvider.GetDirectoryPath().ContinueWith(t =>
             {
                 if (t.Result is null || string.IsNullOrEmpty(t.Result) || !Directory.Exists(t.Result))
                     return;
