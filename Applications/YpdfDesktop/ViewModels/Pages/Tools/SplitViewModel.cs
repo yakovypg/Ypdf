@@ -80,6 +80,41 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             DeletePageRangeCommand = ReactiveCommand.Create<IRange>(DeletePageRange);
         }
 
+        #region Public Methods
+
+        public bool SetFilePath(string path)
+        {
+            if (!File.Exists(path))
+                return false;
+
+            try
+            {
+                int filePages = PdfInfo.GetPageCount(path);
+
+                if (filePages == 0)
+                    throw new FileLoadException(SettingsVM.Locale.FileEmptyMessage, path);
+
+                PageRanges.Clear();
+                PageRanges.Add(new Models.Enumeration.Range(1, filePages));
+
+                if (string.IsNullOrEmpty(OutputDirectoryPath))
+                    OutputDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                _filePages = filePages;
+                FilePath = path;
+                IsFileSelected = true;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MainWindowMessage.ShowErrorDialog(ex.Message);
+                return false;
+            }
+        }
+
+        #endregion
+
         #region Protected Methods
 
         protected override void Execute()
@@ -120,35 +155,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         {
             _ = DialogProvider.GetPdfFilePaths().ContinueWith(t =>
             {
-                if (t.Result is null || t.Result.Length == 0)
-                    return;
-
-                string path = t.Result[0];
-
-                if (!File.Exists(path))
-                    return;
-
-                try
-                {
-                    int filePages = PdfInfo.GetPageCount(path);
-
-                    if (filePages == 0)
-                        throw new FileLoadException(SettingsVM.Locale.FileEmptyMessage, path);
-
-                    PageRanges.Clear();
-                    PageRanges.Add(new Models.Enumeration.Range(1, filePages));
-
-                    if (string.IsNullOrEmpty(OutputDirectoryPath))
-                        OutputDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                    _filePages = filePages;
-                    FilePath = path;
-                    IsFileSelected = true;
-                }
-                catch (Exception ex)
-                {
-                    MainWindowMessage.ShowErrorDialog(ex.Message);
-                }
+                if (t.Result is not null && t.Result.Length > 0)
+                    SetFilePath(t.Result[0]);
             });
         }
 
@@ -156,10 +164,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         {
             _ = DialogProvider.GetDirectoryPath().ContinueWith(t =>
             {
-                if (t.Result is null || string.IsNullOrEmpty(t.Result) || !Directory.Exists(t.Result))
-                    return;
-
-                OutputDirectoryPath = t.Result;
+                if (t.Result is not null && !string.IsNullOrEmpty(t.Result) && Directory.Exists(t.Result))
+                    OutputDirectoryPath = t.Result;
             });
         }
 

@@ -5,6 +5,8 @@
 			 xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:b="using:YpdfDesktop.Infrastructure.Behaviors"
 			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
 			 xmlns:models="clr-namespace:YpdfDesktop.Models.Enumeration"
              mc:Ignorable="d"
@@ -110,7 +112,14 @@
 			</Grid>
 		</Grid>
 
-		<Grid Grid.Column="2" RowDefinitions="1*, 40" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid Grid.Column="2"
+			  RowDefinitions="1*, 40"
+			  DragDrop.AllowDrop="True"
+			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+			<Grid.Resources>
+				<b:FileToSplitDropHandler x:Key="FileToSplitDropHandler" />
+			</Grid.Resources>
+			
 			<Grid.Styles>
 				<Style Selector="TextBlock">
 					<Setter Property="VerticalAlignment" Value="Center" />
@@ -125,6 +134,10 @@
 					<Setter Property="Margin" Value="10, 0, 5, 0" />
 				</Style>
 			</Grid.Styles>
+
+			<i:Interaction.Behaviors>
+				<idd:ContextDropBehavior Handler="{StaticResource FileToSplitDropHandler}" />
+			</i:Interaction.Behaviors>
 
 			<Grid Grid.Row="0" Margin="5" RowDefinitions="32, 5, 32, 1*, 40" ColumnDefinitions="Auto, 1*">
 				<TextBlock Name="FileTextBlock" Grid.Row="0" Grid.Column="0" Text="{Binding SettingsVM.Locale.File}">

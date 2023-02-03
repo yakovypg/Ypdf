@@ -48,7 +48,7 @@ namespace YpdfDesktop.ViewModels.Base
 
             string expectedPathEnding = $".{expectedExtension}";
 
-            return !outputFilePath.EndsWith(expectedPathEnding)
+            return !outputFilePath.ToLower().EndsWith(expectedPathEnding)
                 ? outputFilePath + expectedPathEnding
                 : outputFilePath;
         }
