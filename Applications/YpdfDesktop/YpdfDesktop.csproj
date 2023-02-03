@@ -43,4 +43,20 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Pages\TasksView.axaml" />
   </ItemGroup>
+  <Target Name="CopyLocales" AfterTargets="AfterBuild">
+    <Copy SourceFiles="../../Components/Locales/English.json" DestinationFolder="$(OutDir)/Locales" />
+	<Copy SourceFiles="../../Components/Locales/Russian.json" DestinationFolder="$(OutDir)/Locales" />
+  </Target>
+  <Target Name="CopyLocalesOnPublish" AfterTargets="Publish">
+	<Copy SourceFiles="../../Components/Locales/English.json" DestinationFolder="$(OutDir)/Locales" />
+	<Copy SourceFiles="../../Components/Locales/Russian.json" DestinationFolder="$(OutDir)/Locales" />
+  </Target>
+  <Target Name="CopyThemes" AfterTargets="AfterBuild">
+	<Copy SourceFiles="../../Components/Themes/Light.json" DestinationFolder="$(OutDir)/Themes" />
+	<Copy SourceFiles="../../Components/Themes/Dark.json" DestinationFolder="$(OutDir)/Themes" />
+  </Target>
+  <Target Name="CopyThemesOnPublish" AfterTargets="Publish">
+	<Copy SourceFiles="../../Components/Themes/Light.json" DestinationFolder="$(OutDir)/Themes" />
+	<Copy SourceFiles="../../Components/Themes/Dark.json" DestinationFolder="$(OutDir)/Themes" />
+  </Target>
 </Project>
