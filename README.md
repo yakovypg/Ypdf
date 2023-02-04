@@ -345,11 +345,15 @@ To perform this action, it is necessary that python 3 and some of its packages a
 ypdf compress -i inputPath.pdf -o outputPath.pdf
 ```
 
-You can specify image quality factor (from 0 to 1) and image size factor (from 0 to 1) after the 
---image-quality and --image-size-factor parameters.
+You can specify image quality factor (from 0 to 1), image size factor (from 0 to 1) and images 
+extension after the --image-quality, --image-size-factor and -E parameters.
+
+JPEG is the default image format. Therefore, images with transparency can be distorted. To avoid 
+this, use a different format (for example, PNG). However, other formats give a much lower 
+compression ratio.
 
 ```
-ypdf compress -i inputPath.pdf -o outputPath.pdf --image-quality=0.75 --image-size-factor=0.5
+ypdf compress -i inputPath.pdf -o outputPath.pdf --image-quality=0.75 --image-size-factor=0.5 -E jpg
 ```
 
 Before compression, by default, a check is performed to ensure that the extracted images 
@@ -749,6 +753,10 @@ ypdf compress-images -f inputPath1.jpg -f inputPath2.png -O outputDirectoryPath
 
 You can also specify image quality factor (from 0 to 1), image size factor (from 0 to 1) 
 and output images extension after the --image-quality, --image-size-factor and -E parameters.
+
+JPEG is the default image format. Therefore, images with transparency can be distorted. To avoid 
+this, use a different format (for example, PNG). However, other formats give a much lower 
+compression ratio.
 
 ```
 ypdf compress-images -f inputPath1.jpg -f inputPath2.png -O outputDirectoryPath -Q 0.75 --image-size-factor=0.7 -E jpg
