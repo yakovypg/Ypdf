@@ -1,4 +1,5 @@
-﻿using YpdfDesktop.ViewModels.Base;
+﻿using ReactiveUI;
+using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
@@ -9,6 +10,70 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         #endregion
 
         #region Reactive Properties
+
+        private bool _isInputFileSelected = false;
+        public bool IsInputFileSelected
+        {
+            get => _isInputFileSelected;
+            private set => this.RaiseAndSetIfChanged(ref _isInputFileSelected, value);
+        }
+
+        private bool _isOutputFileSelected = false;
+        public bool IsOutputFileSelected
+        {
+            get => _isOutputFileSelected;
+            private set => this.RaiseAndSetIfChanged(ref _isOutputFileSelected, value);
+        }
+
+        private string _inputFilePath = string.Empty;
+        public string InputFilePath
+        {
+            get => _inputFilePath;
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _inputFilePath, value);
+                IsInputFileSelected = !string.IsNullOrEmpty(value);
+            }
+        }
+
+        private string _outputFilePath = string.Empty;
+        public string OutputFilePath
+        {
+            get => _outputFilePath;
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _outputFilePath, value);
+                IsOutputFileSelected = !string.IsNullOrEmpty(value);
+            }
+        }
+
+        private float _qualityFactor = 0.75f;
+        public float QualityFactor
+        {
+            get => _qualityFactor;
+            set => this.RaiseAndSetIfChanged(ref _qualityFactor, value);
+        }
+
+        private float _sizeFactor = 1.0f;
+        public float SizeFactor
+        {
+            get => _sizeFactor;
+            set => this.RaiseAndSetIfChanged(ref _sizeFactor, value);
+        }
+
+        private string _extension = "jpg";
+        public string Extension
+        {
+            get => _extension;
+            set => this.RaiseAndSetIfChanged(ref _extension, value);
+        }
+
+        private bool _checkCompressionValidity = true;
+        public bool CheckCompressionValidity
+        {
+            get => _checkCompressionValidity;
+            set => this.RaiseAndSetIfChanged(ref _checkCompressionValidity, value);
+        }
 
         #endregion
 

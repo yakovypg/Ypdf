@@ -51,6 +51,7 @@
 									<Setter Property="Width" Value="60" />
 									<Setter Property="Padding" Value="6" />
 									<Setter Property="Margin" Value="10, 0" />
+									<Setter Property="MaxLength" Value="9" />
 									<Setter Property="TextAlignment" Value="Center" />
 								</Style>
 							</Grid.Styles>
@@ -63,22 +64,46 @@
 
 							<TextBox Name="PageFromTextBox" Grid.Column="1" Text="{Binding Start, Mode=TwoWay}">
 								<i:Interaction.Behaviors>
+									<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="PageFromTextBox">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.PreventNotDigitsInput, RelativeSource={RelativeSource AncestorType=ListBox}}"
+											PassEventArgsToCommand="True">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
+									<ia:EventTriggerBehavior EventName="PastingFromClipboard" SourceObject="PageFromTextBox">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.PreventTextInsertion, RelativeSource={RelativeSource AncestorType=ListBox}}"
+											PassEventArgsToCommand="True">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
 									<ia:DataTriggerBehavior Binding="{Binding IsStartCorrect}" ComparisonCondition="Equal" Value="True">
-										<ia:ChangePropertyAction TargetObject="PageFromTextBox" PropertyName="Background" Value="White" />
+										<ia:ChangePropertyAction TargetObject="PageFromTextBox" PropertyName="Foreground" Value="Black" />
 									</ia:DataTriggerBehavior>
 									<ia:DataTriggerBehavior Binding="{Binding IsStartCorrect}" ComparisonCondition="NotEqual" Value="True">
-										<ia:ChangePropertyAction TargetObject="PageFromTextBox" PropertyName="Background" Value="LightPink" />
+										<ia:ChangePropertyAction TargetObject="PageFromTextBox" PropertyName="Foreground" Value="Red" />
 									</ia:DataTriggerBehavior>
 								</i:Interaction.Behaviors>
 							</TextBox>
 
 							<TextBox Name="PageToTextBox" Grid.Column="3" Text="{Binding End, Mode=TwoWay}">
 								<i:Interaction.Behaviors>
+									<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="PageToTextBox">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.PreventNotDigitsInput, RelativeSource={RelativeSource AncestorType=ListBox}}"
+											PassEventArgsToCommand="True">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
+									<ia:EventTriggerBehavior EventName="PastingFromClipboard" SourceObject="PageToTextBox">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.PreventTextInsertion, RelativeSource={RelativeSource AncestorType=ListBox}}"
+											PassEventArgsToCommand="True">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
 									<ia:DataTriggerBehavior Binding="{Binding IsEndCorrect}" ComparisonCondition="Equal" Value="True">
-										<ia:ChangePropertyAction TargetObject="PageToTextBox" PropertyName="Background" Value="White" />
+										<ia:ChangePropertyAction TargetObject="PageToTextBox" PropertyName="Foreground" Value="Black" />
 									</ia:DataTriggerBehavior>
 									<ia:DataTriggerBehavior Binding="{Binding IsEndCorrect}" ComparisonCondition="NotEqual" Value="True">
-										<ia:ChangePropertyAction TargetObject="PageToTextBox" PropertyName="Background" Value="LightPink" />
+										<ia:ChangePropertyAction TargetObject="PageToTextBox" PropertyName="Foreground" Value="Red" />
 									</ia:DataTriggerBehavior>
 								</i:Interaction.Behaviors>
 							</TextBox>
