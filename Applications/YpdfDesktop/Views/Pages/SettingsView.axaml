@@ -26,9 +26,6 @@
 				<Setter Property="Width" Value="150" />
 				<Setter Property="Cursor" Value="Hand" />
 			</Style>
-			<Style Selector="CheckBox">
-				<Setter Property="Foreground" Value="White" />
-			</Style>
 		</Grid.Styles>
 
 		<TextBlock Grid.ColumnSpan="4"

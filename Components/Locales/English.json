@@ -19,6 +19,10 @@
   "Reset": "Reset",
   "File": "File",
   "Output": "Output",
+  "QualityFactor": "Quality factor",
+  "SizeFactor": "Size factor",
+  "Extension": "Extension",
+  "CheckCompressionValidity": "Check compression validity",
   "Split": "split",
   "Merge": "merge",
   "Compress": "compress",
@@ -41,5 +45,7 @@
   "ReplaceItMessage": "Replace it",
   "UnfinishedTasksMessage": "You have unfinished tasks",
   "ExitWithoutWaitingForCompletionMessage": "Exit without waiting for completion",
-  "SpecifyOutputFilePathMessage": "Specify the output file path"
+  "SpecifyOutputFilePathMessage": "Specify the output file path",
+  "SpecifyQualityFactorMessage": "Specify the quality factor",
+  "SpecifySizeFactorMessage": "Specify the size factor"
 }

@@ -19,6 +19,10 @@
   "Reset": "Сбросить",
   "File": "Файл",
   "Output": "Выход",
+  "QualityFactor": "Коэффициент качества",
+  "SizeFactor": "Коэффициент размера",
+  "Extension": "Расширение",
+  "CheckCompressionValidity": "Проверить возможность сжатия",
   "Split": "разбить",
   "Merge": "объединить",
   "Compress": "сжать",
@@ -41,5 +45,7 @@
   "ReplaceItMessage": "Заменить его",
   "UnfinishedTasksMessage": "У Вас есть незавершенные задачи",
   "ExitWithoutWaitingForCompletionMessage": "Выйти без ожидания завершения",
-  "SpecifyOutputFilePathMessage": "Укажите путь к выходному файлу"
+  "SpecifyOutputFilePathMessage": "Укажите путь к выходному файлу",
+  "SpecifyCorrectQualityFactorMessage": "Укажите правильный коэффициент качества",
+  "SpecifyCorrectSizeFactorMessage": "Укажите правильный коэффициент размера"
 }

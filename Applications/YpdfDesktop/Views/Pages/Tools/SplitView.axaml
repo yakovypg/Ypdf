@@ -132,7 +132,7 @@
 						Margin="5"
 						HorizontalAlignment="Center"
 						HorizontalContentAlignment="Center"
-						IsEnabled="{Binding IsFileSelected}"
+						IsEnabled="{Binding IsInputFileSelected}"
 						Command="{Binding AddPageRangeCommand}" />
 			</Grid>
 		</Grid>
@@ -181,7 +181,7 @@
 					</i:Interaction.Behaviors>
 				</TextBlock>
 
-				<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FilePath}" />
+				<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputFilePath}" />
 				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding OutputDirectoryPath}" />
 			</Grid>
 
@@ -191,7 +191,7 @@
 						<Setter Property="MinWidth" Value="110" />
 						<Setter Property="Margin" Value="5" />
 						<Setter Property="HorizontalContentAlignment" Value="Center" />
-						<Setter Property="IsEnabled" Value="{Binding IsFileSelected}" />
+						<Setter Property="IsEnabled" Value="{Binding IsInputFileSelected}" />
 					</Style>
 				</Grid.Styles>
 				

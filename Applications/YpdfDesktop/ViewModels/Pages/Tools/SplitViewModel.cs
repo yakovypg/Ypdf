@@ -32,21 +32,21 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         #region Reactive Properties
 
-        private bool _isFileSelected = false;
-        public bool IsFileSelected
+        private bool _isInputFileSelected = false;
+        public bool IsInputFileSelected
         {
-            get => _isFileSelected;
-            private set => this.RaiseAndSetIfChanged(ref _isFileSelected, value);
+            get => _isInputFileSelected;
+            private set => this.RaiseAndSetIfChanged(ref _isInputFileSelected, value);
         }
 
-        private string _filePath = string.Empty;
-        public string FilePath
+        private string _inputFilePath = string.Empty;
+        public string InputFilePath
         {
-            get => _filePath;
+            get => _inputFilePath;
             private set
             {
-                this.RaiseAndSetIfChanged(ref _filePath, value);
-                IsFileSelected = !string.IsNullOrEmpty(value);
+                this.RaiseAndSetIfChanged(ref _inputFilePath, value);
+                IsInputFileSelected = !string.IsNullOrEmpty(value);
             }
         }
 
@@ -111,7 +111,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                     OutputDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                 _filePages = filePages;
-                FilePath = path;
+                InputFilePath = path;
 
                 return true;
             }
@@ -133,7 +133,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                 PdfTool = "split"
             };
 
-            config.PathsConfig.InputPath = FilePath;
+            config.PathsConfig.InputPath = InputFilePath;
             config.PathsConfig.OutputDirectory = OutputDirectoryPath;
 
             foreach (var range in PageRanges)
@@ -149,7 +149,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         {
             PageRanges.Clear();
 
-            FilePath = string.Empty;
+            InputFilePath = string.Empty;
             OutputDirectoryPath = string.Empty;
 
             _filePages = 0;

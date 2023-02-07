@@ -1,10 +1,15 @@
-﻿using YpdfDesktop.ViewModels.Base;
+﻿using ReactiveUI;
+using System.Reactive;
+using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
     public class ATemplateVM : PdfToolViewModel
     {
         #region Commands
+
+        public ReactiveCommand<Unit, Unit> ExecuteCommand { get; }
+        public ReactiveCommand<Unit, Unit> ResetCommand { get; }
 
         #endregion
 
@@ -19,6 +24,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         public ATemplateVM(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
+            ExecuteCommand = ReactiveCommand.Create(Execute);
+            ResetCommand = ReactiveCommand.Create(Reset);
         }
 
         #region Protected Methods

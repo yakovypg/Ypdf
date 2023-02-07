@@ -34,7 +34,18 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         public string OutputFilePath
         {
             get => _outputFilePath;
-            private set => this.RaiseAndSetIfChanged(ref _outputFilePath, value);
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref _outputFilePath, value);
+                IsOutputFilePathSelected = !string.IsNullOrEmpty(value);
+            }
+        }
+
+        private bool _isOutputFilePathSelected = false;
+        public bool IsOutputFilePathSelected
+        {
+            get => _isOutputFilePathSelected;
+            private set => this.RaiseAndSetIfChanged(ref _isOutputFilePathSelected, value);
         }
 
         private bool _isAnyInputFilesAdded = false;
@@ -187,15 +198,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private bool VerifyOutputFilePath()
         {
-            if (string.IsNullOrEmpty(OutputFilePath))
-            {
-                string message = $"{SettingsVM.Locale.SpecifyOutputFilePathMessage}.";
-                MainWindowMessage.ShowInformationDialog(message);
-
-                return false;
-            }
-
-            return true;
+            return InformIfIncorrect(IsOutputFilePathSelected, SettingsVM.Locale.SpecifyOutputFilePathMessage);
         }
 
         #endregion

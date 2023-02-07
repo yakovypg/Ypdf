@@ -29,6 +29,10 @@
             Reset = "Reset";
             File = "File";
             Output = "Output";
+            QualityFactor = "Quality factor";
+            SizeFactor = "Size factor";
+            Extension = "Extension";
+            CheckCompressionValidity = "Check compression validity";
 
             Split = "split";
             Merge = "merge";
@@ -55,6 +59,8 @@
             UnfinishedTasksMessage = "You have unfinished tasks";
             ExitWithoutWaitingForCompletionMessage = "Exit without waiting for completion";
             SpecifyOutputFilePathMessage = "Specify the output file path";
+            SpecifyCorrectQualityFactorMessage = "Specify the quality factor";
+            SpecifyCorrectSizeFactorMessage = "Specify the size factor";
         }
     }
 }

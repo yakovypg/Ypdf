@@ -28,6 +28,10 @@ namespace YpdfDesktop.Models.Localization
         public string? Reset { get; set; }
         public string? File { get; set; }
         public string? Output { get; set; }
+        public string? QualityFactor { get; set; }
+        public string? SizeFactor { get; set; }
+        public string? Extension { get; set; }
+        public string? CheckCompressionValidity { get; set; }
 
         public string? Split { get; set; }
         public string? Merge { get; set; }
@@ -54,6 +58,8 @@ namespace YpdfDesktop.Models.Localization
         public string? UnfinishedTasksMessage { get; set; }
         public string? ExitWithoutWaitingForCompletionMessage { get; set; }
         public string? SpecifyOutputFilePathMessage { get; set; }
+        public string? SpecifyCorrectQualityFactorMessage { get; set; }
+        public string? SpecifyCorrectSizeFactorMessage { get; set; }
 
         public Locale() : this(Guid.NewGuid().ToString())
         {

@@ -1,4 +1,8 @@
-﻿using ReactiveUI;
+﻿using ExecutionLib.Configuration;
+using ReactiveUI;
+using System.Reactive;
+using YpdfDesktop.Infrastructure.Communication;
+using YpdfDesktop.Models;
 using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
@@ -7,22 +11,41 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
     {
         #region Commands
 
+        public ReactiveCommand<Unit, Unit> ExecuteCommand { get; }
+        public ReactiveCommand<Unit, Unit> ResetCommand { get; }
+        public ReactiveCommand<Unit, Unit> SelectInputFilePathCommand { get; }
+        public ReactiveCommand<Unit, Unit> SelectOutputFilePathCommand { get; }
+
         #endregion
 
         #region Reactive Properties
 
-        private bool _isInputFileSelected = false;
-        public bool IsInputFileSelected
+        private bool _isInputFilePathSelected = false;
+        public bool IsInputFilePathSelected
         {
-            get => _isInputFileSelected;
-            private set => this.RaiseAndSetIfChanged(ref _isInputFileSelected, value);
+            get => _isInputFilePathSelected;
+            private set => this.RaiseAndSetIfChanged(ref _isInputFilePathSelected, value);
         }
 
-        private bool _isOutputFileSelected = false;
-        public bool IsOutputFileSelected
+        private bool _isOutputFilePathSelected = false;
+        public bool IsOutputFilePathSelected
         {
-            get => _isOutputFileSelected;
-            private set => this.RaiseAndSetIfChanged(ref _isOutputFileSelected, value);
+            get => _isOutputFilePathSelected;
+            private set => this.RaiseAndSetIfChanged(ref _isOutputFilePathSelected, value);
+        }
+
+        private bool _isQualityFactorCorrect = true;
+        public bool IsQualityFactorCorrect
+        {
+            get => _isQualityFactorCorrect;
+            private set => this.RaiseAndSetIfChanged(ref _isQualityFactorCorrect, value);
+        }
+
+        private bool _isSizeFactorCorrect = true;
+        public bool IsSizeFactorCorrect
+        {
+            get => _isSizeFactorCorrect;
+            private set => this.RaiseAndSetIfChanged(ref _isSizeFactorCorrect, value);
         }
 
         private string _inputFilePath = string.Empty;
@@ -32,7 +55,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             private set
             {
                 this.RaiseAndSetIfChanged(ref _inputFilePath, value);
-                IsInputFileSelected = !string.IsNullOrEmpty(value);
+                IsInputFilePathSelected = !string.IsNullOrEmpty(value);
             }
         }
 
@@ -43,37 +66,54 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             private set
             {
                 this.RaiseAndSetIfChanged(ref _outputFilePath, value);
-                IsOutputFileSelected = !string.IsNullOrEmpty(value);
+                IsOutputFilePathSelected = !string.IsNullOrEmpty(value);
             }
         }
 
-        private float _qualityFactor = 0.75f;
+        private float _qualityFactor = DEFAULT_QUALITY_FACTOR;
         public float QualityFactor
         {
             get => _qualityFactor;
-            set => this.RaiseAndSetIfChanged(ref _qualityFactor, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _qualityFactor, value);
+                IsQualityFactorCorrect = value > 0 && value <= 1;
+            }
         }
 
-        private float _sizeFactor = 1.0f;
+        private float _sizeFactor = DEFAULT_SIZE_FACTOR;
         public float SizeFactor
         {
             get => _sizeFactor;
-            set => this.RaiseAndSetIfChanged(ref _sizeFactor, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _sizeFactor, value);
+                IsSizeFactorCorrect = _sizeFactor > 0;
+            }
         }
 
-        private string _extension = "jpg";
+        private string _extension = DEFAULT_EXTENSION;
         public string Extension
         {
             get => _extension;
             set => this.RaiseAndSetIfChanged(ref _extension, value);
         }
 
-        private bool _checkCompressionValidity = true;
+        private bool _checkCompressionValidity = DEFAULT_CHECK_COMPRESSION_VALIDITY_VALUE;
         public bool CheckCompressionValidity
         {
             get => _checkCompressionValidity;
             set => this.RaiseAndSetIfChanged(ref _checkCompressionValidity, value);
         }
+
+        #endregion
+
+        #region Constants
+
+        private const float DEFAULT_QUALITY_FACTOR = 0.75f;
+        private const float DEFAULT_SIZE_FACTOR = 1.0f;
+        private const string DEFAULT_EXTENSION = "jpg";
+        private const bool DEFAULT_CHECK_COMPRESSION_VALIDITY_VALUE = true;
 
         #endregion
 
@@ -84,18 +124,86 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         public CompressViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
+            ExecuteCommand = ReactiveCommand.Create(Execute);
+            ResetCommand = ReactiveCommand.Create(Reset);
+            SelectInputFilePathCommand = ReactiveCommand.Create(SelectInputFilePath);
+            SelectOutputFilePathCommand = ReactiveCommand.Create(SelectOutputFilePath);
         }
 
         #region Protected Methods
 
         protected override void Execute()
         {
-            throw new System.NotImplementedException();
+            if (!VerifyOutputFilePath() || !VerifyQualityFactor() || !VerifySizeFactor())
+                return;
+
+            var config = new YpdfConfig()
+            {
+                PdfTool = "compress"
+            };
+
+            config.PathsConfig.InputPath = InputFilePath;
+            config.PathsConfig.OutputPath = CorrectOutputFilePath(OutputFilePath, "pdf");
+
+            config.ImageCompression.QualityFactor = QualityFactor;
+            config.ImageCompression.SizeFactor = SizeFactor;
+            config.ImageCompression.Extension = Extension;
+            config.ImageCompression.CheckCompressionValidity = CheckCompressionValidity;
+
+            Execute(ToolType.Compress, config, true);
         }
 
         protected override void Reset()
         {
-            throw new System.NotImplementedException();
+            InputFilePath = string.Empty;
+            OutputFilePath = string.Empty;
+            QualityFactor = DEFAULT_QUALITY_FACTOR;
+            SizeFactor = DEFAULT_SIZE_FACTOR;
+            Extension = DEFAULT_EXTENSION;
+            CheckCompressionValidity = DEFAULT_CHECK_COMPRESSION_VALIDITY_VALUE;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void SelectInputFilePath()
+        {
+            _ = DialogProvider.GetPdfFilePaths(false).ContinueWith(t =>
+            {
+                if (t.Result is null || t.Result.Length == 0)
+                    return;
+
+                InputFilePath = t.Result[0];
+            });
+        }
+
+        private void SelectOutputFilePath()
+        {
+            const string initialFileName = "Compressed";
+
+            _ = DialogProvider.GetOutputFilePath(initialFileName, true).ContinueWith(t =>
+            {
+                if (t.Result is null || string.IsNullOrEmpty(t.Result))
+                    return;
+
+                OutputFilePath = t.Result;
+            });
+        }
+
+        private bool VerifyOutputFilePath()
+        {
+            return InformIfIncorrect(IsOutputFilePathSelected, SettingsVM.Locale.SpecifyOutputFilePathMessage);
+        }
+
+        private bool VerifyQualityFactor()
+        {
+            return InformIfIncorrect(IsQualityFactorCorrect, SettingsVM.Locale.SpecifyCorrectQualityFactorMessage);
+        }
+
+        private bool VerifySizeFactor()
+        {
+            return InformIfIncorrect(IsSizeFactorCorrect, SettingsVM.Locale.SpecifyCorrectSizeFactorMessage);
         }
 
         #endregion

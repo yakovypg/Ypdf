@@ -26,6 +26,10 @@
         string? Reset { get; set; }
         string? File { get; set; }
         string? Output { get; set; }
+        string? QualityFactor { get; set; }
+        string? SizeFactor { get; set; }
+        string? Extension { get; set; }
+        string? CheckCompressionValidity { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -52,5 +56,7 @@
         string? UnfinishedTasksMessage { get; set; }
         string? ExitWithoutWaitingForCompletionMessage { get; set; }
         string? SpecifyOutputFilePathMessage { get; set; }
+        string? SpecifyCorrectQualityFactorMessage { get; set; }
+        string? SpecifyCorrectSizeFactorMessage { get; set; }
     }
 }

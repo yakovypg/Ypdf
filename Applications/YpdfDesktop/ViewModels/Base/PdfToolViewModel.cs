@@ -41,6 +41,15 @@ namespace YpdfDesktop.ViewModels.Base
 
         #region Protected Methods
 
+        protected static bool InformIfIncorrect(bool isCorrect, string? message)
+        {
+            if (isCorrect)
+                return true;
+
+            MainWindowMessage.ShowInformationDialog(message + ".");
+            return false;
+        }
+
         protected static string CorrectOutputFilePath(string outputFilePath, string expectedExtension)
         {
             if (string.IsNullOrEmpty(outputFilePath))
@@ -53,7 +62,7 @@ namespace YpdfDesktop.ViewModels.Base
                 : outputFilePath;
         }
 
-        protected async Task<bool> VerifyOutputPath(string? path)
+        protected async Task<bool> CheckFileExists(string? path)
         {
             if (!File.Exists(path))
                 return true;
@@ -70,15 +79,15 @@ namespace YpdfDesktop.ViewModels.Base
             return msgResult == ButtonResult.Yes;
         }
 
-        protected void Execute(ToolType toolType, YpdfConfig config, bool checkOutputPath)
+        protected void Execute(ToolType toolType, YpdfConfig config, bool checkOutputPathExists)
         {
-            if (!checkOutputPath)
+            if (!checkOutputPathExists)
             {
                 Execute(toolType, config);
                 return;
             }
 
-            _ = VerifyOutputPath(config.PathsConfig.OutputPath).ContinueWith(t =>
+            _ = CheckFileExists(config.PathsConfig.OutputPath).ContinueWith(t =>
             {
                 if (t.Result)
                 {

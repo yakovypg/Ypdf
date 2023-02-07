@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -43,20 +43,71 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Pages\TasksView.axaml" />
   </ItemGroup>
+  <ItemGroup>
+	<CopyRobotoFonts Include="../../Components/Fonts/roboto/*.*" />
+  </ItemGroup>
+  <ItemGroup>
+	<CopyLocales Include="../../Components/Locales/*.*" />
+  </ItemGroup>
+  <ItemGroup>
+	<CopyThemes Include="../../Components/Themes/*.*" />
+  </ItemGroup>
+  <Target Name="CopyPythonTools" AfterTargets="AfterBuild">
+	<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(OutDir)/Scripts" />
+	<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)/Scripts" />
+	<Copy SourceFiles="../../Core/PythonTools/Compressors/ImageCompressor.py" DestinationFolder="$(OutDir)/Scripts" />
+  </Target>
+  <Target Name="CopyPythonToolsOnPublish" AfterTargets="Publish">
+	<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(PublishDir)/Scripts" />
+	<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(PublishDir)/Scripts" />
+	<Copy SourceFiles="../../Core/PythonTools/Compressors/ImageCompressor.py" DestinationFolder="$(PublishDir)/Scripts" />
+  </Target>
+  <Target Name="CopyRobotoFonts" AfterTargets="AfterBuild">
+    <Copy SourceFiles="@(CopyRobotoFonts)"
+		  DestinationFolder="$(OutDir)/Fonts/roboto"
+		  SkipUnchangedFiles="true"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+  </Target>
+  <Target Name="CopyRobotoFontsOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="@(CopyRobotoFonts)"
+		  DestinationFolder="$(PublishDir)/Fonts/roboto"
+		  SkipUnchangedFiles="true"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
+  </Target>
   <Target Name="CopyLocales" AfterTargets="AfterBuild">
-    <Copy SourceFiles="../../Components/Locales/English.json" DestinationFolder="$(OutDir)/Locales" />
-	<Copy SourceFiles="../../Components/Locales/Russian.json" DestinationFolder="$(OutDir)/Locales" />
+    <Copy SourceFiles="@(CopyLocales)"
+		  DestinationFolder="$(OutDir)/Locales"
+		  SkipUnchangedFiles="true"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
   </Target>
   <Target Name="CopyLocalesOnPublish" AfterTargets="Publish">
-	<Copy SourceFiles="../../Components/Locales/English.json" DestinationFolder="$(OutDir)/Locales" />
-	<Copy SourceFiles="../../Components/Locales/Russian.json" DestinationFolder="$(OutDir)/Locales" />
+	<Copy SourceFiles="@(CopyLocales)"
+		  DestinationFolder="$(PublishDir)/Locales"
+		  SkipUnchangedFiles="true"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
   </Target>
   <Target Name="CopyThemes" AfterTargets="AfterBuild">
-	<Copy SourceFiles="../../Components/Themes/Light.json" DestinationFolder="$(OutDir)/Themes" />
-	<Copy SourceFiles="../../Components/Themes/Dark.json" DestinationFolder="$(OutDir)/Themes" />
+    <Copy SourceFiles="@(CopyThemes)"
+		  DestinationFolder="$(OutDir)/Themes"
+		  SkipUnchangedFiles="true"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
   </Target>
   <Target Name="CopyThemesOnPublish" AfterTargets="Publish">
-	<Copy SourceFiles="../../Components/Themes/Light.json" DestinationFolder="$(OutDir)/Themes" />
-	<Copy SourceFiles="../../Components/Themes/Dark.json" DestinationFolder="$(OutDir)/Themes" />
+    <Copy SourceFiles="@(CopyThemes)"
+		  DestinationFolder="$(PublishDir)/Themes"
+		  SkipUnchangedFiles="true"
+		  OverwriteReadOnlyFiles="true"
+		  Retries="3"
+		  RetryDelayMilliseconds="300" />
   </Target>
 </Project>
