@@ -26,6 +26,38 @@
 		<ProjectReference Include="..\..\Core\YpdfLib\YpdfLib.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="..\..\LICENSE.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<CopyRobotoFonts Include="../../Components/Fonts/roboto/*.*" />
+	</ItemGroup>
+
+	<Target Name="CopyRobotoFonts" AfterTargets="AfterBuild">
+		<Copy SourceFiles="@(CopyRobotoFonts)"
+			  DestinationFolder="$(OutDir)/Fonts/roboto"
+			  SkipUnchangedFiles="true"
+			  OverwriteReadOnlyFiles="true"
+			  Retries="3"
+			  RetryDelayMilliseconds="300" />
+	</Target>
+	<Target Name="CopyRobotoFontsOnPublish" AfterTargets="Publish">
+		<Copy SourceFiles="@(CopyRobotoFonts)"
+			  DestinationFolder="$(PublishDir)/Fonts/roboto"
+			  SkipUnchangedFiles="true"
+			  OverwriteReadOnlyFiles="true"
+			  Retries="3"
+			  RetryDelayMilliseconds="300" />
+	</Target>
+
 	<Target Name="CopyPythonTools" AfterTargets="AfterBuild">
 		<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(OutDir)/Scripts" />
 		<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)/Scripts" />
@@ -42,31 +74,6 @@
 	</Target>
 	<Target Name="CopyReadmeOnPublish" AfterTargets="Publish">
 		<Copy SourceFiles="../../README.md" DestinationFolder="$(PublishDir)/Docs" />
-	</Target>
-
-	<ItemGroup>
-		<CopyRobotoFonts Include="../../Components/Fonts/roboto/*.*" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="..\..\LICENSE.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	  <None Include="..\..\README.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
-	</ItemGroup>
-
-	<Target Name="CopyRobotoFonts" AfterTargets="AfterBuild">
-		<Copy SourceFiles="@(CopyRobotoFonts)" DestinationFolder="$(OutDir)/Fonts/roboto" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300">
-		</Copy>
-	</Target>
-
-	<Target Name="CopyRobotoFontsOnPublish" AfterTargets="Publish">
-		<Copy SourceFiles="@(CopyRobotoFonts)" DestinationFolder="$(PublishDir)/Fonts/roboto" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300">
-		</Copy>
 	</Target>
 
 </Project>
