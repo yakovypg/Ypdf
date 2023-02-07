@@ -8,7 +8,7 @@ using System.Linq;
 using YpdfDesktop.Models.IO;
 using YpdfDesktop.ViewModels.Pages.Tools;
 
-namespace YpdfDesktop.Infrastructure.Behaviors
+namespace YpdfDesktop.Infrastructure.Behaviors.Drop
 {
     public class InputFilesListBoxDropHandler : DropHandlerBase
     {

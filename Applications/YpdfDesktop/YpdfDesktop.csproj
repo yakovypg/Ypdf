@@ -92,54 +92,24 @@
   </Target>
 	
   <Target Name="CopyRobotoFonts" AfterTargets="AfterBuild">
-    <Copy SourceFiles="@(CopyRobotoFonts)"
-		  DestinationFolder="$(OutDir)/Fonts/roboto"
-		  SkipUnchangedFiles="true"
-		  OverwriteReadOnlyFiles="true"
-		  Retries="3"
-		  RetryDelayMilliseconds="300" />
+    <Copy SourceFiles="@(CopyRobotoFonts)" DestinationFolder="$(OutDir)/Fonts/roboto" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
   </Target>
   <Target Name="CopyRobotoFontsOnPublish" AfterTargets="Publish">
-    <Copy SourceFiles="@(CopyRobotoFonts)"
-		  DestinationFolder="$(PublishDir)/Fonts/roboto"
-		  SkipUnchangedFiles="true"
-		  OverwriteReadOnlyFiles="true"
-		  Retries="3"
-		  RetryDelayMilliseconds="300" />
+    <Copy SourceFiles="@(CopyRobotoFonts)" DestinationFolder="$(PublishDir)/Fonts/roboto" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
   </Target>
 	
   <Target Name="CopyLocales" AfterTargets="AfterBuild">
-    <Copy SourceFiles="@(CopyLocales)"
-		  DestinationFolder="$(OutDir)/Locales"
-		  SkipUnchangedFiles="true"
-		  OverwriteReadOnlyFiles="true"
-		  Retries="3"
-		  RetryDelayMilliseconds="300" />
+    <Copy SourceFiles="@(CopyLocales)" DestinationFolder="$(OutDir)/Locales" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
   </Target>
   <Target Name="CopyLocalesOnPublish" AfterTargets="Publish">
-	<Copy SourceFiles="@(CopyLocales)"
-		  DestinationFolder="$(PublishDir)/Locales"
-		  SkipUnchangedFiles="true"
-		  OverwriteReadOnlyFiles="true"
-		  Retries="3"
-		  RetryDelayMilliseconds="300" />
+	<Copy SourceFiles="@(CopyLocales)" DestinationFolder="$(PublishDir)/Locales" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
   </Target>
 	
   <Target Name="CopyThemes" AfterTargets="AfterBuild">
-    <Copy SourceFiles="@(CopyThemes)"
-		  DestinationFolder="$(OutDir)/Themes"
-		  SkipUnchangedFiles="true"
-		  OverwriteReadOnlyFiles="true"
-		  Retries="3"
-		  RetryDelayMilliseconds="300" />
+    <Copy SourceFiles="@(CopyThemes)" DestinationFolder="$(OutDir)/Themes" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
   </Target>
   <Target Name="CopyThemesOnPublish" AfterTargets="Publish">
-    <Copy SourceFiles="@(CopyThemes)"
-		  DestinationFolder="$(PublishDir)/Themes"
-		  SkipUnchangedFiles="true"
-		  OverwriteReadOnlyFiles="true"
-		  Retries="3"
-		  RetryDelayMilliseconds="300" />
+    <Copy SourceFiles="@(CopyThemes)" DestinationFolder="$(PublishDir)/Themes" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
   </Target>
 	
 </Project>

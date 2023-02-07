@@ -1,6 +1,4 @@
-﻿using Avalonia.Input;
-using Avalonia.Interactivity;
-using Avalonia.Threading;
+﻿using Avalonia.Threading;
 using ExecutionLib.Configuration;
 using ReactiveUI;
 using System;
@@ -27,8 +25,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         public ReactiveCommand<Unit, Unit> SelectOutputDirectoryCommand { get; }
         public ReactiveCommand<Unit, Unit> AddPageRangeCommand { get; }
         public ReactiveCommand<IRange, Unit> DeletePageRangeCommand { get; }
-        public ReactiveCommand<KeyEventArgs, Unit> PreventNotDigitsInputCommand { get; }
-        public ReactiveCommand<RoutedEventArgs, Unit> PreventTextInsertionCommand { get; }
 
         #endregion
 
@@ -88,8 +84,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             SelectOutputDirectoryCommand = ReactiveCommand.Create(SelectOutputDirectory);
             AddPageRangeCommand = ReactiveCommand.Create(AddPageRange);
             DeletePageRangeCommand = ReactiveCommand.Create<IRange>(DeletePageRange);
-            PreventNotDigitsInputCommand = ReactiveCommand.Create<KeyEventArgs>(PreventNotDigitsInput);
-            PreventTextInsertionCommand = ReactiveCommand.Create<RoutedEventArgs>(PreventTextInsertion);
         }
 
         #region Protected Methods
@@ -194,25 +188,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         private void DeletePageRange(IRange range)
         {
             PageRanges.Remove(range);
-        }
-
-        private void PreventNotDigitsInput(KeyEventArgs e)
-        {
-            if (e.KeyModifiers != KeyModifiers.None)
-                e.Handled = true;
-
-            if ((e.Key >= Key.D0 && e.Key <= Key.D9) ||
-                (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
-            {
-                return;
-            }
-
-            e.Handled = true;
-        }
-
-        private void PreventTextInsertion(RoutedEventArgs e)
-        {
-            e.Handled = true;
         }
 
         #endregion

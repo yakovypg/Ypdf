@@ -6,7 +6,7 @@
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
-			 xmlns:b="using:YpdfDesktop.Infrastructure.Behaviors"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
 			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
 			 xmlns:models="clr-namespace:YpdfDesktop.Models.IO"
              mc:Ignorable="d"
@@ -58,7 +58,7 @@
 					<!--Selected Pressed-->
 					<SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush">#440078D7</SolidColorBrush>
 
-					<b:InputFilesListBoxDropHandler x:Key="InputFileListBoxDropHandler" />
+					<bd:InputFilesListBoxDropHandler x:Key="InputFileListBoxDropHandler" />
 				</ListBox.Resources>
 
 				<i:Interaction.Behaviors>

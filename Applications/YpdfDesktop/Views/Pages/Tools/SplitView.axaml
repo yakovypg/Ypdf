@@ -6,7 +6,8 @@
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
-			 xmlns:b="using:YpdfDesktop.Infrastructure.Behaviors"
+			 xmlns:bt="using:YpdfDesktop.Infrastructure.Behaviors.Text"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
 			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
 			 xmlns:models="clr-namespace:YpdfDesktop.Models.Enumeration"
              mc:Ignorable="d"
@@ -41,7 +42,7 @@
 
 				<ListBox.ItemTemplate>
 					<DataTemplate DataType="{x:Type models:Range}">
-						<Grid ColumnDefinitions="Auto, 70, Auto, 70, 50, 1*">
+						<Grid ColumnDefinitions="Auto, 70, Auto, 70, 50, 1*">						
 							<Grid.Styles>
 								<Style Selector="TextBlock">
 									<Setter Property="VerticalAlignment" Value="Center" />
@@ -62,20 +63,10 @@
 							<TextBlock Grid.Column="2"
 									   Text="{Binding DataContext.SettingsVM.Locale.To, RelativeSource={RelativeSource AncestorType=ListBox}}" />
 
-							<TextBox Name="PageFromTextBox" Grid.Column="1" Text="{Binding Start, Mode=TwoWay}">
+							<TextBox Name="PageFromTextBox" Grid.Column="1" Text="{Binding Start, Mode=TwoWay}">							
 								<i:Interaction.Behaviors>
-									<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="PageFromTextBox">
-										<ia:InvokeCommandAction
-											Command="{Binding DataContext.PreventNotDigitsInput, RelativeSource={RelativeSource AncestorType=ListBox}}"
-											PassEventArgsToCommand="True">
-										</ia:InvokeCommandAction>
-									</ia:EventTriggerBehavior>
-									<ia:EventTriggerBehavior EventName="PastingFromClipboard" SourceObject="PageFromTextBox">
-										<ia:InvokeCommandAction
-											Command="{Binding DataContext.PreventTextInsertion, RelativeSource={RelativeSource AncestorType=ListBox}}"
-											PassEventArgsToCommand="True">
-										</ia:InvokeCommandAction>
-									</ia:EventTriggerBehavior>
+									<bt:PositiveIntNumberBoxBehavior />
+									
 									<ia:DataTriggerBehavior Binding="{Binding IsStartCorrect}" ComparisonCondition="Equal" Value="True">
 										<ia:ChangePropertyAction TargetObject="PageFromTextBox" PropertyName="Foreground" Value="Black" />
 									</ia:DataTriggerBehavior>
@@ -87,18 +78,8 @@
 
 							<TextBox Name="PageToTextBox" Grid.Column="3" Text="{Binding End, Mode=TwoWay}">
 								<i:Interaction.Behaviors>
-									<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="PageToTextBox">
-										<ia:InvokeCommandAction
-											Command="{Binding DataContext.PreventNotDigitsInput, RelativeSource={RelativeSource AncestorType=ListBox}}"
-											PassEventArgsToCommand="True">
-										</ia:InvokeCommandAction>
-									</ia:EventTriggerBehavior>
-									<ia:EventTriggerBehavior EventName="PastingFromClipboard" SourceObject="PageToTextBox">
-										<ia:InvokeCommandAction
-											Command="{Binding DataContext.PreventTextInsertion, RelativeSource={RelativeSource AncestorType=ListBox}}"
-											PassEventArgsToCommand="True">
-										</ia:InvokeCommandAction>
-									</ia:EventTriggerBehavior>
+									<bt:PositiveIntNumberBoxBehavior />
+									
 									<ia:DataTriggerBehavior Binding="{Binding IsEndCorrect}" ComparisonCondition="Equal" Value="True">
 										<ia:ChangePropertyAction TargetObject="PageToTextBox" PropertyName="Foreground" Value="Black" />
 									</ia:DataTriggerBehavior>
@@ -142,7 +123,7 @@
 			  DragDrop.AllowDrop="True"
 			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
 			<Grid.Resources>
-				<b:FileDropHandler x:Key="FileDropHandler" />
+				<bd:FileDropHandler x:Key="FileDropHandler" />
 			</Grid.Resources>
 			
 			<Grid.Styles>

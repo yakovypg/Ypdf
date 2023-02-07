@@ -3,7 +3,7 @@ using Avalonia.Xaml.Interactions.DragAndDrop;
 using System.Linq;
 using YpdfDesktop.Models.IO;
 
-namespace YpdfDesktop.Infrastructure.Behaviors
+namespace YpdfDesktop.Infrastructure.Behaviors.Drop
 {
     public class FileDropHandler : DropHandlerBase
     {

@@ -5,7 +5,8 @@
 			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
-			 xmlns:b="using:YpdfDesktop.Infrastructure.Behaviors"
+			 xmlns:bt="using:YpdfDesktop.Infrastructure.Behaviors.Text"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
 			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
@@ -16,12 +17,12 @@
 	</Design.DataContext>
 
 	<Grid Margin="5"
-		  RowDefinitions="32, 5, 32, 5, 32, 5, 32, 5, 32, 5, 32, 1*, 32"
+		  RowDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 1*, Auto"
 		  ColumnDefinitions="Auto, 200, 1*"
 		  DragDrop.AllowDrop="True"
 		  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
 		<Grid.Resources>
-			<b:FileDropHandler x:Key="FileDropHandler" />
+			<bd:FileDropHandler x:Key="FileDropHandler" />
 		</Grid.Resources>
 
 		<Grid.Styles>
@@ -84,6 +85,8 @@
 				 Name="QualityFactorTextBox"
 				 Text="{Binding QualityFactor, Mode=TwoWay}">
 			<i:Interaction.Behaviors>
+				<bt:CoefficientNumberBoxBehavior />
+				
 				<ia:DataTriggerBehavior Binding="{Binding IsQualityFactorCorrect}" ComparisonCondition="Equal" Value="True">
 					<ia:ChangePropertyAction TargetObject="QualityFactorTextBox" PropertyName="Foreground" Value="Black" />
 				</ia:DataTriggerBehavior>
@@ -99,6 +102,8 @@
 				 Name="SizeFactorTextBox"
 				 Text="{Binding SizeFactor, Mode=TwoWay}">
 			<i:Interaction.Behaviors>
+				<bt:PositiveFloatNumberBoxBehavior />
+				
 				<ia:DataTriggerBehavior Binding="{Binding IsSizeFactorCorrect}" ComparisonCondition="Equal" Value="True">
 					<ia:ChangePropertyAction TargetObject="SizeFactorTextBox" PropertyName="Foreground" Value="Black" />
 				</ia:DataTriggerBehavior>
