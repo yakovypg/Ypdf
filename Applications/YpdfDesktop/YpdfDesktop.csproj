@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,11 +8,13 @@
     <TrimMode>copyused</TrimMode>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
+	
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
     <None Remove="Assets\ypdf-logo.ico" />
   </ItemGroup>
+	
   <ItemGroup>
     <!--This helps with theme dll-s trimming.
 	If you will publish your application in self-contained mode with p:PublishTrimmed=true and it will use Fluent theme Default theme will be trimmed from the output and vice versa.
@@ -19,6 +22,7 @@
     <TrimmableAssembly Include="Avalonia.Themes.Fluent" />
     <TrimmableAssembly Include="Avalonia.Themes.Default" />
   </ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.18" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
@@ -33,16 +37,19 @@
     <PackageReference Include="Projektanker.Icons.Avalonia.MaterialDesign" Version="5.8.0" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
   </ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ExecutionLib\ExecutionLib.csproj" />
     <ProjectReference Include="..\..\Core\YpdfLib\YpdfLib.csproj" />
   </ItemGroup>
+	
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Pages\Tools\TextToPdfView.axaml" />
   </ItemGroup>
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Pages\TasksView.axaml" />
   </ItemGroup>
+	
   <ItemGroup>
 	<CopyRobotoFonts Include="../../Components/Fonts/roboto/*.*" />
   </ItemGroup>
@@ -52,6 +59,7 @@
   <ItemGroup>
 	<CopyThemes Include="../../Components/Themes/*.*" />
   </ItemGroup>
+	
   <Target Name="CopyPythonTools" AfterTargets="AfterBuild">
 	<Copy SourceFiles="../../Core/PythonTools/Extractors/ImageExtractor.py" DestinationFolder="$(OutDir)/Scripts" />
 	<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(OutDir)/Scripts" />
@@ -62,6 +70,7 @@
 	<Copy SourceFiles="../../Core/PythonTools/Extractors/TextExtractor.py" DestinationFolder="$(PublishDir)/Scripts" />
 	<Copy SourceFiles="../../Core/PythonTools/Compressors/ImageCompressor.py" DestinationFolder="$(PublishDir)/Scripts" />
   </Target>
+	
   <Target Name="CopyRobotoFonts" AfterTargets="AfterBuild">
     <Copy SourceFiles="@(CopyRobotoFonts)"
 		  DestinationFolder="$(OutDir)/Fonts/roboto"
@@ -78,6 +87,7 @@
 		  Retries="3"
 		  RetryDelayMilliseconds="300" />
   </Target>
+	
   <Target Name="CopyLocales" AfterTargets="AfterBuild">
     <Copy SourceFiles="@(CopyLocales)"
 		  DestinationFolder="$(OutDir)/Locales"
@@ -94,6 +104,7 @@
 		  Retries="3"
 		  RetryDelayMilliseconds="300" />
   </Target>
+	
   <Target Name="CopyThemes" AfterTargets="AfterBuild">
     <Copy SourceFiles="@(CopyThemes)"
 		  DestinationFolder="$(OutDir)/Themes"
@@ -110,4 +121,5 @@
 		  Retries="3"
 		  RetryDelayMilliseconds="300" />
   </Target>
+	
 </Project>
