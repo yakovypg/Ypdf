@@ -55,6 +55,7 @@
 
             FileEmptyMessage = "File is empty";
             FileExistsMessage = "File already exists";
+            FileNotPdfMessage = "File is not PDF document";
             ReplaceItMessage = "Replace it";
             UnfinishedTasksMessage = "You have unfinished tasks";
             ExitWithoutWaitingForCompletionMessage = "Exit without waiting for completion";

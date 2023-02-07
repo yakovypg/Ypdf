@@ -88,6 +88,9 @@ namespace YpdfDesktop.Infrastructure.Behaviors
             if (!TryGetInputFiles(paths, out IEnumerable<InputFile> inputFiles))
                 return false;
 
+            if (inputFiles.Any(t => t.File.Extension.Replace(".", null).ToLower() != "pdf"))
+                return false;
+
             foreach (InputFile inputFile in inputFiles)
                 InsertItem(viewModel.InputFiles, inputFile, targetIndex);
 

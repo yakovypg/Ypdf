@@ -1,13 +1,16 @@
-﻿using ExecutionLib.Configuration;
+﻿using Avalonia.Threading;
+using ExecutionLib.Configuration;
 using ReactiveUI;
+using System.IO;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Models;
+using YpdfDesktop.Models.IO;
 using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class CompressViewModel : PdfToolViewModel
+    public class CompressViewModel : PdfToolViewModel, IFilePathContainer
     {
         #region Commands
 
@@ -167,6 +170,27 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         #region Private Methods
 
+        bool IFilePathContainer.SetFilePath(string path)
+        {
+            return SetInputFilePath(path);
+        }
+
+        private bool SetInputFilePath(string path)
+        {
+            if (!File.Exists(path))
+                return false;
+
+            if (!IsPathToPdf(path))
+            {
+                string message = $"{SettingsVM.Locale.FileNotPdfMessage}.";
+                MainWindowMessage.ShowErrorDialog(message);
+                return false;
+            }
+
+            InputFilePath = path;
+            return true;
+        }
+
         private void SelectInputFilePath()
         {
             _ = DialogProvider.GetPdfFilePaths(false).ContinueWith(t =>
@@ -174,7 +198,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                 if (t.Result is null || t.Result.Length == 0)
                     return;
 
-                InputFilePath = t.Result[0];
+                Dispatcher.UIThread.Post(() => SetInputFilePath(t.Result[0]));
             });
         }
 

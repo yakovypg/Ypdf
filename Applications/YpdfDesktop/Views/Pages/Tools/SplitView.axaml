@@ -142,7 +142,7 @@
 			  DragDrop.AllowDrop="True"
 			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
 			<Grid.Resources>
-				<b:FileToSplitDropHandler x:Key="FileToSplitDropHandler" />
+				<b:FileDropHandler x:Key="FileDropHandler" />
 			</Grid.Resources>
 			
 			<Grid.Styles>
@@ -161,7 +161,7 @@
 			</Grid.Styles>
 
 			<i:Interaction.Behaviors>
-				<idd:ContextDropBehavior Handler="{StaticResource FileToSplitDropHandler}" />
+				<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
 			</i:Interaction.Behaviors>
 
 			<Grid Grid.Row="0" Margin="5" RowDefinitions="32, 5, 32, 1*, 40" ColumnDefinitions="Auto, 1*">

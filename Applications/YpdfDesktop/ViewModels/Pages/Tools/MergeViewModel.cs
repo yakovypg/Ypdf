@@ -1,4 +1,5 @@
-﻿using DynamicData;
+﻿using Avalonia.Threading;
+using DynamicData;
 using ExecutionLib.Configuration;
 using ReactiveUI;
 using System;
@@ -177,7 +178,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                     }
                     catch (Exception ex)
                     {
-                        MainWindowMessage.ShowErrorDialog(ex.Message);
+                        Dispatcher.UIThread.Post(() => MainWindowMessage.ShowErrorDialog(ex.Message));
                     }
                 }
             });

@@ -1,11 +1,11 @@
 ﻿using Avalonia.Input;
 using Avalonia.Xaml.Interactions.DragAndDrop;
 using System.Linq;
-using YpdfDesktop.ViewModels.Pages.Tools;
+using YpdfDesktop.Models.IO;
 
 namespace YpdfDesktop.Infrastructure.Behaviors
 {
-    public class FileToSplitDropHandler : DropHandlerBase
+    public class FileDropHandler : DropHandlerBase
     {
         public override bool Execute(object? sender, DragEventArgs e, object? sourceContext, object? targetContext, object? state)
         {
@@ -20,7 +20,7 @@ namespace YpdfDesktop.Infrastructure.Behaviors
         private static bool Validate(DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute)
         {
             if (sourceContext is not null ||
-                targetContext is not SplitViewModel viewModel ||
+                targetContext is not IFilePathContainer filePathContainer ||
                 !e.Data.Contains(DataFormats.FileNames))
             {
                 return false;
@@ -34,7 +34,7 @@ namespace YpdfDesktop.Infrastructure.Behaviors
             if (!bExecute)
                 return true;
 
-            viewModel.SetFilePath(path);
+            filePathContainer.SetFilePath(path);
             return true;
         }
     }

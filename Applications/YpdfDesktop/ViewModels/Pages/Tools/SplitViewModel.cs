@@ -1,5 +1,6 @@
 ﻿using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using ExecutionLib.Configuration;
 using ReactiveUI;
 using System;
@@ -9,13 +10,14 @@ using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Models;
 using YpdfDesktop.Models.Enumeration;
+using YpdfDesktop.Models.IO;
 using YpdfDesktop.ViewModels.Base;
 using YpdfLib.Informing;
 using YpdfLib.Models.Enumeration;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class SplitViewModel : PdfToolViewModel
+    public class SplitViewModel : PdfToolViewModel, IFilePathContainer
     {
         #region Commands
 
@@ -90,40 +92,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             PreventTextInsertionCommand = ReactiveCommand.Create<RoutedEventArgs>(PreventTextInsertion);
         }
 
-        #region Public Methods
-
-        public bool SetFilePath(string path)
-        {
-            if (!File.Exists(path))
-                return false;
-
-            try
-            {
-                int filePages = PdfInfo.GetPageCount(path);
-
-                if (filePages == 0)
-                    throw new FileLoadException(SettingsVM.Locale.FileEmptyMessage, path);
-
-                PageRanges.Clear();
-                PageRanges.Add(new Models.Enumeration.Range(1, filePages));
-
-                if (string.IsNullOrEmpty(OutputDirectoryPath))
-                    OutputDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                _filePages = filePages;
-                InputFilePath = path;
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MainWindowMessage.ShowErrorDialog(ex.Message);
-                return false;
-            }
-        }
-
-        #endregion
-
         #region Protected Methods
 
         protected override void Execute()
@@ -159,12 +127,52 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         #region Private Methods
 
+        bool IFilePathContainer.SetFilePath(string path)
+        {
+            return SetInputFilePath(path);
+        }
+
+        private bool SetInputFilePath(string path)
+        {
+            if (!File.Exists(path))
+                return false;
+
+            try
+            {
+                if (!IsPathToPdf(path))
+                    throw new FileLoadException(SettingsVM.Locale.FileNotPdfMessage, path);
+
+                int filePages = PdfInfo.GetPageCount(path);
+
+                if (filePages == 0)
+                    throw new FileLoadException(SettingsVM.Locale.FileEmptyMessage, path);
+
+                PageRanges.Clear();
+                PageRanges.Add(new Models.Enumeration.Range(1, filePages));
+
+                if (string.IsNullOrEmpty(OutputDirectoryPath))
+                    OutputDirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                _filePages = filePages;
+                InputFilePath = path;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MainWindowMessage.ShowErrorDialog(ex.Message);
+                return false;
+            }
+        }
+
         private void SelectFile()
         {
             _ = DialogProvider.GetPdfFilePaths().ContinueWith(t =>
             {
-                if (t.Result is not null && t.Result.Length > 0)
-                    SetFilePath(t.Result[0]);
+                if (t.Result is null || t.Result.Length == 0)
+                    return;
+
+                Dispatcher.UIThread.Post(() => SetInputFilePath(t.Result[0]));
             });
         }
 

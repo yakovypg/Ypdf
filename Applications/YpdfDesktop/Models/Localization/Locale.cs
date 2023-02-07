@@ -54,6 +54,7 @@ namespace YpdfDesktop.Models.Localization
 
         public string? FileEmptyMessage { get; set; }
         public string? FileExistsMessage { get; set; }
+        public string? FileNotPdfMessage { get; set; }
         public string? ReplaceItMessage { get; set; }
         public string? UnfinishedTasksMessage { get; set; }
         public string? ExitWithoutWaitingForCompletionMessage { get; set; }

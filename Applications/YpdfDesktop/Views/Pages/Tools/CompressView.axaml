@@ -15,7 +15,15 @@
 		<vm:CompressViewModel />
 	</Design.DataContext>
 
-	<Grid Margin="5" RowDefinitions="32, 5, 32, 5, 32, 5, 32, 5, 32, 5, 32, 1*, 32" ColumnDefinitions="Auto, 200, 1*">
+	<Grid Margin="5"
+		  RowDefinitions="32, 5, 32, 5, 32, 5, 32, 5, 32, 5, 32, 1*, 32"
+		  ColumnDefinitions="Auto, 200, 1*"
+		  DragDrop.AllowDrop="True"
+		  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid.Resources>
+			<b:FileDropHandler x:Key="FileDropHandler" />
+		</Grid.Resources>
+
 		<Grid.Styles>
 			<Style Selector="TextBox">
 				<Setter Property="Width" Value="200" />
@@ -34,6 +42,10 @@
 				<Setter Property="FontWeight" Value="Bold" />
 			</Style>
 		</Grid.Styles>
+
+		<i:Interaction.Behaviors>
+			<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
+		</i:Interaction.Behaviors>
 
 		<TextBlock Grid.Row="0"
 				   Grid.Column="0"
