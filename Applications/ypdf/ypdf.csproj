@@ -6,14 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<Nullable>enable</Nullable>
 	<Title>ypdf</Title>
-	<Description>CLI version of Ypdf (cross-platform tool for converting PDF files)</Description>
+	<Description>CLI version of Ypdf (cross-platform tool for manipulating PDF files)</Description>
 	<PackageProjectUrl>https://github.com/yakovypg/Ypdf</PackageProjectUrl>
 	<RepositoryUrl>https://github.com/yakovypg/Ypdf</RepositoryUrl>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	<PackageTags>pdf;pdf-converter;split-pdf;merge-pdf;pdf-tools;pdf2image;pdf-watermark;pdf2text;pdf-password;rotate-pdf;image2pdf;compress-pdf;text2pdf;divide-pdf;crop-pdf;reorder-pdf;remove-pages-pdf;page-numbers-pdf</PackageTags>
-	<FileVersion>1.0.0.3</FileVersion>
-	<AssemblyVersion>1.0.0.3</AssemblyVersion>
+	<FileVersion>1.0.1.0</FileVersion>
+	<AssemblyVersion>1.0.1.0</AssemblyVersion>
   </PropertyGroup>
 	
   <ItemGroup>
