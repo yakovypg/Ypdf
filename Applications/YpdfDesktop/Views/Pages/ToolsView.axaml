@@ -140,7 +140,7 @@
 			<toolPages:ExtractTextView />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsSetPasswordViewVisible}">
-			<toolPages:SetPasswordView />
+			<toolPages:SetPasswordView DataContext="{Binding SetPasswordVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsRemovePasswordViewVisible}">
 			<toolPages:RemovePasswordView />

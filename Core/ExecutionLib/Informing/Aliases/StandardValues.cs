@@ -5,9 +5,9 @@ using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using YpdfLib.Models.Paging;
 
-namespace ypdf.Informing
+namespace ExecutionLib.Informing.Aliases
 {
-    internal static class StandardValues
+    public static class StandardValues
     {
         public static string ColorNames => string.Join('/', _colors.Keys.Select(t => t.ToLower()));
         public static string PageSizeNames => string.Join('/', _pageSizes.Keys.Select(t => t.ToLower()));

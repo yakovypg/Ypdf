@@ -23,6 +23,12 @@
   "SizeFactor": "Size factor",
   "Extension": "Extension",
   "CheckCompressionValidity": "Check compression validity",
+  "OwnerPassword": "Owner password",
+  "UserPassword": "User password",
+  "OwnerPasswordHint": "Password for editing the PDF document",
+  "UserPasswordHint": "Password for viewing the PDF document",
+  "EncryptionAlgorithm": "Encryption algorithm",
+  "ShowPassword": "Show password",
   "Split": "split",
   "Merge": "merge",
   "Compress": "compress",
@@ -48,5 +54,6 @@
   "ExitWithoutWaitingForCompletionMessage": "Exit without waiting for completion",
   "SpecifyOutputFilePathMessage": "Specify the output file path",
   "SpecifyQualityFactorMessage": "Specify the quality factor",
-  "SpecifySizeFactorMessage": "Specify the size factor"
+  "SpecifySizeFactorMessage": "Specify the size factor",
+  "SpecifyAtLeastOnePasswordMessage": "Specify at least one password"
 }

@@ -33,6 +33,12 @@
             SizeFactor = "Size factor";
             Extension = "Extension";
             CheckCompressionValidity = "Check compression validity";
+            OwnerPassword = "Owner password";
+            UserPassword = "User password";
+            OwnerPasswordHint = "Password for editing the PDF document";
+            UserPasswordHint = "Password for viewing the PDF document";
+            EncryptionAlgorithm = "Encryption algorithm";
+            ShowPassword = "Show password";
 
             Split = "split";
             Merge = "merge";
@@ -62,6 +68,7 @@
             SpecifyOutputFilePathMessage = "Specify the output file path";
             SpecifyCorrectQualityFactorMessage = "Specify the quality factor";
             SpecifyCorrectSizeFactorMessage = "Specify the size factor";
+            SpecifyAtLeastOnePasswordMessage = "Specify at least one password";
         }
     }
 }

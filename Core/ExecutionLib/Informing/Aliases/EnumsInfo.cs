@@ -1,9 +1,9 @@
 ﻿using iText.Layout.Properties;
 using YpdfLib.Models.Design;
 
-namespace ypdf.Informing
+namespace ExecutionLib.Informing.Aliases
 {
-    internal static class EnumsInfo
+    public static class EnumsInfo
     {
         public static string LocationModeValues => string.Join('/', Enum.GetValues<LocationMode>().Select(t => t.ToString().ToLower()));
         public static string TextAlignmentValues => string.Join('/', Enum.GetValues<TextAlignment>().Select(t => t.ToString().ToLower()));

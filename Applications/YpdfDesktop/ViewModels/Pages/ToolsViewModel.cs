@@ -29,6 +29,7 @@ namespace YpdfDesktop.ViewModels.Pages
         public SplitViewModel SplitVM { get; }
         public MergeViewModel MergeVM { get; }
         public CompressViewModel CompressVM { get; }
+        public SetPasswordViewModel SetPasswordVM { get; }
 
         #endregion
 
@@ -172,6 +173,7 @@ namespace YpdfDesktop.ViewModels.Pages
             SplitVM = new SplitViewModel(settingsVM, tasksVM);
             MergeVM = new MergeViewModel(settingsVM, tasksVM);
             CompressVM = new CompressViewModel(settingsVM, tasksVM);
+            SetPasswordVM = new SetPasswordViewModel(settingsVM, tasksVM);
 
             Tools = tools ?? DefaultTools.Get(settingsVM.Locale, settingsVM.Theme);
             FavoriteTools = favoriteTools ?? new ObservableCollection<Tool>();

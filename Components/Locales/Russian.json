@@ -23,6 +23,12 @@
   "SizeFactor": "Коэффициент размера",
   "Extension": "Расширение",
   "CheckCompressionValidity": "Проверить возможность сжатия",
+  "OwnerPassword": "Пароль владельца",
+  "UserPassword": "Пароль пользователя",
+  "OwnerPasswordHint": "Пароль для редактирования PDF документа",
+  "UserPasswordHint": "Пароль для просмотра PDF документа",
+  "EncryptionAlgorithm": "Алгоритм шифрования",
+  "ShowPassword": "Показать пароль",
   "Split": "разбить",
   "Merge": "объединить",
   "Compress": "сжать",
@@ -48,5 +54,6 @@
   "ExitWithoutWaitingForCompletionMessage": "Выйти без ожидания завершения",
   "SpecifyOutputFilePathMessage": "Укажите путь к выходному файлу",
   "SpecifyCorrectQualityFactorMessage": "Укажите правильный коэффициент качества",
-  "SpecifyCorrectSizeFactorMessage": "Укажите правильный коэффициент размера"
+  "SpecifyCorrectSizeFactorMessage": "Укажите правильный коэффициент размера",
+  "SpecifyAtLeastOnePasswordMessage": "Укажите хотя бы один пароль"
 }

@@ -1,9 +1,9 @@
 ﻿using ExecutionLib.Configuration;
+using ExecutionLib.Informing.Aliases;
 using iText.Kernel.Colors;
 using iText.Kernel.Geom;
 using iText.Layout.Properties;
 using Mono.Options;
-using ypdf.Informing;
 using YpdfLib.Models.Design;
 using YpdfLib.Models.Enumeration;
 using YpdfLib.Models.Geometry;
