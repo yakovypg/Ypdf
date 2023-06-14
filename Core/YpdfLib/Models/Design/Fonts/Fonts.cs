@@ -24,7 +24,7 @@ namespace YpdfLib.Models.Design.Fonts
 
         private static bool TryLoadFonts()
         {
-            string fontsRootDir = SharedConfig.Directories.FONTS;
+            string fontsRootDir = SharedConfig.Directories.Fonts;
 
             if (!Directory.Exists(fontsRootDir))
                 return false;

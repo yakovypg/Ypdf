@@ -116,26 +116,23 @@ namespace YpdfDesktop.ViewModels
             if (!UIConfigService.TryLoadUIConfiguration(out UIConfig config))
                 return;
 
-            if (config.SelectedLocaleId is not null)
-            {
-                Locale? selectedLocale = SettingsVM.Locales.FirstOrDefault(t => t.Id == config.SelectedLocaleId);
+            Locale? selectedLocale = config.SelectedLocaleId is not null
+                ? SettingsVM.Locales.FirstOrDefault(t => t.Id == config.SelectedLocaleId)
+                : SettingsVM.Locales.FirstOrDefault(t => t.Id == DefaultLocales.Get()[0].Id);
 
-                if (selectedLocale is not null)
-                    SettingsVM.Locale = selectedLocale;
-                else if (SettingsVM.Locales.Count > 0)
-                    SettingsVM.Locale = SettingsVM.Locales[0];
+            if (selectedLocale is not null)
+                SettingsVM.Locale = selectedLocale;
+            else if (SettingsVM.Locales.Count > 0)
+                SettingsVM.Locale = SettingsVM.Locales[0];
 
-            }
+            WindowTheme? selectedTheme = config.SelectedThemeId is not null
+                ? SettingsVM.Themes.FirstOrDefault(t => t.Id == config.SelectedThemeId)
+                : SettingsVM.Themes.FirstOrDefault(t => t.Id == DefaultThemes.Get()[0].Id);
 
-            if (config.SelectedThemeId is not null)
-            {
-                WindowTheme? selectedTheme = SettingsVM.Themes.FirstOrDefault(t => t.Id == config.SelectedThemeId);
-
-                if (selectedTheme is not null)
-                    SettingsVM.Theme = selectedTheme;
-                else if (SettingsVM.Themes.Count > 0)
-                    SettingsVM.Theme = SettingsVM.Themes[0];
-            }
+            if (selectedTheme is not null)
+                SettingsVM.Theme = selectedTheme;
+            else if (SettingsVM.Themes.Count > 0)
+                SettingsVM.Theme = SettingsVM.Themes[0];
 
             if (config.ResetAfterExecution is not null)
             {

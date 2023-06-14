@@ -7,7 +7,7 @@ namespace YpdfDesktop.Infrastructure.Services
     {
         public static bool TryLoadLocales(out ObservableCollection<Locale> locales)
         {
-            return JsonPackService.TryLoadPacks(SharedConfig.Directories.LOCALES, out locales);
+            return JsonPackService.TryLoadPacks(SharedConfig.Directories.Locales, out locales);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace YpdfLib.Informing
         {
             List<int[]> result = new();
 
-            string tempFilePath = new UniqueFile("pdf", SharedConfig.Directories.TEMP).GetNext();
+            string tempFilePath = new UniqueFile("pdf", SharedConfig.Directories.Temp).GetNext();
 
             using (var pdfDoc = new PdfDocument(new PdfReader(inputFile), new PdfWriter(tempFilePath)))
             {

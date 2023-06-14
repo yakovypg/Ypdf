@@ -105,13 +105,20 @@ namespace YpdfDesktop.ViewModels.Pages
         {
             UpdateGlobalConfigFields();
 
-            Locales = LocalesService.TryLoadLocales(out ObservableCollection<Locale> locales) && locales.Count > 0
-                ? locales
-                : DefaultLocales.Get();
+            bool isLocalesLoaded = LocalesService.TryLoadLocales(out ObservableCollection<Locale> locales)
+                && locales.Count > 0;
 
-            Themes = ThemesService.TryLoadThemes(out ObservableCollection<WindowTheme> themes) && themes.Count > 0
-                ? themes
-                : DefaultThemes.Get();
+            bool isThemesLoaded = ThemesService.TryLoadThemes(out ObservableCollection<WindowTheme> themes)
+                && themes.Count > 0;
+
+            Locales = isLocalesLoaded ? locales : DefaultLocales.Get();
+            Themes = isThemesLoaded ? themes : DefaultThemes.Get();
+
+            if (!isLocalesLoaded && Locales.Count > 0)
+                Locale = Locales[0];
+            
+            if (!isThemesLoaded && Themes.Count > 0)
+                Theme = Themes[0];
 
             SaveSettingsCommand = ReactiveCommand.Create(TrySaveSettings);
             OpenVkPageCommand = ReactiveCommand.Create(OpenVkPage);

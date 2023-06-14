@@ -423,7 +423,7 @@ namespace ExecutionLib.Execution
             }
 
             string extension = new FileInfo(inputPath).Extension;
-            string tempFilePath = new UniqueFile(extension, SharedConfig.Directories.TEMP).GetNext();
+            string tempFilePath = new UniqueFile(extension, SharedConfig.Directories.Temp).GetNext();
 
             int[] pageNumbers = PdfInfo.GetAllPageNumbers(inputPath);
             List<int[]> associatedPages = PdfInfo.GetAssociatedPages(inputPath);

@@ -2,9 +2,9 @@
 {
     public static class Files
     {
-        public static readonly string Readme = Path.Combine(Directories.DOCS, "README.md");
-        public static readonly string PythonAlias = Path.Combine(Directories.CONFIG, "python-alias.txt");
-        public static readonly string UIConfig = Path.Combine(Directories.CONFIG, "ui-config.json");
+        public static readonly string Readme = Path.Combine(Directories.Docs, "README.md");
+        public static readonly string PythonAlias = Path.Combine(Directories.Config, "python-alias.txt");
+        public static readonly string UIConfig = Path.Combine(Directories.Config, "ui-config.json");
 
         static Files()
         {
