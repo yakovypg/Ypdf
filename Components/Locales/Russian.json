@@ -23,6 +23,7 @@
   "SizeFactor": "Коэффициент размера",
   "Extension": "Расширение",
   "CheckCompressionValidity": "Проверить возможность сжатия",
+  "UseTika": "Использовать tika",
   "Password": "Пароль",
   "OwnerPassword": "Пароль владельца",
   "UserPassword": "Пароль пользователя",

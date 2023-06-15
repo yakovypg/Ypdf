@@ -553,7 +553,7 @@ namespace ExecutionLib.Execution
             string outputPath = config.PathsConfig.OutputPath
                 ?? throw new UndefinedParameterException(nameof(config.PathsConfig.OutputPath));
 
-            TextExtractor.ExtractByPython(inputPath, outputPath, config.GlobalConfig.PythonAlias);
+            TextExtractor.ExtractByPython(inputPath, outputPath, config.GlobalConfig.PythonAlias, Logger?.Out);
         }
 
         private void CompressImages(YpdfConfig config)

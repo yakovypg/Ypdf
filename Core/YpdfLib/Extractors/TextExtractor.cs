@@ -31,11 +31,11 @@ namespace YpdfLib.Extractors
             File.WriteAllText(destPath, textBuilder.ToString());
         }
 
-        public static void ExtractByPython(string inputFile, string destPath, string? pythonAlias = null)
+        public static void ExtractByPython(string inputFile, string destPath, string? pythonAlias = null, TextWriter? outputWriter = null)
         {
             string pythonTextExtractorPath = SharedConfig.Scripts.PythonTextExtractor;
 
-            var executor = new PythonExecutor(true, true, Console.Out)
+            var executor = new PythonExecutor(true, true, outputWriter)
             {
                 RequirePython3 = true
             };

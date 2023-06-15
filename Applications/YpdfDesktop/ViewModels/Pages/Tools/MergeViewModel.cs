@@ -188,7 +188,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         {
             const string initialFileName = "Merged";
 
-            _ = DialogProvider.GetOutputFilePath(initialFileName, true).ContinueWith(t =>
+            _ = DialogProvider.GetOutputFilePath(initialFileName, DialogProvider.PdfFilters).ContinueWith(t =>
             {
                 if (t.Result is null || string.IsNullOrEmpty(t.Result))
                     return;

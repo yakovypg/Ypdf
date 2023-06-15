@@ -137,7 +137,7 @@
 			<toolPages:ExtractImagesView />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsExtractTextViewVisible}">
-			<toolPages:ExtractTextView />
+			<toolPages:ExtractTextView DataContext="{Binding ExtractTextVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsSetPasswordViewVisible}">
 			<toolPages:SetPasswordView DataContext="{Binding SetPasswordVM}" />

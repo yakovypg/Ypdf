@@ -29,6 +29,7 @@ namespace YpdfDesktop.ViewModels.Pages
         public SplitViewModel SplitVM { get; }
         public MergeViewModel MergeVM { get; }
         public CompressViewModel CompressVM { get; }
+        public ExtractTextViewModel ExtractTextVM { get; }
         public SetPasswordViewModel SetPasswordVM { get; }
         public RemovePasswordViewModel RemovePasswordVM { get; }
 
@@ -174,6 +175,7 @@ namespace YpdfDesktop.ViewModels.Pages
             SplitVM = new SplitViewModel(settingsVM, tasksVM);
             MergeVM = new MergeViewModel(settingsVM, tasksVM);
             CompressVM = new CompressViewModel(settingsVM, tasksVM);
+            ExtractTextVM = new ExtractTextViewModel(settingsVM, tasksVM);
             SetPasswordVM = new SetPasswordViewModel(settingsVM, tasksVM);
             RemovePasswordVM = new RemovePasswordViewModel(settingsVM, tasksVM);
 

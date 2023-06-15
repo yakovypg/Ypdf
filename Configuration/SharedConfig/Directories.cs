@@ -4,8 +4,8 @@ namespace SharedConfig
 {
     public static class Directories
     {
-        public static readonly string AssemplyLocation = Assembly.GetEntryAssembly().Location;
-        public static readonly string AssemplyDirectory = Path.GetDirectoryName(AssemplyLocation);
+        public static readonly string AssemplyLocation = Assembly.GetEntryAssembly()?.Location ?? string.Empty;
+        public static readonly string AssemplyDirectory = Path.GetDirectoryName(AssemplyLocation) ?? string.Empty;
 
         public static readonly string Temp = Path.Combine(AssemplyDirectory, "Temp");
         public static readonly string Docs = Path.Combine(AssemplyDirectory, "Docs");

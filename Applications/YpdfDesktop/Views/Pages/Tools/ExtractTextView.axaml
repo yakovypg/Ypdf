@@ -2,12 +2,105 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.Tools.ExtractTextView">
 
-	<Grid>
-		<TextBlock Text="Extract text" />
+    <Design.DataContext>
+		<vm:ExtractTextViewModel />
+	</Design.DataContext>
+
+	<Grid Margin="5"
+          RowDefinitions="Auto, 5, Auto, 5, Auto, 1*, Auto"
+		  ColumnDefinitions="Auto, 200, 1*"
+          DragDrop.AllowDrop="True"
+		  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid.Resources>
+			<bd:FileDropHandler x:Key="FileDropHandler" />
+		</Grid.Resources>
+
+        <Grid.Styles>
+			<Style Selector="TextBox">
+				<Setter Property="Width" Value="200" />
+				<Setter Property="Margin" Value="10, 0, 0, 0" />
+			</Style>
+			<Style Selector="TextBlock">
+				<Setter Property="VerticalAlignment" Value="Center" />
+				<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+			</Style>
+			<Style Selector="TextBlock.click">
+				<Setter Property="VerticalAlignment" Value="Center" />
+				<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+			</Style>
+			<Style Selector="TextBlock.click:pointerover">
+				<Setter Property="Cursor" Value="Hand" />
+				<Setter Property="FontWeight" Value="Bold" />
+			</Style>
+		</Grid.Styles>
+
+        <i:Interaction.Behaviors>
+			<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
+		</i:Interaction.Behaviors>
+
+        <TextBlock Grid.Row="0"
+				   Grid.Column="0"
+				   Name="InputTextBlock"
+				   Classes="click"
+				   Text="{Binding SettingsVM.Locale.File}">
+			<i:Interaction.Behaviors>
+				<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="InputTextBlock">
+					<ia:InvokeCommandAction Command="{Binding SelectInputFilePathCommand}" />
+				</ia:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</TextBlock>
+
+		<TextBlock Grid.Row="2"
+				   Grid.Column="0"
+				   Classes="click"
+				   Name="OutputTextBlock"
+				   Text="{Binding SettingsVM.Locale.Output}">
+			<i:Interaction.Behaviors>
+				<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="OutputTextBlock">
+					<ia:InvokeCommandAction Command="{Binding SelectOutputFilePathCommand}" />
+				</ia:EventTriggerBehavior>
+			</i:Interaction.Behaviors>
+		</TextBlock>
+
+        <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding InputFilePath}" />
+		<TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding OutputFilePath}" />
+
+        <CheckBox Grid.Row="4"
+				  Grid.ColumnSpan="2"
+				  Cursor="Hand"
+				  Content="{Binding SettingsVM.Locale.UseTika}"
+				  Foreground="{Binding Theme.CheckBoxForeground}"
+				  IsChecked="{Binding UseTika}" />
+        
+        <Grid Grid.Row="8" Grid.ColumnSpan="3" ColumnDefinitions="1*, 1*">
+			<Grid.Styles>
+				<Style Selector="Button">
+					<Setter Property="MinWidth" Value="110" />
+					<Setter Property="Margin" Value="5, 0" />
+					<Setter Property="HorizontalContentAlignment" Value="Center" />
+				</Style>
+			</Grid.Styles>
+
+			<Button Grid.Column="0"
+					Content="{Binding SettingsVM.Locale.Execute}"
+					HorizontalAlignment="Right"
+					IsEnabled="{Binding IsInputFilePathSelected}"
+					Command="{Binding ExecuteCommand}" />
+
+			<Button Grid.Column="1"
+					Content="{Binding SettingsVM.Locale.Reset}"
+					HorizontalAlignment="Left"
+					Command="{Binding ResetCommand}" />
+		</Grid>
 	</Grid>
 
 </UserControl>

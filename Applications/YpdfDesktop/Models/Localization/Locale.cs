@@ -32,6 +32,7 @@ namespace YpdfDesktop.Models.Localization
         public string? SizeFactor { get; set; }
         public string? Extension { get; set; }
         public string? CheckCompressionValidity { get; set; }
+        public string? UseTika { get; set; }
         public string? Password { get; set; }
         public string? OwnerPassword { get; set; }
         public string? UserPassword { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace RuntimeLib.Processes
 {
@@ -7,8 +8,12 @@ namespace RuntimeLib.Processes
         public abstract void Execute(string args);
         public abstract void Execute(string args, string workingDirectory);
 
-        public ProcessExecutor(bool redirectStandardError = true, bool redirectStandardOutput = true, TextWriter? output = null)
-            : base(redirectStandardError, redirectStandardOutput, output)
+        public ProcessExecutor(bool redirectStandardError = true,
+                               bool redirectStandardOutput = true,
+                               TextWriter? output = null,
+                               bool throwExceptionIfExitWithError = true)
+            
+            : base(redirectStandardError, redirectStandardOutput, output, throwExceptionIfExitWithError)
         {
         }
 
@@ -61,6 +66,9 @@ namespace RuntimeLib.Processes
 
                 if (RedirectStandardOutput)
                     outputWaitHandle.WaitOne();
+
+                if (process.ExitCode != 0 && ThrowExceptionIfExitWithError)
+                    throw new InternalProcessException(process.ExitCode);
             }
         }
 

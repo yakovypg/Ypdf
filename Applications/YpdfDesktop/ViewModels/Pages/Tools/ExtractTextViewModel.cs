@@ -1,8 +1,6 @@
-﻿using Avalonia.Threading;
+using Avalonia.Threading;
 using ExecutionLib.Configuration;
-using ExecutionLib.Informing.Aliases;
 using ReactiveUI;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
@@ -12,7 +10,7 @@ using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class SetPasswordViewModel : PdfToolViewModel, IFilePathContainer
+    public class ExtractTextViewModel : PdfToolViewModel, IFilePathContainer
     {
         #region Commands
 
@@ -39,13 +37,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             private set => this.RaiseAndSetIfChanged(ref _isOutputFilePathSelected, value);
         }
 
-        private bool _isAnyPasswordSpecified = false;
-        public bool IsAnyPasswordSpecified
-        {
-            get => _isAnyPasswordSpecified;
-            private set => this.RaiseAndSetIfChanged(ref _isAnyPasswordSpecified, value);
-        }
-
         private string _inputFilePath = string.Empty;
         public string InputFilePath
         {
@@ -68,78 +59,22 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             }
         }
 
-        private string _ownerPassword = string.Empty;
-        public string OwnerPassword
+        private bool _useTika = false;
+        public bool UseTika
         {
-            get => _ownerPassword;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _ownerPassword, value);
-                IsAnyPasswordSpecified = !string.IsNullOrEmpty(OwnerPassword) || !string.IsNullOrEmpty(UserPassword);
-            }
+            get => _useTika;
+            private set => this.RaiseAndSetIfChanged(ref _useTika, value);
         }
-
-        private string _userPassword = string.Empty;
-        public string UserPassword
-        {
-            get => _userPassword;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _userPassword, value);
-                IsAnyPasswordSpecified = !string.IsNullOrEmpty(OwnerPassword) || !string.IsNullOrEmpty(UserPassword);
-            }
-        }
-
-        private string _encryptionAlgorithm = DEFAULT_ENCRYPTION_ALGORITHM;
-        public string EncryptionAlgorithm
-        {
-            get => _encryptionAlgorithm;
-            set => this.RaiseAndSetIfChanged(ref _encryptionAlgorithm, value);
-        }
-
-        private bool _showPassword = false;
-        public bool ShowPassword
-        {
-            get => _showPassword;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _showPassword, value);
-                PasswordChar = value ? null : DEFAULT_PASSWORD_CHAR;
-            }
-        }
-
-        private char? _passwordChar = DEFAULT_PASSWORD_CHAR;
-        public char? PasswordChar
-        {
-            get => _passwordChar;
-            private set => this.RaiseAndSetIfChanged(ref _passwordChar, value);
-        }
-
-        #endregion
-
-        #region Observable Collections
-
-        public ObservableCollection<string> EncryptionAlgorithms { get; }
-
-        #endregion
-
-        #region Constants
-
-        private const char DEFAULT_PASSWORD_CHAR = '*';
-        private const string DEFAULT_ENCRYPTION_ALGORITHM = "AES_128";
 
         #endregion
 
         // Constructor for Designer
-        public SetPasswordViewModel() : this(new SettingsViewModel(), new TasksViewModel())
+        public ExtractTextViewModel() : this(new SettingsViewModel(), new TasksViewModel())
         {
         }
 
-        public SetPasswordViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
+        public ExtractTextViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
-            var encryptionAlgorithms = StandardValues.EncryptionAlgorithms.Keys;
-            EncryptionAlgorithms = new ObservableCollection<string>(encryptionAlgorithms);
-
             ExecuteCommand = ReactiveCommand.Create(Execute);
             ResetCommand = ReactiveCommand.Create(Reset);
             SelectInputFilePathCommand = ReactiveCommand.Create(SelectInputFilePath);
@@ -150,36 +85,25 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         protected override void Execute()
         {
-            if (!VerifyOutputFilePath() || !VerifyPasswords())
+            if (!VerifyOutputFilePath())
                 return;
 
             var config = new YpdfConfig()
             {
-                PdfTool = "set-password"
+                PdfTool = UseTika ? "extract-text-tika" : "extract-text"
             };
 
             config.PathsConfig.InputPath = InputFilePath;
-            config.PathsConfig.OutputPath = CorrectOutputFilePath(OutputFilePath, "pdf");
+            config.PathsConfig.OutputPath = CorrectOutputFilePath(OutputFilePath, "txt");
 
-            if (!string.IsNullOrEmpty(OwnerPassword))
-                config.PdfPassword.OwnerPassword = OwnerPassword;
-
-            if (!string.IsNullOrEmpty(UserPassword))
-                config.PdfPassword.UserPassword = UserPassword;
-
-            int encryptionAlgorithm = StandardValues.EncryptionAlgorithms[EncryptionAlgorithm];
-            config.PdfPassword.EncryptionAlgorithm = encryptionAlgorithm;
-
-            Execute(ToolType.SetPassword, config, true);
+            Execute(ToolType.ExtractText, config, true);
         }
 
         protected override void Reset()
         {
             InputFilePath = string.Empty;
             OutputFilePath = string.Empty;
-            OwnerPassword = string.Empty;
-            UserPassword = string.Empty;
-            EncryptionAlgorithm = DEFAULT_ENCRYPTION_ALGORITHM;
+            UseTika = false;
         }
 
         #endregion
@@ -220,9 +144,9 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private void SelectOutputFilePath()
         {
-            const string initialFileName = "Encrypted";
+            const string initialFileName = "ExtractedText";
 
-            _ = DialogProvider.GetOutputFilePath(initialFileName, DialogProvider.PdfFilters).ContinueWith(t =>
+            _ = DialogProvider.GetOutputFilePath(initialFileName, DialogProvider.TextFilters).ContinueWith(t =>
             {
                 if (t.Result is null || string.IsNullOrEmpty(t.Result))
                     return;
@@ -234,11 +158,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         private bool VerifyOutputFilePath()
         {
             return InformIfIncorrect(IsOutputFilePathSelected, SettingsVM.Locale.SpecifyOutputFilePathMessage);
-        }
-
-        private bool VerifyPasswords()
-        {
-            return InformIfIncorrect(IsAnyPasswordSpecified, SettingsVM.Locale.SpecifyAtLeastOnePasswordMessage);
         }
 
         #endregion

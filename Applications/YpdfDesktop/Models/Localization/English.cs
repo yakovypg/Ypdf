@@ -33,6 +33,7 @@
             SizeFactor = "Size factor";
             Extension = "Extension";
             CheckCompressionValidity = "Check compression validity";
+            UseTika = "Use tika";
             Password = "Password";
             OwnerPassword = "Owner password";
             UserPassword = "User password";

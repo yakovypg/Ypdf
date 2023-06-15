@@ -7,11 +7,46 @@ namespace YpdfDesktop.Infrastructure.Communication
 {
     internal static class DialogProvider
     {
-        private static readonly FileDialogFilter _pdfFilder = new()
+        private static readonly FileDialogFilter _defaultFilter = new()
+        {
+            Name = "All files",
+            Extensions = new List<string>() { "*" }
+        };
+
+        private static readonly FileDialogFilter _textFilter = new()
+        {
+            Name = "Text files",
+            Extensions = new List<string>() { "txt" }
+        };
+
+        private static readonly FileDialogFilter _jpgFilter = new()
+        {
+            Name = "JPG Images",
+            Extensions = new List<string>() { "jpg", "jpeg" }
+        };
+
+        private static readonly FileDialogFilter _pngFilter = new()
+        {
+            Name = "PNG Images",
+            Extensions = new List<string>() { "png" }
+        };
+
+        private static readonly FileDialogFilter _imagesFilter = new()
+        {
+            Name = "Images",
+            Extensions = new List<string>() { "jpg", "jpeg", "png", "bmp", "gif", "tiff" }
+        };
+        
+        private static readonly FileDialogFilter _pdfFilter = new()
         {
             Name = "PDF Documents",
             Extensions = new List<string>() { "pdf" }
         };
+
+        public static IReadOnlyList<FileDialogFilter> DefaultFilters => new List<FileDialogFilter>() { _defaultFilter };
+        public static IReadOnlyList<FileDialogFilter> TextFilters => new List<FileDialogFilter>() { _textFilter };
+        public static IReadOnlyList<FileDialogFilter> ImageFilters => new List<FileDialogFilter>() { _jpgFilter, _pngFilter, _imagesFilter };
+        public static IReadOnlyList<FileDialogFilter> PdfFilters => new List<FileDialogFilter>() { _pdfFilter };
 
         public static Task<string[]?> GetPdfFilePaths(bool allowMultiple = false)
         {
@@ -24,7 +59,7 @@ namespace YpdfDesktop.Infrastructure.Communication
             {
                 Title = title,
                 AllowMultiple = allowMultiple,
-                Filters = new List<FileDialogFilter>() { _pdfFilder }
+                Filters = new List<FileDialogFilter>() { _pdfFilter }
             };
 
             return WindowFinder.FindMainWindow() is Window mainWindow
@@ -32,7 +67,7 @@ namespace YpdfDesktop.Infrastructure.Communication
                 : new Task<string[]?>(() => null);
         }
 
-        public static Task<string?> GetOutputFilePath(string? initialFileName = null, bool isPdfFileOnly = false)
+        public static Task<string?> GetOutputFilePath(string? initialFileName = null, IEnumerable<FileDialogFilter>? filters = null)
         {
             var dialog = new SaveFileDialog()
             {
@@ -40,8 +75,8 @@ namespace YpdfDesktop.Infrastructure.Communication
                 InitialFileName = initialFileName
             };
 
-            if (isPdfFileOnly)
-                dialog.Filters = new List<FileDialogFilter>() { _pdfFilder };
+            if (filters is not null)
+                dialog.Filters = new List<FileDialogFilter>(filters);
 
             return WindowFinder.FindMainWindow() is Window mainWindow
                 ? dialog.ShowAsync(mainWindow)
