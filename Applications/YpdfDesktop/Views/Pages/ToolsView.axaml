@@ -134,7 +134,7 @@
 			<toolPages:TextToPdfView />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsExtractImagesViewVisible}">
-			<toolPages:ExtractImagesView />
+			<toolPages:ExtractImagesView DataContext="{Binding ExtractImagesVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsExtractTextViewVisible}">
 			<toolPages:ExtractTextView DataContext="{Binding ExtractTextVM}" />

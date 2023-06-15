@@ -81,7 +81,7 @@
 				  Foreground="{Binding Theme.CheckBoxForeground}"
 				  IsChecked="{Binding UseTika}" />
         
-        <Grid Grid.Row="8" Grid.ColumnSpan="3" ColumnDefinitions="1*, 1*">
+        <Grid Grid.Row="6" Grid.ColumnSpan="3" ColumnDefinitions="1*, 1*">
 			<Grid.Styles>
 				<Style Selector="Button">
 					<Setter Property="MinWidth" Value="110" />
