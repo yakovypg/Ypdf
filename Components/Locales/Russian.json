@@ -23,6 +23,7 @@
   "SizeFactor": "Коэффициент размера",
   "Extension": "Расширение",
   "CheckCompressionValidity": "Проверить возможность сжатия",
+  "Password": "Пароль",
   "OwnerPassword": "Пароль владельца",
   "UserPassword": "Пароль пользователя",
   "OwnerPasswordHint": "Пароль для редактирования PDF документа",
@@ -55,5 +56,6 @@
   "SpecifyOutputFilePathMessage": "Укажите путь к выходному файлу",
   "SpecifyCorrectQualityFactorMessage": "Укажите правильный коэффициент качества",
   "SpecifyCorrectSizeFactorMessage": "Укажите правильный коэффициент размера",
-  "SpecifyAtLeastOnePasswordMessage": "Укажите хотя бы один пароль"
+  "SpecifyAtLeastOnePasswordMessage": "Укажите хотя бы один пароль",
+  "SpecifyPasswordMessage": "Укажите пароль"
 }

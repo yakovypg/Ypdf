@@ -32,6 +32,7 @@ namespace YpdfDesktop.Models.Localization
         public string? SizeFactor { get; set; }
         public string? Extension { get; set; }
         public string? CheckCompressionValidity { get; set; }
+        public string? Password { get; set; }
         public string? OwnerPassword { get; set; }
         public string? UserPassword { get; set; }
         public string? OwnerPasswordHint { get; set; }
@@ -68,6 +69,7 @@ namespace YpdfDesktop.Models.Localization
         public string? SpecifyCorrectQualityFactorMessage { get; set; }
         public string? SpecifyCorrectSizeFactorMessage { get; set; }
         public string? SpecifyAtLeastOnePasswordMessage { get; set; }
+        public string? SpecifyPasswordMessage { get; set; }
 
         public Locale() : this(Guid.NewGuid().ToString())
         {

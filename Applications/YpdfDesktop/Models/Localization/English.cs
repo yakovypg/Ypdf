@@ -33,6 +33,7 @@
             SizeFactor = "Size factor";
             Extension = "Extension";
             CheckCompressionValidity = "Check compression validity";
+            Password = "Password";
             OwnerPassword = "Owner password";
             UserPassword = "User password";
             OwnerPasswordHint = "Password for editing the PDF document";
@@ -69,6 +70,7 @@
             SpecifyCorrectQualityFactorMessage = "Specify the quality factor";
             SpecifyCorrectSizeFactorMessage = "Specify the size factor";
             SpecifyAtLeastOnePasswordMessage = "Specify at least one password";
+            SpecifyPasswordMessage = "Specify the password";
         }
     }
 }

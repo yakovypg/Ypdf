@@ -30,6 +30,7 @@
         string? SizeFactor { get; set; }
         string? Extension { get; set; }
         string? CheckCompressionValidity { get; set; }
+        string? Password { get; set; }
         string? OwnerPassword { get; set; }
         string? UserPassword { get; set; }
         string? OwnerPasswordHint { get; set; }
@@ -66,5 +67,6 @@
         string? SpecifyCorrectQualityFactorMessage { get; set; }
         string? SpecifyCorrectSizeFactorMessage { get; set; }
         string? SpecifyAtLeastOnePasswordMessage { get; set; }
+        string? SpecifyPasswordMessage { get; set; }
     }
 }

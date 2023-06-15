@@ -23,6 +23,7 @@
   "SizeFactor": "Size factor",
   "Extension": "Extension",
   "CheckCompressionValidity": "Check compression validity",
+  "Password": "Password",
   "OwnerPassword": "Owner password",
   "UserPassword": "User password",
   "OwnerPasswordHint": "Password for editing the PDF document",
@@ -55,5 +56,6 @@
   "SpecifyOutputFilePathMessage": "Specify the output file path",
   "SpecifyQualityFactorMessage": "Specify the quality factor",
   "SpecifySizeFactorMessage": "Specify the size factor",
-  "SpecifyAtLeastOnePasswordMessage": "Specify at least one password"
+  "SpecifyAtLeastOnePasswordMessage": "Specify at least one password",
+  "SpecifyPasswordMessage": "Specify the password"
 }
