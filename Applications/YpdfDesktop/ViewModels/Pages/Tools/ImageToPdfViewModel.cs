@@ -16,12 +16,13 @@ using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Infrastructure.Default;
 using YpdfDesktop.Models;
 using YpdfDesktop.Models.IO;
+using YpdfDesktop.Models.Localization;
 using YpdfDesktop.ViewModels.Base;
 using YpdfLib.Models.Design;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class ImageToPdfViewModel : PdfToolViewModel, IFilePathCollectionContainer
+    public class ImageToPdfViewModel : PdfToolViewModel, IFilePathCollectionContainer, ILazyLocalizable
     {
         #region Commands
 
@@ -146,8 +147,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             set
             {
                 this.RaiseAndSetIfChanged(ref _pageSize, value);
-                IsPageSizeAuto = value == DefaultLocales.English.Auto;
-                IsPageSizeCustom = value == DefaultLocales.English.Custom;
+                IsPageSizeAuto = value == (SettingsVM.Locale.Auto ?? DefaultLocales.English.Auto);
+                IsPageSizeCustom = value == (SettingsVM.Locale.Custom ?? DefaultLocales.English.Custom);
             }
         }
 
@@ -185,6 +186,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private const int DEFAULT_PAGE_WIDTH = 2480;
         private const int DEFAULT_PAGE_HEIGHT = 3508;
+        private const int AUTO_PAGE_SIZE_INDEX = 0;
+        private const int CUSTOM_PAGE_SIZE_INDEX = 1;
 
         #endregion
 
@@ -211,8 +214,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
             var pageSizes = StandardValues.PageSizes.Keys;
             PageSizes = new ObservableCollection<string>(pageSizes);
-            PageSizes.Insert(0, DefaultLocales.English.Auto!);
-            PageSizes.Insert(1, DefaultLocales.English.Custom!);
+            PageSizes.Insert(AUTO_PAGE_SIZE_INDEX, SettingsVM.Locale.Auto ?? DefaultLocales.English.Auto!);
+            PageSizes.Insert(CUSTOM_PAGE_SIZE_INDEX, SettingsVM.Locale.Custom ?? DefaultLocales.English.Custom!);
 
             ExecuteCommand = ReactiveCommand.Create(Execute);
             ResetCommand = ReactiveCommand.Create(Reset);
@@ -223,6 +226,37 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
             SetDefaultItems();
         }
+
+        #region Public Methods
+
+        public void Localize()
+        {
+            int selectedPageSizeIndex = PageSizes.IndexOf(PageSize);
+
+            bool isSelectedPageSizeChanging = selectedPageSizeIndex == AUTO_PAGE_SIZE_INDEX
+                || selectedPageSizeIndex == CUSTOM_PAGE_SIZE_INDEX;
+
+            bool isLocalized = false;
+            
+            if (!string.IsNullOrEmpty(SettingsVM.Locale.Auto)
+                && LocalizeCollectionItem(PageSizes, AUTO_PAGE_SIZE_INDEX, SettingsVM.Locale.Auto))
+            {
+                this.RaisePropertyChanged(nameof(PageSizes));
+                isLocalized = true;
+            }
+
+            if (!string.IsNullOrEmpty(SettingsVM.Locale.Custom)
+                && LocalizeCollectionItem(PageSizes, CUSTOM_PAGE_SIZE_INDEX, SettingsVM.Locale.Custom))
+            {
+                this.RaisePropertyChanged(nameof(PageSizes));
+                isLocalized = true;
+            }
+
+            if (isSelectedPageSizeChanging && isLocalized)
+                PageSize = PageSizes[selectedPageSizeIndex];
+        }
+
+        #endregion
 
         #region Protected Methods
 
@@ -361,7 +395,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private void SetDefaultPageSize()
         {
-            string autoSize = DefaultLocales.English.Auto!;
+            string autoSize = SettingsVM.Locale.Auto ?? DefaultLocales.English.Auto!;
 
             if (PageSizes.Contains(autoSize))
                 PageSize = autoSize;

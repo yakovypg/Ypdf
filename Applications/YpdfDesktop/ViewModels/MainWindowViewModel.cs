@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Infrastructure.Default;
+using YpdfDesktop.Infrastructure.Reflection;
 using YpdfDesktop.Infrastructure.Search;
 using YpdfDesktop.Infrastructure.Services;
 using YpdfDesktop.Models;
@@ -107,6 +108,7 @@ namespace YpdfDesktop.ViewModels
             ShowTasksCommand = ReactiveCommand.Create(ShowTasks);
 
             LoadUIConfiguration();
+            LazyLocalizer.LazyLocalize(this);
         }
 
         #region Private Methods

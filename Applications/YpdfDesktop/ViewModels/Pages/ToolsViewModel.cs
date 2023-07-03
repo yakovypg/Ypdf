@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Default;
+using YpdfDesktop.Infrastructure.Reflection;
 using YpdfDesktop.Models;
 using YpdfDesktop.Models.Localization;
 using YpdfDesktop.Models.Themes;
@@ -12,7 +13,7 @@ using YpdfDesktop.ViewModels.Pages.Tools;
 
 namespace YpdfDesktop.ViewModels.Pages
 {
-    public class ToolsViewModel : ViewModelBase
+    public class ToolsViewModel : ViewModelBase, ILazyLocalizable
     {
         #region Commands
 
@@ -193,6 +194,11 @@ namespace YpdfDesktop.ViewModels.Pages
         }
 
         #region Public Methods
+
+        public void Localize()
+        {
+            LazyLocalizer.LazyLocalize(this);
+        }
 
         public void UpdateLocale(ILocale locale)
         {

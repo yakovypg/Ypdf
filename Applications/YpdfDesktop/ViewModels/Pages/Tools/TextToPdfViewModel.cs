@@ -15,12 +15,13 @@ using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Infrastructure.Default;
 using YpdfDesktop.Models;
 using YpdfDesktop.Models.IO;
+using YpdfDesktop.Models.Localization;
 using YpdfDesktop.ViewModels.Base;
 using YpdfLib.Models.Design;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class TextToPdfViewModel : PdfToolViewModel, IFilePathContainer
+    public class TextToPdfViewModel : PdfToolViewModel, IFilePathContainer, ILazyLocalizable
     {
         #region Commands
 
@@ -168,7 +169,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             set
             {
                 this.RaiseAndSetIfChanged(ref _pageSize, value);
-                IsPageSizeCustom = value == DefaultLocales.English.Custom;
+                IsPageSizeCustom = value == (SettingsVM.Locale.Custom ?? DefaultLocales.English.Custom);
             }
         }
 
@@ -201,6 +202,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         private const float DEFAULT_FONT_OPACITY = 1;
         private const int DEFAULT_PAGE_WIDTH = 2480;
         private const int DEFAULT_PAGE_HEIGHT = 3508;
+        private const int CUSTOM_PAGE_SIZE_INDEX = 0;
 
         #endregion
 
@@ -235,7 +237,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
             var pageSizes = StandardValues.PageSizes.Keys;
             PageSizes = new ObservableCollection<string>(pageSizes);
-            PageSizes.Insert(0, DefaultLocales.English.Custom!);
+            PageSizes.Insert(CUSTOM_PAGE_SIZE_INDEX, SettingsVM.Locale.Custom ?? DefaultLocales.English.Custom!);
 
             ExecuteCommand = ReactiveCommand.Create(Execute);
             ResetCommand = ReactiveCommand.Create(Reset);
@@ -245,6 +247,28 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
             SetDefaultItems();
         }
+
+        #region Public Methods
+
+        public void Localize()
+        {
+            int selectedPageSizeIndex = PageSizes.IndexOf(PageSize);
+            bool isSelectedPageSizeChanging = selectedPageSizeIndex == CUSTOM_PAGE_SIZE_INDEX;
+
+            bool isLocalized = false;
+            
+            if (!string.IsNullOrEmpty(SettingsVM.Locale.Custom)
+                && LocalizeCollectionItem(PageSizes, CUSTOM_PAGE_SIZE_INDEX, SettingsVM.Locale.Custom))
+            {
+                this.RaisePropertyChanged(nameof(PageSizes));
+                isLocalized = true;
+            }
+
+            if (isSelectedPageSizeChanging && isLocalized)
+                PageSize = PageSizes[selectedPageSizeIndex];
+        }
+
+        #endregion
 
         #region Protected Methods
 

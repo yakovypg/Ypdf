@@ -4,6 +4,7 @@ using ExecutionLib.Configuration;
 using ExecutionLib.Execution;
 using ExecutionLib.Informing.Logging;
 using MessageBox.Avalonia.Enums;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -70,6 +71,21 @@ namespace YpdfDesktop.ViewModels.Base
         protected static bool IsPathToTxt(string path)
         {
             return path.ToLower().EndsWith("txt");
+        }
+
+        protected static bool LocalizeCollectionItem<T>(ObservableCollection<T> collection,
+            int itemIndex, T localizedValue)
+        {
+            if (collection.Count <= itemIndex)
+                return false;
+
+            if (!(collection[itemIndex]?.Equals(localizedValue) ?? false))
+            {
+                collection[itemIndex] = localizedValue;
+                return true;
+            }
+
+            return false;
         }
 
         protected async Task<bool> CheckFileExists(string? path)
