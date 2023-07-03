@@ -35,8 +35,13 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Text
             int selectionStart = Math.Min(textBox.SelectionStart, textBox.SelectionEnd);
             int selectionEnd = Math.Max(textBox.SelectionStart, textBox.SelectionEnd);
 
-            string textBeforeSelection = textBox.Text[..selectionStart];
-            string textAfterSelection = textBox.Text[selectionEnd..];
+            string textBeforeSelection = !string.IsNullOrEmpty(textBox.Text)
+                ? textBox.Text[..selectionStart]
+                : string.Empty;
+
+            string textAfterSelection = !string.IsNullOrEmpty(textBox.Text)
+                ? textBox.Text[selectionEnd..]
+                : string.Empty;
 
             return $"{textBeforeSelection}{receivedText}{textAfterSelection}";
         }
