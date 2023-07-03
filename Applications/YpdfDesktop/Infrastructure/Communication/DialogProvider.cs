@@ -48,9 +48,9 @@ namespace YpdfDesktop.Infrastructure.Communication
         public static IReadOnlyList<FileDialogFilter> ImageFilters => new List<FileDialogFilter>() { _jpgFilter, _pngFilter, _imagesFilter };
         public static IReadOnlyList<FileDialogFilter> PdfFilters => new List<FileDialogFilter>() { _pdfFilter };
 
-        public static Task<string[]?> GetPdfFilePaths(bool allowMultiple = false)
+        public static Task<string[]?> GetInputFilePaths(bool allowMultiple = false, IEnumerable<FileDialogFilter>? filters = null)
         {
-            string title = "Select PDF file";
+            string title = "Select input file";
 
             if (allowMultiple)
                 title += "s";
@@ -58,13 +58,25 @@ namespace YpdfDesktop.Infrastructure.Communication
             var dialog = new OpenFileDialog()
             {
                 Title = title,
-                AllowMultiple = allowMultiple,
-                Filters = new List<FileDialogFilter>() { _pdfFilter }
+                AllowMultiple = allowMultiple
             };
+
+            if (filters is not null)
+                dialog.Filters = new List<FileDialogFilter>(filters);
 
             return WindowFinder.FindMainWindow() is Window mainWindow
                 ? dialog.ShowAsync(mainWindow)
                 : new Task<string[]?>(() => null);
+        }
+
+        public static Task<string[]?> GetPdfFilePaths(bool allowMultiple = false)
+        {
+            return GetInputFilePaths(allowMultiple, new FileDialogFilter[] { _pdfFilter });
+        }
+
+        public static Task<string[]?> GetTxtFilePaths(bool allowMultiple = false)
+        {
+            return GetInputFilePaths(allowMultiple, new FileDialogFilter[] { _textFilter });
         }
 
         public static Task<string?> GetOutputFilePath(string? initialFileName = null, IEnumerable<FileDialogFilter>? filters = null)
