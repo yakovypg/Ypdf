@@ -1,9 +1,11 @@
 ﻿using Avalonia.Threading;
 using ExecutionLib.Configuration;
 using ExecutionLib.Informing.Aliases;
+using iText.Kernel.Pdf;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Models;
@@ -90,7 +92,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             }
         }
 
-        private string _encryptionAlgorithm = DEFAULT_ENCRYPTION_ALGORITHM;
+        private string _encryptionAlgorithm = string.Empty;
         public string EncryptionAlgorithm
         {
             get => _encryptionAlgorithm;
@@ -126,7 +128,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         #region Constants
 
         private const char DEFAULT_PASSWORD_CHAR = '*';
-        private const string DEFAULT_ENCRYPTION_ALGORITHM = "AES_128";
 
         #endregion
 
@@ -144,6 +145,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             ResetCommand = ReactiveCommand.Create(Reset);
             SelectInputFilePathCommand = ReactiveCommand.Create(SelectInputFilePath);
             SelectOutputFilePathCommand = ReactiveCommand.Create(SelectOutputFilePath);
+
+            SetDefaultItems();
         }
 
         #region Protected Methods
@@ -179,7 +182,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             OutputFilePath = string.Empty;
             OwnerPassword = string.Empty;
             UserPassword = string.Empty;
-            EncryptionAlgorithm = DEFAULT_ENCRYPTION_ALGORITHM;
+
+            SetDefaultEncryptionAlgorithm();
         }
 
         #endregion
@@ -239,6 +243,24 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         private bool VerifyPasswords()
         {
             return InformIfIncorrect(IsAnyPasswordSpecified, SettingsVM.Locale.SpecifyAtLeastOnePasswordMessage);
+        }
+
+        private void SetDefaultItems()
+        {
+            SetDefaultEncryptionAlgorithm();
+        }
+
+        private void SetDefaultEncryptionAlgorithm()
+        {
+            var aes256 = StandardValues.EncryptionAlgorithms
+                .First(t => t.Value == EncryptionConstants.ENCRYPTION_AES_256);
+
+            if (EncryptionAlgorithms.Contains(aes256.Key))
+                EncryptionAlgorithm = aes256.Key;
+            else if (EncryptionAlgorithms.Count > 0)
+                EncryptionAlgorithm = EncryptionAlgorithms[0];
+            else
+                EncryptionAlgorithm = string.Empty;
         }
 
         #endregion
