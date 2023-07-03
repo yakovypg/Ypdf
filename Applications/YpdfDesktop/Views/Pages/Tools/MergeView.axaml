@@ -132,7 +132,7 @@
 				<TextBox Grid.Row="0"
 						 Grid.Column="1"
 						 IsReadOnly="True"
-						 Margin="10, 0, 5, 0"
+						 Margin="10, 0, 0, 0"
 						 Text="{Binding OutputFilePath}" />
 			</Grid>
 
@@ -142,13 +142,13 @@
 						<Setter Property="MinWidth" Value="110" />
 						<Setter Property="Margin" Value="5" />
 						<Setter Property="HorizontalContentAlignment" Value="Center" />
-						<Setter Property="IsEnabled" Value="{Binding IsAnyInputFilesAdded}" />
 					</Style>
 				</Grid.Styles>
 
 				<Button Grid.Column="0"
 						Content="{Binding SettingsVM.Locale.Execute}"
 						HorizontalAlignment="Right"
+						IsEnabled="{Binding IsAnyInputFilesAdded}"
 						Command="{Binding ExecuteCommand}" />
 
 				<Button Grid.Column="1"
