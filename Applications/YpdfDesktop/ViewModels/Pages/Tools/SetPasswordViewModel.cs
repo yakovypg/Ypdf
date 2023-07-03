@@ -183,7 +183,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             OwnerPassword = string.Empty;
             UserPassword = string.Empty;
 
-            SetDefaultEncryptionAlgorithm();
+            SetDefaultItems();
         }
 
         #endregion
@@ -260,7 +260,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             else if (EncryptionAlgorithms.Count > 0)
                 EncryptionAlgorithm = EncryptionAlgorithms[0];
             else
-                EncryptionAlgorithm = string.Empty;
+                EncryptionAlgorithm = EncryptionConstants.ENCRYPTION_AES_256.ToString();
         }
 
         #endregion

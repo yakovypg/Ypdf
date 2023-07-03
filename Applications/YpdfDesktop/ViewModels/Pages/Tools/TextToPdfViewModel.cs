@@ -2,6 +2,8 @@ using Avalonia.Threading;
 using ExecutionLib.Configuration;
 using ExecutionLib.Informing.Aliases;
 using iText.IO.Font;
+using iText.IO.Font.Constants;
+using iText.Kernel.Colors;
 using iText.Layout.Properties;
 using ReactiveUI;
 using System;
@@ -296,15 +298,6 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             InputFilePath = string.Empty;
             OutputFilePath = string.Empty;
             FontFilePath = string.Empty;
-            TextAlignment = TextAlignment.LEFT;
-
-            FontFamily = FontFamilies.Count > 0
-                ? FontFamilies[0]
-                : string.Empty;
-
-            FontColor = FontColors.Count > 0
-                ? FontColors[0]
-                : string.Empty;
 
             FontSize = DEFAULT_FONT_SIZE;
             FontOpacity = DEFAULT_FONT_OPACITY;
@@ -317,8 +310,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             PageWidth = DEFAULT_PAGE_WIDTH;
             PageHeight = DEFAULT_PAGE_HEIGHT;
 
-            SetDefaultFontEncoding();
-            SetDefaultPageSize();
+            SetDefaultItems();
         }
 
         #endregion
@@ -397,17 +389,45 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private void SetDefaultItems()
         {
-            if (TextAlignments.Count > 0)
-                TextAlignment = TextAlignments[0];
-
-            if (FontFamilies.Count > 0)
-                FontFamily = FontFamilies[0];
-
-            if (FontColors.Count > 0)
-                FontColor = FontColors[0];
-            
+            SetDefaultFontFamily();
+            SetDefaultFontColor();          
+            SetDefaultTextAlignment();
             SetDefaultFontEncoding();
             SetDefaultPageSize();
+        }
+
+        private void SetDefaultFontFamily()
+        {
+            var timesRoman = StandardValues.FontFamilies.First(t => t.Value == StandardFonts.TIMES_ROMAN);
+
+            if (FontFamilies.Contains(timesRoman.Key))
+                FontFamily = timesRoman.Key;
+            else if (FontFamilies.Count > 0)
+                FontFamily = FontFamilies[0];
+            else
+                FontFamily = StandardFonts.TIMES_ROMAN.ToString();
+        }
+
+        private void SetDefaultFontColor()
+        {
+            var black = StandardValues.Colors.First(t => t.Value == ColorConstants.BLACK);
+
+            if (FontColors.Contains(black.Key))
+                FontColor = black.Key;
+            else if (FontColors.Count > 0)
+                FontColor = FontColors[0];
+            else
+                FontColor = ColorConstants.BLACK.ToString() ?? string.Empty;
+        }
+
+        private void SetDefaultTextAlignment()
+        {
+            if (TextAlignments.Contains(TextAlignment.LEFT))
+                TextAlignment = TextAlignment.LEFT;
+            else if (TextAlignments.Count > 0)
+                TextAlignment = TextAlignments[0];
+            else
+                TextAlignment = TextAlignment.LEFT;
         }
 
         private void SetDefaultFontEncoding()
@@ -419,7 +439,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             else if (FontEncodings.Count > 0)
                 FontEncoding = FontEncodings[0];
             else
-                FontEncoding = string.Empty;
+                FontEncoding = PdfEncodings.IDENTITY_H.ToString();
         }
 
         private void SetDefaultPageSize()
@@ -431,7 +451,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             else if (PageSizes.Count > 0)
                 PageSize = PageSizes[^1];
             else
-                PageSize = string.Empty;
+                PageSize = iText.Kernel.Geom.PageSize.A4.ToString();
         }
 
         #endregion
