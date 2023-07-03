@@ -16,7 +16,7 @@ using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class MergeViewModel : PdfToolViewModel
+    public class MergeViewModel : PdfToolViewModel, IFilePathCollectionContainer
     {
         #region Commands
 

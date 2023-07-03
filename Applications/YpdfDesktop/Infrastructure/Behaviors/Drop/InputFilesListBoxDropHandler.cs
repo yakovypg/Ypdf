@@ -33,15 +33,15 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Drop
 
         private bool ValidateInternalItem(ListBox listBox, InputFile sourceItem, DragEventArgs e, object? targetContext, bool bExecute)
         {
-            if (targetContext is not MergeViewModel viewModel ||
+            if (targetContext is not IFilePathCollectionContainer pathsContainer ||
                 listBox.GetVisualAt(e.GetPosition(listBox)) is not Control targetControl ||
                 targetControl.DataContext is not InputFile targetItem)
             {
                 return false;
             }
 
-            int sourceItemIndex = viewModel.InputFiles.IndexOf(sourceItem);
-            int targetItemIndex = viewModel.InputFiles.IndexOf(targetItem);
+            int sourceItemIndex = pathsContainer.InputFiles.IndexOf(sourceItem);
+            int targetItemIndex = pathsContainer.InputFiles.IndexOf(targetItem);
 
             if (sourceItemIndex < 0 || targetItemIndex < 0)
                 return false;
@@ -49,11 +49,11 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Drop
             switch (e.DragEffects)
             {
                 case DragDropEffects.Move:
-                    if (bExecute) MoveItem(viewModel.InputFiles, sourceItemIndex, targetItemIndex);
+                    if (bExecute) MoveItem(pathsContainer.InputFiles, sourceItemIndex, targetItemIndex);
                     return true;
 
                 case DragDropEffects.Link:
-                    if (bExecute) SwapItem(viewModel.InputFiles, sourceItemIndex, targetItemIndex);
+                    if (bExecute) SwapItem(pathsContainer.InputFiles, sourceItemIndex, targetItemIndex);
                     return true;
 
                 default:
@@ -63,7 +63,7 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Drop
 
         private bool ValidateExternalItem(ListBox listBox, DragEventArgs e, object? targetContext, bool bExecute)
         {
-            if (targetContext is not MergeViewModel viewModel ||
+            if (targetContext is not IFilePathCollectionContainer pathsContainer ||
                 listBox.GetVisualAt(e.GetPosition(listBox)) is not Control targetControl ||
                 !e.Data.Contains(DataFormats.FileNames))
             {
@@ -76,7 +76,7 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Drop
                 return false;
 
             int targetIndex = targetControl.DataContext is InputFile targetItem
-                ? viewModel.InputFiles.IndexOf(targetItem)
+                ? pathsContainer.InputFiles.IndexOf(targetItem)
                 : 0;
 
             if (targetIndex < 0)
@@ -92,7 +92,7 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Drop
                 return false;
 
             foreach (InputFile inputFile in inputFiles)
-                InsertItem(viewModel.InputFiles, inputFile, targetIndex);
+                InsertItem(pathsContainer.InputFiles, inputFile, targetIndex);
 
             return true;
         }
