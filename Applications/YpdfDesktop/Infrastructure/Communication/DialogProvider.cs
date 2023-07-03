@@ -79,6 +79,11 @@ namespace YpdfDesktop.Infrastructure.Communication
             return GetInputFilePaths(allowMultiple, new FileDialogFilter[] { _textFilter });
         }
 
+        public static Task<string[]?> GetImageFilePaths(bool allowMultiple = false)
+        {
+            return GetInputFilePaths(allowMultiple, new FileDialogFilter[] { _imagesFilter });
+        }
+
         public static Task<string?> GetOutputFilePath(string? initialFileName = null, IEnumerable<FileDialogFilter>? filters = null)
         {
             var dialog = new SaveFileDialog()
