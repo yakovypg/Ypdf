@@ -40,6 +40,17 @@ namespace YpdfDesktop.Models.Localization
         public string? UserPasswordHint { get; set; }
         public string? EncryptionAlgorithm { get; set; }
         public string? ShowPassword { get; set; }
+        public string? TextAlignment { get; set; }
+        public string? FontPath { get; set; }
+        public string? FontSize { get; set; }
+        public string? FontFamily { get; set; }
+        public string? FontColor { get; set; }
+        public string? FontOpacity { get; set; }
+        public string? FontEncoding { get; set; }
+        public string? PageSize { get; set; }
+        public string? PageWidth { get; set; }
+        public string? PageHeight { get; set; }
+        public string? Margin { get; set; }
 
         public string? Split { get; set; }
         public string? Merge { get; set; }
@@ -59,10 +70,12 @@ namespace YpdfDesktop.Models.Localization
 
         public string? Yes { get; set; }
         public string? No { get; set; }
+        public string? Custom { get; set; }
 
         public string? FileEmptyMessage { get; set; }
         public string? FileExistsMessage { get; set; }
         public string? FileNotPdfMessage { get; set; }
+        public string? FileNotTxtMessage { get; set; }
         public string? ReplaceItMessage { get; set; }
         public string? UnfinishedTasksMessage { get; set; }
         public string? ExitWithoutWaitingForCompletionMessage { get; set; }

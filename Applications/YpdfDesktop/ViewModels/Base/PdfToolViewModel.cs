@@ -67,6 +67,11 @@ namespace YpdfDesktop.ViewModels.Base
             return path.ToLower().EndsWith("pdf");
         }
 
+        protected static bool IsPathToTxt(string path)
+        {
+            return path.ToLower().EndsWith("txt");
+        }
+
         protected async Task<bool> CheckFileExists(string? path)
         {
             if (!File.Exists(path))

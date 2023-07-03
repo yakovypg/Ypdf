@@ -38,6 +38,17 @@
         string? UserPasswordHint { get; set; }
         string? EncryptionAlgorithm { get; set; }
         string? ShowPassword { get; set; }
+        string? TextAlignment { get; set; }
+        string? FontPath { get; set; }
+        string? FontSize { get; set; }
+        string? FontFamily { get; set; }
+        string? FontColor { get; set; }
+        string? FontOpacity { get; set; }
+        string? FontEncoding { get; set; }
+        string? PageSize { get; set; }
+        string? PageWidth { get; set; }
+        string? PageHeight { get; set; }
+        string? Margin { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -57,10 +68,12 @@
 
         string? Yes { get; set; }
         string? No { get; set; }
+        string? Custom { get; set; }
 
         string? FileEmptyMessage { get; set; }
         string? FileExistsMessage { get; set; }
         string? FileNotPdfMessage { get; set; }
+        string? FileNotTxtMessage { get; set; }
         string? ReplaceItMessage { get; set; }
         string? UnfinishedTasksMessage { get; set; }
         string? ExitWithoutWaitingForCompletionMessage { get; set; }
