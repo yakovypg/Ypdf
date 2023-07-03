@@ -4,8 +4,10 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Text
 {
     public class PositiveFloatNumberBoxBehavior : FloatNumberBoxBehavior
     {
-        protected override bool IsPossibleTextValid(string possibleText, string currentText)
+        protected override bool IsPossibleTextValid(string? possibleText, string? currentText)
         {
+            possibleText ??= string.Empty;
+
             string dot = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
             bool isStartZero = possibleText == "0" || possibleText == $"0{dot}";
 

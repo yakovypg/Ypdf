@@ -4,8 +4,9 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Text
 {
     public class CoefficientNumberBoxBehavior : PositiveFloatNumberBoxBehavior
     {
-        protected override bool IsPossibleTextValid(string possibleText, string currentText)
+        protected override bool IsPossibleTextValid(string? possibleText, string? currentText)
         {
+            possibleText ??= string.Empty;        
             NumberStyles numStyle = NumberStyles.AllowDecimalPoint;
 
             return float.TryParse(possibleText, numStyle, CultureInfo.CurrentUICulture, out float value)
