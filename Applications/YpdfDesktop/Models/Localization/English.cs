@@ -52,6 +52,8 @@
             PageWidth = "Page width";
             PageHeight = "Page height";
             Margin = "Margin";
+            Alignment = "Alignment";
+            AutoincreaseSize = "Autoincrease size";
 
             Split = "split";
             Merge = "merge";
@@ -72,6 +74,7 @@
             Yes = "Yes";
             No = "No";
             Custom = "Custom";
+            Auto = "Auto";
 
             FileEmptyMessage = "File is empty";
             FileExistsMessage = "File already exists";

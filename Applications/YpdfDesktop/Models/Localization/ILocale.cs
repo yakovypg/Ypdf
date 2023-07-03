@@ -49,6 +49,8 @@
         string? PageWidth { get; set; }
         string? PageHeight { get; set; }
         string? Margin { get; set; }
+        string? Alignment { get; set; }
+        string? AutoincreaseSize { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -69,6 +71,7 @@
         string? Yes { get; set; }
         string? No { get; set; }
         string? Custom { get; set; }
+        string? Auto { get; set; }
 
         string? FileEmptyMessage { get; set; }
         string? FileExistsMessage { get; set; }

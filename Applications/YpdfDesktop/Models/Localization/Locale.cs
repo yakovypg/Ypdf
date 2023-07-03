@@ -51,6 +51,8 @@ namespace YpdfDesktop.Models.Localization
         public string? PageWidth { get; set; }
         public string? PageHeight { get; set; }
         public string? Margin { get; set; }
+        public string? Alignment { get; set; }
+        public string? AutoincreaseSize { get; set; }
 
         public string? Split { get; set; }
         public string? Merge { get; set; }
@@ -71,6 +73,7 @@ namespace YpdfDesktop.Models.Localization
         public string? Yes { get; set; }
         public string? No { get; set; }
         public string? Custom { get; set; }
+        public string? Auto { get; set; }
 
         public string? FileEmptyMessage { get; set; }
         public string? FileExistsMessage { get; set; }
