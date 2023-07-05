@@ -54,6 +54,18 @@
             Margin = "Margin";
             Alignment = "Alignment";
             AutoincreaseSize = "Autoincrease size";
+            HorizontalAlignment = "Horizontal alignment";
+            VerticalAlignment = "Vertical alignment";
+            TextPresenter = "Text presenter";
+            ConsiderLeftPageMargin = "Consider left page margin";
+            ConsiderTopPageMargin = "Consider top page margin";
+            ConsiderRightPageMargin = "Consider right page margin";
+            ConsiderBottomPageMargin = "Consider bottom page margin";
+            ContentShift = "Content shift";
+            FillColor = "Fill color";
+            NumberLocationMode = "Number location mode";
+            PageIncrease = "Page increase";
+            IncreasePage = "Increase page";
 
             Split = "split";
             Merge = "merge";
@@ -88,6 +100,7 @@
             SpecifyCorrectSizeFactorMessage = "Specify the size factor";
             SpecifyAtLeastOnePasswordMessage = "Specify at least one password";
             SpecifyPasswordMessage = "Specify the password";
+            IncorrectShiftContentPagesMessage = "Pages on which the content will be shifted are incorrect";
         }
     }
 }

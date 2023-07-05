@@ -119,7 +119,7 @@
 			<toolPages:DividePagesView />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsAddPageNumbersViewVisible}">
-			<toolPages:AddPageNumbersView />
+			<toolPages:AddPageNumbersView DataContext="{Binding AddPageNumbersVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsAddWatermarkViewVisible}">
 			<toolPages:AddWatermarkView />

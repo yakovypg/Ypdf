@@ -30,6 +30,7 @@ namespace YpdfDesktop.ViewModels.Pages
         public SplitViewModel SplitVM { get; }
         public MergeViewModel MergeVM { get; }
         public CompressViewModel CompressVM { get; }
+        public AddPageNumbersViewModel AddPageNumbersVM { get; }
         public ImageToPdfViewModel ImageToPdfVM { get; }
         public TextToPdfViewModel TextToPdfVM { get; }
         public ExtractImagesViewModel ExtractImagesVM { get; }
@@ -179,6 +180,7 @@ namespace YpdfDesktop.ViewModels.Pages
             SplitVM = new SplitViewModel(settingsVM, tasksVM);
             MergeVM = new MergeViewModel(settingsVM, tasksVM);
             CompressVM = new CompressViewModel(settingsVM, tasksVM);
+            AddPageNumbersVM = new AddPageNumbersViewModel(settingsVM, tasksVM);
             ImageToPdfVM = new ImageToPdfViewModel(settingsVM, tasksVM);
             TextToPdfVM = new TextToPdfViewModel(settingsVM, tasksVM);
             ExtractImagesVM = new ExtractImagesViewModel(settingsVM, tasksVM);

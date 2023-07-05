@@ -53,6 +53,18 @@ namespace YpdfDesktop.Models.Localization
         public string? Margin { get; set; }
         public string? Alignment { get; set; }
         public string? AutoincreaseSize { get; set; }
+        public string? HorizontalAlignment { get; set; }
+        public string? VerticalAlignment { get; set; }
+        public string? TextPresenter { get; set; }
+        public string? ConsiderLeftPageMargin { get; set; }
+        public string? ConsiderTopPageMargin { get; set; }
+        public string? ConsiderRightPageMargin { get; set; }
+        public string? ConsiderBottomPageMargin { get; set; }
+        public string? ContentShift { get; set; }
+        public string? FillColor { get; set; }
+        public string? NumberLocationMode { get; set; }
+        public string? PageIncrease { get; set; }
+        public string? IncreasePage { get; set; }
 
         public string? Split { get; set; }
         public string? Merge { get; set; }
@@ -87,6 +99,7 @@ namespace YpdfDesktop.Models.Localization
         public string? SpecifyCorrectSizeFactorMessage { get; set; }
         public string? SpecifyAtLeastOnePasswordMessage { get; set; }
         public string? SpecifyPasswordMessage { get; set; }
+        public string? IncorrectShiftContentPagesMessage { get; set; }
 
         public Locale() : this(Guid.NewGuid().ToString())
         {

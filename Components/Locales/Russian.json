@@ -44,6 +44,18 @@
   "Margin": "Отступ",
   "Alignment": "Выравнивание",
   "AutoincreaseSize": "Автоувеличение размера",
+  "HorizontalAlignment": "Горизонтальное выравнивание",
+  "VerticalAlignment": "Вертикальное выравнивание",
+  "TextPresenter": "Представление текста",
+  "ConsiderLeftPageMargin": "Учитывать левый отступ страницы",
+  "ConsiderTopPageMargin": "Учитывать верхний отступ страницы",
+  "ConsiderRightPageMargin": "Учитывать правый отступ страницы",
+  "ConsiderBottomPageMargin": "Учитывать нижний отступ страницы",
+  "ContentShift": "Сдвиг контента",
+  "FillColor":"Цвет заполнения",
+  "NumberLocationMode":"Расположение числа",
+  "PageIncrease":"Увеличение страницы",
+  "IncreasePage": "Увеличить страницу",
   "Split": "разбить",
   "Merge": "объединить",
   "Compress": "сжать",
@@ -74,5 +86,6 @@
   "SpecifyCorrectQualityFactorMessage": "Укажите правильный коэффициент качества",
   "SpecifyCorrectSizeFactorMessage": "Укажите правильный коэффициент размера",
   "SpecifyAtLeastOnePasswordMessage": "Укажите хотя бы один пароль",
-  "SpecifyPasswordMessage": "Укажите пароль"
+  "SpecifyPasswordMessage": "Укажите пароль",
+  "IncorrectShiftContentPagesMessage": "Страницы, на которых будет произведен сдвиг контента, некорректны"
 }

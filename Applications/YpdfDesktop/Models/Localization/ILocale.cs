@@ -51,6 +51,18 @@
         string? Margin { get; set; }
         string? Alignment { get; set; }
         string? AutoincreaseSize { get; set; }
+        string? HorizontalAlignment { get; set; }
+        string? VerticalAlignment { get; set; }
+        string? TextPresenter { get; set; }
+        string? ConsiderLeftPageMargin { get; set; }
+        string? ConsiderTopPageMargin { get; set; }
+        string? ConsiderRightPageMargin { get; set; }
+        string? ConsiderBottomPageMargin { get; set; }
+        string? ContentShift { get; set; }
+        string? FillColor { get; set; }
+        string? NumberLocationMode { get; set; }
+        string? PageIncrease { get; set; }
+        string? IncreasePage { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -85,5 +97,6 @@
         string? SpecifyCorrectSizeFactorMessage { get; set; }
         string? SpecifyAtLeastOnePasswordMessage { get; set; }
         string? SpecifyPasswordMessage { get; set; }
+        string? IncorrectShiftContentPagesMessage { get; set; }
     }
 }
