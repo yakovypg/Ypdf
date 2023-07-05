@@ -4,7 +4,7 @@ using YpdfDesktop.ViewModels.Base;
 
 namespace YpdfDesktop.ViewModels.Pages.Tools
 {
-    public class ATemplateVM : PdfToolViewModel
+    public class A0TemplateVM : PdfToolViewModel
     {
         #region Commands
 
@@ -18,11 +18,11 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         #endregion
 
         // Constructor for Designer
-        public ATemplateVM() : this(new SettingsViewModel(), new TasksViewModel())
+        public A0TemplateVM() : this(new SettingsViewModel(), new TasksViewModel())
         {
         }
 
-        public ATemplateVM(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
+        public A0TemplateVM(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
             ExecuteCommand = ReactiveCommand.Create(Execute);
             ResetCommand = ReactiveCommand.Create(Reset);

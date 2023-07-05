@@ -60,10 +60,10 @@
 			<Grid RowDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto"
 		  		  ColumnDefinitions="Auto, 200, 1*">
 				<TextBlock Grid.Row="0"
-			           Grid.Column="0"
-				       Name="InputTextBlock"
-				       Classes="click"
-				       Text="{Binding SettingsVM.Locale.File}">
+			           	   Grid.Column="0"
+				       	   Name="InputTextBlock"
+				       	   Classes="click"
+				       	   Text="{Binding SettingsVM.Locale.File}">
 					<i:Interaction.Behaviors>
 						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="InputTextBlock">
 							<ia:InvokeCommandAction Command="{Binding SelectInputFilePathCommand}" />
