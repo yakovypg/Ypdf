@@ -15,6 +15,10 @@ namespace YpdfDesktop
 
         public override void OnFrameworkInitializationCompleted()
         {
+            // using Avalonia.Data.Core;
+            // using Avalonia.Data.Core.Plugins;
+            // ExpressionObserver.DataValidators.RemoveAll(t => t is DataAnnotationsValidationPlugin);
+            
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 desktop.MainWindow = new MainWindow
