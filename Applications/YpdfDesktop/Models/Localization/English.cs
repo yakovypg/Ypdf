@@ -66,6 +66,9 @@
             NumberLocationMode = "Number location mode";
             PageIncrease = "Page increase";
             IncreasePage = "Increase page";
+            Orientation = "Orientation";
+            ApplyTo = "Apply to";
+            Pages = "Pages";
 
             Split = "split";
             Merge = "merge";
@@ -83,6 +86,7 @@
             SetPassword = "set password";
             RemovePassword = "rm password";
 
+            Ok = "Ok";
             Yes = "Yes";
             No = "No";
             Custom = "Custom";
@@ -92,6 +96,7 @@
             FileExistsMessage = "File already exists";
             FileNotPdfMessage = "File is not PDF document";
             FileNotTxtMessage = "File is not TXT document";
+            FailedToLoadFileMessage = "Failed to load file";
             ReplaceItMessage = "Replace it";
             UnfinishedTasksMessage = "You have unfinished tasks";
             ExitWithoutWaitingForCompletionMessage = "Exit without waiting for completion";
@@ -101,6 +106,7 @@
             SpecifyAtLeastOnePasswordMessage = "Specify at least one password";
             SpecifyPasswordMessage = "Specify the password";
             IncorrectShiftContentPagesMessage = "Pages on which the content will be shifted are incorrect";
+            IncorrectPagesMessage = "Pages to which the current configuration will be applied are incorrect";
         }
     }
 }

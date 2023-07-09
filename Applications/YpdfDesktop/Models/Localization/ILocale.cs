@@ -63,6 +63,9 @@
         string? NumberLocationMode { get; set; }
         string? PageIncrease { get; set; }
         string? IncreasePage { get; set; }
+        string? Orientation { get; set; }
+        string? ApplyTo { get; set; }
+        string? Pages { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -80,6 +83,7 @@
         string? SetPassword { get; set; }
         string? RemovePassword { get; set; }
 
+        string? Ok { get; set; }
         string? Yes { get; set; }
         string? No { get; set; }
         string? Custom { get; set; }
@@ -89,6 +93,7 @@
         string? FileExistsMessage { get; set; }
         string? FileNotPdfMessage { get; set; }
         string? FileNotTxtMessage { get; set; }
+        string? FailedToLoadFileMessage { get; set; }
         string? ReplaceItMessage { get; set; }
         string? UnfinishedTasksMessage { get; set; }
         string? ExitWithoutWaitingForCompletionMessage { get; set; }
@@ -98,5 +103,6 @@
         string? SpecifyAtLeastOnePasswordMessage { get; set; }
         string? SpecifyPasswordMessage { get; set; }
         string? IncorrectShiftContentPagesMessage { get; set; }
+        string? IncorrectPagesMessage { get; set; }
     }
 }

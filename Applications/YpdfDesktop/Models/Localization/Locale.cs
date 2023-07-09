@@ -65,6 +65,9 @@ namespace YpdfDesktop.Models.Localization
         public string? NumberLocationMode { get; set; }
         public string? PageIncrease { get; set; }
         public string? IncreasePage { get; set; }
+        public string? Orientation { get; set; }
+        public string? ApplyTo { get; set; }
+        public string? Pages { get; set; }
 
         public string? Split { get; set; }
         public string? Merge { get; set; }
@@ -82,6 +85,7 @@ namespace YpdfDesktop.Models.Localization
         public string? SetPassword { get; set; }
         public string? RemovePassword { get; set; }
 
+        public string? Ok { get; set; }
         public string? Yes { get; set; }
         public string? No { get; set; }
         public string? Custom { get; set; }
@@ -91,6 +95,7 @@ namespace YpdfDesktop.Models.Localization
         public string? FileExistsMessage { get; set; }
         public string? FileNotPdfMessage { get; set; }
         public string? FileNotTxtMessage { get; set; }
+        public string? FailedToLoadFileMessage { get; set; }
         public string? ReplaceItMessage { get; set; }
         public string? UnfinishedTasksMessage { get; set; }
         public string? ExitWithoutWaitingForCompletionMessage { get; set; }
@@ -100,6 +105,7 @@ namespace YpdfDesktop.Models.Localization
         public string? SpecifyAtLeastOnePasswordMessage { get; set; }
         public string? SpecifyPasswordMessage { get; set; }
         public string? IncorrectShiftContentPagesMessage { get; set; }
+        public string? IncorrectPagesMessage { get; set; }
 
         public Locale() : this(Guid.NewGuid().ToString())
         {

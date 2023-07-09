@@ -56,6 +56,9 @@
   "NumberLocationMode":"Расположение числа",
   "PageIncrease":"Увеличение страницы",
   "IncreasePage": "Увеличить страницу",
+  "Orientation": "Ориентация",
+  "ApplyTo": "Применить к",
+  "Pages": "Страницы",
   "Split": "разбить",
   "Merge": "объединить",
   "Compress": "сжать",
@@ -71,6 +74,7 @@
   "ExtractText": "извлечь текст",
   "SetPassword": "пароль",
   "RemovePassword": "снять пароль",
+  "Ok": "Ок",
   "Yes": "Да",
   "No": "Нет",
   "Custom": "Свой",
@@ -79,6 +83,7 @@
   "FileExistsMessage": "Файл уже существует",
   "FileNotPdfMessage": "Файл не является PDF документом",
   "FileNotTxtMessage": "Файл не является TXT документом",
+  "FailedToLoadFileMessage": "Не удалось загрузить файл",
   "ReplaceItMessage": "Заменить его",
   "UnfinishedTasksMessage": "У Вас есть незавершенные задачи",
   "ExitWithoutWaitingForCompletionMessage": "Выйти без ожидания завершения",
@@ -87,5 +92,6 @@
   "SpecifyCorrectSizeFactorMessage": "Укажите правильный коэффициент размера",
   "SpecifyAtLeastOnePasswordMessage": "Укажите хотя бы один пароль",
   "SpecifyPasswordMessage": "Укажите пароль",
-  "IncorrectShiftContentPagesMessage": "Страницы, на которых будет произведен сдвиг контента, некорректны"
+  "IncorrectShiftContentPagesMessage": "Страницы, на которых будет произведен сдвиг контента, некорректны",
+  "IncorrectPagesMessage": "Pages to which the current configuration will be applied are incorrect"
 }

@@ -116,7 +116,7 @@
 			<toolPages:CropPagesView />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsDividePagesViewVisible}">
-			<toolPages:DividePagesView />
+			<toolPages:DividePagesView DataContext="{Binding DividePagesVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsAddPageNumbersViewVisible}">
 			<toolPages:AddPageNumbersView DataContext="{Binding AddPageNumbersVM}" />

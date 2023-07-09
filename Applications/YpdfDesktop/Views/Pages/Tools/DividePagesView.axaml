@@ -2,12 +2,275 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:bt="using:YpdfDesktop.Infrastructure.Behaviors.Text"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
+             xmlns:models="clr-namespace:YpdfDesktop.Models.Paging"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.Tools.DividePagesView">
 
-	<Grid>
-		<TextBlock Text="Divide pages" />
+    <Design.DataContext>
+		<vm:DividePagesViewModel />
+	</Design.DataContext>
+
+    <Grid Margin="5, 5, 0, 5"
+		  DragDrop.AllowDrop="True"
+		  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid.Resources>
+			<bd:FileDropHandler x:Key="FileDropHandler" />
+		</Grid.Resources>
+
+		<i:Interaction.Behaviors>
+			<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
+		</i:Interaction.Behaviors>
+		
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition Width="2" />
+			<ColumnDefinition MinWidth="2" />
+		</Grid.ColumnDefinitions>
+
+		<GridSplitter Grid.Column="1" Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" />
+
+		<Grid Grid.Column="0"
+			  ColumnDefinitions="Auto, 1*"
+			  RowDefinitions="Auto, 1*"
+			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		    <Grid.Styles>
+				<Style Selector="Slider">
+					<Setter Property="Margin" Value="0" />
+				</Style>
+			</Grid.Styles>
+
+			<Slider Grid.Row="0"
+					Grid.Column="1"
+                	Minimum="0"
+                	Orientation="Horizontal"
+                	HorizontalAlignment="Center"
+                	Width="{Binding CurrentVirtualPdfPageWidth}"
+                	IsEnabled="{Binding IsCurrentDivisionOrientationVertical}"
+                	Maximum="{Binding CurrentPdfPageWidth}"
+                	Value="{Binding VerticalDivisionPoint}" />
+			
+			<Slider Grid.Row="1"
+					Grid.Column="0"
+					Minimum="0"
+					Orientation="Vertical"
+					VerticalAlignment="Center"
+					Height="{Binding CurrentVirtualPdfPageHeight}"
+					IsEnabled="{Binding IsCurrentDivisionOrientationHorizontal}"
+					Maximum="{Binding CurrentPdfPageHeight}"
+					Value="{Binding HorizontalDivisionPoint}" />
+
+			<Grid Grid.Row="1"
+				  Grid.Column="1"
+				  Margin="0, 0, 5, 0"
+				  Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}"
+				  Bounds="{Binding VirtualPdfPageBounds, Mode=OneWayToSource}">
+				<Rectangle Stroke="Black"
+						   Width="1"
+						   StrokeThickness="1"
+						   StrokeDashArray="4,7"
+						   HorizontalAlignment="Left"
+						   Margin="{Binding VerticalDottedLineMargin}"
+						   IsVisible="{Binding IsCurrentDivisionOrientationVertical}" />
+
+				<Rectangle Stroke="Black"
+						   Height="1"
+						   StrokeThickness="1"
+						   StrokeDashArray="5,5"
+						   VerticalAlignment="Bottom"
+						   Margin="{Binding HorizontalDottedLineMargin}"
+						   IsVisible="{Binding IsCurrentDivisionOrientationHorizontal}" />
+			</Grid>
+		</Grid>
+
+		<Grid Grid.Column="2"
+              RowDefinitions="Auto, 5, 1*, 5, Auto"
+              Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+			<Grid.Styles>
+				<Style Selector="TextBlock">
+					<Setter Property="VerticalAlignment" Value="Center" />
+					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+				</Style>
+			</Grid.Styles>
+
+			<Grid Grid.Row="0"
+				  Margin="5, 0, 5, 0"
+                  ColumnDefinitions="Auto, 1*"
+                  RowDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto">
+				<Grid.Styles>
+					<Style Selector="TextBlock.click">
+						<Setter Property="VerticalAlignment" Value="Center" />
+						<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+					</Style>
+					<Style Selector="TextBlock.click:pointerover">
+						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="FontWeight" Value="Bold" />
+					</Style>
+					<Style Selector="TextBox">
+						<Setter Property="HorizontalAlignment" Value="Stretch" />
+						<Setter Property="Margin" Value="10, 0, 0, 0" />
+					</Style>
+					<Style Selector="ComboBox">
+						<Setter Property="HorizontalAlignment" Value="Stretch" />
+						<Setter Property="Margin" Value="10, 0, 0, 0" />
+					</Style>
+				</Grid.Styles>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Classes="click"
+						   Name="InputTextBlock"
+						   Text="{Binding SettingsVM.Locale.File}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="InputTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectInputFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0"
+						   Classes="click"
+						   Name="OutputTextBlock"
+						   Text="{Binding SettingsVM.Locale.Output}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="OutputTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectOutputFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding SettingsVM.Locale.Orientation}" />
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding SettingsVM.Locale.ApplyTo}" />
+
+				<TextBox Grid.Row="0"
+						 Grid.Column="1"
+						 IsReadOnly="True"
+						 Text="{Binding InputFilePath}" />
+
+				<TextBox Grid.Row="2"
+						 Grid.Column="1"
+						 IsReadOnly="True"
+						 Text="{Binding OutputFilePath}" />
+				
+				<ComboBox Grid.Row="4"
+                          Grid.Column="1"
+                          IsEnabled="{Binding IsInputFilePathSelected}"
+                          Items="{Binding Orientations}"
+                          SelectedItem="{Binding CurrentDivisionOrientation}" />
+				
+				<Grid Grid.Row="6" Grid.Column="1" ColumnDefinitions="1*, 5, Auto">
+					<TextBox Grid.Column="0"
+                         	 IsEnabled="{Binding IsInputFilePathSelected}"
+                         	 Watermark="{Binding SettingsVM.Locale.Pages}"
+                         	 Text="{Binding PagesToApllyCurrentDivision}">
+						<TextBox.KeyBindings>
+							<KeyBinding Gesture="Enter"
+										Command="{Binding ApplyCurrentDivisionForSelectedPagesCommand}" />
+						</TextBox.KeyBindings>
+					</TextBox>
+					
+					<Button Grid.Column="2"
+						    Content="{Binding SettingsVM.Locale.Ok}"
+							IsEnabled="{Binding IsInputFilePathSelected}"
+							Command="{Binding ApplyCurrentDivisionForSelectedPagesCommand}" />
+				</Grid>
+			</Grid>
+
+			<Border Grid.Row="2"
+					Margin="5, 0, 5, 0"
+					BorderThickness="1"
+					BorderBrush="{Binding SettingsVM.Theme.ExplorerSplitterBackground}">
+				<Grid RowDefinitions="32, 1, 1*">
+					<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding SettingsVM.Locale.Pages}" />
+					<Rectangle Grid.Row="1" Fill="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" /> 
+
+					<ListBox Grid.Row="2"
+							 Name="PagesListBox"
+							 SelectionMode="Multiple"
+							 IsEnabled="{Binding IsInputFilePathSelected}"
+                     		 Items="{Binding PdfPageDivisionsInfo}"
+                     		 SelectedItem="{Binding CurrentPdfPageDivisionInfo}"
+                     		 Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+						<ListBox.ItemTemplate>
+							<DataTemplate DataType="{x:Type models:IPageDivisionInfo}">
+								<CheckBox Cursor="Hand"
+										  IsChecked="{Binding ExecuteDivision}"
+										  Content="{Binding Presenter}"
+										  Foreground="{Binding Theme.CheckBoxForeground}" />
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+
+						<ListBox.KeyBindings>
+							<KeyBinding Gesture="Enter"
+										Command="{Binding SwitchDivisionExecutionToTrueCommand}"
+										CommandParameter="{Binding #PagesListBox.SelectedItems}" />
+							<KeyBinding Gesture="Delete"
+										Command="{Binding SwitchDivisionExecutionToFalseCommand}"
+										CommandParameter="{Binding #PagesListBox.SelectedItems}" />
+						</ListBox.KeyBindings>
+					</ListBox>
+				</Grid>
+			</Border>
+
+            <Grid Grid.Row="4"
+				  Margin="5, 0, 5, 0"
+				  ColumnDefinitions="1*, 5, 1*">
+				<Grid.Styles>
+					<Style Selector="Button">
+						<Setter Property="Width" Value="110" />
+						<Setter Property="HorizontalContentAlignment" Value="Center" />
+					</Style>
+				</Grid.Styles>
+                
+                <Button Grid.Column="0"
+                        HorizontalAlignment="Right"
+						Content="{Binding SettingsVM.Locale.Execute}"
+						IsEnabled="{Binding IsInputFilePathSelected}"
+						Command="{Binding ExecuteCommand}" />
+
+				<Button Grid.Column="2"
+                        HorizontalAlignment="Left"
+						Content="{Binding SettingsVM.Locale.Reset}"
+						Command="{Binding ResetCommand}" />
+			</Grid>
+		</Grid>
 	</Grid>
+
+	<!-- <Grid Margin="5" RowDefinitions="50, 1*">
+        <Slider Grid.Row="0"
+                Minimum="0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Width="{Binding CurrentVirtualPdfPageWidth}"
+                IsEnabled="{Binding IsCurrentDivisionOrientationHorizontal}"
+                Maximum="{Binding CurrentPdfPageWidth}"
+                Value="{Binding VerticalDivisionPoint}" />
+
+        <Grid Grid.Row="1" Background="LightGray" Bounds="{Binding VirtualPdfPageBounds, Mode=OneWayToSource}">
+            <Rectangle Stroke="Black" Width="1" StrokeThickness="1" StrokeDashArray="5,5"
+                HorizontalAlignment="Left" Margin="{Binding VerticalDottedLineMargin}"
+                IsVisible="{Binding IsCurrentDivisionOrientationVertical}" />
+
+            <Rectangle Stroke="Black" Height="1" StrokeThickness="1" StrokeDashArray="5,5"
+                VerticalAlignment="Bottom" Margin="{Binding HorizontalDottedLineMargin}"
+                IsVisible="{Binding IsCurrentDivisionOrientationHorizontal}" />
+        </Grid>
+
+        <Slider Grid.Row="1"
+                Minimum="0"
+                Orientation="Vertical"
+                VerticalAlignment="Center"
+                Height="{Binding CurrentVirtualPdfPageHeight}"
+                IsEnabled="{Binding IsCurrentDivisionOrientationVertical}"
+                Maximum="{Binding CurrentPdfPageHeight}"
+                Value="{Binding HorizontalDivisionPoint}" />
+	</Grid> -->
 
 </UserControl>
