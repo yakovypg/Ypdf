@@ -18,7 +18,7 @@
 		<vm:SplitViewModel />
 	</Design.DataContext>
 
-	<Grid Background="White">
+	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
 			<ColumnDefinition Width="2" />
