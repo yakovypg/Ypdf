@@ -73,8 +73,8 @@ namespace YpdfDesktop.Models.Paging
 
             float centerOffset = Orientation switch
             {
-                PageDivisionOrientation.Vertical => VerticalDivisionPoint - pageVerticalCenter,
-                PageDivisionOrientation.Horizontal => HorizontalDivisionPoint - pageHorizontalCenter,
+                PageDivisionOrientation.Vertical => VerticalDivisionPoint - pageHorizontalCenter,
+                PageDivisionOrientation.Horizontal => HorizontalDivisionPoint - pageVerticalCenter,
                 _ => throw new NotImplementedException()
             };
 
