@@ -19,7 +19,6 @@ using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Infrastructure.Default;
 using YpdfDesktop.Models;
 using YpdfDesktop.Models.IO;
-using YpdfDesktop.Models.Localization;
 using YpdfDesktop.ViewModels.Base;
 using YpdfDesktop.Models.Paging;
 using YpdfLib.Models.Design;
@@ -41,6 +40,21 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         public ReactiveCommand<Unit, Unit> ApplyCurrentDivisionForSelectedPagesCommand { get; }
         public ReactiveCommand<IList, Unit> SwitchDivisionExecutionToTrueCommand { get; }
         public ReactiveCommand<IList, Unit> SwitchDivisionExecutionToFalseCommand { get; }
+
+        #endregion
+
+        #region Public Properties
+
+        /*
+         * If you change the value of PdfPageImageBorderThicknessValue, change it in
+         * the DividePagesView.axaml as well (value should be doubled). It is used as
+         * a converter parameter in the converter for the PDF page image border width
+         * and height
+        */
+        public static double PdfPageImageBorderThicknessValue => 2;
+        public static Thickness PdfPageImageBorderThickness => new(PdfPageImageBorderThicknessValue);
+
+        public bool IsAnyDivisionsSpecified => PdfPageDivisionsInfo.Any(t => t.ExecuteDivision);
 
         #endregion
 
@@ -89,12 +103,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             set
             {
                 this.RaiseAndSetIfChanged(ref _virtualPdfPageBounds, value);
-
-                CurrentVirtualPdfPageWidth = value.Width;
-                CurrentVirtualPdfPageHeight = value.Height;
-
-                UpdateHorizontalDottedLineMargin();
-                UpdateVerticalDottedLineMargin();
+                UpdateVirtualPdfPageSize();
             }
         }
 
@@ -126,6 +135,13 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             private set => this.RaiseAndSetIfChanged(ref _currentPdfPageHeight, value);
         }
 
+        private string _currentPdfPageImage = string.Empty;
+        public string CurrentPdfPageImage
+        {
+            get => _currentPdfPageImage;
+            private set => this.RaiseAndSetIfChanged(ref _currentPdfPageImage, value);
+        }
+
         private PageDivisionOrientation _currentDivisionOrientation = PageDivisionOrientation.Vertical;
         public PageDivisionOrientation CurrentDivisionOrientation
         {
@@ -139,21 +155,23 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             }
         }
 
-        private IPageDivisionInfo _currentPdfPageDivisionInfo = new PageDivisionInfo(0, 0, 0);
-        public IPageDivisionInfo CurrentPdfPageDivisionInfo
+        private IPageDivisionInfo? _currentPdfPageDivisionInfo = new PageDivisionInfo(0, 0, 0);
+        public IPageDivisionInfo? CurrentPdfPageDivisionInfo
         {
             get => _currentPdfPageDivisionInfo;
             set
             {
                 ApplyCurrentDivision(_currentPdfPageDivisionInfo);
-
                 this.RaiseAndSetIfChanged(ref _currentPdfPageDivisionInfo, value);
 
-                CurrentPdfPageWidth = value.PageWidth;
-                CurrentPdfPageHeight = value.PageHeight;
-                HorizontalDivisionPoint = value.HorizontalDivisionPoint;
-                VerticalDivisionPoint = value.VerticalDivisionPoint;
-                CurrentDivisionOrientation = value.Orientation;
+                CurrentPdfPageWidth = value?.PageWidth ?? 0;
+                CurrentPdfPageHeight = value?.PageHeight ?? 0;
+                CurrentPdfPageImage = string.Empty; // TODO
+                HorizontalDivisionPoint = value?.HorizontalDivisionPoint ?? 0;
+                VerticalDivisionPoint = value?.VerticalDivisionPoint ?? 0;
+                CurrentDivisionOrientation = value?.Orientation ?? 0;
+
+                UpdateVirtualPdfPageSize();
             }
         }
 
@@ -252,7 +270,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         {
             ApplyCurrentDivision(CurrentPdfPageDivisionInfo);
 
-            if (!VerifyOutputFilePath())
+            if (!VerifyOutputFilePath() || !VerifyDivisionsCount())
                 return;
 
             var config = new YpdfConfig()
@@ -344,6 +362,11 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         private bool VerifyOutputFilePath()
         {
             return InformIfIncorrect(IsOutputFilePathSelected, SettingsVM.Locale.SpecifyOutputFilePathMessage);
+        }
+
+        private bool VerifyDivisionsCount()
+        {
+            return InformIfIncorrect(IsAnyDivisionsSpecified, SettingsVM.Locale.SpecifyAtLeastOneDivisionMessage);
         }
 
         private void ApplyCurrentDivisionForSelectedPages()
@@ -449,13 +472,58 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             return true;
         }
 
+        private void UpdateVirtualPdfPageSize()
+        {
+            double maxVirtualPdfPageWidth = VirtualPdfPageBounds.Width
+                - PdfPageImageBorderThickness.Left
+                - PdfPageImageBorderThickness.Right;
+
+            double maxVirtualPdfPageHeight = VirtualPdfPageBounds.Height
+                - PdfPageImageBorderThickness.Top
+                - PdfPageImageBorderThickness.Bottom;
+
+            if (CurrentPdfPageHeight >= CurrentPdfPageWidth && CurrentPdfPageHeight != 0)
+            {
+                CurrentVirtualPdfPageHeight = Math.Min(
+                    maxVirtualPdfPageHeight,
+                    CurrentPdfPageHeight);
+
+                CurrentVirtualPdfPageWidth = Math.Min(
+                    maxVirtualPdfPageWidth,
+                    CurrentVirtualPdfPageHeight * CurrentPdfPageWidth / CurrentPdfPageHeight);
+            }
+            else if (CurrentPdfPageWidth >= CurrentPdfPageHeight && CurrentPdfPageWidth != 0)
+            {
+                CurrentVirtualPdfPageWidth = Math.Min(
+                    maxVirtualPdfPageWidth,
+                    CurrentPdfPageWidth);
+
+                CurrentVirtualPdfPageHeight = Math.Min(
+                    maxVirtualPdfPageHeight,
+                    CurrentVirtualPdfPageWidth * CurrentPdfPageHeight / CurrentPdfPageWidth);
+            }
+            else
+            {
+                CurrentVirtualPdfPageWidth = maxVirtualPdfPageWidth;
+                CurrentVirtualPdfPageHeight = maxVirtualPdfPageHeight;
+            }
+
+            UpdateHorizontalDottedLineMargin();
+            UpdateVerticalDottedLineMargin();
+        }
+
         private void UpdateHorizontalDottedLineMargin()
         {
             double p = CurrentPdfPageHeight != 0
                 ? HorizontalDivisionPoint / CurrentPdfPageHeight
                 : 0;
 
-            HorizontalDottedLineMargin = new Thickness(0, 0, 0, VirtualPdfPageBounds.Height * p);
+            double bottomMargin = CurrentVirtualPdfPageHeight * p;
+
+            if (bottomMargin >= CurrentVirtualPdfPageHeight)
+                bottomMargin = CurrentVirtualPdfPageHeight - 1;
+
+            HorizontalDottedLineMargin = new Thickness(0, 0, 0, bottomMargin);
         }
 
         private void UpdateVerticalDottedLineMargin()
@@ -464,7 +532,12 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                 ? VerticalDivisionPoint / CurrentPdfPageWidth
                 : 0;
 
-            VerticalDottedLineMargin = new Thickness(VirtualPdfPageBounds.Width * p, 0, 0, 0);
+            double leftMargin = CurrentVirtualPdfPageWidth * p;
+
+            if (leftMargin >= CurrentVirtualPdfPageWidth)
+                leftMargin = CurrentVirtualPdfPageWidth - 1;
+
+            VerticalDottedLineMargin = new Thickness(leftMargin, 0, 0, 0);
         }
 
         private void SetDefaultItems()

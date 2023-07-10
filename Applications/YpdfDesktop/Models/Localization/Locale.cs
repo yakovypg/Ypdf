@@ -104,6 +104,7 @@ namespace YpdfDesktop.Models.Localization
         public string? SpecifyCorrectSizeFactorMessage { get; set; }
         public string? SpecifyAtLeastOnePasswordMessage { get; set; }
         public string? SpecifyPasswordMessage { get; set; }
+        public string? SpecifyAtLeastOneDivisionMessage { get; set; }
         public string? IncorrectShiftContentPagesMessage { get; set; }
         public string? IncorrectPagesMessage { get; set; }
 

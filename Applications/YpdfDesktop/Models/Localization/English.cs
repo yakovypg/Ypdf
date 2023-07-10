@@ -105,6 +105,7 @@
             SpecifyCorrectSizeFactorMessage = "Specify the size factor";
             SpecifyAtLeastOnePasswordMessage = "Specify at least one password";
             SpecifyPasswordMessage = "Specify the password";
+            SpecifyAtLeastOneDivisionMessage = "Specify at least one division";
             IncorrectShiftContentPagesMessage = "Pages on which the content will be shifted are incorrect";
             IncorrectPagesMessage = "Pages to which the current configuration will be applied are incorrect";
         }

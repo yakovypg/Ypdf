@@ -2,6 +2,7 @@
   "Id": "dark_unix1674225488",
   "Name": "Dark",
   "ExplorerBackground": "#292E45",
+  "ExplorerEmptyPlaceBackground": "#D3D3D3",
   "ExplorerTextForeground": "#FFFF8C00",
   "ExplorerSplitterBackground": "#D3D3D3",
   "ExplorerMenuBackground": "#D3D3D3",
@@ -41,5 +42,6 @@
   "InputFilesTileTextForeground": "#000000",
   "RunningStatusBrush": "#EECFCFE0",
   "CompletedStatusBrush": "#EECFE0DF",
-  "FaultedStatusBrush": "#EEE0CFCF"
+  "FaultedStatusBrush": "#EEE0CFCF",
+  "ContrastBorderBrush": "#D3D3D3"
 }

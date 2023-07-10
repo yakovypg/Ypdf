@@ -14,6 +14,9 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? ExplorerBackground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ExplorerEmptyPlaceBackground { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? ExplorerTextForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
@@ -132,6 +135,9 @@ namespace YpdfDesktop.Models.Themes
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? FaultedStatusBrush { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? ContrastBorderBrush { get; set; }
 
         public WindowTheme() : this(Guid.NewGuid().ToString())
         {

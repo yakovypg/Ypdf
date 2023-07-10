@@ -11,6 +11,7 @@ namespace YpdfDesktop.Models.Themes
         protected override void SetBrushes()
         {
             ExplorerBackground = SolidColorBrush.Parse("#F0F8FF");
+            ExplorerEmptyPlaceBackground = SolidColorBrush.Parse("#D3D3D3");
             ExplorerTextForeground = SolidColorBrush.Parse("#000000");
             ExplorerSplitterBackground = SolidColorBrush.Parse("#D3D3D3");
             ExplorerMenuBackground = SolidColorBrush.Parse("#D3D3D3");
@@ -57,6 +58,8 @@ namespace YpdfDesktop.Models.Themes
             RunningStatusBrush = SolidColorBrush.Parse("#EECFCFE0");
             CompletedStatusBrush = SolidColorBrush.Parse("#EECFE0DF");
             FaultedStatusBrush = SolidColorBrush.Parse("#EEE0CFCF");
+
+            ContrastBorderBrush = SolidColorBrush.Parse("#FF8B8B8B");
         }
     }
 }

@@ -9,6 +9,7 @@
 			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
 			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
              xmlns:models="clr-namespace:YpdfDesktop.Models.Paging"
+			 xmlns:converters="clr-namespace:YpdfDesktop.Infrastructure.Converters"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.Tools.DividePagesView">
@@ -38,14 +39,8 @@
 
 		<Grid Grid.Column="0"
 			  ColumnDefinitions="Auto, 1*"
-			  RowDefinitions="Auto, 1*"
+			  RowDefinitions="Auto, 1*, Auto"
 			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
-		    <Grid.Styles>
-				<Style Selector="Slider">
-					<Setter Property="Margin" Value="0" />
-				</Style>
-			</Grid.Styles>
-
 			<Slider Grid.Row="0"
 					Grid.Column="1"
                 	Minimum="0"
@@ -69,23 +64,59 @@
 			<Grid Grid.Row="1"
 				  Grid.Column="1"
 				  Margin="0, 0, 5, 0"
-				  Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}"
-				  Bounds="{Binding VirtualPdfPageBounds, Mode=OneWayToSource}">
-				<Rectangle Stroke="Black"
-						   Width="1"
-						   StrokeThickness="1"
-						   StrokeDashArray="4,7"
-						   HorizontalAlignment="Left"
-						   Margin="{Binding VerticalDottedLineMargin}"
-						   IsVisible="{Binding IsCurrentDivisionOrientationVertical}" />
+				  Background="{Binding SettingsVM.Theme.ExplorerEmptyPlaceBackground}"
+				  Bounds="{Binding VirtualPdfPageBounds, Mode=OneWayToSource}">		
+				<Grid.Resources>
+					<converters:BitmapFileValueConverter x:Key="BitmapFileValueConverter" />
+					<converters:IncreaseDoubleValueConverter x:Key="IncreaseDoubleValueConverter" />
+				</Grid.Resources>
+				
+				<Border BorderThickness="{Binding PdfPageImageBorderThickness}"
+						BorderBrush="{Binding SettingsVM.Theme.ContrastBorderBrush}"
+						Background="{Binding SettingsVM.Theme.ExplorerBackground}"
+						Width="{Binding CurrentVirtualPdfPageWidth, Converter={StaticResource IncreaseDoubleValueConverter}, ConverterParameter=4}"
+						Height="{Binding CurrentVirtualPdfPageHeight, Converter={StaticResource IncreaseDoubleValueConverter}, ConverterParameter=4}">
+					<Grid Width="{Binding CurrentVirtualPdfPageWidth}"
+						  Height="{Binding CurrentVirtualPdfPageHeight}">
 
-				<Rectangle Stroke="Black"
-						   Height="1"
-						   StrokeThickness="1"
-						   StrokeDashArray="5,5"
-						   VerticalAlignment="Bottom"
-						   Margin="{Binding HorizontalDottedLineMargin}"
-						   IsVisible="{Binding IsCurrentDivisionOrientationHorizontal}" />
+						<Image Stretch="Fill"
+							   Source="{Binding CurrentPdfPageImage, Converter={StaticResource BitmapFileValueConverter}}" />
+
+						<Rectangle Stroke="Black"
+								   Width="1"
+								   StrokeThickness="1"
+								   StrokeDashArray="4,7"
+								   HorizontalAlignment="Left"
+								   Margin="{Binding VerticalDottedLineMargin}"
+								   IsVisible="{Binding IsCurrentDivisionOrientationVertical}" />
+
+						<Rectangle Stroke="Black"
+								   Height="1"
+								   StrokeThickness="1"
+								   StrokeDashArray="5,5"
+								   VerticalAlignment="Bottom"
+								   Margin="{Binding HorizontalDottedLineMargin}"
+								   IsVisible="{Binding IsCurrentDivisionOrientationHorizontal}" />
+					</Grid>
+				</Border>
+			</Grid>
+
+			<Grid Grid.Row="2"
+				  Grid.Column="1"
+				  Margin="0, 10, 0, 0"
+				  HorizontalAlignment="Center"
+				  ColumnDefinitions="1*, Auto, 5, Auto, 1*">
+				<NumericUpDown Grid.Column="1"
+						   	   Minimum="0"
+						       Maximum="{Binding CurrentPdfPageHeight}"
+							   IsEnabled="{Binding IsCurrentDivisionOrientationHorizontal}"
+						   	   Value="{Binding HorizontalDivisionPoint, Mode=TwoWay}" />
+				
+				<NumericUpDown Grid.Column="3"
+						       Minimum="0"
+						       Maximum="{Binding CurrentPdfPageWidth}"
+						       IsEnabled="{Binding IsCurrentDivisionOrientationVertical}"
+						       Value="{Binding VerticalDivisionPoint, Mode=TwoWay}" />
 			</Grid>
 		</Grid>
 
@@ -186,10 +217,10 @@
 			<Border Grid.Row="2"
 					Margin="5, 0, 5, 0"
 					BorderThickness="1"
-					BorderBrush="{Binding SettingsVM.Theme.ExplorerSplitterBackground}">
+					BorderBrush="{Binding SettingsVM.Theme.ContrastBorderBrush}">
 				<Grid RowDefinitions="32, 1, 1*">
 					<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding SettingsVM.Locale.Pages}" />
-					<Rectangle Grid.Row="1" Fill="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" /> 
+					<Rectangle Grid.Row="1" Fill="{Binding SettingsVM.Theme.ContrastBorderBrush}" /> 
 
 					<ListBox Grid.Row="2"
 							 Name="PagesListBox"
@@ -242,35 +273,5 @@
 			</Grid>
 		</Grid>
 	</Grid>
-
-	<!-- <Grid Margin="5" RowDefinitions="50, 1*">
-        <Slider Grid.Row="0"
-                Minimum="0"
-                Orientation="Horizontal"
-                HorizontalAlignment="Center"
-                Width="{Binding CurrentVirtualPdfPageWidth}"
-                IsEnabled="{Binding IsCurrentDivisionOrientationHorizontal}"
-                Maximum="{Binding CurrentPdfPageWidth}"
-                Value="{Binding VerticalDivisionPoint}" />
-
-        <Grid Grid.Row="1" Background="LightGray" Bounds="{Binding VirtualPdfPageBounds, Mode=OneWayToSource}">
-            <Rectangle Stroke="Black" Width="1" StrokeThickness="1" StrokeDashArray="5,5"
-                HorizontalAlignment="Left" Margin="{Binding VerticalDottedLineMargin}"
-                IsVisible="{Binding IsCurrentDivisionOrientationVertical}" />
-
-            <Rectangle Stroke="Black" Height="1" StrokeThickness="1" StrokeDashArray="5,5"
-                VerticalAlignment="Bottom" Margin="{Binding HorizontalDottedLineMargin}"
-                IsVisible="{Binding IsCurrentDivisionOrientationHorizontal}" />
-        </Grid>
-
-        <Slider Grid.Row="1"
-                Minimum="0"
-                Orientation="Vertical"
-                VerticalAlignment="Center"
-                Height="{Binding CurrentVirtualPdfPageHeight}"
-                IsEnabled="{Binding IsCurrentDivisionOrientationVertical}"
-                Maximum="{Binding CurrentPdfPageHeight}"
-                Value="{Binding HorizontalDivisionPoint}" />
-	</Grid> -->
 
 </UserControl>

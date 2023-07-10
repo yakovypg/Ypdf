@@ -8,6 +8,7 @@ namespace YpdfDesktop.Models.Themes
         string Name { get; set; }
 
         ISolidColorBrush? ExplorerBackground { get; set; }
+        ISolidColorBrush? ExplorerEmptyPlaceBackground { get; set; }
         ISolidColorBrush? ExplorerTextForeground { get; set; }
         ISolidColorBrush? ExplorerSplitterBackground { get; set; }
         ISolidColorBrush? ExplorerMenuBackground { get; set; }
@@ -54,5 +55,7 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? RunningStatusBrush { get; set; }
         ISolidColorBrush? CompletedStatusBrush { get; set; }
         ISolidColorBrush? FaultedStatusBrush { get; set; }
+
+        ISolidColorBrush? ContrastBorderBrush { get; set; }
     }
 }

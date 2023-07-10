@@ -92,6 +92,7 @@
   "SpecifyCorrectSizeFactorMessage": "Укажите правильный коэффициент размера",
   "SpecifyAtLeastOnePasswordMessage": "Укажите хотя бы один пароль",
   "SpecifyPasswordMessage": "Укажите пароль",
+  "SpecifyAtLeastOneDivisionMessage": "Укажите хотя бы одно деление",
   "IncorrectShiftContentPagesMessage": "Страницы, на которых будет произведен сдвиг контента, некорректны",
   "IncorrectPagesMessage": "Pages to which the current configuration will be applied are incorrect"
 }

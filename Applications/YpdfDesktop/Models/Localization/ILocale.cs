@@ -102,6 +102,7 @@
         string? SpecifyCorrectSizeFactorMessage { get; set; }
         string? SpecifyAtLeastOnePasswordMessage { get; set; }
         string? SpecifyPasswordMessage { get; set; }
+        string? SpecifyAtLeastOneDivisionMessage { get; set; }
         string? IncorrectShiftContentPagesMessage { get; set; }
         string? IncorrectPagesMessage { get; set; }
     }
