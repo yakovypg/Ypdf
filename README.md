@@ -149,29 +149,14 @@ First, upgrade pip.
 pip install --upgrade pip
 ```
 
-Next, install all the necessary packages with the following commands.
+Next, install all the necessary packages with the following command.
 
 ```
-pip install Pillow
+pip install -r requirements.txt
 ```
 
-```
-pip install --upgrade pymupdf
-```
-
-```
-pip install tqdm
-```
-
-```
-pip install tika
-```
-
-You can also do this with a single command.
-
-```
-pip install Pillow & pip install --upgrade pymupdf & pip install tqdm & pip install tika
-```
+There is no need to install specific versions of packages. However, the tool has been 
+tested against those specified in the corresponding file.
 
 ## How to use CLI version
 
