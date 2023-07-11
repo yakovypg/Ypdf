@@ -105,5 +105,6 @@
         string? SpecifyAtLeastOneDivisionMessage { get; set; }
         string? IncorrectShiftContentPagesMessage { get; set; }
         string? IncorrectPagesMessage { get; set; }
+        string? IncorrectPageRangeMessage { get; set; }
     }
 }

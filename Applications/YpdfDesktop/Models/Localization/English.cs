@@ -108,6 +108,7 @@
             SpecifyAtLeastOneDivisionMessage = "Specify at least one division";
             IncorrectShiftContentPagesMessage = "Pages on which the content will be shifted are incorrect";
             IncorrectPagesMessage = "Pages to which the current configuration will be applied are incorrect";
+            IncorrectPageRangeMessage = "There is an incorrect page range";
         }
     }
 }

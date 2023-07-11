@@ -94,5 +94,6 @@
   "SpecifyPasswordMessage": "Укажите пароль",
   "SpecifyAtLeastOneDivisionMessage": "Укажите хотя бы одно деление",
   "IncorrectShiftContentPagesMessage": "Страницы, на которых будет произведен сдвиг контента, некорректны",
-  "IncorrectPagesMessage": "Pages to which the current configuration will be applied are incorrect"
+  "IncorrectPagesMessage": "Страницы, к которым будет применена текущая конфигурация, некорректны",
+  "IncorrectPageRangeMessage": "Имеется некорректный диапазон страниц"
 }

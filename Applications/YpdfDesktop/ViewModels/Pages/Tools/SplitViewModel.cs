@@ -4,6 +4,7 @@ using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reactive;
 using YpdfDesktop.Infrastructure.Communication;
 using YpdfDesktop.Models;
@@ -25,6 +26,12 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
         public ReactiveCommand<Unit, Unit> SelectOutputDirectoryCommand { get; }
         public ReactiveCommand<Unit, Unit> AddPageRangeCommand { get; }
         public ReactiveCommand<IRange, Unit> DeletePageRangeCommand { get; }
+
+        #endregion
+
+        #region Public Properties
+
+        public bool IsAnyIncorrectRange => PageRanges.Any(t => !t.IsCorrect);
 
         #endregion
 
@@ -90,6 +97,9 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         protected override void Execute()
         {
+            if (!VerifyRanges())
+                return;
+
             var config = new YpdfConfig()
             {
                 PdfTool = "split"
@@ -177,6 +187,11 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                 if (t.Result is not null && !string.IsNullOrEmpty(t.Result) && Directory.Exists(t.Result))
                     OutputDirectoryPath = t.Result;
             });
+        }
+
+        private bool VerifyRanges()
+        {
+            return InformIfIncorrect(!IsAnyIncorrectRange, SettingsVM.Locale.IncorrectPageRangeMessage);
         }
 
         private void AddPageRange()
