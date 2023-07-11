@@ -26,7 +26,11 @@
 		</Grid.Resources>
 
 		<Grid.Styles>
-			<Style Selector="TextBox">
+			<Style Selector="TextBox.default">
+				<Setter Property="Width" Value="200" />
+				<Setter Property="Margin" Value="10, 0, 0, 0" />
+			</Style>
+			<Style Selector="NumericUpDown">
 				<Setter Property="Width" Value="200" />
 				<Setter Property="Margin" Value="10, 0, 0, 0" />
 			</Style>
@@ -76,44 +80,24 @@
 		<TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding SettingsVM.Locale.SizeFactor}" />
 		<TextBlock Grid.Row="8" Grid.Column="0" Text="{Binding SettingsVM.Locale.Extension}" />
 
-		<TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding InputFilePath}" />
-		<TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding OutputFilePath}" />
+		<TextBox Grid.Row="0" Grid.Column="1" Classes="default" IsReadOnly="True" Text="{Binding InputFilePath}" />
+		<TextBox Grid.Row="2" Grid.Column="1" Classes="default" IsReadOnly="True" Text="{Binding OutputFilePath}" />
 
-		<TextBox Grid.Row="4"
-				 Grid.Column="1"
-				 MaxLength="4"
-				 Name="QualityFactorTextBox"
-				 Text="{Binding QualityFactor, Mode=TwoWay}">
-			<i:Interaction.Behaviors>
-				<bt:CoefficientNumberBoxBehavior />
-				
-				<ia:DataTriggerBehavior Binding="{Binding IsQualityFactorCorrect}" ComparisonCondition="Equal" Value="True">
-					<ia:ChangePropertyAction TargetObject="QualityFactorTextBox" PropertyName="Foreground" Value="Black" />
-				</ia:DataTriggerBehavior>
-				<ia:DataTriggerBehavior Binding="{Binding IsQualityFactorCorrect}" ComparisonCondition="NotEqual" Value="True">
-					<ia:ChangePropertyAction TargetObject="QualityFactorTextBox" PropertyName="Foreground" Value="Red" />
-				</ia:DataTriggerBehavior>
-			</i:Interaction.Behaviors>
-		</TextBox>
+		<NumericUpDown Grid.Row="4"
+				 	   Grid.Column="1"
+					   Minimum="0"
+				 	   Maximum="1"
+					   Increment="0.05"
+					   Value="{Binding QualityFactor}" />
+		
+		<NumericUpDown Grid.Row="6"
+				 	   Grid.Column="1"
+				 	   Minimum="0.0001"
+				 	   Maximum="10000"
+					   Increment="0.1"
+				 	   Value="{Binding SizeFactor}" />
 
-		<TextBox Grid.Row="6"
-				 Grid.Column="1"
-				 MaxLength="4"
-				 Name="SizeFactorTextBox"
-				 Text="{Binding SizeFactor, Mode=TwoWay}">
-			<i:Interaction.Behaviors>
-				<bt:PositiveFloatNumberBoxBehavior />
-				
-				<ia:DataTriggerBehavior Binding="{Binding IsSizeFactorCorrect}" ComparisonCondition="Equal" Value="True">
-					<ia:ChangePropertyAction TargetObject="SizeFactorTextBox" PropertyName="Foreground" Value="Black" />
-				</ia:DataTriggerBehavior>
-				<ia:DataTriggerBehavior Binding="{Binding IsSizeFactorCorrect}" ComparisonCondition="NotEqual" Value="True">
-					<ia:ChangePropertyAction TargetObject="SizeFactorTextBox" PropertyName="Foreground" Value="Red" />
-				</ia:DataTriggerBehavior>
-			</i:Interaction.Behaviors>
-		</TextBox>
-
-		<TextBox Grid.Row="8" Grid.Column="1" MaxLength="9" Text="{Binding Extension, Mode=TwoWay}" />
+		<TextBox Grid.Row="8" Grid.Column="1" Classes="default" MaxLength="9" Text="{Binding Extension}" />
 		
 		<CheckBox Grid.Row="10"
 				  Grid.ColumnSpan="2"
