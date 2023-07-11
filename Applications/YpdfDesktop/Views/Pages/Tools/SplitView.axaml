@@ -63,7 +63,7 @@
 							<TextBlock Grid.Column="2"
 									   Text="{Binding DataContext.SettingsVM.Locale.To, RelativeSource={RelativeSource AncestorType=ListBox}}" />
 
-							<TextBox Name="PageFromTextBox" Grid.Column="1" Text="{Binding Start, Mode=TwoWay}">							
+							<TextBox Name="PageFromTextBox" Grid.Column="1" Text="{Binding Start, FallbackValue=0}">							
 								<i:Interaction.Behaviors>
 									<bt:PositiveIntNumberBoxBehavior />
 									
@@ -76,7 +76,7 @@
 								</i:Interaction.Behaviors>
 							</TextBox>
 
-							<TextBox Name="PageToTextBox" Grid.Column="3" Text="{Binding End, Mode=TwoWay}">
+							<TextBox Name="PageToTextBox" Grid.Column="3" Text="{Binding End, FallbackValue=0}">
 								<i:Interaction.Behaviors>
 									<bt:PositiveIntNumberBoxBehavior />
 									
