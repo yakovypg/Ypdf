@@ -93,6 +93,7 @@
   "SpecifyAtLeastOnePasswordMessage": "Укажите хотя бы один пароль",
   "SpecifyPasswordMessage": "Укажите пароль",
   "SpecifyAtLeastOneDivisionMessage": "Укажите хотя бы одно деление",
+  "SpecifyAtLeastOneCroppingMessage": "Укажите хотя бы одну вырезку",
   "IncorrectShiftContentPagesMessage": "Страницы, на которых будет произведен сдвиг контента, некорректны",
   "IncorrectPagesMessage": "Страницы, к которым будет применена текущая конфигурация, некорректны",
   "IncorrectPageRangeMessage": "Имеется некорректный диапазон страниц"

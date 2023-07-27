@@ -93,6 +93,7 @@
   "SpecifyAtLeastOnePasswordMessage": "Specify at least one password",
   "SpecifyPasswordMessage": "Specify the password",
   "SpecifyAtLeastOneDivisionMessage": "Specify at least one division",
+  "SpecifyAtLeastOneCroppingMessage": "Specify at least one cropping",
   "IncorrectShiftContentPagesMessage": "Pages on which the content will be shifted are incorrect",
   "IncorrectPagesMessage": "Pages to which the current configuration will be applied are incorrect",
   "IncorrectPageRangeMessage": "There is an incorrect page range"
