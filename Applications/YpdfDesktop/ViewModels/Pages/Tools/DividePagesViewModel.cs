@@ -432,7 +432,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             SwitchDivisionExecution(divisionsList, t => false);
         }
 
-        private void SwitchDivisionExecution(IList divisionsList, Func<bool, bool> func)
+        private static void SwitchDivisionExecution(IList divisionsList, Func<bool, bool> func)
         {
             IEnumerable<IPageDivisionInfo> divisions = divisionsList.Cast<IPageDivisionInfo>();
 

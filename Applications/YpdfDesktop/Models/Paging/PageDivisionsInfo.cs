@@ -45,7 +45,13 @@ namespace YpdfDesktop.Models.Paging
                                 float pageHeight,
                                 PageDivisionOrientation orientation = PageDivisionOrientation.Vertical,
                                 bool executeDivision = false)
-            : this(pageNumber, pageWidth, pageHeight, orientation, (int)(pageHeight / 2), (int)(pageWidth / 2), executeDivision)
+            : this(pageNumber,
+                   pageWidth,
+                   pageHeight,
+                   orientation,
+                   (int)(pageHeight / 2),
+                   (int)(pageWidth / 2),
+                   executeDivision)
         {
         }
 
