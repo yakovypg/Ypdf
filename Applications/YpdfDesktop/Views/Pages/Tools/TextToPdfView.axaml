@@ -1,0 +1,240 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:bt="using:YpdfDesktop.Infrastructure.Behaviors.Text"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
+             mc:Ignorable="d"
+			 d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="YpdfDesktop.Views.Pages.Tools.TextToPdfView">
+
+    <Design.DataContext>
+		<vm:TextToPdfViewModel />
+	</Design.DataContext>
+
+	<Grid Margin="5"
+		  RowDefinitions="1*, 8, Auto"
+		  DragDrop.AllowDrop="True"
+		  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid.Resources>
+			<bd:FileDropHandler x:Key="FileDropHandler" />
+		</Grid.Resources>
+
+		<Grid.Styles>
+			<Style Selector="TextBox.default">
+				<Setter Property="Width" Value="200" />
+				<Setter Property="Margin" Value="10, 0, 0, 0" />
+				<Setter Property="IsReadOnly" Value="True" />
+			</Style>
+			<Style Selector="ComboBox">
+				<Setter Property="Width" Value="200" />
+				<Setter Property="Margin" Value="10, 0, 0, 0" />
+			</Style>
+			<Style Selector="NumericUpDown">
+				<Setter Property="Width" Value="200" />
+				<Setter Property="Margin" Value="10, 0, 0, 0" />
+			</Style>
+			<Style Selector="TextBlock">
+				<Setter Property="VerticalAlignment" Value="Center" />
+				<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+			</Style>
+			<Style Selector="TextBlock.click">
+				<Setter Property="VerticalAlignment" Value="Center" />
+				<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+			</Style>
+			<Style Selector="TextBlock.click:pointerover">
+				<Setter Property="Cursor" Value="Hand" />
+				<Setter Property="FontWeight" Value="Bold" />
+			</Style>
+		</Grid.Styles>
+
+		<i:Interaction.Behaviors>
+			<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
+		</i:Interaction.Behaviors>
+
+		<ScrollViewer VerticalScrollBarVisibility="Visible">
+			<Grid RowDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto"
+		  		  ColumnDefinitions="Auto, 200, 1*">
+				<TextBlock Grid.Row="0"
+			           	   Grid.Column="0"
+				       	   Name="InputTextBlock"
+				       	   Classes="click"
+				       	   Text="{Binding SettingsVM.Locale.File}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="InputTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectInputFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0"
+						   Classes="click"
+						   Name="OutputTextBlock"
+						   Text="{Binding SettingsVM.Locale.Output}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="OutputTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectOutputFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding SettingsVM.Locale.TextAlignment}" />
+				<TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontSize}" />
+				<TextBlock Grid.Row="8" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontColor}" />
+				<TextBlock Grid.Row="10" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontFamily}" />
+				<TextBlock Grid.Row="12" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontOpacity}" />
+
+				<TextBlock Grid.Row="14"
+						   Grid.Column="0"
+						   Name="FontPathTextBlock"
+						   Classes="click"
+						   Text="{Binding SettingsVM.Locale.FontPath}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FontPathTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectFontFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="16" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontEncoding}" />
+				<TextBlock Grid.Row="18" Grid.Column="0" Text="{Binding SettingsVM.Locale.Margin}" />
+				<TextBlock Grid.Row="20" Grid.Column="0" Text="{Binding SettingsVM.Locale.PageSize}" />
+				<TextBlock Grid.Row="22" Grid.Column="0" Text="{Binding SettingsVM.Locale.PageWidth}" />
+				<TextBlock Grid.Row="24" Grid.Column="0" Text="{Binding SettingsVM.Locale.PageHeight}" />
+
+				<TextBox Grid.Row="0" Grid.Column="1" Classes="default" Text="{Binding InputFilePath}" />
+				<TextBox Grid.Row="2" Grid.Column="1" Classes="default" Text="{Binding OutputFilePath}" />
+
+				<ComboBox Grid.Row="4"
+						  Grid.Column="1"
+						  Items="{Binding TextAlignments}"
+						  SelectedItem="{Binding TextAlignment}" />
+
+				<NumericUpDown Grid.Row="6"
+							   Grid.Column="1"
+							   Increment="1"
+							   Value="{Binding FontSize}"
+							   Minimum="{Binding MinFontSize}"
+							   Maximum="{Binding MaxFontSize}" />
+
+				<ComboBox Grid.Row="8"
+						  Grid.Column="1"
+						  Items="{Binding FontColors}"
+						  SelectedItem="{Binding FontColor}" />
+				
+				<ComboBox Grid.Row="10"
+						  Grid.Column="1"
+						  Items="{Binding FontFamilies}"
+						  SelectedItem="{Binding FontFamily}" />
+
+				<NumericUpDown Grid.Row="12"
+							   Grid.Column="1"
+							   Value="{Binding FontOpacity}"
+							   Increment="0.05"
+							   Minimum="0"
+							   Maximum="1" />
+
+				<TextBox Grid.Row="14" Grid.Column="1" Classes="default" Text="{Binding FontFilePath}" />
+
+				<ComboBox Grid.Row="16"
+						  Grid.Column="1"
+						  Items="{Binding FontEncodings}"
+						  SelectedItem="{Binding FontEncoding}" />
+				
+				<Grid Grid.Row="18"
+					  Grid.Column="1"
+					  Margin="10, 0, 0, 0"
+					  Grid.ColumnDefinitions="1*, 5, 1*, 5, 1*, 5, 1*">
+					<Grid.Styles>
+						<Style Selector="TextBox">
+							<Setter Property="MinWidth" Value="0" />
+							<Setter Property="MaxLength" Value="10" />
+						</Style>
+					</Grid.Styles>
+					
+					<TextBox Grid.Column="0" Watermark="L" Text="{Binding LeftMargin}">
+						<i:Interaction.Behaviors>
+							<bt:NotNegativeIntNumberBoxBehavior />
+						</i:Interaction.Behaviors>
+					</TextBox>
+
+					<TextBox Grid.Column="2" Watermark="T" Text="{Binding TopMargin}">
+						<i:Interaction.Behaviors>
+							<bt:NotNegativeIntNumberBoxBehavior />
+						</i:Interaction.Behaviors>
+					</TextBox>
+
+					<TextBox Grid.Column="4" Watermark="R" Text="{Binding RightMargin}">
+						<i:Interaction.Behaviors>
+							<bt:NotNegativeIntNumberBoxBehavior />
+						</i:Interaction.Behaviors>
+					</TextBox>
+
+					<TextBox Grid.Column="6" Watermark="B" Text="{Binding BottomMargin}">
+						<i:Interaction.Behaviors>
+							<bt:NotNegativeIntNumberBoxBehavior />
+						</i:Interaction.Behaviors>
+					</TextBox>
+				</Grid>
+
+				<ComboBox Grid.Row="20"
+						  Grid.Column="1"
+						  Items="{Binding PageSizes}"
+						  SelectedItem="{Binding PageSize}" />
+
+				<TextBox Grid.Row="22"
+						 Grid.Column="1"
+						 Name="PageWidthTextBox"
+						 Classes="default"
+						 IsReadOnly="False"
+						 MaxLength="6"
+						 IsEnabled="{Binding IsPageSizeCustom}"
+						 Text="{Binding PageWidth}">
+					<i:Interaction.Behaviors>
+						<bt:PositiveIntNumberBoxBehavior />
+					</i:Interaction.Behaviors>
+				</TextBox>
+				
+				<TextBox Grid.Row="24"
+						 Grid.Column="1"
+						 Name="PageHeightTextBox"
+						 Classes="default"
+						 IsReadOnly="False"
+						 MaxLength="6"
+						 IsEnabled="{Binding IsPageSizeCustom}"
+						 Text="{Binding PageHeight}">
+					<i:Interaction.Behaviors>
+						<bt:PositiveIntNumberBoxBehavior />
+					</i:Interaction.Behaviors>
+				</TextBox>
+			</Grid>
+		</ScrollViewer>
+
+        <Grid Grid.Row="2" ColumnDefinitions="1*, 1*">
+			<Grid.Styles>
+				<Style Selector="Button">
+					<Setter Property="MinWidth" Value="110" />
+					<Setter Property="Margin" Value="5, 0" />
+					<Setter Property="HorizontalContentAlignment" Value="Center" />
+				</Style>
+			</Grid.Styles>
+
+			<Button Grid.Column="0"
+					Content="{Binding SettingsVM.Locale.Execute}"
+					HorizontalAlignment="Right"
+					IsEnabled="{Binding IsInputFilePathSelected}"
+					Command="{Binding ExecuteCommand}" />
+
+			<Button Grid.Column="1"
+					Content="{Binding SettingsVM.Locale.Reset}"
+					HorizontalAlignment="Left"
+					Command="{Binding ResetCommand}" />
+		</Grid>
+	</Grid>
+
+</UserControl>

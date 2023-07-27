@@ -4,6 +4,7 @@
     {
         public bool RedirectStandardError { get; set; }
         public bool RedirectStandardOutput { get; set; }
+        public bool ThrowExceptionIfExitWithError { get; set; }
 
         public TextWriter? Output { get; set; }
 
@@ -13,10 +14,12 @@
         public Predicate<string?>? ErrorDataVerifier { get; set; }
         public Predicate<string?>? OutputDataVerifier { get; set; }
 
-        public ProcessController(bool redirectStandardError = true, bool redirectStandardOutput = true, TextWriter? output = null)
+        public ProcessController(bool redirectStandardError = true, bool redirectStandardOutput = true,
+            TextWriter? output = null, bool throwExceptionIfExitWithError = true)
         {
             RedirectStandardError = redirectStandardError;
             RedirectStandardOutput = redirectStandardOutput;
+            ThrowExceptionIfExitWithError = throwExceptionIfExitWithError;
             Output = output;
         }
     }

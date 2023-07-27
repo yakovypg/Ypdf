@@ -21,6 +21,12 @@ namespace ExecutionLib.Execution
         private readonly YpdfConfig _config;
         private readonly Dictionary<string, Action<YpdfConfig>> _commands;
 
+        public delegate void ExecutionSuccessfullyCompletedHandler();
+        public event ExecutionSuccessfullyCompletedHandler? ExecutionSuccessfullyCompleted;
+
+        public delegate void ExecutionFaultedHandler();
+        public event ExecutionFaultedHandler? ExecutionFaulted;
+
         public IExecutionLogger? Logger { get; set; }
         public IFileExistsUserAnswerDispatcher? FileExistsQuestion { get; set; }
         public IApplyCorrectionsUserAnswerDispatcher? ApplyCorrectionsQuestion { get; set; }
@@ -41,7 +47,7 @@ namespace ExecutionLib.Execution
 
         #region Executing
 
-        public ExecutionInfo PrepareExecute()
+        public ExecutionInfo PrepareExecute(bool checkOutputPath = true, bool correctPaths = true)
         {
             if (string.IsNullOrEmpty(_config.PdfTool))
                 return new ExecutionInfo(new NoFileProcessingToolException());
@@ -50,9 +56,14 @@ namespace ExecutionLib.Execution
             {
                 _config.PathsConfig.PreparePaths();
 
-                CheckOutputPath();
-                CorrectInputFile();
-                CorrectFilePaths();
+                if (checkOutputPath)
+                    CheckOutputPath();
+
+                if (correctPaths)
+                {
+                    CorrectInputFile();
+                    CorrectFilePaths();
+                }
             }
             catch (Exception ex)
             {
@@ -69,12 +80,14 @@ namespace ExecutionLib.Execution
             if (!executionInfo.CanExecute)
             {
                 Logger?.LogError(executionInfo.Exception?.Message);
+                ExecutionFaulted?.Invoke();
                 return;
             }
 
             try
             {
                 executionInfo.Executor?.Invoke(_config);
+                ExecutionSuccessfullyCompleted?.Invoke();
             }
             catch (Exception ex)
             {
@@ -92,6 +105,8 @@ namespace ExecutionLib.Execution
                     }
                     catch { }
                 }
+
+                ExecutionFaulted?.Invoke();
             }
         }
 
@@ -408,7 +423,7 @@ namespace ExecutionLib.Execution
             }
 
             string extension = new FileInfo(inputPath).Extension;
-            string tempFilePath = new UniqueFile(extension, SharedConfig.Directories.TEMP).GetNext();
+            string tempFilePath = new UniqueFile(extension, SharedConfig.Directories.Temp).GetNext();
 
             int[] pageNumbers = PdfInfo.GetAllPageNumbers(inputPath);
             List<int[]> associatedPages = PdfInfo.GetAssociatedPages(inputPath);
@@ -538,7 +553,7 @@ namespace ExecutionLib.Execution
             string outputPath = config.PathsConfig.OutputPath
                 ?? throw new UndefinedParameterException(nameof(config.PathsConfig.OutputPath));
 
-            TextExtractor.ExtractByPython(inputPath, outputPath, config.GlobalConfig.PythonAlias);
+            TextExtractor.ExtractByPython(inputPath, outputPath, config.GlobalConfig.PythonAlias, Logger?.Out);
         }
 
         private void CompressImages(YpdfConfig config)

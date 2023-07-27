@@ -1,0 +1,160 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+			 xmlns:models="clr-namespace:YpdfDesktop.Models.Informing"
+             xmlns:vm="using:YpdfDesktop.ViewModels.Pages"
+			 mc:Ignorable="d"
+			 d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="YpdfDesktop.Views.Pages.TasksView">
+
+	<Design.DataContext>
+		<vm:TasksViewModel />
+	</Design.DataContext>
+	
+	<Grid>
+		<Grid RowDefinitions="1*, 30">
+			<ListBox Grid.Row="0"
+					 Name="TasksListBox"
+					 SelectionMode="Multiple"
+					 Background="{Binding SettingsVM.Theme.ExplorerBackground}"
+					 Items="{Binding Tasks}">
+				<ListBox.Resources>
+					<!--PointerOver-->
+					<SolidColorBrush x:Key="SystemControlHighlightListLowBrush">#19000000</SolidColorBrush>
+					<!--Selected-->
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush">#220078D7</SolidColorBrush>
+					<!--Selected PointerOver-->
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush">#330078D7</SolidColorBrush>
+					<!--Selected Pressed-->
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush">#440078D7</SolidColorBrush>
+				</ListBox.Resources>
+
+				<ListBox.KeyBindings>
+					<KeyBinding Gesture="Delete"
+								Command="{Binding DeleteTasksCommand}"
+								CommandParameter="{Binding ElementName=TasksListBox, Path=SelectedItems}" />
+				</ListBox.KeyBindings>
+
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type models:ToolExecutionInfo}">
+						<Grid ColumnDefinitions="100, 1*">
+							<Border Height="85"
+									MaxHeight="85"
+									VerticalAlignment="Top"
+									BorderThickness="1"
+									BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ListBox}}">							
+								<Grid Grid.Column="0"
+									  RowDefinitions="1*, 20"
+									  Background="{Binding DataContext.SettingsVM.Theme.ToolTileBackground, RelativeSource={RelativeSource AncestorType=ListBox}}">						
+									<img:Icon Grid.Row="0"
+											  FontSize="30"
+											  Opacity="0.88"
+											  Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}"
+											  Value="{Binding ToolIcon}" />
+									
+									<TextBlock Grid.Row="1"
+											   Margin="0, 0, 0, 8"
+											   VerticalAlignment="Center"
+											   HorizontalAlignment="Center"
+											   Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}"
+											   Text="{Binding ToolName}" />
+								</Grid>
+							</Border>
+
+							<Grid Grid.Column="1" Margin="10, 0, 0, 0" RowDefinitions="35, 1*">
+								<Border Grid.Row="0"
+										BorderThickness="1"
+										Background="{Binding DataContext.SettingsVM.Theme.InputFilesTileBackground, RelativeSource={RelativeSource AncestorType=ListBox}}"
+										BorderBrush="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ListBox}}">
+									<Grid ColumnDefinitions="1*, 50">
+										<ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto">
+											<TextBlock Margin="8, 8, 8, 22"
+													   VerticalAlignment="Top"
+													   Foreground="{Binding DataContext.SettingsVM.Theme.InputFilesTileTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}"
+													   Text="{Binding InputFilesPresenter}" />
+										</ScrollViewer>
+
+										<Grid Grid.Column="1" Margin="10, 0, 0, 0" Background="{Binding StatusBrush}">
+											<img:Icon FontSize="19"
+													  Opacity="0.88"
+													  Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileIconForeground, RelativeSource={RelativeSource AncestorType=ListBox}}"
+													  Value="{Binding StatusIcon}" />
+										</Grid>
+									</Grid>
+								</Border>
+								
+								<Expander Grid.Row="1"
+										  Header="{Binding DataContext.SettingsVM.Locale.Output, RelativeSource={RelativeSource AncestorType=ListBox}}">								
+									<ScrollViewer Height="150"
+												  Padding="0, 0, 20, 20"
+												  HorizontalScrollBarVisibility="Auto"
+												  VerticalScrollBarVisibility="Auto">					
+										<TextBlock Text="{Binding ToolOutput}" />
+									</ScrollViewer>
+								</Expander>
+							</Grid>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+			
+			<Grid Grid.Row="1"
+				  Height="32"
+				  Background="{Binding SettingsVM.Theme.ExplorerMenuBackground}"
+				  ColumnDefinitions="1*, Auto">
+				<Grid.Styles>
+					<Style Selector="TextBlock">
+						<Setter Property="VerticalAlignment" Value="Center" />
+						<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerMenuTextForeground}" />
+					</Style>
+					<Style Selector="TextBlock.value">
+						<Setter Property="Margin" Value="5, 0, 15, 0" />
+					</Style>
+				</Grid.Styles>
+
+				<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10, 0">
+					<TextBlock Text="{Binding SettingsVM.Locale.Running}" />
+					<TextBlock Text="{Binding RunningTasksCount}" Classes="value" />
+					<TextBlock Text="{Binding SettingsVM.Locale.Completed}" />
+					<TextBlock Text="{Binding CompletedTasksCount}" Classes="value" />
+					<TextBlock Text="{Binding SettingsVM.Locale.Faulted}" />
+					<TextBlock Text="{Binding FaultedTasksCount}" Classes="value" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="1" Orientation="Horizontal">
+					<StackPanel.Styles>
+						<Style Selector="Button">
+							<Setter Property="Width" Value="35" />
+							<Setter Property="Height" Value="32" />
+							<Setter Property="Padding" Value="0" />
+							<Setter Property="Opacity" Value="0.9" />
+							<Setter Property="FontSize" Value="18" />
+							<Setter Property="Cursor" Value="Hand" />
+							<Setter Property="BorderThickness" Value="0" />
+							<Setter Property="Background" Value="{Binding SettingsVM.Theme.ExplorerMenuBackground}" />
+						</Style>
+						<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+							<Setter Property="Background" Value="DarkGray" />
+						</Style>
+						<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+							<Setter Property="Background" Value="Gray" />
+						</Style>
+						<Style Selector="Button > img|Icon">
+							<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerMenuIconForeground}" />
+						</Style>
+					</StackPanel.Styles>
+
+					<Button img:Attached.Icon="fa-trash-can"
+							Command="{Binding DeleteFinishedTasksCommand}" />
+					
+					<Button img:Attached.Icon="fa-circle-minus"
+							Command="{Binding DeleteTasksCommand}"
+							CommandParameter="{Binding ElementName=TasksListBox, Path=SelectedItems}" />
+				</StackPanel>
+			</Grid>
+		</Grid>
+	</Grid>
+	
+</UserControl>

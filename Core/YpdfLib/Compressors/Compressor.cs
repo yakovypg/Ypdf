@@ -29,7 +29,7 @@ namespace YpdfLib.Compressors
                 imageCompression.Extension = "jpg";
             }
 
-            const string tempDirPath = SharedConfig.Directories.TEMP;
+            string tempDirPath = SharedConfig.Directories.Temp;
 
             IUniqueDirectory uniqueDirGenerator = new UniqueDirectory(tempDirPath);
             DirectoryInfo uniqueDir = uniqueDirGenerator.Create();
@@ -104,7 +104,7 @@ namespace YpdfLib.Compressors
         public static bool IsCompressionValid(string inputFile, string? pythonAlias, IImageCompression imageCompression,
             int extractedImagesCount = EXTRACTED_IMAGES_FOR_CHECKING_VALIDITY)
         {
-            const string tempDirPath = SharedConfig.Directories.TEMP;
+            string tempDirPath = SharedConfig.Directories.Temp;
 
             IUniqueDirectory uniqueDirGenerator = new UniqueDirectory(tempDirPath);
             DirectoryInfo uniqueDir = uniqueDirGenerator.Create();

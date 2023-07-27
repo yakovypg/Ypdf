@@ -1,0 +1,150 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:models="clr-namespace:YpdfDesktop.Models"
+			 xmlns:toolPages="using:YpdfDesktop.Views.Pages.Tools"
+			 xmlns:vmt="using:YpdfDesktop.ViewModels.Pages.Tools"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages"
+             mc:Ignorable="d"
+			 d:DesignWidth="600" d:DesignHeight="450"
+             x:Class="YpdfDesktop.Views.Pages.ToolsView">
+
+	<Design.DataContext>
+		<vm:ToolsViewModel />
+	</Design.DataContext>
+
+	<Grid>
+		<Grid.Styles>
+			<Style Selector="UniformGrid">
+				<Setter Property="Background" Value="{Binding SettingsVM.Theme.ExplorerBackground}" />
+			</Style>
+		</Grid.Styles>
+		
+		<ItemsControl Items="{Binding Tools}">
+			<ItemsControl.Styles>
+				<Style Selector="Button">
+					<Setter Property="Margin" Value="3" />
+					<Setter Property="Width" Value="114" />
+					<Setter Property="Height" Value="84" />
+					<Setter Property="Padding" Value="0" />
+					<Setter Property="Cursor" Value="Hand" />
+					<Setter Property="BorderThickness" Value="1" />
+					<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+					<Setter Property="BorderBrush" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+				</Style>
+				<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBackgroundPointerOver, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+				</Style>
+				<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.ToolTileBackgroundPressed, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+				</Style>
+			</ItemsControl.Styles>
+			
+			<ItemsControl.Template>
+				<ControlTemplate>
+					<ScrollViewer>
+						<ItemsPresenter Items="{Binding Tools}">
+							<ItemsPresenter.ItemsPanel>
+								<ItemsPanelTemplate>
+									<WrapPanel ItemWidth="120" ItemHeight="90" />
+								</ItemsPanelTemplate>
+							</ItemsPresenter.ItemsPanel>
+						</ItemsPresenter>
+					</ScrollViewer>
+				</ControlTemplate>
+			</ItemsControl.Template>
+
+			<ItemsControl.DataTemplates>
+				<DataTemplate DataType="{x:Type models:Tool}">
+					<Button Command="{Binding DataContext.ShowToolPageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+							CommandParameter="{Binding Type}">
+						<Grid RowDefinitions="1*, 30">
+							<img:Icon Name="FavoriteIcon"
+									  Value="fa-star"
+									  Cursor="Arrow"
+									  FontSize="15"
+									  Margin="0, 3, 5, 0"
+									  Foreground="{Binding StarBrush}"
+									  VerticalAlignment="Top"
+									  HorizontalAlignment="Right">
+								<i:Interaction.Behaviors>
+									<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FavoriteIcon">
+										<ia:InvokeCommandAction
+											Command="{Binding DataContext.ChangeToolAffiliationToFavoritesCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+											CommandParameter="{Binding Type}">
+										</ia:InvokeCommandAction>
+									</ia:EventTriggerBehavior>
+								</i:Interaction.Behaviors>
+							</img:Icon>
+
+							<img:Icon Grid.Row="0"
+									  FontSize="30"
+									  Opacity="0.88"
+									  Margin="0, 10, 0, 0"
+									  Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileIconForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+									  Value="{Binding IconName}" />
+
+							<TextBlock Grid.Row="1"
+									   VerticalAlignment="Center"
+									   HorizontalAlignment="Center"
+									   Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+									   Text="{Binding Name}" />
+						</Grid>
+					</Button>
+				</DataTemplate>
+			</ItemsControl.DataTemplates>
+		</ItemsControl>
+
+		<UniformGrid IsVisible="{Binding IsSplitViewVisible}">
+			<toolPages:SplitView DataContext="{Binding SplitVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsMergeViewVisible}">
+			<toolPages:MergeView DataContext="{Binding MergeVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsCompressViewVisible}">
+			<toolPages:CompressView DataContext="{Binding CompressVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsHandlePagesViewVisible}">
+			<toolPages:HandlePagesView />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsCropPagesViewVisible}">
+			<toolPages:CropPagesView DataContext="{Binding CropPagesVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsDividePagesViewVisible}">
+			<toolPages:DividePagesView DataContext="{Binding DividePagesVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsAddPageNumbersViewVisible}">
+			<toolPages:AddPageNumbersView DataContext="{Binding AddPageNumbersVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsAddWatermarkViewVisible}">
+			<toolPages:AddWatermarkView />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsRemoveWatermarkViewVisible}">
+			<toolPages:RemoveWatermarkView DataContext="{Binding RemoveWatermarkVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsImageToPdfViewVisible}">
+			<toolPages:ImageToPdfView DataContext="{Binding ImageToPdfVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsTextToPdfViewVisible}">
+			<toolPages:TextToPdfView DataContext="{Binding TextToPdfVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsExtractImagesViewVisible}">
+			<toolPages:ExtractImagesView DataContext="{Binding ExtractImagesVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsExtractTextViewVisible}">
+			<toolPages:ExtractTextView DataContext="{Binding ExtractTextVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsSetPasswordViewVisible}">
+			<toolPages:SetPasswordView DataContext="{Binding SetPasswordVM}" />
+		</UniformGrid>
+		<UniformGrid IsVisible="{Binding IsRemovePasswordViewVisible}">
+			<toolPages:RemovePasswordView DataContext="{Binding RemovePasswordVM}" />
+		</UniformGrid>
+	</Grid>
+	
+</UserControl>

@@ -1,0 +1,192 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+			 xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:bt="using:YpdfDesktop.Infrastructure.Behaviors.Text"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
+			 xmlns:models="clr-namespace:YpdfDesktop.Models.Enumeration"
+             mc:Ignorable="d"
+			 d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="YpdfDesktop.Views.Pages.Tools.SplitView">
+
+	<Design.DataContext>
+		<vm:SplitViewModel />
+	</Design.DataContext>
+
+	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition Width="2" />
+			<ColumnDefinition MinWidth="2" />
+		</Grid.ColumnDefinitions>
+		
+		<GridSplitter Grid.Column="1" Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" />
+
+		<Grid Grid.Column="0" RowDefinitions="1*, 40">		
+			<ListBox Grid.Row="0" Items="{Binding PageRanges}" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+				<ListBox.Resources>
+					<!--PointerOver-->
+					<SolidColorBrush x:Key="SystemControlHighlightListLowBrush">#19000000</SolidColorBrush>
+					<!--Selected-->
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush">#220078D7</SolidColorBrush>
+					<!--Selected PointerOver-->
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentMediumBrush">#330078D7</SolidColorBrush>
+					<!--Selected Pressed-->
+					<SolidColorBrush x:Key="SystemControlHighlightListAccentHighBrush">#440078D7</SolidColorBrush>
+				</ListBox.Resources>
+
+				<ListBox.ItemTemplate>
+					<DataTemplate DataType="{x:Type models:Range}">
+						<Grid ColumnDefinitions="Auto, 70, Auto, 70, 50, 1*">						
+							<Grid.Styles>
+								<Style Selector="TextBlock">
+									<Setter Property="VerticalAlignment" Value="Center" />
+									<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.ExplorerTextForeground, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+								</Style>
+								<Style Selector="TextBox">
+									<Setter Property="Width" Value="60" />
+									<Setter Property="Padding" Value="6" />
+									<Setter Property="Margin" Value="10, 0" />
+									<Setter Property="MaxLength" Value="9" />
+									<Setter Property="TextAlignment" Value="Center" />
+								</Style>
+							</Grid.Styles>
+
+							<TextBlock Grid.Column="0"
+									   Text="{Binding DataContext.SettingsVM.Locale.From, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+							
+							<TextBlock Grid.Column="2"
+									   Text="{Binding DataContext.SettingsVM.Locale.To, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+
+							<TextBox Name="PageFromTextBox" Grid.Column="1" Text="{Binding Start, FallbackValue=0}">							
+								<i:Interaction.Behaviors>
+									<bt:PositiveIntNumberBoxBehavior />
+									
+									<ia:DataTriggerBehavior Binding="{Binding IsStartCorrect}" ComparisonCondition="Equal" Value="True">
+										<ia:ChangePropertyAction TargetObject="PageFromTextBox" PropertyName="Foreground" Value="Black" />
+									</ia:DataTriggerBehavior>
+									<ia:DataTriggerBehavior Binding="{Binding IsStartCorrect}" ComparisonCondition="NotEqual" Value="True">
+										<ia:ChangePropertyAction TargetObject="PageFromTextBox" PropertyName="Foreground" Value="Red" />
+									</ia:DataTriggerBehavior>
+								</i:Interaction.Behaviors>
+							</TextBox>
+
+							<TextBox Name="PageToTextBox" Grid.Column="3" Text="{Binding End, FallbackValue=0}">
+								<i:Interaction.Behaviors>
+									<bt:PositiveIntNumberBoxBehavior />
+									
+									<ia:DataTriggerBehavior Binding="{Binding IsEndCorrect}" ComparisonCondition="Equal" Value="True">
+										<ia:ChangePropertyAction TargetObject="PageToTextBox" PropertyName="Foreground" Value="Black" />
+									</ia:DataTriggerBehavior>
+									<ia:DataTriggerBehavior Binding="{Binding IsEndCorrect}" ComparisonCondition="NotEqual" Value="True">
+										<ia:ChangePropertyAction TargetObject="PageToTextBox" PropertyName="Foreground" Value="Red" />
+									</ia:DataTriggerBehavior>
+								</i:Interaction.Behaviors>
+							</TextBox>
+
+							<Button Grid.Column="4"
+									Height="32"
+									FontSize="15"
+									Command="{Binding DataContext.DeletePageRangeCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+									CommandParameter="{Binding Self}">
+								<Button.Resources>
+									<SolidColorBrush x:Key="ButtonForeground" Color="{Binding DataContext.SettingsVM.Theme.ButtonIconForeground.Color, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									<SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding DataContext.SettingsVM.Theme.ButtonIconForeground.Color, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+									<SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding DataContext.SettingsVM.Theme.ButtonIconForeground.Color, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+								</Button.Resources>
+								
+								<img:Icon Value="fa-trash" Opacity="0.65" />
+							</Button>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+
+			<Grid Grid.Row="1" Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+				<Button Width="40"
+						Content="+"
+						Margin="5"
+						HorizontalAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsEnabled="{Binding IsInputFileSelected}"
+						Command="{Binding AddPageRangeCommand}" />
+			</Grid>
+		</Grid>
+
+		<Grid Grid.Column="2"
+			  RowDefinitions="1*, 40"
+			  DragDrop.AllowDrop="True"
+			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+			<Grid.Resources>
+				<bd:FileDropHandler x:Key="FileDropHandler" />
+			</Grid.Resources>
+			
+			<Grid.Styles>
+				<Style Selector="TextBlock">
+					<Setter Property="VerticalAlignment" Value="Center" />
+					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+				</Style>
+				<Style Selector="TextBlock:pointerover">
+					<Setter Property="Cursor" Value="Hand" />
+					<Setter Property="FontWeight" Value="Bold" />
+				</Style>
+				<Style Selector="TextBox">
+					<Setter Property="IsReadOnly" Value="True" />
+					<Setter Property="Margin" Value="10, 0, 5, 0" />
+				</Style>
+			</Grid.Styles>
+
+			<i:Interaction.Behaviors>
+				<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
+			</i:Interaction.Behaviors>
+
+			<Grid Grid.Row="0" Margin="5" RowDefinitions="32, 5, 32, 1*, 40" ColumnDefinitions="Auto, 1*">
+				<TextBlock Name="FileTextBlock" Grid.Row="0" Grid.Column="0" Text="{Binding SettingsVM.Locale.File}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FileTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectFileCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Name="OutputTextBlock" Grid.Row="2" Grid.Column="0" Text="{Binding SettingsVM.Locale.Output}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="OutputTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectOutputDirectoryCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding InputFilePath}" />
+				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding OutputDirectoryPath}" />
+			</Grid>
+
+			<Grid Grid.Row="1" ColumnDefinitions="1*, 1*">
+				<Grid.Styles>
+					<Style Selector="Button">
+						<Setter Property="MinWidth" Value="110" />
+						<Setter Property="Margin" Value="5" />
+						<Setter Property="HorizontalContentAlignment" Value="Center" />
+						<Setter Property="IsEnabled" Value="{Binding IsInputFileSelected}" />
+					</Style>
+				</Grid.Styles>
+				
+				<Button Grid.Column="0"
+						Content="{Binding SettingsVM.Locale.Execute}"
+						HorizontalAlignment="Right"
+						Command="{Binding ExecuteCommand}" />
+
+				<Button Grid.Column="1"
+						Content="{Binding SettingsVM.Locale.Reset}"
+						HorizontalAlignment="Left"
+						Command="{Binding ResetCommand}" />
+			</Grid>
+		</Grid>
+	</Grid>
+	
+</UserControl>

@@ -1,0 +1,116 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+		xmlns:vm="using:YpdfDesktop.ViewModels"
+		xmlns:pages="using:YpdfDesktop.Views.Pages"
+        mc:Ignorable="d"
+		d:DesignWidth="720" d:DesignHeight="450"
+		Width="720" Height="450"
+		MinWidth="600" MinHeight="390"
+        x:Class="YpdfDesktop.Views.MainWindow"
+        Icon="/Assets/ypdf-logo.ico"
+        Title="Ypdf-Desktop">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+	<Window.Resources>
+		<SolidColorBrush x:Key="ButtonForeground" Color="{Binding SettingsVM.Theme.ButtonForeground.Color}" />
+		<SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding SettingsVM.Theme.ButtonForegroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding SettingsVM.Theme.ButtonForegroundPressed.Color}" />
+		<SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{Binding SettingsVM.Theme.ButtonForegroundDisabled.Color}" />
+		<SolidColorBrush x:Key="ButtonBackground" Color="{Binding SettingsVM.Theme.ButtonBackground.Color}" />
+		<SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{Binding SettingsVM.Theme.ButtonBackgroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{Binding SettingsVM.Theme.ButtonBackgroundPressed.Color}" />
+		<SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{Binding SettingsVM.Theme.ButtonBackgroundDisabled.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPointerOver.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPressed.Color}" />
+		<SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="{Binding SettingsVM.Theme.CheckBoxForegroundPressed.Color}" />
+	</Window.Resources>
+
+	<i:Interaction.Behaviors>
+		<ia:EventTriggerBehavior EventName="Closing">
+			<ia:InvokeCommandAction Command="{Binding CheckRunningTasksCommand}" PassEventArgsToCommand="True" />
+			<ia:InvokeCommandAction Command="{Binding SaveUIConfigurationCommand}" PassEventArgsToCommand="True" />
+		</ia:EventTriggerBehavior>
+	</i:Interaction.Behaviors>
+
+	<Grid Background="{Binding SettingsVM.Theme.ExplorerBackground}" ColumnDefinitions="120, 1*">	
+		<StackPanel Grid.Column="0" Orientation="Vertical" Background="{Binding SettingsVM.Theme.PanelSelectorBackground}">
+			<StackPanel.Styles>
+				<Style Selector="Button">
+					<Setter Property="Width" Value="120" />
+					<Setter Property="Height" Value="90" />
+					<Setter Property="Padding" Value="0" />
+					<Setter Property="Cursor" Value="Hand" />
+					<Setter Property="BorderThickness" Value="0" />
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileBackground}" />
+				</Style>
+				<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileBackgroundPointerOver}" />
+				</Style>
+				<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{Binding SettingsVM.Theme.PanelSelectorTileBackgroundPressed}" />
+				</Style>
+				<Style Selector="Grid > img|Icon">
+					<Setter Property="FontSize" Value="35" />
+					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.PanelSelectorIconForeground}" />
+				</Style>
+				<Style Selector="TextBlock">
+					<Setter Property="HorizontalAlignment" Value="Center" />
+					<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.PanelSelectorTextForeground}" />
+				</Style>
+			</StackPanel.Styles>
+
+			<Button Command="{Binding ShowFavoriteToolsCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-star" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Favorites}" />
+				</Grid>
+			</Button>
+
+			<Button Command="{Binding ShowToolsCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-wrench" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tools}" />
+				</Grid>
+			</Button>
+
+			<Button Command="{Binding ShowSettingsCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-cog" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Settings}" />
+				</Grid>
+			</Button>
+
+			<Button Command="{Binding ShowTasksCommand}">
+				<Grid RowDefinitions="1*, 20">
+					<img:Icon Grid.Row="0" Value="fa-list-alt" />
+					<TextBlock Grid.Row="1" Text="{Binding SettingsVM.Locale.Tasks}" />
+				</Grid>
+			</Button>
+		</StackPanel>
+		
+		<Grid Grid.Column="1">
+			<UniformGrid IsVisible="{Binding IsFavoriteToolsVisible}">
+				<pages:ToolsView DataContext="{Binding FavoriteToolsVM}" />
+			</UniformGrid>
+			<UniformGrid IsVisible="{Binding IsToolsVisible}">
+				<pages:ToolsView DataContext="{Binding ToolsVM}" />
+			</UniformGrid>
+			<UniformGrid IsVisible="{Binding IsSettingsVisible}">
+				<pages:SettingsView DataContext="{Binding SettingsVM}" />
+			</UniformGrid>
+			<UniformGrid IsVisible="{Binding IsTasksVisible}">
+				<pages:TasksView DataContext="{Binding TasksVM}" />
+			</UniformGrid>
+		</Grid>
+	</Grid>
+
+</Window>

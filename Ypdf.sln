@@ -29,6 +29,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YpdfDesktop", "Applications\YpdfDesktop\YpdfDesktop.csproj", "{7DA8553F-EE79-41AC-80D1-E3CE027DB60B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{F53D8999-9BE6-4AE0-8235-743C62268A48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Locales", "Locales", "{BD6699E2-10DD-4621-96C2-12B112B3B6DF}"
+	ProjectSection(SolutionItems) = preProject
+		Components\Locales\English.json = Components\Locales\English.json
+		Components\Locales\Russian.json = Components\Locales\Russian.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Themes", "Themes", "{1732FC4E-F1F4-4C60-8F5C-90FBC6285DD5}"
+	ProjectSection(SolutionItems) = preProject
+		Components\Themes\Dark.json = Components\Themes\Dark.json
+		Components\Themes\Light.json = Components\Themes\Light.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +73,10 @@ Global
 		{A8F7B6A8-21F4-4299-9E08-80052395C3CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8F7B6A8-21F4-4299-9E08-80052395C3CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F7B6A8-21F4-4299-9E08-80052395C3CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DA8553F-EE79-41AC-80D1-E3CE027DB60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DA8553F-EE79-41AC-80D1-E3CE027DB60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DA8553F-EE79-41AC-80D1-E3CE027DB60B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DA8553F-EE79-41AC-80D1-E3CE027DB60B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +89,9 @@ Global
 		{70062E60-FD04-4796-9EC4-835FD5A2FE90} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
 		{54E9017A-6BCC-4C2B-B7AF-D0771A6BFF98} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
 		{A8F7B6A8-21F4-4299-9E08-80052395C3CF} = {C88F07F3-549F-4349-A2B9-EB766B4A696A}
+		{7DA8553F-EE79-41AC-80D1-E3CE027DB60B} = {16880FF8-5C76-4D58-9030-7C6D9A4EA049}
+		{BD6699E2-10DD-4621-96C2-12B112B3B6DF} = {F53D8999-9BE6-4AE0-8235-743C62268A48}
+		{1732FC4E-F1F4-4C60-8F5C-90FBC6285DD5} = {F53D8999-9BE6-4AE0-8235-743C62268A48}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {427A2228-5613-4DB6-926C-61E3256840F9}

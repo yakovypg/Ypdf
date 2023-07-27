@@ -1,6 +1,5 @@
 # pip install Pillow
 
-from msilib.schema import Extension
 import os
 import sys
 import argparse

@@ -24,6 +24,25 @@ namespace YpdfLib.Informing
             return Enumerable.Range(1, pageCount).ToArray();
         }
 
+        public static Rectangle[] GetPageSizes(string inputFile)
+        {
+            Rectangle[] pageSizes;
+            
+            using (var pdfDoc = new PdfDocument(new PdfReader(inputFile)))
+            {
+                int numOfPages = pdfDoc.GetNumberOfPages();
+                pageSizes = new Rectangle[numOfPages];
+
+                for (int i = 1; i <= numOfPages; ++i)
+                {
+                    PdfPage curPage = pdfDoc.GetPage(i);
+                    pageSizes[i - 1] = curPage.GetPageSize();
+                }
+            }
+
+            return pageSizes;
+        }
+
         public static bool ContainsAssociatedPages(string inputFile)
         {
             return GetAssociatedPages(inputFile).Count > 0;
@@ -33,7 +52,7 @@ namespace YpdfLib.Informing
         {
             List<int[]> result = new();
 
-            string tempFilePath = new UniqueFile("pdf", SharedConfig.Directories.TEMP).GetNext();
+            string tempFilePath = new UniqueFile("pdf", SharedConfig.Directories.Temp).GetNext();
 
             using (var pdfDoc = new PdfDocument(new PdfReader(inputFile), new PdfWriter(tempFilePath)))
             {
