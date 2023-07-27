@@ -125,7 +125,7 @@
 			<toolPages:AddWatermarkView />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsRemoveWatermarkViewVisible}">
-			<toolPages:RemoveWatermarkView />
+			<toolPages:RemoveWatermarkView DataContext="{Binding RemoveWatermarkVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsImageToPdfViewVisible}">
 			<toolPages:ImageToPdfView DataContext="{Binding ImageToPdfVM}" />
