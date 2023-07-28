@@ -189,7 +189,7 @@ the end of the range).
 commas. These items mean the page numbers through which the page order is determined.
 - The *rotation* should be represented as two elements separated by the ':' symbol. The first 
 element means the set of comma-separated page numbers (that can be represented either as a 
-single number or as range) and the second element means the angle to which this page should 
+single number or as range) and the second element means the angle to which this pages should 
 be rotated.
 - The *cropping* should be represented as two elements separated by the ':' symbol. The first
 element means the set of comma-separated page numbers (that can be represented either as a 
@@ -426,11 +426,11 @@ to specify the rotations (the page number and the angle by which you want to rot
 specified page) using the -r parameter. [Here](#parameters-parsing) you can read about the 
 format of the input parameters.
 
-For example, with this command you will rotate the first page 90 degrees and the fifth page 
-180 degrees.
+For example, with this command you will rotate the first and second pages by 90 degrees, and 
+the fifth page by 180 degrees.
 
 ```
-ypdf rotate -i inputPath.pdf -o outputPath.pdf -r 1,5:90
+ypdf rotate -i inputPath.pdf -o outputPath.pdf -r 1-2:90 -r 5:180
 ```
 
 ### Crop PDF document pages
