@@ -69,6 +69,9 @@
             Orientation = "Orientation";
             ApplyTo = "Apply to";
             Pages = "Pages";
+            ReorderPages = "Reorder pages";
+            TurnPages = "Turn pages";
+            RemovePages = "Remove pages";
 
             Split = "split";
             Merge = "merge";
@@ -110,6 +113,8 @@
             IncorrectShiftContentPagesMessage = "Pages on which the content will be shifted are incorrect";
             IncorrectPagesMessage = "Pages to which the current configuration will be applied are incorrect";
             IncorrectPageRangeMessage = "There is an incorrect page range";
+            AllPagedRemovedMessage = "All pages have been removed";
+            OperationCouldNotBePerformedMessage = "Operation could not be performed";
         }
     }
 }

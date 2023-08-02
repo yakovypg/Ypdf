@@ -2,12 +2,309 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:img="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:bt="using:YpdfDesktop.Infrastructure.Behaviors.Text"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
+             xmlns:models="clr-namespace:YpdfDesktop.Models.Paging"
+			 xmlns:converters="clr-namespace:YpdfDesktop.Infrastructure.Converters"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.Tools.HandlePagesView">
 
-	<Grid>
-		<TextBlock Text="Handle pages" />
+	<Design.DataContext>
+		<vm:HandlePagesViewModel />
+	</Design.DataContext>
+    
+    <Grid Margin="5, 5, 0, 5"
+		  DragDrop.AllowDrop="True"
+		  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid.Resources>
+			<bd:FileDropHandler x:Key="FileDropHandler" />
+		</Grid.Resources>
+
+		<i:Interaction.Behaviors>
+			<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
+		</i:Interaction.Behaviors>
+		
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition Width="2" />
+			<ColumnDefinition MinWidth="2" />
+		</Grid.ColumnDefinitions>
+
+		<GridSplitter Grid.Column="1" MinWidth="0" Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" />
+
+		<Grid.Styles>
+			<Style Selector="ItemsControl ContentPresenter Grid.Draggable">
+				<Setter Property="(i:Interaction.Behaviors)">
+					<i:BehaviorCollectionTemplate>
+						<i:BehaviorCollection>
+							<idd:ContextDragBehavior />
+						</i:BehaviorCollection>
+					</i:BehaviorCollectionTemplate>
+				</Setter>
+			</Style>
+		</Grid.Styles>
+
+		<ItemsControl Name="PagesItemsControl" Items="{Binding Pages}">
+            <ItemsControl.Resources>
+				<bd:PagesItemsControlDropHandler x:Key="PagesItemsControlDropHandler" />
+			</ItemsControl.Resources>
+			
+			<i:Interaction.Behaviors>
+				<idd:ContextDropBehavior Handler="{StaticResource PagesItemsControlDropHandler}" />
+			</i:Interaction.Behaviors>
+			
+			<ItemsControl.Template>
+				<ControlTemplate>
+					<ScrollViewer>
+						<ItemsPresenter Items="{Binding Pages}">
+							<ItemsPresenter.ItemsPanel>
+								<ItemsPanelTemplate>
+									<WrapPanel ItemWidth="145" ItemHeight="145" />
+								</ItemsPanelTemplate>
+							</ItemsPresenter.ItemsPanel>
+						</ItemsPresenter>
+					</ScrollViewer>
+				</ControlTemplate>
+			</ItemsControl.Template>
+
+            <ItemsControl.DataTemplates>
+				<DataTemplate DataType="{x:Type models:PageInfo}">
+					<Border Margin="3"
+							BorderThickness="1"
+                            BorderBrush="{Binding DataContext.SettingsVM.Theme.PageInfoTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+						<Grid RowDefinitions="Auto, 1, 1*">							
+							<UniformGrid Grid.Row="0" Background="{Binding DataContext.SettingsVM.Theme.PageInfoTileCaptionBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+								<Grid Margin="5, 3" Grid.ColumnDefinitions="Auto, 3, 1*, Auto, 5, Auto, 5, Auto">
+									<Grid.Resources>
+										<converters:DegreeContentValueConverter x:Key="DegreeContentValueConverter" />
+										<converters:SquareBracketContentValueConverter x:Key="SquareBracketContentValueConverter" />
+									</Grid.Resources>
+									
+									<Grid.Styles>
+										<Style Selector="UniformGrid">
+											<Setter Property="Cursor" Value="Hand" />
+											<Setter Property="Background" Value="{Binding DataContext.SettingsVM.Theme.PageInfoTileCaptionBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+										</Style>
+										
+										<Style Selector="UniformGrid > img|Icon">
+											<Setter Property="FontSize" Value="14" />
+											<Setter Property="Opacity" Value="0.7" />
+											<Setter Property="Foreground" Value="{Binding DataContext.SettingsVM.Theme.PageInfoTileCaptionContentForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+										</Style>
+
+										<Style Selector="UniformGrid:pointerover > img|Icon">
+											<Setter Property="FontSize" Value="15" />
+										</Style>
+									</Grid.Styles>
+									
+									<TextBlock Grid.Column="0"
+											   Text="{Binding Position, Converter={StaticResource SquareBracketContentValueConverter}}"
+											   Foreground="{Binding DataContext.SettingsVM.Theme.PageInfoTileCaptionContentForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+									
+									<TextBlock Grid.Column="2"
+											   Text="{Binding RotationAngle, Converter={StaticResource DegreeContentValueConverter}}"
+											   Foreground="{Binding DataContext.SettingsVM.Theme.PageInfoTileCaptionContentForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+
+									<UniformGrid Grid.Column="3" Name="TurnPageLeftIcon">
+										<img:Icon Value="fa-rotate-left" />
+
+										<i:Interaction.Behaviors>
+											<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="TurnPageLeftIcon">
+												<ia:InvokeCommandAction Command="{Binding DataContext.TurnPageLeftCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+																		CommandParameter="{Binding PageNumber}" />
+											</ia:EventTriggerBehavior>
+										</i:Interaction.Behaviors>
+									</UniformGrid>
+									
+									<UniformGrid Grid.Column="5" Name="TurnPageRightIcon">
+										<img:Icon Value="fa-rotate-right" />
+
+										<i:Interaction.Behaviors>
+											<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="TurnPageRightIcon">
+												<ia:InvokeCommandAction Command="{Binding DataContext.TurnPageRightCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+																		CommandParameter="{Binding PageNumber}" />
+											</ia:EventTriggerBehavior>
+										</i:Interaction.Behaviors>
+									</UniformGrid>
+
+									<UniformGrid Grid.Column="7" Name="RemovePageIcon">
+										<img:Icon Value="fa-trash" />
+
+										<i:Interaction.Behaviors>
+											<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="RemovePageIcon">
+												<ia:InvokeCommandAction Command="{Binding DataContext.RemovePageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+																		CommandParameter="{Binding PageNumber}" />
+											</ia:EventTriggerBehavior>
+										</i:Interaction.Behaviors>
+									</UniformGrid>
+								</Grid>
+							</UniformGrid>
+
+							<Rectangle Grid.Row="1"
+									   Fill="{Binding DataContext.SettingsVM.Theme.PageInfoTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+							
+							<Grid Grid.Row="2"
+								  Classes="Draggable"
+								  Background="{Binding DataContext.SettingsVM.Theme.PageInfoTileBackground, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+								<TextBlock FontSize="42"
+										   Opacity="0.7"
+										   VerticalAlignment="Center"
+										   HorizontalAlignment="Center"
+										   Text="{Binding PageNumber}"
+										   Foreground="{Binding DataContext.SettingsVM.Theme.PageInfoTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</DataTemplate>
+			</ItemsControl.DataTemplates>
+        </ItemsControl>
+        
+        <Grid Grid.Column="2"
+			  RowDefinitions="Auto, 1*, Auto"
+			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">         
+            <Grid Grid.Row="0"
+                  Margin="5, 0"
+			      ColumnDefinitions="Auto, 1*"
+			      RowDefinitions="Auto, 5, Auto, 5, Auto"
+			      Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+                <Grid.Styles>		    
+                    <Style Selector="TextBlock">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+					    <Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+				    </Style>
+                    <Style Selector="TextBlock.click">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+					    <Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+				    </Style>
+			        <Style Selector="TextBlock.click:pointerover">
+				        <Setter Property="Cursor" Value="Hand" />
+				        <Setter Property="FontWeight" Value="Bold" />
+			        </Style>
+			        <Style Selector="TextBox">
+				        <Setter Property="HorizontalAlignment" Value="Stretch" />
+				        <Setter Property="Margin" Value="10, 0, 0, 0" />
+			        </Style>
+			    </Grid.Styles>
+
+			    <TextBlock Grid.Row="0"
+					       Grid.Column="0"
+					       Classes="click"
+					       Name="InputTextBlock"
+					       Text="{Binding SettingsVM.Locale.File}">
+				    <i:Interaction.Behaviors>
+					    <ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="InputTextBlock">
+						    <ia:InvokeCommandAction Command="{Binding SelectInputFilePathCommand}" />
+					    </ia:EventTriggerBehavior>
+				    </i:Interaction.Behaviors>
+			    </TextBlock>
+
+			    <TextBlock Grid.Row="2"
+					       Grid.Column="0"
+                           Classes="click"
+                           Name="OutputTextBlock"
+					       Text="{Binding SettingsVM.Locale.Output}">
+				    <i:Interaction.Behaviors>
+					    <ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="OutputTextBlock">
+						    <ia:InvokeCommandAction Command="{Binding SelectOutputFilePathCommand}" />
+					    </ia:EventTriggerBehavior>
+				    </i:Interaction.Behaviors>
+			    </TextBlock>
+
+                <TextBox Grid.Row="0"
+					     Grid.Column="1"
+					     IsReadOnly="True"
+					     Text="{Binding InputFilePath}" />
+
+			    <TextBox Grid.Row="2"
+					     Grid.Column="1"
+					     IsReadOnly="True"
+					     Text="{Binding OutputFilePath}" />
+
+				<Grid Grid.Row="4"
+					  Grid.ColumnSpan="2"
+					  Grid.ColumnDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto, 5, 1*">
+					<Grid.Resources>
+						<SolidColorBrush x:Key="ButtonForeground" Color="{Binding SettingsVM.Theme.ButtonIconForeground.Color}" />
+						<SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{Binding SettingsVM.Theme.ButtonIconForeground.Color}" />
+						<SolidColorBrush x:Key="ButtonForegroundPressed" Color="{Binding SettingsVM.Theme.ButtonIconForeground.Color}" />
+					</Grid.Resources>
+
+					<Grid.Styles>
+						<Style Selector="img|Icon">
+							<Setter Property="Opacity" Value="0.65" />
+						</Style>
+					</Grid.Styles>
+					
+					<Button Grid.Column="0"
+							img:Attached.Icon="fa-sort"
+							VerticalAlignment="Stretch"
+							IsEnabled="{Binding IsInputFilePathSelected}"
+							ToolTip.Tip="{Binding SettingsVM.Locale.ReorderPages}"
+							Command="{Binding ReorderPagesCommand}"
+							CommandParameter="{Binding #PagesTextBox.Text}" />
+
+					<Button Grid.Column="2"
+							img:Attached.Icon="fa-rotate-left"
+							VerticalAlignment="Stretch"
+							IsEnabled="{Binding IsInputFilePathSelected}"
+							ToolTip.Tip="{Binding SettingsVM.Locale.TurnPages}"
+							Command="{Binding TurnPagesLeftCommand}"
+							CommandParameter="{Binding #PagesTextBox.Text}" />
+
+					<Button Grid.Column="4"
+							img:Attached.Icon="fa-rotate-right"
+							VerticalAlignment="Stretch"
+							IsEnabled="{Binding IsInputFilePathSelected}"
+							ToolTip.Tip="{Binding SettingsVM.Locale.TurnPages}"
+							Command="{Binding TurnPagesRightCommand}"
+							CommandParameter="{Binding #PagesTextBox.Text}" />
+
+					<Button Grid.Column="6"
+							img:Attached.Icon="fa-trash"
+							VerticalAlignment="Stretch"
+							IsEnabled="{Binding IsInputFilePathSelected}"
+							ToolTip.Tip="{Binding SettingsVM.Locale.RemovePages}"
+							Command="{Binding RemovePagesCommand}"
+							CommandParameter="{Binding #PagesTextBox.Text}" />
+					
+					<TextBox Grid.Column="8"
+						 	 Name="PagesTextBox"
+							 Margin="0"
+							 MinWidth="0"
+                         	 IsEnabled="{Binding IsInputFilePathSelected}"
+                         	 Watermark="{Binding SettingsVM.Locale.Pages}"
+                         	 Text="{Binding OrderOfPages}" />
+				</Grid>
+            </Grid>
+            
+            <Grid Grid.Row="2"
+				  Margin="5, 0"
+				  ColumnDefinitions="1*, 5, 1*">
+				<Grid.Styles>
+					<Style Selector="Button">
+						<Setter Property="Width" Value="110" />
+						<Setter Property="HorizontalContentAlignment" Value="Center" />
+					</Style>
+				</Grid.Styles>
+                
+                <Button Grid.Column="0"
+                        HorizontalAlignment="Right"
+						Content="{Binding SettingsVM.Locale.Execute}"
+						IsEnabled="{Binding IsInputFilePathSelected}"
+						Command="{Binding ExecuteCommand}" />
+
+				<Button Grid.Column="2"
+                        HorizontalAlignment="Left"
+						Content="{Binding SettingsVM.Locale.Reset}"
+						Command="{Binding ResetCommand}" />
+			</Grid>
+        </Grid>
 	</Grid>
 
 </UserControl>

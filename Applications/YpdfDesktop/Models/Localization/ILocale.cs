@@ -66,6 +66,9 @@
         string? Orientation { get; set; }
         string? ApplyTo { get; set; }
         string? Pages { get; set; }
+        string? ReorderPages { get; set; }
+        string? TurnPages { get; set; }
+        string? RemovePages { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -107,5 +110,7 @@
         string? IncorrectShiftContentPagesMessage { get; set; }
         string? IncorrectPagesMessage { get; set; }
         string? IncorrectPageRangeMessage { get; set; }
+        string? AllPagedRemovedMessage { get; set; }
+        string? OperationCouldNotBePerformedMessage { get; set; }
     }
 }

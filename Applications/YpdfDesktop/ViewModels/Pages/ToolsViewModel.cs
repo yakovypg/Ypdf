@@ -30,6 +30,7 @@ namespace YpdfDesktop.ViewModels.Pages
         public SplitViewModel SplitVM { get; }
         public MergeViewModel MergeVM { get; }
         public CompressViewModel CompressVM { get; }
+        public HandlePagesViewModel HandlePagesVM { get; }
         public CropPagesViewModel CropPagesVM { get; }
         public DividePagesViewModel DividePagesVM { get; }
         public AddPageNumbersViewModel AddPageNumbersVM { get; }
@@ -183,6 +184,7 @@ namespace YpdfDesktop.ViewModels.Pages
             SplitVM = new SplitViewModel(settingsVM, tasksVM);
             MergeVM = new MergeViewModel(settingsVM, tasksVM);
             CompressVM = new CompressViewModel(settingsVM, tasksVM);
+            HandlePagesVM = new HandlePagesViewModel(settingsVM, tasksVM);
             CropPagesVM = new CropPagesViewModel(settingsVM, tasksVM);
             DividePagesVM = new DividePagesViewModel(settingsVM, tasksVM);
             AddPageNumbersVM = new AddPageNumbersViewModel(settingsVM, tasksVM);

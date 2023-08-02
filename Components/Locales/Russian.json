@@ -59,6 +59,9 @@
   "Orientation": "Ориентация",
   "ApplyTo": "Применить к",
   "Pages": "Страницы",
+  "ReorderPages": "Изменить порядок страниц",
+  "TurnPages": "Повернуть страницы",
+  "RemovePages": "Удалить страницы",
   "Split": "разбить",
   "Merge": "объединить",
   "Compress": "сжать",
@@ -96,5 +99,7 @@
   "SpecifyAtLeastOneCroppingMessage": "Укажите хотя бы одну вырезку",
   "IncorrectShiftContentPagesMessage": "Страницы, на которых будет произведен сдвиг контента, некорректны",
   "IncorrectPagesMessage": "Страницы, к которым будет применена текущая конфигурация, некорректны",
-  "IncorrectPageRangeMessage": "Имеется некорректный диапазон страниц"
+  "IncorrectPageRangeMessage": "Имеется некорректный диапазон страниц",
+  "AllPagedRemovedMessage": "Все страницы были удалены",
+  "OperationCouldNotBePerformedMessage": "Операция не может быть выполнена"
 }

@@ -53,6 +53,12 @@ namespace YpdfDesktop.Models.Themes
             ToolTileBackgroundPointerOver = SolidColorBrush.Parse("#EEB3ADF0");
             ToolTileBackgroundPressed = SolidColorBrush.Parse("#EE877EE7");
 
+            PageInfoTileBorderBrush = SolidColorBrush.Parse("#FF8B8B8B");
+            PageInfoTileBackground = SolidColorBrush.Parse("#FFFFFFFF");
+            PageInfoTileTextForeground = SolidColorBrush.Parse("#000000");
+            PageInfoTileCaptionBackground = SolidColorBrush.Parse("#D3D3D3");
+            PageInfoTileCaptionContentForeground = SolidColorBrush.Parse("#000000");
+
             InputFilesTileBackground = SolidColorBrush.Parse("#F2F2F2");
             InputFilesTileTextForeground = SolidColorBrush.Parse("#000000");
             RunningStatusBrush = SolidColorBrush.Parse("#EECFCFE0");

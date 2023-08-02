@@ -110,7 +110,7 @@
 			<toolPages:CompressView DataContext="{Binding CompressVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsHandlePagesViewVisible}">
-			<toolPages:HandlePagesView />
+			<toolPages:HandlePagesView DataContext="{Binding HandlePagesVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsCropPagesViewVisible}">
 			<toolPages:CropPagesView DataContext="{Binding CropPagesVM}" />
