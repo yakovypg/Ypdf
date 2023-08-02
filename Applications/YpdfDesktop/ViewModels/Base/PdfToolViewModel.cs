@@ -1,9 +1,13 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Threading;
+using DynamicData;
 using ExecutionLib.Configuration;
 using ExecutionLib.Execution;
 using ExecutionLib.Informing.Logging;
+using FileSystemLib.Naming;
 using MessageBox.Avalonia.Enums;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -109,7 +113,8 @@ namespace YpdfDesktop.ViewModels.Base
         {
             if (!checkOutputPathExists)
             {
-                Execute(toolType, config);
+                _ = Execute(toolType, config);
+                PreformPostExecutionActions();
                 return;
             }
 
@@ -117,10 +122,8 @@ namespace YpdfDesktop.ViewModels.Base
             {
                 if (t.Result)
                 {
-                    Execute(toolType, config);
-
-                    if (SettingsVM.ResetAfterExecution)
-                        Reset();
+                    _ = Execute(toolType, config);
+                    PreformPostExecutionActions();
                 }
                 else
                 {
@@ -135,11 +138,39 @@ namespace YpdfDesktop.ViewModels.Base
             });
         }
 
+        protected void ExecuteManyAsOne(ToolType toolType, YpdfConfig[] configs, string inputPath,
+            string outputPath, bool checkOutputPathExists)
+        {
+            if (!checkOutputPathExists)
+            {
+                ExecuteManyAsOne(toolType, configs, inputPath, outputPath);
+                PreformPostExecutionActions();
+                return;
+            }
+
+            _ = CheckFileExists(outputPath).ContinueWith(t =>
+            {
+                if (t.Result)
+                {
+                    ExecuteManyAsOne(toolType, configs, inputPath, outputPath);
+                    PreformPostExecutionActions();
+                }
+                else
+                {
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        string? message = SettingsVM.Locale.FileExistsMessage;
+                        MainWindowMessage.ShowErrorDialog($"{message}: {outputPath}");
+                    });
+                }
+            });
+        }
+
         #endregion
 
         #region Private Methods
 
-        private void Execute(ToolType toolType, YpdfConfig config)
+        private Task Execute(ToolType toolType, YpdfConfig config)
         {
             var executor = new PdfToolExecutor(config);
 
@@ -188,6 +219,98 @@ namespace YpdfDesktop.ViewModels.Base
             };
 
             executionTask.Start();
+
+            return executionTask;
+        }
+
+        private void ExecuteManyAsOne(ToolType toolType, YpdfConfig[] configs, string inputPath, string outputPath)
+        {
+            ArgumentNullException.ThrowIfNull(configs, nameof(configs));
+
+            if (configs.Length == 0)
+                return;
+
+            if (configs.Length == 1)
+            {
+                YpdfConfig config = configs[0];
+                config.PathsConfig.InputPath = inputPath;
+                config.PathsConfig.OutputPath = outputPath;
+
+                _ = Execute(toolType, config);
+                return;
+            }
+
+            GeneratePathsPipeline(configs, inputPath, outputPath, out List<string> tempFilePaths);
+
+            Task tasksWaiter = Task.Run(() =>
+            {
+                for (int i = 0; i < configs.Length; ++i)
+                {
+                    Task task = Execute(toolType, configs[i]);
+                    TasksVM.Tasks[0].InputFilesPresenter = inputPath;
+                    task.Wait();
+                }
+            });
+
+            _ = tasksWaiter.ContinueWith(t =>
+            {
+                var tasksToDelete = TasksVM.Tasks.Skip(1).Take(configs.Length - 1);
+                TasksVM.Tasks.RemoveMany(tasksToDelete);
+                
+                foreach (string path in tempFilePaths)
+                {
+                    try
+                    {
+                        if (File.Exists(path))
+                            File.Delete(path);
+                    }
+                    catch { }
+                }
+            });
+        }
+
+        private void PreformPostExecutionActions()
+        {
+            if (SettingsVM.ResetAfterExecution)
+                Reset();
+        }
+
+        private static void GeneratePathsPipeline(YpdfConfig[] configs, string inputPath, string outputPath)
+        {
+            GeneratePathsPipeline(configs, inputPath, outputPath, out _);
+        }
+
+        private static void GeneratePathsPipeline(YpdfConfig[] configs, string inputPath,
+            string outputPath, out List<string> tempFilePaths)
+        {
+            ArgumentNullException.ThrowIfNull(configs, nameof(configs));
+
+            tempFilePaths = new List<string>();
+
+            if (configs.Length == 0)
+                return;
+            
+            for (int i = 0; i < configs.Length; ++i)
+            {
+                YpdfConfig currConfig = configs[i];
+                YpdfConfig? prevConfig = i > 0 ? configs[i - 1] : null;
+                
+                string? extension = Path.GetExtension(currConfig.PathsConfig.OutputPath);
+
+                if (string.IsNullOrEmpty(extension))
+                    extension = "pdf";
+                
+                string tempFilePath = new UniqueFile(extension, SharedConfig.Directories.Temp).GetNext();
+                tempFilePaths.Add(tempFilePath);
+
+                currConfig.PathsConfig.InputPath = prevConfig?.PathsConfig.OutputPath;
+                currConfig.PathsConfig.OutputPath = tempFilePath;
+            }
+
+            configs[0].PathsConfig.InputPath = inputPath;
+            configs[^1].PathsConfig.OutputPath = outputPath;
+
+            tempFilePaths.RemoveAt(tempFilePaths.Count - 1);
         }
 
         #endregion
