@@ -1,9 +1,7 @@
 ﻿namespace YpdfLib.Models.Design.Fonts
 {
-    public interface ILazyFont : IDeepCloneable<ILazyFont>
+    public interface ILazyFont : ILazyType<Font>, IDeepCloneable<ILazyFont>
     {
         string Name { get; }
-
-        Font GetFont();
     }
 }

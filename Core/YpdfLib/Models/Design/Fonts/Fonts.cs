@@ -9,11 +9,11 @@ namespace YpdfLib.Models.Design.Fonts
         public static IReadOnlyDictionary<string, ILazyFont> IntegratedFonts => _integratedFonts;
 
         public static Font FirstRegular => _integratedFonts.Keys.Any(t => t.ToLower().Contains("regular"))
-            ? _integratedFonts.First(t => t.Key.ToLower().Contains("regular")).Value.GetFont()
+            ? _integratedFonts.First(t => t.Key.ToLower().Contains("regular")).Value.Create()
             : Font.Create("TIMES_ROMAN", PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN));
 
         public static Font FirstBold => _integratedFonts.Keys.Any(t => t.ToLower().Contains("bold"))
-            ? _integratedFonts.First(t => t.Key.ToLower().Contains("bold")).Value.GetFont()
+            ? _integratedFonts.First(t => t.Key.ToLower().Contains("bold")).Value.Create()
             : Font.Create("TIMES_BOLD", PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD));
 
         static Fonts()
