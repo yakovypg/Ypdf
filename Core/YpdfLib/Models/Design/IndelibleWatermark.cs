@@ -1,4 +1,5 @@
-﻿using iText.Kernel.Geom;
+﻿using iText.Layout.Borders;
+using iText.Kernel.Geom;
 using YpdfLib.Models.Design.Fonts;
 using YpdfLib.Models.Geometry;
 
@@ -8,18 +9,21 @@ namespace YpdfLib.Models.Design
     {
         public float Width { get; set; }
         public float Height { get; set; }
+        public Border? Border { get; set; }
 
-        public IndelibleWatermark(float width, float height) : base()
+        public IndelibleWatermark(float width, float height, Border? border = null) : base()
         {
             Width = width;
             Height = height;
+            Border = border;
         }
 
-        public IndelibleWatermark(float width, float height, string text, double rotationAngle, IFontInfo fontInfo, FloatPoint? lowerLeftPoint = null) :
+        public IndelibleWatermark(float width, float height, string text, double rotationAngle, IFontInfo fontInfo, FloatPoint? lowerLeftPoint = null, Border? border = null) :
             base(text, rotationAngle, fontInfo, lowerLeftPoint)
         {
             Width = width;
             Height = height;
+            Border = border;
         }
 
         public FloatPoint GetCenterredLowerLeftPoint(Rectangle pageSize)

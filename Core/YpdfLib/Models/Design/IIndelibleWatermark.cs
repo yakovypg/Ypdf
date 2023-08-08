@@ -1,4 +1,5 @@
-﻿using iText.Kernel.Geom;
+﻿using iText.Layout.Borders;
+using iText.Kernel.Geom;
 using YpdfLib.Models.Geometry;
 
 namespace YpdfLib.Models.Design
@@ -7,6 +8,7 @@ namespace YpdfLib.Models.Design
     {
         float Width { get; set; }
         float Height { get; set; }
+        Border? Border { get; set; }
 
         FloatPoint GetCenterredLowerLeftPoint(Rectangle pageSize);
     }

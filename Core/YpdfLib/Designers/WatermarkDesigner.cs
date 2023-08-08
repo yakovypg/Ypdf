@@ -111,6 +111,9 @@ namespace YpdfLib.Designers
             paragraph.SetRotationAngle(watermark.RotationAngle);
             paragraph.SetFixedPosition(pageNumber, lowerLeftPoint.X, lowerLeftPoint.Y, watermark.Width);
 
+            if (watermark.Border is not null)
+                paragraph.SetBorder(watermark.Border);
+
             return paragraph;
         }
 
