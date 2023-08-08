@@ -10,23 +10,22 @@ namespace YpdfLib.Models.Design
         public float Width { get; set; }
         public float Height { get; set; }
 
-        public TextAlignment TextAlignment { get; set; }
-        public HorizontalAlignment TextHorizontalAlignment { get; set; }
-        public VerticalAlignment TextContainerVerticalAlignment { get; set; }
-
+        public IWatermarkTextAllocator TextAllocator { get; set; }
         public ILazyBorder? Border { get; set; }
 
-        public IndelibleWatermark(float width, float height) : base()
+        public IndelibleWatermark(float width, float height, WatermarkTextAllocator? textAllocator = null) : base()
         {
             Width = width;
             Height = height;
+            TextAllocator = textAllocator ?? new WatermarkTextAllocator();
         }
 
-        public IndelibleWatermark(float width, float height, string text, double rotationAngle, IFontInfo fontInfo, FloatPoint? lowerLeftPoint = null) :
+        public IndelibleWatermark(float width, float height, string text, double rotationAngle, IFontInfo fontInfo, FloatPoint? lowerLeftPoint = null, WatermarkTextAllocator? textAllocator = null) :
             base(text, rotationAngle, fontInfo, lowerLeftPoint)
         {
             Width = width;
             Height = height;
+            TextAllocator = textAllocator ?? new WatermarkTextAllocator();
         }
 
         public FloatPoint GetCenterredLowerLeftPoint(Rectangle pageSize)
@@ -48,10 +47,8 @@ namespace YpdfLib.Models.Design
                 RotationAngle = RotationAngle,
                 FontInfo = FontInfo.Copy(),
                 LowerLeftPoint = LowerLeftPoint,
+                TextAllocator = TextAllocator.Copy(),
                 Border = Border?.Copy(),
-                TextAlignment = TextAlignment,
-                TextHorizontalAlignment = TextHorizontalAlignment,
-                TextContainerVerticalAlignment = TextContainerVerticalAlignment
             };
         }
 
@@ -70,10 +67,8 @@ namespace YpdfLib.Models.Design
                    EqualityComparer<FloatPoint?>.Default.Equals(LowerLeftPoint, other.LowerLeftPoint) &&
                    Width == other.Width &&
                    Height == other.Height &&
-                   EqualityComparer<ILazyBorder>.Default.Equals(Border, other.Border) &&
-                   TextAlignment == other.TextAlignment &&
-                   TextHorizontalAlignment == TextHorizontalAlignment &&
-                   TextContainerVerticalAlignment == TextContainerVerticalAlignment;
+                   EqualityComparer<IWatermarkTextAllocator>.Default.Equals(TextAllocator, other.TextAllocator) &&
+                   EqualityComparer<ILazyBorder>.Default.Equals(Border, other.Border);
         }
 
         public override bool Equals(object? obj)
@@ -92,10 +87,8 @@ namespace YpdfLib.Models.Design
             hash.Add(LowerLeftPoint);
             hash.Add(Width);
             hash.Add(Height);
+            hash.Add(TextAllocator);
             hash.Add(Border);
-            hash.Add(TextAlignment);
-            hash.Add(TextHorizontalAlignment);
-            hash.Add(TextContainerVerticalAlignment);
 
             return hash.ToHashCode();
         }

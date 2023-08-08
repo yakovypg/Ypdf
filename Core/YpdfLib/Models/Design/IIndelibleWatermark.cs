@@ -10,10 +10,7 @@ namespace YpdfLib.Models.Design
         float Width { get; set; }
         float Height { get; set; }
 
-        TextAlignment TextAlignment { get; set; }
-        HorizontalAlignment TextHorizontalAlignment { get; set; }
-        VerticalAlignment TextContainerVerticalAlignment { get; set; }
-
+        IWatermarkTextAllocator TextAllocator { get; set; }
         ILazyBorder? Border { get; set; }
 
         FloatPoint GetCenterredLowerLeftPoint(Rectangle pageSize);
