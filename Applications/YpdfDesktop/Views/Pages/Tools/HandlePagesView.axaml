@@ -74,7 +74,7 @@
 			</ItemsControl.Template>
 
             <ItemsControl.DataTemplates>
-				<DataTemplate DataType="{x:Type models:PageInfo}">
+				<DataTemplate DataType="{x:Type models:PageHandlingInfo}">
 					<Border Margin="3"
 							BorderThickness="1"
                             BorderBrush="{Binding DataContext.SettingsVM.Theme.PageInfoTileBorderBrush, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
