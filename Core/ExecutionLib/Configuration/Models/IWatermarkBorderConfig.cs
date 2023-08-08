@@ -11,7 +11,7 @@ namespace ExecutionLib.Configuration.Models
         BorderType BorderType { get; set; }
         Color Color { get; set; }
 
-        float Width { get; set; }
+        float Thickness { get; set; }
         float Opacity { get; set; }
     }
 }

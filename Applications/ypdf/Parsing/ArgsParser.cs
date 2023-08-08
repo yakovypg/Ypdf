@@ -82,7 +82,7 @@ namespace ypdf.Parsing
 
                 { "border=", $"the border type ({EnumsInfo.BorderTypeValues}).", t => _config.WatermarkBorderConfig.BorderType = ParseBorderType(t) },
                 { "border-color=", $"the border color ({StandardValues.ColorNames}).", t => _config.WatermarkBorderConfig.Color = ParseColor(t) },
-                { "border-width=", $"the border width.", (float t) => _config.WatermarkBorderConfig.Width = t },
+                { "border-thickness=", $"the border thickness.", (float t) => _config.WatermarkBorderConfig.Thickness = t },
                 { "border-opacity=", $"the border opacity.", (float t) => _config.WatermarkBorderConfig.Opacity = t },
 
                 { "password=", "the common PDF document password (sets the same user password and owner password).", t => _config.PdfPassword.SetCommonPassword(t) },

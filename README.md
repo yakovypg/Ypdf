@@ -541,11 +541,11 @@ order to properly draw and align it.
 ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -w "My watermark" -s 72 --font-family=times_bold --font-color=black -a 60 --font-opacity=0.5 --watermark-width=500 --watermark-height=100 --watermark-pos=(250;250)
 ```
 
-You can add a border for the watermark. You can specify border type, color, width and opacity 
-after the --border, --border-color, --border-width and --border-opacity parameters.
+You can add a border for the watermark. You can specify border type, color, thickness and 
+opacity after the --border, --border-color, --border-width and --border-opacity parameters.
 
 ```
-ypdf add-watermark -i inputPath.pdf -o outputPath.pdf --border=dashed --border-color=blue --border-width=5 --border-opacity=0.7
+ypdf add-watermark -i inputPath.pdf -o outputPath.pdf --border=dashed --border-color=blue --border-thickness=5 --border-opacity=0.7
 ```
 
 If you do not know the exact dimensions of the watermark text, you can specify the exhaustive 

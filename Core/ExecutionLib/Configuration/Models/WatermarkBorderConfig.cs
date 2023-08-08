@@ -32,7 +32,7 @@ namespace ExecutionLib.Configuration.Models
         }
 
         private float _width = 5;
-        public float Width
+        public float Thickness
         {
             get => _width;
             set
@@ -59,7 +59,7 @@ namespace ExecutionLib.Configuration.Models
                 throw new NotConfiguredException(nameof(WatermarkBorderConfig));
             
             DeviceRgb rgb = ColorConverter.ToDeviceRgb(Color);
-            return new LazyBorder(BorderType, rgb, Width, Opacity);
+            return new LazyBorder(BorderType, rgb, Thickness, Opacity);
         }
 
         public WatermarkBorderConfig Copy()
@@ -69,7 +69,7 @@ namespace ExecutionLib.Configuration.Models
                 IsConfigured = IsConfigured,
                 BorderType = BorderType,
                 Color = Color,
-                Width = Width,
+                Thickness = Thickness,
                 Opacity = Opacity
             };
         }
@@ -85,7 +85,7 @@ namespace ExecutionLib.Configuration.Models
                    IsConfigured == other.IsConfigured &&
                    BorderType == other.BorderType &&
                    Color.Equals(other.Color) &&
-                   Width == other.Width &&
+                   Thickness == other.Thickness &&
                    Opacity == other.Opacity;
         }
 
@@ -96,7 +96,7 @@ namespace ExecutionLib.Configuration.Models
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(IsConfigured, BorderType, Color, Width, Opacity);
+            return HashCode.Combine(IsConfigured, BorderType, Color, Thickness, Opacity);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace YpdfLib.Models.Design
         BorderType BorderType { get; }
         DeviceRgb Color { get; }
         
-        float Width { get; }
+        float Thickness { get; }
         float Opacity { get; }
     }
 }

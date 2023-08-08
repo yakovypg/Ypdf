@@ -9,7 +9,7 @@ namespace YpdfLib.Models.Design
         public BorderType BorderType { get; }
         public DeviceRgb Color { get; }
 
-        public float Width { get; }
+        public float Thickness { get; }
         public float Opacity { get; }
 
         public LazyBorder(BorderType borderType) : this(borderType, new DeviceRgb(0, 0, 0), 5, 1)
@@ -20,7 +20,7 @@ namespace YpdfLib.Models.Design
         {
             BorderType = borderType;
             Color = color;
-            Width = width;
+            Thickness = width;
             Opacity = opacity;
         }
         
@@ -28,16 +28,16 @@ namespace YpdfLib.Models.Design
         {
             return BorderType switch
             {
-                BorderType.Inset => new InsetBorder(Color, Width, Opacity),
-                BorderType.Ridge => new RidgeBorder(Color, Width, Opacity),
-                BorderType.Solid => new SolidBorder(Color, Width, Opacity),
-                BorderType.Dashed => new DashedBorder(Color, Width, Opacity),
-                BorderType.Dotted => new DottedBorder(Color, Width, Opacity),
-                BorderType.Double => new DoubleBorder(Color, Width, Opacity),
-                BorderType.Groove => new GrooveBorder(Color, Width, Opacity),
-                BorderType.Outset => new OutsetBorder(Color, Width, Opacity),
-                BorderType.RoundDots => new RoundDotsBorder(Color, Width, Opacity),
-                BorderType.FixedDashed => new FixedDashedBorder(Color, Width, Opacity),
+                BorderType.Inset => new InsetBorder(Color, Thickness, Opacity),
+                BorderType.Ridge => new RidgeBorder(Color, Thickness, Opacity),
+                BorderType.Solid => new SolidBorder(Color, Thickness, Opacity),
+                BorderType.Dashed => new DashedBorder(Color, Thickness, Opacity),
+                BorderType.Dotted => new DottedBorder(Color, Thickness, Opacity),
+                BorderType.Double => new DoubleBorder(Color, Thickness, Opacity),
+                BorderType.Groove => new GrooveBorder(Color, Thickness, Opacity),
+                BorderType.Outset => new OutsetBorder(Color, Thickness, Opacity),
+                BorderType.RoundDots => new RoundDotsBorder(Color, Thickness, Opacity),
+                BorderType.FixedDashed => new FixedDashedBorder(Color, Thickness, Opacity),
 
                 _ => throw new NotSupportedException()
             };
@@ -46,7 +46,7 @@ namespace YpdfLib.Models.Design
         public LazyBorder Copy()
         {
             DeviceRgb color = ColorConverter.CopyDeviceRGB(Color);
-            return new LazyBorder(BorderType, color, Width, Opacity);
+            return new LazyBorder(BorderType, color, Thickness, Opacity);
         }
 
         ILazyBorder IDeepCloneable<ILazyBorder>.Copy()
@@ -59,7 +59,7 @@ namespace YpdfLib.Models.Design
             return other is not null &&
                    BorderType == other.BorderType &&
                    Color.Equals(other.Color) &&
-                   Width == other.Width &&
+                   Thickness == other.Thickness &&
                    Opacity == other.Opacity;
         }
 
@@ -70,7 +70,7 @@ namespace YpdfLib.Models.Design
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(BorderType, Color, Width, Opacity);
+            return HashCode.Combine(BorderType, Color, Thickness, Opacity);
         }
     }
 }
