@@ -17,7 +17,7 @@ namespace YpdfLib.Models.Design.Fonts
             Name = Path.GetFileNameWithoutExtension(path);
         }
 
-        public Font GetFont()
+        public Font Create()
         {
             return Font.Create(_path, _encoding);
         }

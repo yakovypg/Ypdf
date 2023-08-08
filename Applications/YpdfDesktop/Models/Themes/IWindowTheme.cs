@@ -50,6 +50,16 @@ namespace YpdfDesktop.Models.Themes
         ISolidColorBrush? ToolTileBackgroundPointerOver { get; set; }
         ISolidColorBrush? ToolTileBackgroundPressed { get; set; }
 
+        ISolidColorBrush? PageInfoTileBorderBrush { get; set; }
+        ISolidColorBrush? PageInfoTileBackground { get; set; }
+        ISolidColorBrush? PageInfoTileTextForeground { get; set; }
+        ISolidColorBrush? PageInfoTileCaptionBackground { get; set; }
+        ISolidColorBrush? PageInfoTileCaptionContentForeground { get; set; }
+
+        ISolidColorBrush? WatermarkBoundsBrush { get; set; }
+        ISolidColorBrush? WatermarkTextBoundsBrush { get; set; }
+        ISolidColorBrush? WatermarkRotatedTextBoundsBrush { get; set; }
+
         ISolidColorBrush? InputFilesTileBackground { get; set; }
         ISolidColorBrush? InputFilesTileTextForeground { get; set; }
         ISolidColorBrush? RunningStatusBrush { get; set; }

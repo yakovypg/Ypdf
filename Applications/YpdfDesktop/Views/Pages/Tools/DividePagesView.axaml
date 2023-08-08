@@ -35,7 +35,7 @@
 			<ColumnDefinition MinWidth="2" />
 		</Grid.ColumnDefinitions>
 
-		<GridSplitter Grid.Column="1" Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" />
+		<GridSplitter Grid.Column="1" MinWidth="0" Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" />
 
 		<Grid Grid.Column="0"
 			  ColumnDefinitions="Auto, 1*"

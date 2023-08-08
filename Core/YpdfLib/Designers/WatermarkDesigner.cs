@@ -100,16 +100,22 @@ namespace YpdfLib.Designers
             FloatPoint lowerLeftPoint = watermark.LowerLeftPoint ?? watermark.GetCenterredLowerLeftPoint(pageSize);
 
             var text = new Text(watermark.Text);
+            text.SetTextAlignment(watermark.TextAllocator.TextAlignment);
+            text.SetHorizontalAlignment(watermark.TextAllocator.TextHorizontalAlignment);
             text.SetOpacity(watermark.FontInfo.Opacity);
             text.SetFontColor(watermark.FontInfo.Color);
             text.SetFont(watermark.FontInfo.GetPdfFont());
             text.SetFontSize(watermark.FontInfo.Size);
 
             var paragraph = new Paragraph(text);
+            paragraph.SetVerticalAlignment(watermark.TextAllocator.TextContainerVerticalAlignment);
             paragraph.SetWidth(watermark.Width);
             paragraph.SetHeight(watermark.Height);
             paragraph.SetRotationAngle(watermark.RotationAngle);
             paragraph.SetFixedPosition(pageNumber, lowerLeftPoint.X, lowerLeftPoint.Y, watermark.Width);
+
+            if (watermark.Border is not null)
+                paragraph.SetBorder(watermark.Border.Create());
 
             return paragraph;
         }

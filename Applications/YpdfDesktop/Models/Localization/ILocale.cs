@@ -66,6 +66,16 @@
         string? Orientation { get; set; }
         string? ApplyTo { get; set; }
         string? Pages { get; set; }
+        string? ReorderPages { get; set; }
+        string? TurnPages { get; set; }
+        string? RemovePages { get; set; }
+        string? Watermark { get; set; }
+        string? Angle { get; set; }
+        string? MakeAsAnnotation { get; set; }
+        string? ShowBoundedRectangle { get; set; }
+        string? ShowSourceTextBounds { get; set; }
+        string? ShowRotatedTextBounds { get; set; }
+        string? Remarks { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -107,5 +117,10 @@
         string? IncorrectShiftContentPagesMessage { get; set; }
         string? IncorrectPagesMessage { get; set; }
         string? IncorrectPageRangeMessage { get; set; }
+        string? AllPagedRemovedMessage { get; set; }
+        string? OperationCouldNotBePerformedMessage { get; set; }
+        string? DesignerIgnoreFontFamilyMessage { get; set; }
+        string? DesignerHasSmallInaccuraciesInTextAllocationByWidthMessage { get; set; }
+        string? WatermarkAnnotationNotFullySupportedMessage { get; set; }
     }
 }

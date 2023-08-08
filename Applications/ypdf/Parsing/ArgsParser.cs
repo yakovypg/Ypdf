@@ -76,6 +76,14 @@ namespace ypdf.Parsing
                 { "watermark-height=", "the watermark object height.", (float t) => _config.Watermark.SetHeight(t) },
                 { "watermark-x-translation=", "the shift of the origin along the X-axis for the watermark annotation.", (float t) => _config.Watermark.XTranslation = t },
                 { "watermark-y-translation=", "the shift of the origin along the Y-axis for the watermark annotation.", (float t) => _config.Watermark.YTranslation = t },
+                { "watermark-text-alignment=", "the alignment of the watermark text.", t => _config.WatermarkTextAllocator.TextAlignment = ParseTextAlignment(t) },
+                { "watermark-text-h-alignment=", "the horizontal alignment of the watermark text.", t => _config.WatermarkTextAllocator.TextHorizontalAlignment = ParseHorizontalAlignment(t) },
+                { "watermark-container-v-alignment=", "the vertical alignment of the watermark text container.", t => _config.WatermarkTextAllocator.TextContainerVerticalAlignment = ParseVerticalAlignment(t) },
+
+                { "border=", $"the border type ({EnumsInfo.BorderTypeValues}).", t => _config.WatermarkBorderConfig.BorderType = ParseBorderType(t) },
+                { "border-color=", $"the border color ({StandardValues.ColorNames}).", t => _config.WatermarkBorderConfig.Color = ParseColor(t) },
+                { "border-thickness=", $"the border thickness.", (float t) => _config.WatermarkBorderConfig.Thickness = t },
+                { "border-opacity=", $"the border opacity.", (float t) => _config.WatermarkBorderConfig.Opacity = t },
 
                 { "password=", "the common PDF document password (sets the same user password and owner password).", t => _config.PdfPassword.SetCommonPassword(t) },
                 { "user-password=", "the user PDF document password.", t => _config.PdfPassword.UserPassword = t },
@@ -172,6 +180,11 @@ namespace ypdf.Parsing
         private static VerticalAlignment ParseVerticalAlignment(string data)
         {
             return Enum.Parse<VerticalAlignment>(data, true);
+        }
+
+        private static BorderType ParseBorderType(string data)
+        {
+            return Enum.Parse<BorderType>(data, true);
         }
 
         public static PageNumberTextPresenter ParsePageNumberTextPresenter(string data)

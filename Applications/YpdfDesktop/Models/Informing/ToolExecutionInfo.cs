@@ -17,7 +17,12 @@ namespace YpdfDesktop.Models.Informing
         public Task ExecutionTask { get; }
         public IEnumerable<string> InputFiles { get; }
 
-        public string InputFilesPresenter => string.Join(", ", InputFiles);
+        private string _inputFilesPresenter = string.Empty;
+        public string InputFilesPresenter
+        {
+            get => _inputFilesPresenter;
+            set => RaiseAndSetIfChanged(ref _inputFilesPresenter, value);
+        }
 
         private string _toolOutput = string.Empty;
         public string ToolOutput
@@ -62,6 +67,7 @@ namespace YpdfDesktop.Models.Informing
             ExecutionTask = executionTask;
             InputFiles = inputFiles;
 
+            InputFilesPresenter = string.Join(", ", inputFiles);
             StatusIcon = ToolInfoService.GetExecutionStatusIconName(Status);
         }
 

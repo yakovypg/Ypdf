@@ -60,5 +60,10 @@
 
             return new FloatPoint(x, y);
         }
+
+        public static FloatPoint FromDoubleCoordinates(double x, double y)
+        {
+            return new FloatPoint(Convert.ToSingle(x), Convert.ToSingle(y));
+        }
     }
 }

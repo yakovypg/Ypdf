@@ -28,6 +28,7 @@ namespace YpdfDesktop.Models.Localization
         public string? Reset { get; set; }
         public string? File { get; set; }
         public string? Output { get; set; }
+        public string? PageOrder { get; set; }
         public string? QualityFactor { get; set; }
         public string? SizeFactor { get; set; }
         public string? Extension { get; set; }
@@ -68,6 +69,16 @@ namespace YpdfDesktop.Models.Localization
         public string? Orientation { get; set; }
         public string? ApplyTo { get; set; }
         public string? Pages { get; set; }
+        public string? ReorderPages { get; set; }
+        public string? TurnPages { get; set; }
+        public string? RemovePages { get; set; }
+        public string? Watermark { get; set; }
+        public string? Angle { get; set; }
+        public string? MakeAsAnnotation { get; set; }
+        public string? ShowBoundedRectangle { get; set; }
+        public string? ShowSourceTextBounds { get; set; }
+        public string? ShowRotatedTextBounds { get; set; }
+        public string? Remarks { get; set; }
 
         public string? Split { get; set; }
         public string? Merge { get; set; }
@@ -109,6 +120,11 @@ namespace YpdfDesktop.Models.Localization
         public string? IncorrectShiftContentPagesMessage { get; set; }
         public string? IncorrectPagesMessage { get; set; }
         public string? IncorrectPageRangeMessage { get; set; }
+        public string? AllPagedRemovedMessage { get; set; }
+        public string? OperationCouldNotBePerformedMessage { get; set; }
+        public string? DesignerIgnoreFontFamilyMessage { get; set; }
+        public string? DesignerHasSmallInaccuraciesInTextAllocationByWidthMessage { get; set; }
+        public string? WatermarkAnnotationNotFullySupportedMessage { get; set; }
 
         public Locale() : this(Guid.NewGuid().ToString())
         {

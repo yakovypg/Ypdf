@@ -59,6 +59,16 @@
   "Orientation": "Orientation",
   "ApplyTo": "Apply to",
   "Pages": "Pages",
+  "ReorderPages": "Reorder pages",
+  "TurnPages": "Turn pages",
+  "RemovePages": "Remove pages",
+  "Watermark": "Watermark",
+  "Angle": "Angle",
+  "MakeAsAnnotation": "Make as annotation",
+  "ShowBoundedRectangle": "Show bounded rectangle",
+  "ShowSourceTextBounds": "Show source text bounds",
+  "ShowRotatedTextBounds": "Show rotated text bounds",
+  "Remarks": "Remarks",
   "Split": "split",
   "Merge": "merge",
   "Compress": "compress",
@@ -96,5 +106,10 @@
   "SpecifyAtLeastOneCroppingMessage": "Specify at least one cropping",
   "IncorrectShiftContentPagesMessage": "Pages on which the content will be shifted are incorrect",
   "IncorrectPagesMessage": "Pages to which the current configuration will be applied are incorrect",
-  "IncorrectPageRangeMessage": "There is an incorrect page range"
+  "IncorrectPageRangeMessage": "There is an incorrect page range",
+  "AllPagedRemovedMessage": "All pages have been removed",
+  "OperationCouldNotBePerformedMessage": "Operation could not be performed",
+  "DesignerIgnoreFontFamilyMessage": "Designer does not take into account the font family",
+  "DesignerHasSmallInaccuraciesInTextAllocationByWidthMessage": "Designer has small inaccuracies in the allocation of text by width",
+  "WatermarkAnnotationNotFullySupportedMessage": "Watermark annotation is not fully supported"
 }

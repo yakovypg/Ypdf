@@ -189,7 +189,7 @@ the end of the range).
 commas. These items mean the page numbers through which the page order is determined.
 - The *rotation* should be represented as two elements separated by the ':' symbol. The first 
 element means the set of comma-separated page numbers (that can be represented either as a 
-single number or as range) and the second element means the angle to which this page should 
+single number or as range) and the second element means the angle to which this pages should 
 be rotated.
 - The *cropping* should be represented as two elements separated by the ':' symbol. The first
 element means the set of comma-separated page numbers (that can be represented either as a 
@@ -426,11 +426,11 @@ to specify the rotations (the page number and the angle by which you want to rot
 specified page) using the -r parameter. [Here](#parameters-parsing) you can read about the 
 format of the input parameters.
 
-For example, with this command you will rotate the first page 90 degrees and the fifth page 
-180 degrees.
+For example, with this command you will rotate the first and second pages by 90 degrees, and 
+the fifth page by 180 degrees.
 
 ```
-ypdf rotate -i inputPath.pdf -o outputPath.pdf -r 1,5:90
+ypdf rotate -i inputPath.pdf -o outputPath.pdf -r 1-2:90 -r 5:180
 ```
 
 ### Crop PDF document pages
@@ -520,8 +520,10 @@ numbers are not specified, the watermark will be placed on all pages of the PDF 
 ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -p 1 -p 5-10
 ```
 
-You can specify text, rotation angle, width, height and lower left point after the -w, -a, 
---watermark-opacity, --watermark-width, --watermark-height and --watermark-pos parameters.
+You can specify text, rotation angle, width, height, lower left point, text alignment, 
+horizontal text alignment and watermark container vertical alignment after the -w, -a, 
+--watermark-width, --watermark-height, --watermark-pos, watermark-text-alignment,
+watermark-text-h-alignment and watermark-container-v-alignment parameters.
 
 You can also [configure the font](#font-configuration).
 
@@ -539,9 +541,25 @@ order to properly draw and align it.
 ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -w "My watermark" -s 72 --font-family=times_bold --font-color=black -a 60 --font-opacity=0.5 --watermark-width=500 --watermark-height=100 --watermark-pos=(250;250)
 ```
 
+You can add a border for the watermark. You can specify border type, color, thickness and 
+opacity after the --border, --border-color, --border-width and --border-opacity parameters.
+
+```
+ypdf add-watermark -i inputPath.pdf -o outputPath.pdf --border=dashed --border-color=blue --border-thickness=5 --border-opacity=0.7
+```
+
+If you do not know the exact dimensions of the watermark text, you can specify the exhaustive 
+area of the watermark. But in this case, you need to place the watermark text in the lower left 
+corner of this area.
+
+```
+ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -w "My watermark" -a 60 --watermark-pos=(250;0) --watermark-width=10000 --watermark-height=10000 --watermark-text-alignment=left --watermark-text-h-alignment=left watermark-container-v-alignment=bottom
+```
+
 You can also add a watermark annotation to the PDF document. The watermark annotation 
-configuration is the same as the watermark configuration. But you can also specify 
-x-translation and y-translation after the --watermark-x-translation and 
+configuration is almost the same as the watermark configuration. You can not specify text 
+alignment, horizontal text alignment and watermark container vertical alignment. But you can 
+specify x-translation and y-translation after the --watermark-x-translation and 
 --watermark-y-translation parameters.
 
 Unlike a watermark, the watermark annotation is placed in an enclosing rectangle that does 
