@@ -69,6 +69,12 @@
         string? ReorderPages { get; set; }
         string? TurnPages { get; set; }
         string? RemovePages { get; set; }
+        string? Watermark { get; set; }
+        string? Angle { get; set; }
+        string? MakeAsAnnotation { get; set; }
+        string? ShowBoundedRectangle { get; set; }
+        string? ShowSourceTextBounds { get; set; }
+        string? ShowRotatedTextBounds { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }

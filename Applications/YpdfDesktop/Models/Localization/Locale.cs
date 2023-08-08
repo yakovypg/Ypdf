@@ -72,6 +72,12 @@ namespace YpdfDesktop.Models.Localization
         public string? ReorderPages { get; set; }
         public string? TurnPages { get; set; }
         public string? RemovePages { get; set; }
+        public string? Watermark { get; set; }
+        public string? Angle { get; set; }
+        public string? MakeAsAnnotation { get; set; }
+        public string? ShowBoundedRectangle { get; set; }
+        public string? ShowSourceTextBounds { get; set; }
+        public string? ShowRotatedTextBounds { get; set; }
 
         public string? Split { get; set; }
         public string? Merge { get; set; }

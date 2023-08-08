@@ -59,6 +59,10 @@ namespace YpdfDesktop.Models.Themes
             PageInfoTileCaptionBackground = SolidColorBrush.Parse("#D3D3D3");
             PageInfoTileCaptionContentForeground = SolidColorBrush.Parse("#000000");
 
+            WatermarkBoundsBrush = SolidColorBrush.Parse("#00B400");
+            WatermarkTextBoundsBrush = SolidColorBrush.Parse("#FF0000");
+            WatermarkRotatedTextBoundsBrush = SolidColorBrush.Parse("#000000");
+
             InputFilesTileBackground = SolidColorBrush.Parse("#F2F2F2");
             InputFilesTileTextForeground = SolidColorBrush.Parse("#000000");
             RunningStatusBrush = SolidColorBrush.Parse("#EECFCFE0");

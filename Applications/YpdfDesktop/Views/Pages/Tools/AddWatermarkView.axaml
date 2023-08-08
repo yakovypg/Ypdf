@@ -2,12 +2,350 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+			 xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions"
+			 xmlns:bt="using:YpdfDesktop.Infrastructure.Behaviors.Text"
+			 xmlns:bd="using:YpdfDesktop.Infrastructure.Behaviors.Drop"
+			 xmlns:vm="using:YpdfDesktop.ViewModels.Pages.Tools"
+             xmlns:models="clr-namespace:YpdfDesktop.Models.Paging"
+			 xmlns:converters="clr-namespace:YpdfDesktop.Infrastructure.Converters"
              mc:Ignorable="d"
 			 d:DesignWidth="800" d:DesignHeight="450"
              x:Class="YpdfDesktop.Views.Pages.Tools.AddWatermarkView">
 
-	<Grid>
-		<TextBlock Text="Add watermark" />
+	<Design.DataContext>
+		<vm:AddWatermarkViewModel />
+	</Design.DataContext>
+    
+    <Grid Margin="5, 5, 0, 5"
+		  DragDrop.AllowDrop="True"
+		  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+		<Grid.Resources>
+			<bd:FileDropHandler x:Key="FileDropHandler" />
+		</Grid.Resources>
+
+		<i:Interaction.Behaviors>
+			<idd:ContextDropBehavior Handler="{StaticResource FileDropHandler}" />
+		</i:Interaction.Behaviors>
+		
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition Width="2" />
+			<ColumnDefinition MinWidth="2" />
+		</Grid.ColumnDefinitions>
+
+		<GridSplitter Grid.Column="1" MinWidth="0" Background="{Binding SettingsVM.Theme.ExplorerSplitterBackground}" />
+
+		<Grid Grid.Column="0"
+			  Margin="0, 0, 10, 0"
+			  ColumnDefinitions="Auto, 1*"
+			  RowDefinitions="Auto, 1*"
+			  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+			<Grid.Resources>
+				<converters:BitmapFileValueConverter x:Key="BitmapFileValueConverter" />
+				<converters:IncreaseDoubleValueConverter x:Key="IncreaseDoubleValueConverter" />
+				<converters:ChangeDoubleSignValueConverter x:Key="ChangeDoubleSignValueConverter" />
+				<converters:DoubleToGridLengthValueConverter x:Key="DoubleToGridLengthValueConverter" />
+				<converters:ColorToBrushValueConverter x:Key="ColorToBrushValueConverter" />
+			</Grid.Resources>
+			
+			<ScrollViewer Grid.Row="1"
+					 	  Grid.Column="1"
+						  HorizontalScrollBarVisibility="Auto"
+						  VerticalScrollBarVisibility="Auto">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="{Binding WatermarkBounds.Height, Converter={StaticResource DoubleToGridLengthValueConverter}}" />
+						<RowDefinition />
+						<RowDefinition Height="{Binding WatermarkBounds.Height, Converter={StaticResource DoubleToGridLengthValueConverter}}" />
+					</Grid.RowDefinitions>
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="{Binding WatermarkTextBounds.Width, Converter={StaticResource DoubleToGridLengthValueConverter}}" />
+						<ColumnDefinition />
+						<ColumnDefinition Width="{Binding WatermarkTextBounds.Width, Converter={StaticResource DoubleToGridLengthValueConverter}}" />
+					</Grid.ColumnDefinitions>
+
+					<Grid Grid.Row="0" Grid.ColumnSpan="3" Background="{Binding SettingsVM.Theme.ExplorerEmptyPlaceBackground}" />
+					<Grid Grid.Row="2" Grid.ColumnSpan="3" Background="{Binding SettingsVM.Theme.ExplorerEmptyPlaceBackground}" />
+					<Grid Grid.Column="0" Grid.RowSpan="3" Background="{Binding SettingsVM.Theme.ExplorerEmptyPlaceBackground}" />
+					<Grid Grid.Column="2" Grid.RowSpan="3" Background="{Binding SettingsVM.Theme.ExplorerEmptyPlaceBackground}" />
+
+					<TextBlock Grid.Row="1"
+						  	   Grid.Column="1"
+							   Name="WatermarkGhostTextBlock"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   IsVisible="{Binding IsInputFilePathSelected}"
+							   Text="{Binding WatermarkText}"
+							   FontSize="{Binding FontSize}"
+							   Opacity="{Binding FontOpacity}"
+							   Foreground="{Binding FontColor, Converter={StaticResource ColorToBrushValueConverter}}"
+							   Bounds="{Binding WatermarkGhostTextBlockBounds, Mode=OneWayToSource}" />
+					
+					<Grid Grid.Row="1"
+						  Grid.Column="1"
+						  IsVisible="{Binding IsInputFilePathSelected}"
+						  Background="{Binding SettingsVM.Theme.ExplorerEmptyPlaceBackground}">		
+						<Border BorderThickness="2"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Center"
+								BorderBrush="{Binding SettingsVM.Theme.ContrastBorderBrush}"
+								Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+							<Grid Width="{Binding FirstPdfPageWidth}"
+								  Height="{Binding FirstPdfPageHeight}">
+
+								<Image Stretch="Fill"
+									   Source="{Binding FirstPdfPageImage, Converter={StaticResource BitmapFileValueConverter}}" />
+								
+								<Grid HorizontalAlignment="Left"
+									  VerticalAlignment="Top"
+									  MinWidth="{Binding WatermarkGhostTextWidth}"
+									  MaxWidth="{Binding WatermarkGhostTextWidth}"
+									  MinHeight="{Binding WatermarkGhostTextHeight}"
+									  MaxHeight="{Binding WatermarkGhostTextHeight}"
+									  Margin="{Binding WatermarkTextTopLeftMargin}"
+									  Bounds="{Binding WatermarkTextBounds, Mode=OneWayToSource}">
+									<Grid.RenderTransform>
+										<RotateTransform CenterX="{Binding RotationCenterX}"
+														 CenterY="{Binding RotationCenterY}"
+														 Angle="{Binding RotationAngle, Converter={StaticResource ChangeDoubleSignValueConverter}}" />
+									</Grid.RenderTransform>
+									
+									<TextBlock Name="WatermarkTextBlock"
+											   HorizontalAlignment="Center"
+									  		   VerticalAlignment="Center"
+											   Text="{Binding #WatermarkGhostTextBlock.Text}"
+											   FontSize="{Binding #WatermarkGhostTextBlock.FontSize}"
+											   Opacity="{Binding #WatermarkGhostTextBlock.Opacity}"
+											   Foreground="{Binding #WatermarkGhostTextBlock.Foreground}" />
+
+									<Rectangle StrokeThickness="1"
+											   StrokeDashArray="5,5"
+											   IsVisible="{Binding IsWatermarkRotatedTextBoundsVisible}"
+											   Stroke="{Binding SettingsVM.Theme.WatermarkRotatedTextBoundsBrush}" />
+								</Grid>
+
+								<Rectangle StrokeThickness="1"
+										   StrokeDashArray="5,5"
+										   HorizontalAlignment="Left"
+										   VerticalAlignment="Top"
+										   Margin="{Binding WatermarkTextTopLeftMargin}"
+										   Width="{Binding WatermarkTextBounds.Width}"
+										   Height="{Binding WatermarkTextBounds.Height}"
+										   IsVisible="{Binding IsWatermarkTextBoundsVisible}"
+										   Stroke="{Binding SettingsVM.Theme.WatermarkTextBoundsBrush}" />
+
+								<Rectangle StrokeThickness="1"
+										   StrokeDashArray="5,5"
+										   HorizontalAlignment="Left"
+										   VerticalAlignment="Top"
+										   Margin="{Binding WatermarkBoundsTopLeftMargin}"
+										   Width="{Binding WatermarkBounds.Width}"
+										   Height="{Binding WatermarkBounds.Height}"
+										   IsVisible="{Binding IsWatermarkBoundsVisible}"
+										   Stroke="{Binding SettingsVM.Theme.WatermarkBoundsBrush}" />
+							</Grid>
+						</Border>
+					</Grid>
+				</Grid>
+			</ScrollViewer>
+
+			<Slider Grid.Row="0"
+					Grid.Column="1"
+                	Minimum="{Binding WatermarkTextBounds.Width, Converter={StaticResource ChangeDoubleSignValueConverter}}"
+                	Orientation="Horizontal"
+                	IsEnabled="{Binding IsInputFilePathSelected}"
+                	Maximum="{Binding FirstPdfPageWidth}"
+                	Value="{Binding WatermarkTextTopLeftX}" />
+			
+			<Slider Grid.Row="1"
+					Grid.Column="0"
+					Minimum="{Binding WatermarkTextBounds.Height, Converter={StaticResource ChangeDoubleSignValueConverter}}"
+					Orientation="Vertical"
+                    IsDirectionReversed="True"
+					IsEnabled="{Binding IsInputFilePathSelected}"
+					Maximum="{Binding FirstPdfPageHeight}"
+					Value="{Binding WatermarkTextTopLeftY}" />
+        </Grid>
+
+		<ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Auto">
+			<ScrollViewer.Resources>
+				<converters:ColorValueConverter x:Key="ColorValueConverter" />
+			</ScrollViewer.Resources>
+			
+			<Grid Margin="5, 0, 5, 0"
+				  ColumnDefinitions="Auto, 1*"
+				  RowDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 1*, 10, Auto"
+				  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+				<Grid.Styles>
+					<Style Selector="TextBox.default">
+						<Setter Property="MinWidth" Value="100" />
+						<Setter Property="Margin" Value="10, 0, 0, 0" />
+						<Setter Property="HorizontalAlignment" Value="Stretch" />
+					</Style>
+					<Style Selector="ComboBox">
+						<Setter Property="MinWidth" Value="100" />
+						<Setter Property="Margin" Value="10, 0, 0, 0" />
+						<Setter Property="HorizontalAlignment" Value="Stretch" />
+					</Style>
+					<Style Selector="NumericUpDown">
+						<Setter Property="MinWidth" Value="100" />
+						<Setter Property="Margin" Value="10, 0, 0, 0" />
+						<Setter Property="HorizontalAlignment" Value="Stretch" />
+					</Style>
+					<Style Selector="CheckBox">
+						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.CheckBoxForeground}" />
+					</Style>
+					<Style Selector="TextBlock">
+						<Setter Property="VerticalAlignment" Value="Center" />
+						<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+					</Style>
+					<Style Selector="TextBlock.click">
+						<Setter Property="VerticalAlignment" Value="Center" />
+						<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+					</Style>
+					<Style Selector="TextBlock.click:pointerover">
+						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="FontWeight" Value="Bold" />
+					</Style>
+				</Grid.Styles>
+
+				<TextBlock Grid.Row="0"
+						Grid.Column="0"
+						Name="InputTextBlock"
+						Classes="click"
+						Text="{Binding SettingsVM.Locale.File}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="InputTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectInputFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="2"
+						Grid.Column="0"
+						Classes="click"
+						Name="OutputTextBlock"
+						Text="{Binding SettingsVM.Locale.Output}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="OutputTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectOutputFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding SettingsVM.Locale.Pages}" />
+				<TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding SettingsVM.Locale.Watermark}" />
+				<TextBlock Grid.Row="8" Grid.Column="0" Text="{Binding SettingsVM.Locale.Angle}" />
+				<TextBlock Grid.Row="10" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontSize}" />
+				<TextBlock Grid.Row="12" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontColor}" />
+				<TextBlock Grid.Row="14" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontFamily}" />
+				<TextBlock Grid.Row="16" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontOpacity}" />
+
+				<TextBlock Grid.Row="18"
+						Grid.Column="0"
+						Name="FontPathTextBlock"
+						Classes="click"
+						Text="{Binding SettingsVM.Locale.FontPath}">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="PointerReleased" SourceObject="FontPathTextBlock">
+							<ia:InvokeCommandAction Command="{Binding SelectFontFilePathCommand}" />
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</TextBlock>
+
+				<TextBlock Grid.Row="20" Grid.Column="0" Text="{Binding SettingsVM.Locale.FontEncoding}" />
+
+				<TextBox Grid.Row="0" Grid.Column="1" Classes="default" IsReadOnly="True" Text="{Binding InputFilePath}" />
+				<TextBox Grid.Row="2" Grid.Column="1" Classes="default" IsReadOnly="True" Text="{Binding OutputFilePath}" />
+
+				<TextBox Grid.Row="4" Grid.Column="1" Classes="default" Text="{Binding SelectedPages}" />
+				<TextBox Grid.Row="6" Grid.Column="1" Classes="default" Text="{Binding WatermarkText}" />
+
+				<NumericUpDown Grid.Row="8"
+							Grid.Column="1"
+							Increment="1"
+							Value="{Binding RotationAngle}"
+							Minimum="-360"
+							Maximum="360" />
+				
+				<NumericUpDown Grid.Row="10"
+							Grid.Column="1"
+							Increment="1"
+							Value="{Binding FontSize}"
+							Minimum="{Binding MinFontSize}"
+							Maximum="{Binding MaxFontSize}" />
+
+				<ComboBox Grid.Row="12"
+						Grid.Column="1"
+						Items="{Binding FontColors}"
+						SelectedItem="{Binding FontColor, Converter={StaticResource ColorValueConverter}}" />
+				
+				<ComboBox Grid.Row="14"
+						Grid.Column="1"
+						Items="{Binding FontFamilies}"
+						SelectedItem="{Binding FontFamily}" />
+
+				<NumericUpDown Grid.Row="16"
+							Grid.Column="1"
+							Value="{Binding FontOpacity}"
+							Increment="0.05"
+							Minimum="0"
+							Maximum="1" />
+
+				<TextBox Grid.Row="18" Grid.Column="1" Classes="default" IsReadOnly="True" Text="{Binding FontFilePath}" />
+
+				<ComboBox Grid.Row="20"
+						Grid.Column="1"
+						Items="{Binding FontEncodings}"
+						SelectedItem="{Binding FontEncoding}" />
+				
+				<CheckBox Grid.Row="22"
+						  Grid.ColumnSpan="2"
+						  IsChecked="{Binding MakeAsAnnotation}"
+						  Content="{Binding SettingsVM.Locale.MakeAsAnnotation}" />
+				
+				<CheckBox Grid.Row="24"
+						  Grid.ColumnSpan="2"
+						  IsChecked="{Binding IsWatermarkBoundsVisible}"
+						  Content="{Binding SettingsVM.Locale.ShowBoundedRectangle}" />
+				
+				<CheckBox Grid.Row="26"
+						  Grid.ColumnSpan="2"
+						  IsChecked="{Binding IsWatermarkTextBoundsVisible}"
+						  Content="{Binding SettingsVM.Locale.ShowSourceTextBounds}" />
+				
+				<CheckBox Grid.Row="28"
+						  Grid.ColumnSpan="2"
+						  IsChecked="{Binding IsWatermarkRotatedTextBoundsVisible}"
+						  Content="{Binding SettingsVM.Locale.ShowRotatedTextBounds}" />
+				
+				<Grid Grid.Row="31"
+					  Grid.ColumnSpan="2"
+					  ColumnDefinitions="1*, 5, 1*">
+					<Grid.Styles>
+						<Style Selector="Button">
+							<Setter Property="Width" Value="110" />
+							<Setter Property="HorizontalContentAlignment" Value="Center" />
+						</Style>
+					</Grid.Styles>
+					
+					<Button Grid.Column="0"
+							HorizontalAlignment="Right"
+							Content="{Binding SettingsVM.Locale.Execute}"
+							IsEnabled="{Binding IsInputFilePathSelected}"
+							Command="{Binding ExecuteCommand}" />
+
+					<Button Grid.Column="2"
+							HorizontalAlignment="Left"
+							Content="{Binding SettingsVM.Locale.Reset}"
+							Command="{Binding ResetCommand}" />
+				</Grid>
+			</Grid>
+		</ScrollViewer>
 	</Grid>
 
 </UserControl>

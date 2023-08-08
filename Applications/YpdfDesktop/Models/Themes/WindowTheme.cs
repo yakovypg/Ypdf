@@ -137,6 +137,15 @@ namespace YpdfDesktop.Models.Themes
         public ISolidColorBrush? PageInfoTileCaptionContentForeground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? WatermarkBoundsBrush { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? WatermarkTextBoundsBrush { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
+        public ISolidColorBrush? WatermarkRotatedTextBoundsBrush { get; set; }
+
+        [JsonConverter(typeof(ISolidColorBrushConverter))]
         public ISolidColorBrush? InputFilesTileBackground { get; set; }
 
         [JsonConverter(typeof(ISolidColorBrushConverter))]

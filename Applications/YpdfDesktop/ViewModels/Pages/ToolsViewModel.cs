@@ -34,6 +34,7 @@ namespace YpdfDesktop.ViewModels.Pages
         public CropPagesViewModel CropPagesVM { get; }
         public DividePagesViewModel DividePagesVM { get; }
         public AddPageNumbersViewModel AddPageNumbersVM { get; }
+        public AddWatermarkViewModel AddWatermarkVM { get; }
         public RemoveWatermarkViewModel RemoveWatermarkVM { get; }
         public ImageToPdfViewModel ImageToPdfVM { get; }
         public TextToPdfViewModel TextToPdfVM { get; }
@@ -188,6 +189,7 @@ namespace YpdfDesktop.ViewModels.Pages
             CropPagesVM = new CropPagesViewModel(settingsVM, tasksVM);
             DividePagesVM = new DividePagesViewModel(settingsVM, tasksVM);
             AddPageNumbersVM = new AddPageNumbersViewModel(settingsVM, tasksVM);
+            AddWatermarkVM = new AddWatermarkViewModel(settingsVM, tasksVM);
             RemoveWatermarkVM = new RemoveWatermarkViewModel(settingsVM, tasksVM);
             ImageToPdfVM = new ImageToPdfViewModel(settingsVM, tasksVM);
             TextToPdfVM = new TextToPdfViewModel(settingsVM, tasksVM);

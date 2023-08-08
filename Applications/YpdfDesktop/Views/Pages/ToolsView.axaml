@@ -122,7 +122,7 @@
 			<toolPages:AddPageNumbersView DataContext="{Binding AddPageNumbersVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsAddWatermarkViewVisible}">
-			<toolPages:AddWatermarkView />
+			<toolPages:AddWatermarkView DataContext="{Binding AddWatermarkVM}" />
 		</UniformGrid>
 		<UniformGrid IsVisible="{Binding IsRemoveWatermarkViewVisible}">
 			<toolPages:RemoveWatermarkView DataContext="{Binding RemoveWatermarkVM}" />

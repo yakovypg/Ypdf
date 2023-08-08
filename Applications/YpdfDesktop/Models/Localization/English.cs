@@ -72,6 +72,12 @@
             ReorderPages = "Reorder pages";
             TurnPages = "Turn pages";
             RemovePages = "Remove pages";
+            Watermark = "Watermark";
+            Angle = "Angle";
+            MakeAsAnnotation = "Make as annotation";
+            ShowBoundedRectangle = "Show bounded rectangle";
+            ShowSourceTextBounds = "Show source text bounds";
+            ShowRotatedTextBounds = "Show rotated text bounds";
 
             Split = "split";
             Merge = "merge";
