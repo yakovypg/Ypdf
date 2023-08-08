@@ -176,9 +176,11 @@
 			</ScrollViewer.Resources>
 			
 			<Grid Margin="5, 0, 5, 0"
+				  Background="{Binding SettingsVM.Theme.ExplorerBackground}"
 				  ColumnDefinitions="Auto, 1*"
-				  RowDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 1*, 10, Auto"
-				  Background="{Binding SettingsVM.Theme.ExplorerBackground}">
+				  RowDefinitions="Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5,
+				  				  Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5, Auto, 5,
+								  Auto, 5, Auto, 5, Auto, 10, Auto, 1*, 10, Auto">
 				<Grid.Styles>
 					<Style Selector="TextBox.default">
 						<Setter Property="MinWidth" Value="100" />
@@ -323,7 +325,35 @@
 						  IsChecked="{Binding IsWatermarkRotatedTextBoundsVisible}"
 						  Content="{Binding SettingsVM.Locale.ShowRotatedTextBounds}" />
 				
-				<Grid Grid.Row="31"
+				<Border Grid.Row="30"
+						Grid.ColumnSpan="2"
+						BorderThickness="1"
+						BorderBrush="{Binding SettingsVM.Theme.ContrastBorderBrush}">
+					<Grid RowDefinitions="32, 1, 1*">
+						<TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding SettingsVM.Locale.Remarks}" />
+						<Rectangle Grid.Row="1" Fill="{Binding SettingsVM.Theme.ContrastBorderBrush}" />
+
+						<StackPanel Grid.Row="2">
+							<StackPanel.Resources>
+								<converters:ItemizeValueConverter x:Key="ItemizeValueConverter" />
+							</StackPanel.Resources>
+
+							<StackPanel.Styles>
+								<Style Selector="TextBlock">
+									<Setter Property="Margin" Value="5" />
+									<Setter Property="TextWrapping" Value="Wrap" />
+									<Setter Property="Foreground" Value="{Binding SettingsVM.Theme.ExplorerTextForeground}" />
+								</Style>
+							</StackPanel.Styles>
+							
+							<TextBlock Text="{Binding SettingsVM.Locale.WatermarkAnnotationNotFullySupportedMessage, Converter={StaticResource ItemizeValueConverter}}" />
+							<TextBlock Text="{Binding SettingsVM.Locale.DesignerIgnoreFontFamilyMessage, Converter={StaticResource ItemizeValueConverter}}" />
+							<TextBlock Text="{Binding SettingsVM.Locale.DesignerHasSmallInaccuraciesInTextAllocationByWidthMessage, Converter={StaticResource ItemizeValueConverter}}" />
+						</StackPanel>
+					</Grid>
+				</Border>
+				
+				<Grid Grid.Row="33"
 					  Grid.ColumnSpan="2"
 					  ColumnDefinitions="1*, 5, 1*">
 					<Grid.Styles>

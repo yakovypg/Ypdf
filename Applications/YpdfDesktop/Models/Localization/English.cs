@@ -78,6 +78,7 @@
             ShowBoundedRectangle = "Show bounded rectangle";
             ShowSourceTextBounds = "Show source text bounds";
             ShowRotatedTextBounds = "Show rotated text bounds";
+            Remarks = "Remarks";
 
             Split = "split";
             Merge = "merge";
@@ -121,6 +122,9 @@
             IncorrectPageRangeMessage = "There is an incorrect page range";
             AllPagedRemovedMessage = "All pages have been removed";
             OperationCouldNotBePerformedMessage = "Operation could not be performed";
+            DesignerIgnoreFontFamilyMessage = "Designer does not take into account the font family";
+            DesignerHasSmallInaccuraciesInTextAllocationByWidthMessage = "Designer has small inaccuracies in the allocation of text by width";
+            WatermarkAnnotationNotFullySupportedMessage = "Watermark annotation is not fully supported";
         }
     }
 }

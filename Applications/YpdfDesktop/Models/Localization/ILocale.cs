@@ -75,6 +75,7 @@
         string? ShowBoundedRectangle { get; set; }
         string? ShowSourceTextBounds { get; set; }
         string? ShowRotatedTextBounds { get; set; }
+        string? Remarks { get; set; }
 
         string? Split { get; set; }
         string? Merge { get; set; }
@@ -118,5 +119,8 @@
         string? IncorrectPageRangeMessage { get; set; }
         string? AllPagedRemovedMessage { get; set; }
         string? OperationCouldNotBePerformedMessage { get; set; }
+        string? DesignerIgnoreFontFamilyMessage { get; set; }
+        string? DesignerHasSmallInaccuraciesInTextAllocationByWidthMessage { get; set; }
+        string? WatermarkAnnotationNotFullySupportedMessage { get; set; }
     }
 }
