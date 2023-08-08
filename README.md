@@ -541,6 +541,14 @@ order to properly draw and align it.
 ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -w "My watermark" -s 72 --font-family=times_bold --font-color=black -a 60 --font-opacity=0.5 --watermark-width=500 --watermark-height=100 --watermark-pos=(250;250)
 ```
 
+If you do not know the exact dimensions of the watermark text, you can specify the exhaustive 
+area of the watermark. But in this case, you need to place the watermark text in the lower left 
+corner of this area.
+
+```
+ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -w "My watermark" -a 60 --watermark-pos=(250;0) --watermark-width=10000 --watermark-height=10000 --watermark-text-alignment=left --watermark-text-h-alignment=left watermark-container-v-alignment=bottom
+```
+
 You can also add a watermark annotation to the PDF document. The watermark annotation 
 configuration is almost the same as the watermark configuration. You can not specify text 
 alignment, horizontal text alignment and watermark container vertical alignment. But you can 
