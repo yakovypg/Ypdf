@@ -5,6 +5,6 @@ namespace YpdfDesktop.Models.IO
 {   
     public interface IPageCollectionContainer
     {
-        ObservableCollection<PageInfo> Pages { get; }
+        ObservableCollection<PageHandlingInfo> Pages { get; }
     }
 }

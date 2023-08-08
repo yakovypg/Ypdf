@@ -110,8 +110,8 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         #region Observable Collections
 
-        public ExtendedObservableCollection<PageInfo> Pages { get; }
-        ObservableCollection<PageInfo> IPageCollectionContainer.Pages => Pages;
+        public ExtendedObservableCollection<PageHandlingInfo> Pages { get; }
+        ObservableCollection<PageHandlingInfo> IPageCollectionContainer.Pages => Pages;
 
         #endregion
 
@@ -122,7 +122,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         public HandlePagesViewModel(SettingsViewModel settingsVM, TasksViewModel tasksVM) : base(settingsVM, tasksVM)
         {
-            Pages = new ExtendedObservableCollection<PageInfo>();
+            Pages = new ExtendedObservableCollection<PageHandlingInfo>();
             Pages.CollectionChanged += (s, e) => UpdatePagePositions();
             
             ExecuteCommand = ReactiveCommand.Create(Execute);
@@ -320,7 +320,7 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
                 newOrder = newOrder.Concat(remainingPages);
             }
 
-            PageInfo[] orderedPages = newOrder
+            PageHandlingInfo[] orderedPages = newOrder
                 .Select(n => Pages.First(t => t.PageNumber == n))
                 .ToArray();
             
@@ -373,19 +373,19 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
 
         private void TurnPageLeft(int pageNumber)
         {
-            PageInfo? page = Pages.FirstOrDefault(t => t.PageNumber == pageNumber);      
+            PageHandlingInfo? page = Pages.FirstOrDefault(t => t.PageNumber == pageNumber);      
             page?.TurnLeft90();
         }
 
         private void TurnPageRight(int pageNumber)
         {
-            PageInfo? page = Pages.FirstOrDefault(t => t.PageNumber == pageNumber);      
+            PageHandlingInfo? page = Pages.FirstOrDefault(t => t.PageNumber == pageNumber);      
             page?.TurnRight90();
         }
 
         private void RemovePage(int pageNumber)
         {
-            PageInfo? page = Pages.FirstOrDefault(t => t.PageNumber == pageNumber);
+            PageHandlingInfo? page = Pages.FirstOrDefault(t => t.PageNumber == pageNumber);
 
             if (page is not null)
                 Pages.Remove(page);
@@ -420,12 +420,12 @@ namespace YpdfDesktop.ViewModels.Pages.Tools
             Pages.Clear();
             
             for (int i = 1; i <= pageCount; ++i)
-                Pages.Add(new PageInfo(i, i));
+                Pages.Add(new PageHandlingInfo(i, i));
 
             return true;
         }
 
-        private bool TryParsePageRanges(string data, out PageRange[] pageRanges)
+        private static bool TryParsePageRanges(string data, out PageRange[] pageRanges)
         {
             try
             {

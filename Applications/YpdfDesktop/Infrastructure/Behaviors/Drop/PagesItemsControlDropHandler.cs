@@ -27,15 +27,15 @@ namespace YpdfDesktop.Infrastructure.Behaviors.Drop
 
         private bool Validate(ItemsControl itemsControl, DragEventArgs e, object? sourceContext, object? targetContext, bool bExecute)
         {
-            return sourceContext is PageInfo sourceItem
+            return sourceContext is PageHandlingInfo sourceItem
                 && ValidateInternalItem(itemsControl, sourceItem, e, targetContext, bExecute);
         }
 
-        private bool ValidateInternalItem(ItemsControl itemsControl, PageInfo sourceItem, DragEventArgs e, object? targetContext, bool bExecute)
+        private bool ValidateInternalItem(ItemsControl itemsControl, PageHandlingInfo sourceItem, DragEventArgs e, object? targetContext, bool bExecute)
         {
             if (targetContext is not IPageCollectionContainer pagesContainer ||
                 itemsControl.GetVisualAt(e.GetPosition(itemsControl)) is not Control targetControl ||
-                targetControl.DataContext is not PageInfo targetItem)
+                targetControl.DataContext is not PageHandlingInfo targetItem)
             {
                 return false;
             }
