@@ -520,8 +520,10 @@ numbers are not specified, the watermark will be placed on all pages of the PDF 
 ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -p 1 -p 5-10
 ```
 
-You can specify text, rotation angle, width, height and lower left point after the -w, -a, 
---watermark-width, --watermark-height and --watermark-pos parameters.
+You can specify text, rotation angle, width, height, lower left point, text alignment, 
+horizontal text alignment and watermark container vertical alignment after the -w, -a, 
+--watermark-width, --watermark-height, --watermark-pos, watermark-text-alignment,
+watermark-text-h-alignment and watermark-container-v-alignment parameters.
 
 You can also [configure the font](#font-configuration).
 
@@ -540,8 +542,9 @@ ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -w "My watermark" -s 72 --
 ```
 
 You can also add a watermark annotation to the PDF document. The watermark annotation 
-configuration is the same as the watermark configuration. But you can also specify 
-x-translation and y-translation after the --watermark-x-translation and 
+configuration is almost the same as the watermark configuration. You can not specify text 
+alignment, horizontal text alignment and watermark container vertical alignment. But you can 
+specify x-translation and y-translation after the --watermark-x-translation and 
 --watermark-y-translation parameters.
 
 Unlike a watermark, the watermark annotation is placed in an enclosing rectangle that does 
