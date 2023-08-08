@@ -1,4 +1,5 @@
-﻿using YpdfLib.Models.Design;
+﻿using ExecutionLib.Configuration.Models;
+using YpdfLib.Models.Design;
 using YpdfLib.Models.Design.Fonts;
 using YpdfLib.Models.Enumeration;
 using YpdfLib.Models.Geometry;
@@ -40,6 +41,7 @@ namespace ExecutionLib.Configuration
         public IPageMovementInfo PageMovement { get; set; } = new PageMovementInfo();
         public IWatermarkAnnotation Watermark { get; } = new WatermarkAnnotation();
         public IWatermarkTextAllocator WatermarkTextAllocator { get; } = new WatermarkTextAllocator();
+        public IWatermarkBorderConfig WatermarkBorderConfig { get; } = new WatermarkBorderConfig();
         public IPdfPassword PdfPassword { get; } = new PdfPassword();
 
         public IPageChange PageChange { get; } = new PageChange();
@@ -99,6 +101,9 @@ namespace ExecutionLib.Configuration
             IIndelibleWatermark watermark = annotation.ToIndelibleWatermark();
 
             watermark.TextAllocator = WatermarkTextAllocator.Copy();
+
+            if (WatermarkBorderConfig.IsConfigured)
+                watermark.Border = WatermarkBorderConfig.Create();
 
             return watermark;
         }

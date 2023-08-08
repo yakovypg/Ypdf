@@ -23,16 +23,20 @@ namespace YpdfLib.Infrastructure.Converters
             return new DeviceRgb(r, g, b);
         }
 
+        public static DeviceRgb ToDeviceRgb(Color color)
+        {
+            (byte r, byte g, byte b) = ToRgb(color);
+            return new DeviceRgb(r, g, b);
+        }
+
         public static DeviceRgb CopyDeviceRGB(DeviceRgb rgb)
         {
-            (byte r, byte g, byte b) = ToRgb(rgb);
-            return new DeviceRgb(r, g, b);
+            return ToDeviceRgb(rgb);
         }
 
         public static Color CopyColor(Color color)
         {
-            (byte r, byte g, byte b) = ToRgb(color);
-            return new DeviceRgb(r, g, b); 
+            return ToDeviceRgb(color);
         }
     }
 }
