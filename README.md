@@ -521,7 +521,7 @@ ypdf add-watermark -i inputPath.pdf -o outputPath.pdf -p 1 -p 5-10
 ```
 
 You can specify text, rotation angle, width, height and lower left point after the -w, -a, 
---watermark-opacity, --watermark-width, --watermark-height and --watermark-pos parameters.
+--watermark-width, --watermark-height and --watermark-pos parameters.
 
 You can also [configure the font](#font-configuration).
 
