@@ -82,24 +82,45 @@ cd Ypdf
 dotnet build -c Release
 ```
 
+With the help of this command, all projects were built (CLI version, Desktop version, etc.). 
 Now you can already run, for example, the CLI version of the tool.
 
 ```
 dotnet run --project Applications/ypdf
 ```
 
+Or, for example, the Desktop version of the tool.
+
+```
+dotnet run --project Applications/YpdfDesktop
+```
+
 You can also [publish](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) 
-the project. For example, we will publish the CLI version.
+the project. For example, with the help of this command you can publish the CLI version of 
+the tool.
 
 ```
 dotnet publish Applications/ypdf -c Release -o pathToPublishFolder
 ```
 
+Or, for example, the Desktop version of the tool.
+
+```
+dotnet publish Applications/YpdfDesktop -c Release -o pathToPublishFolder
+```
+
 The published project is runtime-dependent. That is, to run it, it is necessary that .NET 
-runtime is installed on your system. You can run the tool using the following command:
+runtime is installed on your system. You can run the CLI version of the tool with the 
+following command.
 
 ```
 dotnet pathToPublishFolder/ypdf.dll
+```
+
+Or the Desktop version of the tool with the following command.
+
+```
+dotnet pathToPublishFolder/YpdfDesktop.dll
 ```
 
 You can also publish the project with the --self-contained parameter. Then, to run the tool, 
@@ -107,8 +128,16 @@ it is not required that .NET runtime is installed on your system. To publish a p
 this parameter, you should also specify the target platform and architecture using -r 
 parameter. For example, we will publish a project for linux-x64.
 
+You can publish CLI version of the tool with the following command.
+
 ```
 dotnet publish Applications/ypdf -c Release -o pathToPublishFolder --self-contained True -r linux-x64
+```
+
+Or Desktop version of the tool with the following command.
+
+```
+dotnet publish Applications/YpdfDesktop -c Release -o pathToPublishFolder --self-contained True -r linux-x64
 ```
 
 A published project can be run without dotnet. To do this, navigate to the folder where you 
@@ -120,10 +149,18 @@ On Windows.
 ypdf --version
 ```
 
+```
+YpdfDesktop
+```
+
 On Linux and Mac.
 
 ```
 ./ypdf --version
+```
+
+```
+./YpdfDesktop
 ```
 
 ### Development
@@ -157,6 +194,35 @@ pip install -r requirements.txt
 
 There is no need to install specific versions of packages. However, the tool has been 
 tested against those specified in the corresponding file.
+
+You can use a [python virtual environment](https://docs.python.org/3/library/venv.html). To do 
+this, you first need to create it. For example, this can be done with the following command.
+
+```
+python3 -m venv pathToEnvironment
+```
+
+Next, you need to activate the virtual environment.
+
+On Windows
+
+```
+pathToEnvironment\Scripts\activate.bat
+```
+
+On Linux and Mac.
+
+```
+source pathToEnvironment/bin/activate
+```
+
+Now you can install the necessary components in the created virtual environment.
+
+```
+pip install -r requirements.txt
+```
+
+And then run the tool in it using the commands described earlier.
 
 ## How to use CLI version
 
