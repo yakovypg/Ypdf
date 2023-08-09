@@ -74,6 +74,20 @@ On Linux and Mac.
 ./ypdf --version
 ```
 
+Desktop vesion of the tool can also be launched from the console/terminal using the on of the command below.
+
+On Windows.
+
+```
+YpdfDesktop
+```
+
+On Linux and Mac.
+
+```
+./YpdfDesktop
+```
+
 ### Build from source
 
 We will build the project using [dotnet](https://dotnet.microsoft.com/en-us/). But you can 
