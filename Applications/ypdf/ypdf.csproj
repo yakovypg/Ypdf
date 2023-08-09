@@ -12,8 +12,8 @@
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	<PackageTags>pdf;pdf-converter;split-pdf;merge-pdf;pdf-tools;pdf2image;pdf-watermark;pdf2text;pdf-password;rotate-pdf;image2pdf;compress-pdf;text2pdf;divide-pdf;crop-pdf;reorder-pdf;remove-pages-pdf;page-numbers-pdf</PackageTags>
-	<FileVersion>1.0.1.0</FileVersion>
-	<AssemblyVersion>1.0.1.0</AssemblyVersion>
+	<FileVersion>1.0.1.1</FileVersion>
+	<AssemblyVersion>1.0.1.1</AssemblyVersion>
   </PropertyGroup>
 	
   <ItemGroup>
