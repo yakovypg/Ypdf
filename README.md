@@ -1,9 +1,25 @@
 # Ypdf
-Ypdf is a cross-platform tool for converting and performing other actions on PDF documents. 
-The tool has both a CLI and a graphical version, so that it is convenient for both 
-command-line lovers and people who prefer graphical shells.
+We present Ypdf, a PDF document processing application that combines the best features of 
+existing solutions and provides the most popular and requested functionality for free to its 
+users.
 
-Graphic version is currently under development.
+Unlike many other projects, Ypdf is a free, open source and cross-platform tool that has both 
+a CLI and a graphical version, so that it is convenient for both command-line lovers and 
+people who prefer graphical shells. Ypdf can also be used as a library providing all of the 
+presented functionality, which can be used without complicated configuration.
+
+In addition, Ypdf has no restrictions on the maximum number of files or their pages to be 
+processed and the maximum size of these files. It also provides the ability to fine-tune 
+each of its functions, which allows you to achieve almost any intended result.
+
+Confidentiality is also an important detail. Ypdf takes care of the safety of user data, does 
+not collect any user data, does not perform any actions without the knowledge and consent of 
+the user, does not require access to the Internet and works exclusively locally in its own 
+directory (that is, it does not add anything extra to the operating system).
+
+In conclusion, the project is aimed at ensuring maximum ease of use of the program, contains 
+documentation that details all the functionality with multiple examples, does not contain 
+anything superfluous and distracting.
 
 ## Start of use
 
@@ -82,24 +98,45 @@ cd Ypdf
 dotnet build -c Release
 ```
 
+With the help of this command, all projects were built (CLI version, Desktop version, etc.). 
 Now you can already run, for example, the CLI version of the tool.
 
 ```
 dotnet run --project Applications/ypdf
 ```
 
+Or, for example, the Desktop version of the tool.
+
+```
+dotnet run --project Applications/YpdfDesktop
+```
+
 You can also [publish](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) 
-the project. For example, we will publish the CLI version.
+the project. For example, with the help of this command you can publish the CLI version of 
+the tool.
 
 ```
 dotnet publish Applications/ypdf -c Release -o pathToPublishFolder
 ```
 
+Or, for example, the Desktop version of the tool.
+
+```
+dotnet publish Applications/YpdfDesktop -c Release -o pathToPublishFolder
+```
+
 The published project is runtime-dependent. That is, to run it, it is necessary that .NET 
-runtime is installed on your system. You can run the tool using the following command:
+runtime is installed on your system. You can run the CLI version of the tool with the 
+following command.
 
 ```
 dotnet pathToPublishFolder/ypdf.dll
+```
+
+Or the Desktop version of the tool with the following command.
+
+```
+dotnet pathToPublishFolder/YpdfDesktop.dll
 ```
 
 You can also publish the project with the --self-contained parameter. Then, to run the tool, 
@@ -107,8 +144,16 @@ it is not required that .NET runtime is installed on your system. To publish a p
 this parameter, you should also specify the target platform and architecture using -r 
 parameter. For example, we will publish a project for linux-x64.
 
+You can publish CLI version of the tool with the following command.
+
 ```
 dotnet publish Applications/ypdf -c Release -o pathToPublishFolder --self-contained True -r linux-x64
+```
+
+Or Desktop version of the tool with the following command.
+
+```
+dotnet publish Applications/YpdfDesktop -c Release -o pathToPublishFolder --self-contained True -r linux-x64
 ```
 
 A published project can be run without dotnet. To do this, navigate to the folder where you 
@@ -120,10 +165,18 @@ On Windows.
 ypdf --version
 ```
 
+```
+YpdfDesktop
+```
+
 On Linux and Mac.
 
 ```
 ./ypdf --version
+```
+
+```
+./YpdfDesktop
 ```
 
 ### Development
@@ -157,6 +210,35 @@ pip install -r requirements.txt
 
 There is no need to install specific versions of packages. However, the tool has been 
 tested against those specified in the corresponding file.
+
+You can use a [python virtual environment](https://docs.python.org/3/library/venv.html). To do 
+this, you first need to create it. For example, this can be done with the following command.
+
+```
+python3 -m venv pathToEnvironment
+```
+
+Next, you need to activate the virtual environment.
+
+On Windows
+
+```
+pathToEnvironment\Scripts\activate.bat
+```
+
+On Linux and Mac.
+
+```
+source pathToEnvironment/bin/activate
+```
+
+Now you can install the necessary components in the created virtual environment.
+
+```
+pip install -r requirements.txt
+```
+
+And then run the tool in it using the commands described earlier.
 
 ## How to use CLI version
 
