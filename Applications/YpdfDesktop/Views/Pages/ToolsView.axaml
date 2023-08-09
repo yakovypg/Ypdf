@@ -90,8 +90,11 @@
 									  Value="{Binding IconName}" />
 
 							<TextBlock Grid.Row="1"
+									   Margin="3, 5"
+									   TextAlignment="Center"
 									   VerticalAlignment="Center"
 									   HorizontalAlignment="Center"
+									   TextTrimming="CharacterEllipsis"
 									   Foreground="{Binding DataContext.SettingsVM.Theme.ToolTileTextForeground, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
 									   Text="{Binding Name}" />
 						</Grid>
