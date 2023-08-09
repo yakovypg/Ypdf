@@ -1,9 +1,25 @@
 # Ypdf
-Ypdf is a cross-platform tool for converting and performing other actions on PDF documents. 
-The tool has both a CLI and a graphical version, so that it is convenient for both 
-command-line lovers and people who prefer graphical shells.
+We present Ypdf, a PDF document processing application that combines the best features of 
+existing solutions and provides the most popular and requested functionality for free to its 
+users.
 
-Graphic version is currently under development.
+Unlike many other projects, Ypdf is a free, open source and cross-platform tool that has both 
+a CLI and a graphical version, so that it is convenient for both command-line lovers and 
+people who prefer graphical shells. Ypdf can also be used as a library providing all of the 
+presented functionality, which can be used without complicated configuration.
+
+In addition, Ypdf has no restrictions on the maximum number of files or their pages to be 
+processed and the maximum size of these files. It also provides the ability to fine-tune 
+each of its functions, which allows you to achieve almost any intended result.
+
+Confidentiality is also an important detail. Ypdf takes care of the safety of user data, does 
+not collect any user data, does not perform any actions without the knowledge and consent of 
+the user, does not require access to the Internet and works exclusively locally in its own 
+directory (that is, it does not add anything extra to the operating system).
+
+In conclusion, the project is aimed at ensuring maximum ease of use of the program, contains 
+documentation that details all the functionality with multiple examples, does not contain 
+anything superfluous and distracting.
 
 ## Start of use
 
