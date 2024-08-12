@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+    <EnablePackageVersionOverride>false</EnablePackageVersionOverride>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
+  </ItemGroup>
+
+</Project>
