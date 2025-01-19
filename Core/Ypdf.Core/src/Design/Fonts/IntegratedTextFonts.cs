@@ -49,13 +49,11 @@ public static class IntegratedTextFonts
             font = lazyFontPair.Value.Create();
             return true;
         }
-#pragma warning disable CA1031 // Do not catch general exception types
         catch
         {
             font = null;
             return false;
         }
-#pragma warning restore CA1031 // Do not catch general exception types
     }
 
     private static Dictionary<string, LazyTextFont> LoadFonts()
@@ -68,7 +66,6 @@ public static class IntegratedTextFonts
 
         DirectoryInfo[] fontDirectories;
 
-#pragma warning disable CA1031 // Do not catch general exception types
         try
         {
             var fontsDirectoryInfo = new DirectoryInfo(fontsDirectoryPath);
@@ -97,7 +94,6 @@ public static class IntegratedTextFonts
                 fonts.Add(font.Name, font);
             }
         }
-#pragma warning restore CA1031 // Do not catch general exception types
 
         return fonts;
     }

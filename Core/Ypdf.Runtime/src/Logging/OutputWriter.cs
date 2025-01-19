@@ -13,12 +13,12 @@ public class OutputWriter : IOutputWriter
 
     protected TextWriter Writer { get; }
 
-    public void Write(string? text)
+    public virtual void Write(string? text)
     {
         Writer.Write(text);
     }
 
-    public void WriteLine(string? text = null)
+    public virtual void WriteLine(string? text = null)
     {
         Writer.WriteLine(text ?? string.Empty);
     }

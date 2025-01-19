@@ -81,13 +81,11 @@ public static class PythonDetector
             if (process.ExitCode != 0)
                 throw new PythonNotInstalledException();
         }
-#pragma warning disable CA1031 // Do not catch general exception types
         catch
         {
             version = string.Empty;
             return false;
         }
-#pragma warning restore CA1031 // Do not catch general exception types
 
         string outputStr = proccessOutput.ToString();
         int spaceIndex = outputStr.IndexOf(' ', StringComparison.InvariantCulture);
