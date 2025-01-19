@@ -3,6 +3,9 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Error log files
+compiler-diagnostics.sarif
+
 # dotenv files
 .env
 
