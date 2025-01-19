@@ -1,9 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="itext7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Config\Ypdf.Paths\Ypdf.Paths.csproj" />
+    <ProjectReference Include="..\Ypdf.FileSystem\Ypdf.FileSystem.csproj" />
+    <ProjectReference Include="..\Ypdf.Runtime\Ypdf.Runtime.csproj" />
+    <ProjectReference Include="..\Ypdf.Extensions\Ypdf.Extensions.csproj" />
+  </ItemGroup>
 
 </Project>
