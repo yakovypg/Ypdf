@@ -1,6 +1,13 @@
 <Project>
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>
+        net5.0;net6.0;net7.0;net8.0;
+        netcoreapp3.0;netcoreapp3.1;
+        netstandard2.0;netstandard2.1;
+        net47;net471;net472;net48;net481
+    </TargetFrameworks>
+    <LangVersion>12.0</LangVersion>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -12,11 +19,13 @@
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <CodeAnalysisRuleSet>../../.ruleset</CodeAnalysisRuleSet>
     <AnalysisMode>All</AnalysisMode>
+    <ErrorLog>compiler-diagnostics.sarif</ErrorLog>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)/Config/Shared/*.cs" Visible="false" />
     <AdditionalFiles Include="../../stylecop.json" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556">
+    <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
