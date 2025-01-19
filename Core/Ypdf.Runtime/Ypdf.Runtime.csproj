@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Ypdf.Extensions\Ypdf.Extensions.csproj" />
+  </ItemGroup>
+</Project>
