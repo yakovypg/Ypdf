@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <TargetName>ypdf</TargetName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetArgumentParser" />
+  </ItemGroup>
 
 </Project>
