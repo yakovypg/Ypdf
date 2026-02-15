@@ -35,7 +35,7 @@
         <Rule Id="SA1027"  Action="Warning" />          <!-- Use tabs correctly -->
         <Rule Id="SA1028"  Action="Warning" />          <!-- Code should not contain trailing whitespace -->
     </Rules>
-   
+
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.ReadabilityRules">
         <Rule Id="SA1100"  Action="Warning" />          <!-- Do not prefix calls with base unless local implementation exists -->
         <Rule Id="SA1101"  Action="None" />             <!-- Prefix local calls with this -->
@@ -55,7 +55,7 @@
         <Rule Id="SA1115"  Action="Warning" />          <!-- Parameter should follow comma -->
         <Rule Id="SA1116"  Action="Warning" />          <!-- Split parameters should start on line after declaration -->
         <Rule Id="SA1117"  Action="Warning" />          <!-- Parameters should be on same line or separate lines -->
-        <Rule Id="SA1118"  Action="Warning" />          <!-- Parameter should not span multiple lines -->
+        <Rule Id="SA1118"  Action="None" />             <!-- Parameter should not span multiple lines -->
         <Rule Id="SA1120"  Action="Warning" />          <!-- Comments should contain text -->
         <Rule Id="SA1121"  Action="Warning" />          <!-- Use built-in type alias -->
         <Rule Id="SA1122"  Action="Warning" />          <!-- Use string.Empty for empty strings -->
@@ -77,7 +77,7 @@
         <Rule Id="SA1139"  Action="Warning" />          <!-- Use literal suffix notation instead of casting -->
         <Rule Id="SX1101"  Action="None" />             <!-- Do not prefix local calls with 'this.' -->
     </Rules>
-	
+
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.OrderingRules">
         <Rule Id="SA1200"  Action="None" />             <!-- Using directives should be placed correctly -->
         <Rule Id="SA1201"  Action="Warning" />          <!-- Elements should appear in the correct order -->
@@ -135,7 +135,7 @@
         <Rule Id="SA1412"  Action="None"    />          <!-- Store files as UTF-8 with byte order mark -->
         <Rule Id="SA1413"  Action="None" />             <!-- Use trailing comma in multi-line initializers -->
     </Rules>
-	
+
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.LayoutRules">
         <Rule Id="SA1500"  Action="Warning" />          <!-- Braces for multi-line statements should not share line -->
         <Rule Id="SA1501"  Action="Warning" />          <!-- Statement should not be on a single line -->
@@ -159,7 +159,7 @@
         <Rule Id="SA1519"  Action="Warning" />          <!-- Braces should not be omitted from multi-line child statement -->
         <Rule Id="SA1520"  Action="Warning" />          <!-- Use braces consistently -->
     </Rules>
-	
+
     <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.DocumentationRules">
         <Rule Id="SA1600"  Action="None" />             <!-- Elements should be documented -->
         <Rule Id="SA1601"  Action="None" />             <!-- Partial elements should be documented -->
