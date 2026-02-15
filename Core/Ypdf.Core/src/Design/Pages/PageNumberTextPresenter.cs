@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Ypdf.Core.Utils;
 
 namespace Ypdf.Core.Design.Pages;
@@ -16,6 +17,23 @@ public class PageNumberTextPresenter : IPageNumberTextPresenter, IEquatable<Page
     public static PageNumberTextPresenter Verbal => new((pageNum, numOfPages) => $"page {pageNum} of {numOfPages}");
 
     public Func<int, int, string> Converter { get; }
+
+    public static PageNumberTextPresenter Parse(string data)
+    {
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
+
+        string[] supportedValues = [nameof(Default), nameof(Fractional), nameof(Verbal)];
+        string joinedSupportedValues = string.Join(", ", supportedValues);
+
+        return data.ToUpper(CultureInfo.CurrentCulture) switch
+        {
+            "DEFAULT" => Default,
+            "FRACTIONAL" => Fractional,
+            "VERBAL" => Verbal,
+
+            _ => throw new IncorrectDataFormatException(null, data, joinedSupportedValues)
+        };
+    }
 
     public string GetText(int pageNum, int numOfPages)
     {
