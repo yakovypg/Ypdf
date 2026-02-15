@@ -3,10 +3,19 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetName>ypdf</TargetName>
+    <AssemblyName>ypdf</AssemblyName>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="itext7" />
     <PackageReference Include="NetArgumentParser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../Config/Ypdf.Paths/Ypdf.Paths.csproj" />
+    <ProjectReference Include="../../Core/Ypdf.Core/Ypdf.Core.csproj" />
+    <ProjectReference Include="../../Core/Ypdf.Runtime/Ypdf.Runtime.csproj" />
   </ItemGroup>
 
 </Project>
