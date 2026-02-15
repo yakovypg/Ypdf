@@ -5,10 +5,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Config\Ypdf.Paths\Ypdf.Paths.csproj" />
-    <ProjectReference Include="..\Ypdf.FileSystem\Ypdf.FileSystem.csproj" />
-    <ProjectReference Include="..\Ypdf.Runtime\Ypdf.Runtime.csproj" />
-    <ProjectReference Include="..\Ypdf.Extensions\Ypdf.Extensions.csproj" />
+    <ProjectReference Include="../../Config/Ypdf.Paths/Ypdf.Paths.csproj" />
+    <ProjectReference Include="../Ypdf.FileSystem/Ypdf.FileSystem.csproj" />
+    <ProjectReference Include="../Ypdf.Runtime/Ypdf.Runtime.csproj" />
+    <ProjectReference Include="../Ypdf.Extensions/Ypdf.Extensions.csproj" />
   </ItemGroup>
 
 </Project>
