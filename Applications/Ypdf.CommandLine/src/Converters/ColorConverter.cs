@@ -1,0 +1,78 @@
+using System;
+using System.Globalization;
+using System.Linq;
+using iText.Kernel.Colors;
+using Ypdf.Core;
+
+namespace Ypdf.CommandLine.Converters;
+
+internal static class ColorConverter
+{
+    private const string _expectedStringFormatRgb = "(R,G,B)";
+    private const string _expectedStringFormat = $"Name or {_expectedStringFormatRgb}";
+
+    internal static Color ParseByName(string data)
+    {
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
+
+        return data.ToUpper(CultureInfo.CurrentCulture) switch
+        {
+            nameof(ColorConstants.BLACK) => ColorConstants.BLACK,
+            nameof(ColorConstants.BLUE) => ColorConstants.BLUE,
+            nameof(ColorConstants.CYAN) => ColorConstants.CYAN,
+            nameof(ColorConstants.DARK_GRAY) => ColorConstants.DARK_GRAY,
+            nameof(ColorConstants.GRAY) => ColorConstants.GRAY,
+            nameof(ColorConstants.GREEN) => ColorConstants.GREEN,
+            nameof(ColorConstants.LIGHT_GRAY) => ColorConstants.LIGHT_GRAY,
+            nameof(ColorConstants.MAGENTA) => ColorConstants.MAGENTA,
+            nameof(ColorConstants.ORANGE) => ColorConstants.ORANGE,
+            nameof(ColorConstants.PINK) => ColorConstants.PINK,
+            nameof(ColorConstants.RED) => ColorConstants.RED,
+            nameof(ColorConstants.WHITE) => ColorConstants.WHITE,
+            nameof(ColorConstants.YELLOW) => ColorConstants.YELLOW,
+
+            _ => throw new ArgumentOutOfRangeException(nameof(data), data)
+        };
+    }
+
+    internal static Color ParseByRgb(string data)
+    {
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
+
+        if (data.StartsWith('('))
+            data = data[1..];
+
+        if (data.EndsWith(')'))
+            data = data[..^1];
+
+        byte[] rgb = [.. data.Split(',').Select(byte.Parse)];
+
+        if (rgb.Length != 3)
+            throw new IncorrectDataFormatException(null, data, _expectedStringFormatRgb);
+
+        return new DeviceRgb(rgb[0], rgb[1], rgb[2]);
+    }
+
+    internal static Color Parse(string data)
+    {
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
+
+        try
+        {
+            return ParseByName(data);
+        }
+        catch
+        {
+        }
+
+        try
+        {
+            return ParseByRgb(data);
+        }
+        catch
+        {
+        }
+
+        throw new IncorrectDataFormatException(null, data, _expectedStringFormat);
+    }
+}

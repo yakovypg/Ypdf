@@ -1,0 +1,237 @@
+using System.Collections.Generic;
+using iText.IO.Font;
+using iText.IO.Font.Constants;
+using iText.Kernel.Colors;
+using iText.Layout.Properties;
+using NetArgumentParser.Attributes;
+using NetArgumentParser.Options.Context;
+using Ypdf.Core.Design;
+using Ypdf.Core.Design.Pages;
+
+namespace Ypdf.CommandLine.Configuration;
+
+internal sealed class AddPageNumbersSubcommand
+{
+    internal AddPageNumbersSubcommand()
+    {
+        InputPath = string.Empty;
+        OutputPath = string.Empty;
+        TextPresenter = PageNumberTextPresenter.Default;
+        PageNumberShifts = [];
+        FontPath = string.Empty;
+        FontEncoding = string.Empty;
+        FontFamily = string.Empty;
+        FontColor = ColorConstants.BLACK;
+    }
+
+    [ValueOption<string>(
+        longName: "input-file",
+        shortName: "i",
+        description: "path to the input file",
+        isRequired: true)
+    ]
+    [OptionGroup("paths", "Paths", "Options for configuring paths")]
+    internal string InputPath { get; set; }
+
+    [ValueOption<string>(
+        longName: "output-file",
+        shortName: "o",
+        description: "path to the output file",
+        isRequired: true)
+    ]
+    [OptionGroup("paths", "", "")]
+    internal string OutputPath { get; set; }
+
+    [EnumValueOption<TabAlignment>(
+        defaultValue: TabAlignment.CENTER,
+        longName: "horizontal-alignment",
+        shortName: "H",
+        description: "horizontal page number alignment",
+        addChoicesToDescription: true)
+    ]
+    [OptionGroup("appearance", "Appearance", "Options for configuring page number appearance")]
+    internal TabAlignment HorizontalNumberAlignment { get; set; }
+
+    [EnumValueOption<VerticalAlignment>(
+        defaultValue: VerticalAlignment.BOTTOM,
+        longName: "vertical-alignment",
+        shortName: "V",
+        description: "vertical page number alignment",
+        addChoicesToDescription: true)
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal VerticalAlignment VerticalNumberAlignment { get; set; }
+
+    [ValueOption<Margin>(
+        longName: "margin",
+        shortName: "m",
+        description: "page number margin (M or H,V or L,T,R,B)")
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal Margin Margin { get; set; }
+
+    [EnumValueOption<LocationMode>(
+        longName: "num-location-mode",
+        shortName: "l",
+        description: "page number location mode",
+        addChoicesToDescription: true)
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal LocationMode LocationMode { get; set; }
+
+    [FlagOption(
+        longName: "left-page-margin",
+        shortName: "L",
+        description: "indicate whether the left page margin is considered")
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal bool ConsiderLeftPageMargin { get; set; }
+
+    [FlagOption(
+        longName: "top-page-margin",
+        shortName: "T",
+        description: "indicate whether the top page margin is considered")
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal bool ConsiderTopPageMargin { get; set; }
+
+    [FlagOption(
+        longName: "right-page-margin",
+        shortName: "R",
+        description: "indicate whether the right page margin is considered")
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal bool ConsiderRightPageMargin { get; set; }
+
+    [FlagOption(
+        longName: "bottom-page-margin",
+        shortName: "B",
+        description: "indicate whether the bottom page margin is considered")
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal bool ConsiderBottomPageMargin { get; set; }
+
+    [ValueOption<PageNumberTextPresenter>(
+        longName: "num-presenter",
+        shortName: "P",
+        description: "page number presenter",
+        beforeParseChoices: ["Default", "Fractional", "Verbal"],
+        addBeforeParseChoicesToDescription: true)
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal PageNumberTextPresenter TextPresenter { get; set; }
+
+    [MultipleValueOption<PageContentShift>(
+        longName: "content-shift",
+        shortName: "",
+        description: "page number shifts (Pages:Horizontal,Vertical -> 1:-50,0 or 1,3-5:10,15)",
+        contextCaptureType: ContextCaptureType.ZeroOrMore)
+    ]
+    [OptionGroup("appearance", "", "")]
+    internal List<PageContentShift> PageNumberShifts { get; set; }
+
+    [ValueOption<string>(
+        defaultValue: "",
+        longName: "font-path",
+        shortName: "",
+        description: "page number font path")
+    ]
+    [OptionGroup("font", "Font", "Options for configuring page number font")]
+    internal string FontPath { get; set; }
+
+    [ValueOption<string>(
+        defaultValue: PdfEncodings.IDENTITY_H,
+        longName: "font-encoding",
+        shortName: "",
+        description: "page number font encoding",
+        choices:
+        [
+            PdfEncodings.CP1250,
+            PdfEncodings.CP1252,
+            PdfEncodings.CP1253,
+            PdfEncodings.CP1257,
+            PdfEncodings.IDENTITY_H,
+            PdfEncodings.IDENTITY_V,
+            PdfEncodings.MACROMAN,
+            PdfEncodings.PDF_DOC_ENCODING,
+            PdfEncodings.SYMBOL,
+            PdfEncodings.UNICODE_BIG,
+            PdfEncodings.UNICODE_BIG_UNMARKED,
+            PdfEncodings.UTF8,
+            PdfEncodings.WINANSI,
+            PdfEncodings.ZAPFDINGBATS
+        ],
+        addChoicesToDescription: true)
+    ]
+    [OptionGroup("font", "", "")]
+    internal string FontEncoding { get; set; }
+
+    [ValueOption<float>(
+        defaultValue: 24f,
+        longName: "font-size",
+        shortName: "",
+        description: "page number font size")
+    ]
+    [OptionGroup("font", "", "")]
+    internal float FontSize { get; set; }
+
+    [ValueOption<float>(
+        defaultValue: 1f,
+        longName: "font-opacity",
+        shortName: "",
+        description: "page number font opacity")
+    ]
+    [OptionGroup("font", "", "")]
+    internal float FontOpacity { get; set; }
+
+    [ValueOption<string>(
+        defaultValue: StandardFonts.TIMES_ROMAN,
+        longName: "font-family",
+        shortName: "",
+        description: "page number font family",
+        choices:
+        [
+            StandardFonts.COURIER,
+            StandardFonts.COURIER_BOLD,
+            StandardFonts.COURIER_OBLIQUE,
+            StandardFonts.COURIER_BOLDOBLIQUE,
+            StandardFonts.HELVETICA,
+            StandardFonts.HELVETICA_BOLD,
+            StandardFonts.HELVETICA_OBLIQUE,
+            StandardFonts.HELVETICA_BOLDOBLIQUE,
+            StandardFonts.SYMBOL,
+            StandardFonts.TIMES_ROMAN,
+            StandardFonts.TIMES_BOLD,
+            StandardFonts.TIMES_ITALIC,
+            StandardFonts.TIMES_BOLDITALIC,
+            StandardFonts.ZAPFDINGBATS
+        ],
+        addChoicesToDescription: true)
+    ]
+    [OptionGroup("font", "", "")]
+    internal string FontFamily { get; set; }
+
+    [ValueOption<Color>(
+        longName: "font-color",
+        shortName: "c",
+        description: "page number font color (color name or (r,g,b))",
+        beforeParseChoices:
+        [
+            nameof(ColorConstants.BLACK),
+            nameof(ColorConstants.BLUE),
+            nameof(ColorConstants.CYAN),
+            nameof(ColorConstants.DARK_GRAY),
+            nameof(ColorConstants.GRAY),
+            nameof(ColorConstants.GREEN),
+            nameof(ColorConstants.LIGHT_GRAY),
+            nameof(ColorConstants.MAGENTA),
+            nameof(ColorConstants.ORANGE),
+            nameof(ColorConstants.PINK),
+            nameof(ColorConstants.RED),
+            nameof(ColorConstants.WHITE),
+            nameof(ColorConstants.YELLOW)
+        ])
+    ]
+    [OptionGroup("font", "", "")]
+    internal Color FontColor { get; set; }
+}

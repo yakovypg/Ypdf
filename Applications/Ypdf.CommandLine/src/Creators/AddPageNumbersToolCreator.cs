@@ -1,0 +1,48 @@
+using Ypdf.CommandLine.Configuration;
+using Ypdf.CommandLine.Execution;
+using Ypdf.Core.Design.Fonts;
+using Ypdf.Core.Design.Pages;
+using Ypdf.Core.Tools;
+
+namespace Ypdf.CommandLine.Creators;
+
+internal sealed class AddPageNumbersToolCreator : IToolCreator
+{
+    public IToolExecutionProvider Create(YpdfParserConfig config)
+    {
+        Core.ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
+
+        AddPageNumbersSubcommand subcommand = config.AddPageNumbersSubcommand;
+
+        var fontInfo = string.IsNullOrEmpty(subcommand.FontPath)
+            ? new TextFontInfo(
+                subcommand.FontFamily,
+                subcommand.FontColor,
+                subcommand.FontSize,
+                subcommand.FontOpacity)
+            : new TextFontInfo(
+                subcommand.FontPath,
+                subcommand.FontEncoding);
+
+        var pageNumberStyle = new PageNumberStyle()
+        {
+            FontInfo = fontInfo,
+            HorizontalAlignment = subcommand.HorizontalNumberAlignment,
+            VerticalAlignment = subcommand.VerticalNumberAlignment,
+            Margin = subcommand.Margin,
+            LocationMode = subcommand.LocationMode,
+            ConsiderLeftPageMargin = subcommand.ConsiderLeftPageMargin,
+            ConsiderTopPageMargin = subcommand.ConsiderTopPageMargin,
+            ConsiderRightPageMargin = subcommand.ConsiderRightPageMargin,
+            ConsiderBottomPageMargin = subcommand.ConsiderBottomPageMargin,
+            TextPresenter = subcommand.TextPresenter
+        };
+
+        var tool = new AddPageNumbersTool(pageNumberStyle, subcommand.PageNumberShifts);
+
+        return new ToolExecutionProvider(
+            tool,
+            [subcommand.InputPath],
+            subcommand.OutputPath);
+    }
+}
