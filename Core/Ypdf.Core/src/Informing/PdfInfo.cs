@@ -101,7 +101,7 @@ public static class PdfInfo
 
     private static IList<int> GetFirstAssociatedPages(
         PdfDocument pdfDocument,
-        IList<int> consideredPages)
+        List<int> consideredPages)
     {
         ExtendedArgumentNullException.ThrowIfNull(pdfDocument, nameof(pdfDocument));
         ExtendedArgumentNullException.ThrowIfNull(consideredPages, nameof(consideredPages));

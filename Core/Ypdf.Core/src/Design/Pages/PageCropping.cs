@@ -84,7 +84,7 @@ public readonly struct PageCropping : IEquatable<PageCropping>
 
         return pages
             .Select(t => $"{t}:{parts[1]}")
-            .Select(t => Parse(t))
+            .Select(Parse)
             .ToList();
     }
 
