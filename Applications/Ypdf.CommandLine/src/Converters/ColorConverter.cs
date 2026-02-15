@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using iText.Kernel.Colors;
 using Ypdf.Core;
+using Ypdf.Extensions;
 
 namespace Ypdf.CommandLine.Converters;
 
@@ -40,10 +41,10 @@ internal static class ColorConverter
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
         if (data.StartsWith('('))
-            data = data[1..];
+            data = data.Substring(1);
 
         if (data.EndsWith(')'))
-            data = data[..^1];
+            data = data.Remove(data.Length - 1);
 
         byte[] rgb = [.. data.Split(',').Select(byte.Parse)];
 
