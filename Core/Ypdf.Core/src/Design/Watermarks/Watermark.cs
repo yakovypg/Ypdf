@@ -1,4 +1,5 @@
 using System;
+using iText.Kernel.Colors;
 using Ypdf.Core.Design.Fonts;
 using Ypdf.Core.Geometry;
 using Ypdf.Core.Utils;
@@ -12,11 +13,7 @@ public class Watermark : IWatermark, IEquatable<Watermark?>
 
     static Watermark()
     {
-        DefaultFontInfo = new()
-        {
-            Size = 72,
-            Opacity = 0.5f
-        };
+        DefaultFontInfo = new(ColorConstants.BLACK, 72, 0.5f);
     }
 
     public Watermark(

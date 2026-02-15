@@ -9,16 +9,14 @@ namespace Ypdf.Core.Design.Fonts;
 
 public readonly struct TextFontInfo : IEquatable<TextFontInfo>
 {
-    private readonly Color _color;
-
     public TextFontInfo()
         : this(StandardFonts.TIMES_ROMAN) { }
 
     public TextFontInfo(string family)
-        : this(ColorConstants.DARK_GRAY)
+        : this(
+            family ?? throw new ArgumentNullException(nameof(family)),
+            ColorConstants.DARK_GRAY)
     {
-        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(family, nameof(family));
-        Family = family;
     }
 
     public TextFontInfo(string path, string encoding)
@@ -31,14 +29,24 @@ public readonly struct TextFontInfo : IEquatable<TextFontInfo>
         Encoding = encoding;
     }
 
-    private TextFontInfo(Color color, float size = 12f, float opacity = 1f)
+    public TextFontInfo(Color color, float size = 12f, float opacity = 1f)
+        : this(
+            StandardFonts.TIMES_ROMAN,
+            color ?? throw new ArgumentNullException(nameof(color)),
+            size,
+            opacity)
     {
+    }
+
+    public TextFontInfo(string family, Color color, float size = 12f, float opacity = 1f)
+    {
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(family, nameof(family));
         ExtendedArgumentNullException.ThrowIfNull(color, nameof(color));
         DefaultExceptions.ThrowIfNegativeOrZero(size, nameof(size));
         DefaultExceptions.ThrowIfNotBetween(opacity, 0, 1, nameof(opacity));
 
-        _color = color;
-
+        Color = color;
+        Family = family;
         Size = size;
         Opacity = opacity;
     }
@@ -47,15 +55,9 @@ public readonly struct TextFontInfo : IEquatable<TextFontInfo>
     public readonly string? Encoding { get; }
 
     public readonly string? Family { get; }
-
-    public readonly float Size { get; init; }
-    public readonly float Opacity { get; init; }
-
-    public readonly Color Color
-    {
-        get => _color;
-        init => _color = value ?? throw new ArgumentNullException(nameof(value));
-    }
+    public readonly float Size { get; }
+    public readonly float Opacity { get; }
+    public readonly Color Color { get; }
 
     public static bool operator ==(TextFontInfo left, TextFontInfo right)
     {
