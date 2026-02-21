@@ -10,7 +10,7 @@ internal sealed class AddPageNumbersToolCreator : IToolCreator
 {
     public IToolExecutionProvider Create(YpdfParserConfig config)
     {
-        Core.ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
+        ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
         AddPageNumbersSubcommand subcommand = config.AddPageNumbersSubcommand;
 

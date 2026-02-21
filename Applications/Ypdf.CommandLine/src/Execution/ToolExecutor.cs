@@ -10,7 +10,7 @@ internal sealed class ToolExecutor : IToolExecutor
 {
     internal ToolExecutor(IReadOnlyDictionary<string, IToolCreator> tools)
     {
-        Core.ExtendedArgumentNullException.ThrowIfNull(tools, nameof(tools));
+        ExtendedArgumentNullException.ThrowIfNull(tools, nameof(tools));
         Tools = tools;
     }
 
@@ -18,8 +18,8 @@ internal sealed class ToolExecutor : IToolExecutor
 
     public void Execute(YpdfParserConfig config, ParseArgumentsResult parseResult)
     {
-        Core.ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
-        Core.ExtendedArgumentNullException.ThrowIfNull(parseResult, nameof(parseResult));
+        ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
+        ExtendedArgumentNullException.ThrowIfNull(parseResult, nameof(parseResult));
 
         bool hasSubcommand = parseResult.TryGetLastHandledSubcommand(out Subcommand? subcommand);
 

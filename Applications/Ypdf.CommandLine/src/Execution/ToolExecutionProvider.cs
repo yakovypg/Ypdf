@@ -12,9 +12,9 @@ internal sealed class ToolExecutionProvider : IToolExecutionProvider
         IReadOnlyCollection<string> inputPaths,
         string outputPath)
     {
-        Core.ExtendedArgumentNullException.ThrowIfNull(tool, nameof(tool));
-        Core.ExtendedArgumentNullException.ThrowIfNull(inputPaths, nameof(inputPaths));
-        Core.ExtendedArgumentNullException.ThrowIfNull(outputPath, nameof(outputPath));
+        ExtendedArgumentNullException.ThrowIfNull(tool, nameof(tool));
+        ExtendedArgumentNullException.ThrowIfNull(inputPaths, nameof(inputPaths));
+        ExtendedArgumentNullException.ThrowIfNull(outputPath, nameof(outputPath));
 
         DefaultExceptions.ThrowIfZero(inputPaths.Count, nameof(inputPaths.Count));
 
