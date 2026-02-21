@@ -4,6 +4,7 @@ using NetArgumentParser;
 using NetArgumentParser.Informing;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Creators;
+using Ypdf.CommandLine.Creators.Tools;
 using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
 using Ypdf.Paths;

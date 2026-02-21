@@ -4,7 +4,7 @@ using Ypdf.Core.Design.Fonts;
 using Ypdf.Core.Design.Pages;
 using Ypdf.Core.Tools;
 
-namespace Ypdf.CommandLine.Creators;
+namespace Ypdf.CommandLine.Creators.Tools;
 
 internal sealed class AddPageNumbersToolCreator : IToolCreator
 {

@@ -1,7 +1,7 @@
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Execution;
 
-namespace Ypdf.CommandLine.Creators;
+namespace Ypdf.CommandLine.Creators.Tools;
 
 internal interface IToolCreator
 {
