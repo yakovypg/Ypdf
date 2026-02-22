@@ -22,7 +22,10 @@ internal sealed class AddPageNumbersToolCreator : IToolCreator
                 subcommand.FontOpacity)
             : new TextFontInfo(
                 subcommand.FontPath,
-                subcommand.FontEncoding);
+                subcommand.FontEncoding,
+                subcommand.FontColor,
+                subcommand.FontSize,
+                subcommand.FontOpacity);
 
         var pageNumberStyle = new PageNumberStyle()
         {
