@@ -5,6 +5,7 @@ using iText.Kernel.Colors;
 using iText.Layout.Properties;
 using NetArgumentParser.Attributes;
 using NetArgumentParser.Options.Context;
+using Ypdf.CommandLine.Converters;
 using Ypdf.Core.Design;
 using Ypdf.Core.Design.Pages;
 
@@ -12,6 +13,10 @@ namespace Ypdf.CommandLine.Configuration;
 
 internal sealed class AddPageNumbersSubcommand
 {
+    internal const string DefaultTextPresenter = nameof(PageNumberTextPresenter.Default);
+    internal const string DefaultMargin = "0";
+    internal const string DefaultFontColor = nameof(ColorConstants.BLACK);
+
     internal AddPageNumbersSubcommand()
     {
         InputPath = string.Empty;
@@ -47,7 +52,8 @@ internal sealed class AddPageNumbersSubcommand
         longName: "horizontal-alignment",
         shortName: "H",
         description: "horizontal page number alignment",
-        addChoicesToDescription: true)
+        addChoicesToDescription: true,
+        addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring page number appearance")]
     internal TabAlignment HorizontalNumberAlignment { get; set; }
@@ -57,7 +63,8 @@ internal sealed class AddPageNumbersSubcommand
         longName: "vertical-alignment",
         shortName: "V",
         description: "vertical page number alignment",
-        addChoicesToDescription: true)
+        addChoicesToDescription: true,
+        addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
     internal VerticalAlignment VerticalNumberAlignment { get; set; }
@@ -65,16 +72,18 @@ internal sealed class AddPageNumbersSubcommand
     [ValueOption<Margin>(
         longName: "margin",
         shortName: "m",
-        description: "page number margin (M or H,V or L,T,R,B)")
+        description: $"page number margin [default={DefaultMargin}] (M or H,V or L,T,R,B)")
     ]
     [OptionGroup("appearance", "", "")]
-    internal Margin Margin { get; set; }
+    internal Margin Margin { get; set; } = Margin.Parse(DefaultMargin);
 
     [EnumValueOption<LocationMode>(
+        defaultValue: LocationMode.WithoutIncrease,
         longName: "num-location-mode",
         shortName: "l",
         description: "page number location mode",
-        addChoicesToDescription: true)
+        addChoicesToDescription: true,
+        addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
     internal LocationMode LocationMode { get; set; }
@@ -114,27 +123,31 @@ internal sealed class AddPageNumbersSubcommand
     [ValueOption<PageNumberTextPresenter>(
         longName: "num-presenter",
         shortName: "P",
-        description: "page number presenter",
-        beforeParseChoices: ["Default", "Fractional", "Verbal"],
+        description: $"page number presenter [default={DefaultTextPresenter}]",
+        beforeParseChoices: [
+            nameof(PageNumberTextPresenter.Default),
+            nameof(PageNumberTextPresenter.Fractional),
+            nameof(PageNumberTextPresenter.Verbal)
+        ],
         addBeforeParseChoicesToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
-    internal PageNumberTextPresenter TextPresenter { get; set; }
+    internal PageNumberTextPresenter TextPresenter { get; set; } = PageNumberTextPresenter.Parse(DefaultTextPresenter);
 
     [MultipleValueOption<PageContentShift>(
         longName: "content-shift",
         shortName: "",
-        description: "page number shifts (Pages:Horizontal,Vertical -> 1:-50,0 or 1,3-5:10,15)",
+        description: "page number shifts [default=[]] (Pages:Horizontal,Vertical -> 1:-50,0 or 1,3-5:10,15)",
         contextCaptureType: ContextCaptureType.ZeroOrMore)
     ]
     [OptionGroup("appearance", "", "")]
-    internal List<PageContentShift> PageNumberShifts { get; set; }
+    internal List<PageContentShift> PageNumberShifts { get; set; } = [];
 
     [ValueOption<string>(
         defaultValue: "",
         longName: "font-path",
         shortName: "",
-        description: "page number font path")
+        description: "page number font path [default=\"\"]")
     ]
     [OptionGroup("font", "Font", "Options for configuring page number font")]
     internal string FontPath { get; set; }
@@ -161,7 +174,8 @@ internal sealed class AddPageNumbersSubcommand
             PdfEncodings.WINANSI,
             PdfEncodings.ZAPFDINGBATS
         ],
-        addChoicesToDescription: true)
+        addChoicesToDescription: true,
+        addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
     internal string FontEncoding { get; set; }
@@ -170,7 +184,8 @@ internal sealed class AddPageNumbersSubcommand
         defaultValue: 24f,
         longName: "font-size",
         shortName: "",
-        description: "page number font size")
+        description: "page number font size",
+        addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
     internal float FontSize { get; set; }
@@ -179,7 +194,8 @@ internal sealed class AddPageNumbersSubcommand
         defaultValue: 1f,
         longName: "font-opacity",
         shortName: "",
-        description: "page number font opacity")
+        description: "page number font opacity",
+        addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
     internal float FontOpacity { get; set; }
@@ -206,7 +222,8 @@ internal sealed class AddPageNumbersSubcommand
             StandardFonts.TIMES_BOLDITALIC,
             StandardFonts.ZAPFDINGBATS
         ],
-        addChoicesToDescription: true)
+        addChoicesToDescription: true,
+        addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
     internal string FontFamily { get; set; }
@@ -214,7 +231,7 @@ internal sealed class AddPageNumbersSubcommand
     [ValueOption<Color>(
         longName: "font-color",
         shortName: "c",
-        description: "page number font color (color name or (r,g,b))",
+        description: $"page number font color [default={DefaultFontColor}] (name or (r,g,b))",
         beforeParseChoices:
         [
             nameof(ColorConstants.BLACK),
@@ -230,8 +247,9 @@ internal sealed class AddPageNumbersSubcommand
             nameof(ColorConstants.RED),
             nameof(ColorConstants.WHITE),
             nameof(ColorConstants.YELLOW)
-        ])
+        ],
+        addBeforeParseChoicesToDescription: true)
     ]
     [OptionGroup("font", "", "")]
-    internal Color FontColor { get; set; }
+    internal Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
 }
