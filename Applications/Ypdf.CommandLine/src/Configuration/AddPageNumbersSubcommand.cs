@@ -17,6 +17,25 @@ internal sealed class AddPageNumbersSubcommand
     internal const string DefaultMargin = "0";
     internal const string DefaultFontColor = nameof(ColorConstants.BLACK);
 
+    internal const string InputPathLongName = "input-file";
+    internal const string OutputPathLongName = "output-file";
+    internal const string HorizontalNumberAlignmentLongName = "horizontal-alignment";
+    internal const string VerticalNumberLongName = "vertical-alignment";
+    internal const string MarginLongName = "margin";
+    internal const string LocationModeLongName = "num-location-mode";
+    internal const string ConsiderLeftPageMarginLongName = "left-page-margin";
+    internal const string ConsiderTopPageMarginLongName = "top-page-margin";
+    internal const string ConsiderRightPageMarginLongName = "right-page-margin";
+    internal const string ConsiderBottomPageMarginLongName = "bottom-page-margin";
+    internal const string TextPresenterLongName = "num-presenter";
+    internal const string PageNumberShiftsLongName = "content-shift";
+    internal const string FontPathLongName = "font-path";
+    internal const string FontEncodingLongName = "font-encoding";
+    internal const string FontSizeLongName = "font-size";
+    internal const string FontOpacityLongName = "font-opacity";
+    internal const string FontFamilyLongName = "font-family";
+    internal const string FontColorLongName = "font-color";
+
     internal AddPageNumbersSubcommand()
     {
         InputPath = string.Empty;
@@ -30,7 +49,7 @@ internal sealed class AddPageNumbersSubcommand
     }
 
     [ValueOption<string>(
-        longName: "input-file",
+        longName: InputPathLongName,
         shortName: "i",
         description: "path to the input file",
         isRequired: true)
@@ -39,7 +58,7 @@ internal sealed class AddPageNumbersSubcommand
     internal string InputPath { get; set; }
 
     [ValueOption<string>(
-        longName: "output-file",
+        longName: OutputPathLongName,
         shortName: "o",
         description: "path to the output file",
         isRequired: true)
@@ -49,7 +68,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [EnumValueOption<TabAlignment>(
         defaultValue: TabAlignment.CENTER,
-        longName: "horizontal-alignment",
+        longName: HorizontalNumberAlignmentLongName,
         shortName: "H",
         description: "horizontal page number alignment",
         addChoicesToDescription: true,
@@ -60,7 +79,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [EnumValueOption<VerticalAlignment>(
         defaultValue: VerticalAlignment.BOTTOM,
-        longName: "vertical-alignment",
+        longName: VerticalNumberLongName,
         shortName: "V",
         description: "vertical page number alignment",
         addChoicesToDescription: true,
@@ -70,7 +89,7 @@ internal sealed class AddPageNumbersSubcommand
     internal VerticalAlignment VerticalNumberAlignment { get; set; }
 
     [ValueOption<Margin>(
-        longName: "margin",
+        longName: MarginLongName,
         shortName: "m",
         description: $"page number margin [default={DefaultMargin}] (M or H,V or L,T,R,B)")
     ]
@@ -79,7 +98,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [EnumValueOption<LocationMode>(
         defaultValue: LocationMode.WithoutIncrease,
-        longName: "num-location-mode",
+        longName: LocationModeLongName,
         shortName: "l",
         description: "page number location mode",
         addChoicesToDescription: true,
@@ -89,7 +108,7 @@ internal sealed class AddPageNumbersSubcommand
     internal LocationMode LocationMode { get; set; }
 
     [FlagOption(
-        longName: "left-page-margin",
+        longName: ConsiderLeftPageMarginLongName,
         shortName: "L",
         description: "indicate whether the left page margin is considered")
     ]
@@ -97,7 +116,7 @@ internal sealed class AddPageNumbersSubcommand
     internal bool ConsiderLeftPageMargin { get; set; }
 
     [FlagOption(
-        longName: "top-page-margin",
+        longName: ConsiderTopPageMarginLongName,
         shortName: "T",
         description: "indicate whether the top page margin is considered")
     ]
@@ -105,7 +124,7 @@ internal sealed class AddPageNumbersSubcommand
     internal bool ConsiderTopPageMargin { get; set; }
 
     [FlagOption(
-        longName: "right-page-margin",
+        longName: ConsiderRightPageMarginLongName,
         shortName: "R",
         description: "indicate whether the right page margin is considered")
     ]
@@ -113,7 +132,7 @@ internal sealed class AddPageNumbersSubcommand
     internal bool ConsiderRightPageMargin { get; set; }
 
     [FlagOption(
-        longName: "bottom-page-margin",
+        longName: ConsiderBottomPageMarginLongName,
         shortName: "B",
         description: "indicate whether the bottom page margin is considered")
     ]
@@ -121,7 +140,7 @@ internal sealed class AddPageNumbersSubcommand
     internal bool ConsiderBottomPageMargin { get; set; }
 
     [ValueOption<PageNumberTextPresenter>(
-        longName: "num-presenter",
+        longName: TextPresenterLongName,
         shortName: "P",
         description: $"page number presenter [default={DefaultTextPresenter}]",
         beforeParseChoices: [
@@ -135,7 +154,7 @@ internal sealed class AddPageNumbersSubcommand
     internal PageNumberTextPresenter TextPresenter { get; set; } = PageNumberTextPresenter.Parse(DefaultTextPresenter);
 
     [MultipleValueOption<PageContentShift>(
-        longName: "content-shift",
+        longName: PageNumberShiftsLongName,
         shortName: "",
         description: "page number shifts [default=[]] (Pages:Horizontal,Vertical -> 1:-50,0 or 1,3-5:10,15)",
         contextCaptureType: ContextCaptureType.ZeroOrMore)
@@ -145,7 +164,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [ValueOption<string>(
         defaultValue: "",
-        longName: "font-path",
+        longName: FontPathLongName,
         shortName: "",
         description: "page number font path [default=\"\"]")
     ]
@@ -159,7 +178,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [ValueOption<string>(
         defaultValue: PdfEncodings.IDENTITY_H,
-        longName: "font-encoding",
+        longName: FontEncodingLongName,
         shortName: "",
         description: "page number font encoding",
         choices:
@@ -187,7 +206,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [ValueOption<float>(
         defaultValue: 24f,
-        longName: "font-size",
+        longName: FontSizeLongName,
         shortName: "",
         description: "page number font size",
         addDefaultValueToDescription: true)
@@ -197,7 +216,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [ValueOption<float>(
         defaultValue: 1f,
-        longName: "font-opacity",
+        longName: FontOpacityLongName,
         shortName: "",
         description: "page number font opacity",
         addDefaultValueToDescription: true)
@@ -207,7 +226,7 @@ internal sealed class AddPageNumbersSubcommand
 
     [ValueOption<string>(
         defaultValue: StandardFonts.TIMES_ROMAN,
-        longName: "font-family",
+        longName: FontFamilyLongName,
         shortName: "",
         description: "page number font family",
         choices:
@@ -235,7 +254,7 @@ internal sealed class AddPageNumbersSubcommand
     internal string FontFamily { get; set; }
 
     [ValueOption<Color>(
-        longName: "font-color",
+        longName: FontColorLongName,
         shortName: "c",
         description: $"page number font color [default={DefaultFontColor}] (name or (r,g,b))",
         beforeParseChoices:
