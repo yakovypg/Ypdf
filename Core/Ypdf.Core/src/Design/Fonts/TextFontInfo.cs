@@ -19,8 +19,21 @@ public readonly struct TextFontInfo : IEquatable<TextFontInfo>
     {
     }
 
-    public TextFontInfo(string path, string encoding)
-        : this(ColorConstants.DARK_GRAY)
+    public TextFontInfo(string path, string encoding, float size = 12f, float opacity = 1f)
+        : this(
+            path ?? throw new ArgumentNullException(nameof(path)),
+            encoding ?? throw new ArgumentNullException(nameof(encoding)),
+            ColorConstants.DARK_GRAY,
+            size,
+            opacity)
+    {
+    }
+
+    public TextFontInfo(string path, string encoding, Color color, float size = 12f, float opacity = 1f)
+        : this(
+            color ?? throw new ArgumentNullException(nameof(color)),
+            size,
+            opacity)
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(path, nameof(path));
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(encoding, nameof(encoding));
