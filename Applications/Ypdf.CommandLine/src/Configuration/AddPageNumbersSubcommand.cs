@@ -150,6 +150,11 @@ internal sealed class AddPageNumbersSubcommand
         description: "page number font path [default=\"\"]")
     ]
     [OptionGroup("font", "Font", "Options for configuring page number font")]
+    [MutuallyExclusiveOptionGroup(
+        $"{nameof(AddPageNumbersSubcommand)}.FontConfig",
+        "font config",
+        $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
+    ]
     internal string FontPath { get; set; }
 
     [ValueOption<string>(
@@ -226,6 +231,7 @@ internal sealed class AddPageNumbersSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
+    [MutuallyExclusiveOptionGroup($"{nameof(AddPageNumbersSubcommand)}.FontConfig", "", "")]
     internal string FontFamily { get; set; }
 
     [ValueOption<Color>(
