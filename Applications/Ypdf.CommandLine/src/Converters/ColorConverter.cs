@@ -76,4 +76,20 @@ internal static class ColorConverter
 
         throw new IncorrectDataFormatException(null, data, _expectedStringFormat);
     }
+
+    internal static DeviceRgb ToDeviceRgb(Color color)
+    {
+        if (color is DeviceRgb deviceRgb)
+            return deviceRgb;
+
+        float[] components = color.GetColorValue();
+
+        return components.Length switch
+        {
+            1 => new DeviceRgb(components[0], components[0], components[0]),
+            3 => new DeviceRgb(components[0], components[1], components[2]),
+
+            _ => throw new NotSupportedException("Color space not supported.")
+        };
+    }
 }

@@ -12,9 +12,9 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
         {
             // TODO
             { AddPageNumbersSubcommand.Name, new AddPageNumbersToolCreator() },
-            /*{ AddWatermarkAnnotationSubcommand.Name, new AddWatermarkAnnotationToolCreator() },
+            { AddWatermarkAnnotationSubcommand.Name, new AddWatermarkAnnotationToolCreator() },
             { AddWatermarkSubcommand.Name, new AddWatermarkToolCreator() },
-            { CompressImagesSubcommand.Name, new CompressImagesToolCreator() },
+            /*{ CompressImagesSubcommand.Name, new CompressImagesToolCreator() },
             { CompressSubcommand.Name, new CompressToolCreator() },
             { ConfigSubcommand.Name, new ConfigToolCreator() },
             { CopySubcommand.Name, new CopyToolCreator() },

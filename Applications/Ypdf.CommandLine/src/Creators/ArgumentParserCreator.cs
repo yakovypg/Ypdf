@@ -8,6 +8,8 @@ using NetArgumentParser.Generators;
 using Ypdf.CommandLine.Converters;
 using Ypdf.Core.Design;
 using Ypdf.Core.Design.Pages;
+using Ypdf.Core.Enumeration;
+using Ypdf.Core.Geometry;
 
 namespace Ypdf.CommandLine.Creators;
 
@@ -85,7 +87,9 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
             new ValueConverter<Margin>(Margin.Parse),
             new ValueConverter<PageNumberTextPresenter>(PageNumberTextPresenter.Parse),
             new MultipleValueConverter<PageContentShift>(PageContentShift.ParseMany),
-            new ValueConverter<Color>(ColorConverter.Parse)
+            new ValueConverter<Color>(ColorConverter.Parse),
+            new MultipleValueConverter<PageRange>(PageRange.Parse),
+            new ValueConverter<FloatPoint>(FloatPoint.Parse)
         ];
     }
 }
