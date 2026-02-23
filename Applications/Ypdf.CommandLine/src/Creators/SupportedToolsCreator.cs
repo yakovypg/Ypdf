@@ -10,6 +10,7 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
     {
         return new()
         {
+            // TODO
             { SubcommandNames.AddPageNumbers, new AddPageNumbersToolCreator() },
             /*{ SubcommandNames.AddWatermarkAnnotation, new AddWatermarkAnnotationToolCreator() },
             { SubcommandNames.AddWatermark, new AddWatermarkToolCreator() },
