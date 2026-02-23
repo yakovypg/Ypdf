@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NetArgumentParser.Subcommands;
+using Ypdf.Core.Design.Pages;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
@@ -9,6 +10,7 @@ internal sealed class AddPageNumbersSubcommandOptionRestrictions : OptionRestric
     protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
     [
         AddRestrictionForInputPathOption,
+        AddRestrictionForPageNumberShiftsOption,
         AddRestrictionForFontPathOption,
         AddRestrictionForFontSizeOption,
         AddRestrictionForFontOpacityOption
@@ -17,24 +19,34 @@ internal sealed class AddPageNumbersSubcommandOptionRestrictions : OptionRestric
     private static void AddRestrictionForInputPathOption(Subcommand subcommand)
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
-        AddFileRestrictionForPathOption(subcommand, AddPageNumbersSubcommand.InputPathLongName, PdfExtensions);
+        AddFileAllowedRestrictionForPathOption(subcommand, AddPageNumbersSubcommand.InputPathLongName, PdfExtensions);
+    }
+
+    private static void AddRestrictionForPageNumberShiftsOption(Subcommand subcommand)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+
+        AddCorrectRestrictionForPageContentShiftsOption<List<PageContentShift>>(
+            subcommand,
+            AddPageNumbersSubcommand.PageNumberShiftsLongName,
+            1);
     }
 
     private static void AddRestrictionForFontPathOption(Subcommand subcommand)
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
-        AddFileRestrictionForPathOption(subcommand, AddPageNumbersSubcommand.FontPathLongName, FontExtensions);
+        AddFileAllowedRestrictionForPathOption(subcommand, AddPageNumbersSubcommand.FontPathLongName, FontExtensions);
     }
 
     private static void AddRestrictionForFontSizeOption(Subcommand subcommand)
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
-        AddInRangeRestrictionForValueOption<float>(subcommand, AddPageNumbersSubcommand.FontSizeLongName, 1, 512);
+        AddInRangeRestrictionForNumberOption<float>(subcommand, AddPageNumbersSubcommand.FontSizeLongName, 1, 512);
     }
 
     private static void AddRestrictionForFontOpacityOption(Subcommand subcommand)
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
-        AddInRangeRestrictionForValueOption<float>(subcommand, AddPageNumbersSubcommand.FontOpacityLongName, 0, 1);
+        AddInRangeRestrictionForNumberOption<float>(subcommand, AddPageNumbersSubcommand.FontOpacityLongName, 0, 1);
     }
 }

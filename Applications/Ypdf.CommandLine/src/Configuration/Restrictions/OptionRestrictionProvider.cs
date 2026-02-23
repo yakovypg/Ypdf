@@ -6,6 +6,9 @@ using System.Linq;
 using NetArgumentParser.Options;
 using NetArgumentParser.Options.Configuration;
 using NetArgumentParser.Subcommands;
+using Ypdf.Core.Design.Pages;
+using Ypdf.Core.Enumeration;
+using Ypdf.Core.Geometry;
 using Ypdf.Extensions;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
@@ -44,7 +47,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         return option => option is ValueOption<T> && option.LongName == optionName;
     }
 
-    protected static Predicate<string> CreatePathToFileAllowedPredicate(IEnumerable<string>? allowedExtensions = null)
+    protected static Predicate<string> CreatePathToFilePredicate(IEnumerable<string>? allowedExtensions = null)
     {
         return path =>
         {
@@ -58,7 +61,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         };
     }
 
-    protected static Predicate<T> CreateValueInRangeAllowedPredicate<T>(double? minValue = null, double? maxValue = null)
+    protected static Predicate<T> CreateValueInRangePredicate<T>(double? minValue = null, double? maxValue = null)
         where T : IConvertible
     {
         return value =>
@@ -73,6 +76,28 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
 
             return minRestrictionOk && maxRestrictionOk;
         };
+    }
+
+    protected static Predicate<T> CreatePagesGreaterThanZeroPredicate<T>()
+        where T : IEnumerable<PageRange>
+    {
+        return ranges => ranges.All(range => range.Items.All(page => page >= 1));
+    }
+
+    protected static Predicate<T> CreatePageContentShiftCorrectPredicate<T>(int minPage = 1)
+        where T : IEnumerable<PageContentShift>
+    {
+        return shifts => shifts.All(t => t.PageNumber >= minPage);
+    }
+
+    protected static Predicate<FloatPoint> CreateFloatPointCorrectPredicate(float minX, float minY)
+    {
+        return value => value.X >= minX && value.Y >= minY;
+    }
+
+    protected static Predicate<string> CreateValueNotEmptyPredicate()
+    {
+        return value => !string.IsNullOrEmpty(value);
     }
 
     protected static ValueOption<T> FindOption<T>(Subcommand subcommand, Predicate<ICommonOption> predicate)
@@ -106,7 +131,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
             valueNotSatisfuRestrictionMessage);
     }
 
-    protected static void AddFileRestrictionForPathOption(
+    protected static void AddFileAllowedRestrictionForPathOption(
         Subcommand subcommand,
         string optionName,
         IEnumerable<string> allowedExtensions)
@@ -122,11 +147,11 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         AddRestriction(
             subcommand,
             CreateFindOptionPredicate<string>(optionName),
-            CreatePathToFileAllowedPredicate(PdfExtensions),
+            CreatePathToFilePredicate(PdfExtensions),
             badValueMessage);
     }
 
-    protected static void AddInRangeRestrictionForValueOption<T>(
+    protected static void AddInRangeRestrictionForNumberOption<T>(
         Subcommand subcommand,
         string optionName,
         double? minValue = null,
@@ -152,7 +177,78 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         AddRestriction(
             subcommand,
             CreateFindOptionPredicate<T>(optionName),
-            CreateValueInRangeAllowedPredicate<T>(minValue, maxValue),
+            CreateValueInRangePredicate<T>(minValue, maxValue),
+            badValueMessage);
+    }
+
+    protected static void AddGreaterThanZeroRestrictionForPagesOption<T>(
+        Subcommand subcommand,
+        string optionName)
+        where T : IEnumerable<PageRange>
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionName, nameof(optionName));
+
+        string badValueReason = "all pages must be >= 1";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            CreateFindOptionPredicate<T>(optionName),
+            CreatePagesGreaterThanZeroPredicate<T>(),
+            badValueMessage);
+    }
+
+    protected static void AddCorrectRestrictionForPageContentShiftsOption<T>(
+        Subcommand subcommand,
+        string optionName,
+        int minPage = 1)
+        where T : IEnumerable<PageContentShift>
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionName, nameof(optionName));
+
+        string badValueReason = $"all pages must be >= {minPage}";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            CreateFindOptionPredicate<T>(optionName),
+            CreatePageContentShiftCorrectPredicate<T>(minPage),
+            badValueMessage);
+    }
+
+    protected static void AddCorrectRestrictionForFloatPointOption(
+        Subcommand subcommand,
+        string optionName,
+        float minX = 0,
+        float minY = 0)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionName, nameof(optionName));
+
+        string badValueReason = $"X-coordinates must be >= {minX} and Y-coordinates must be >= {minY}";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            CreateFindOptionPredicate<FloatPoint>(optionName),
+            CreateFloatPointCorrectPredicate(minX, minY),
+            badValueMessage);
+    }
+
+    protected static void AddNotEmptyRestrictionForStringOption(Subcommand subcommand, string optionName)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionName, nameof(optionName));
+
+        string badValueReason = $"it mustn't be empty";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            CreateFindOptionPredicate<string>(optionName),
+            CreateValueNotEmptyPredicate(),
             badValueMessage);
     }
 }
