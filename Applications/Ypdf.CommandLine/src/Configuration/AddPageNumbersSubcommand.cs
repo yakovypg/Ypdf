@@ -39,18 +39,6 @@ internal sealed class AddPageNumbersSubcommand
     internal const string DefaultMargin = "0";
     internal const string DefaultFontColor = nameof(ColorConstants.BLACK);
 
-    internal AddPageNumbersSubcommand()
-    {
-        InputPath = string.Empty;
-        OutputPath = string.Empty;
-        TextPresenter = PageNumberTextPresenter.Default;
-        PageNumberShifts = [];
-        FontPath = string.Empty;
-        FontEncoding = string.Empty;
-        FontFamily = string.Empty;
-        FontColor = ColorConstants.BLACK;
-    }
-
     [ValueOption<string>(
         longName: InputPathLongName,
         shortName: "i",
@@ -58,7 +46,7 @@ internal sealed class AddPageNumbersSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; }
+    internal string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -67,7 +55,7 @@ internal sealed class AddPageNumbersSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; }
+    internal string OutputPath { get; set; } = string.Empty;
 
     [EnumValueOption<TabAlignment>(
         defaultValue: TabAlignment.CENTER,
@@ -177,7 +165,7 @@ internal sealed class AddPageNumbersSubcommand
         "font config",
         $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
     ]
-    internal string FontPath { get; set; }
+    internal string FontPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         defaultValue: PdfEncodings.IDENTITY_H,
@@ -205,7 +193,7 @@ internal sealed class AddPageNumbersSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
-    internal string FontEncoding { get; set; }
+    internal string FontEncoding { get; set; } = string.Empty;
 
     [ValueOption<float>(
         defaultValue: 24f,
@@ -254,7 +242,7 @@ internal sealed class AddPageNumbersSubcommand
     ]
     [OptionGroup("font", "", "")]
     [MutuallyExclusiveOptionGroup($"{nameof(AddPageNumbersSubcommand)}.FontConfig", "", "")]
-    internal string FontFamily { get; set; }
+    internal string FontFamily { get; set; } = string.Empty;
 
     [ValueOption<Color>(
         longName: FontColorLongName,
