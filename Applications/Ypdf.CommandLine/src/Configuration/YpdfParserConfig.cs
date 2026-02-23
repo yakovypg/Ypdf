@@ -5,95 +5,69 @@ namespace Ypdf.CommandLine.Configuration;
 [ParserConfig]
 internal sealed class YpdfParserConfig
 {
-    internal YpdfParserConfig()
-    {
-        AddPageNumbersSubcommand = new();
-        AddWatermarkAnnotationSubcommand = new();
-        AddWatermarkSubcommand = new();
-        CompressImagesSubcommand = new();
-        CompressSubcommand = new();
-        ConfigSubcommand = new();
-        CopySubcommand = new();
-        CropPagesSubcommand = new();
-        DividePagesSubcommand = new();
-        ExtractImagesSubcommand = new();
-        ExtractTextSubcommand = new();
-        ImagesToPdfSubcommand = new();
-        MergeSubcommand = new();
-        MovePageSubcommand = new();
-        RemovePagesSubcommand = new();
-        RemovePasswordSubcommand = new();
-        RemoveWatermarkAnnotationSubcommand = new();
-        ReorderPagesSubcommand = new();
-        RotatePagesSubcommand = new();
-        SetPasswordSubcommand = new();
-        SplitSubcommand = new();
-        TextToPdfSubcommand = new();
-    }
+    [Subcommand(AddPageNumbersSubcommand.Name, AddPageNumbersSubcommand.Description)]
+    internal AddPageNumbersSubcommand AddPageNumbersSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.AddPageNumbers, SubcommandDescriptions.AddPageNumbers)]
-    internal AddPageNumbersSubcommand AddPageNumbersSubcommand { get; }
+    [Subcommand(AddWatermarkAnnotationSubcommand.Name, AddWatermarkAnnotationSubcommand.Description)]
+    internal AddWatermarkAnnotationSubcommand AddWatermarkAnnotationSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.AddWatermarkAnnotation, SubcommandDescriptions.AddWatermarkAnnotation)]
-    internal AddWatermarkAnnotationSubcommand AddWatermarkAnnotationSubcommand { get; }
+    [Subcommand(AddWatermarkSubcommand.Name, AddWatermarkSubcommand.Description)]
+    internal AddWatermarkSubcommand AddWatermarkSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.AddWatermark, SubcommandDescriptions.AddWatermark)]
-    internal AddWatermarkSubcommand AddWatermarkSubcommand { get; }
+    [Subcommand(CompressImagesSubcommand.Name, CompressImagesSubcommand.Description)]
+    internal CompressImagesSubcommand CompressImagesSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.CompressImages, SubcommandDescriptions.CompressImages)]
-    internal CompressImagesSubcommand CompressImagesSubcommand { get; }
+    [Subcommand(CompressSubcommand.Name, CompressSubcommand.Description)]
+    internal CompressSubcommand CompressSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.Compress, SubcommandDescriptions.Compress)]
-    internal CompressSubcommand CompressSubcommand { get; }
+    [Subcommand(ConfigSubcommand.Name, ConfigSubcommand.Description)]
+    internal ConfigSubcommand ConfigSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.Config, SubcommandDescriptions.Config)]
-    internal ConfigSubcommand ConfigSubcommand { get; }
+    [Subcommand(CopySubcommand.Name, CopySubcommand.Description)]
+    internal CopySubcommand CopySubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.Copy, SubcommandDescriptions.Copy)]
-    internal CopySubcommand CopySubcommand { get; }
+    [Subcommand(CropPagesSubcommand.Name, CropPagesSubcommand.Description)]
+    internal CropPagesSubcommand CropPagesSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.CropPages, SubcommandDescriptions.CropPages)]
-    internal CropPagesSubcommand CropPagesSubcommand { get; }
+    [Subcommand(DividePagesSubcommand.Name, DividePagesSubcommand.Description)]
+    internal DividePagesSubcommand DividePagesSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.DividePages, SubcommandDescriptions.DividePages)]
-    internal DividePagesSubcommand DividePagesSubcommand { get; }
+    [Subcommand(ExtractImagesSubcommand.Name, ExtractImagesSubcommand.Description)]
+    internal ExtractImagesSubcommand ExtractImagesSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.ExtractImages, SubcommandDescriptions.ExtractImages)]
-    internal ExtractImagesSubcommand ExtractImagesSubcommand { get; }
+    [Subcommand(ExtractTextSubcommand.Name, ExtractTextSubcommand.Description)]
+    internal ExtractTextSubcommand ExtractTextSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.ExtractText, SubcommandDescriptions.ExtractText)]
-    internal ExtractTextSubcommand ExtractTextSubcommand { get; }
+    [Subcommand(ImagesToPdfSubcommand.Name, ImagesToPdfSubcommand.Description)]
+    internal ImagesToPdfSubcommand ImagesToPdfSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.ImagesToPdf, SubcommandDescriptions.ImagesToPdf)]
-    internal ImagesToPdfSubcommand ImagesToPdfSubcommand { get; }
+    [Subcommand(MergeSubcommand.Name, MergeSubcommand.Description)]
+    internal MergeSubcommand MergeSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.Merge, SubcommandDescriptions.Merge)]
-    internal MergeSubcommand MergeSubcommand { get; }
+    [Subcommand(MovePageSubcommand.Name, MovePageSubcommand.Description)]
+    internal MovePageSubcommand MovePageSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.MovePage, SubcommandDescriptions.MovePage)]
-    internal MovePageSubcommand MovePageSubcommand { get; }
+    [Subcommand(RemovePagesSubcommand.Name, RemovePagesSubcommand.Description)]
+    internal RemovePagesSubcommand RemovePagesSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.RemovePages, SubcommandDescriptions.RemovePages)]
-    internal RemovePagesSubcommand RemovePagesSubcommand { get; }
+    [Subcommand(RemovePasswordSubcommand.Name, RemovePasswordSubcommand.Description)]
+    internal RemovePasswordSubcommand RemovePasswordSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.RemovePassword, SubcommandDescriptions.RemovePassword)]
-    internal RemovePasswordSubcommand RemovePasswordSubcommand { get; }
+    [Subcommand(RemoveWatermarkAnnotationSubcommand.Name, RemoveWatermarkAnnotationSubcommand.Description)]
+    internal RemoveWatermarkAnnotationSubcommand RemoveWatermarkAnnotationSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.RemoveWatermarkAnnotation, SubcommandDescriptions.RemoveWatermarkAnnotation)]
-    internal RemoveWatermarkAnnotationSubcommand RemoveWatermarkAnnotationSubcommand { get; }
+    [Subcommand(ReorderPagesSubcommand.Name, ReorderPagesSubcommand.Description)]
+    internal ReorderPagesSubcommand ReorderPagesSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.ReorderPages, SubcommandDescriptions.ReorderPages)]
-    internal ReorderPagesSubcommand ReorderPagesSubcommand { get; }
+    [Subcommand(RotatePagesSubcommand.Name, RotatePagesSubcommand.Description)]
+    internal RotatePagesSubcommand RotatePagesSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.RotatePages, SubcommandDescriptions.RotatePages)]
-    internal RotatePagesSubcommand RotatePagesSubcommand { get; }
+    [Subcommand(SetPasswordSubcommand.Name, SetPasswordSubcommand.Description)]
+    internal SetPasswordSubcommand SetPasswordSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.SetPassword, SubcommandDescriptions.SetPassword)]
-    internal SetPasswordSubcommand SetPasswordSubcommand { get; }
+    [Subcommand(SplitSubcommand.Name, SplitSubcommand.Description)]
+    internal SplitSubcommand SplitSubcommand { get; } = new();
 
-    [Subcommand(SubcommandNames.Split, SubcommandDescriptions.Split)]
-    internal SplitSubcommand SplitSubcommand { get; }
-
-    [Subcommand(SubcommandNames.TextToPdf, SubcommandDescriptions.TextToPdf)]
-    internal TextToPdfSubcommand TextToPdfSubcommand { get; }
+    [Subcommand(TextToPdfSubcommand.Name, TextToPdfSubcommand.Description)]
+    internal TextToPdfSubcommand TextToPdfSubcommand { get; } = new();
 }

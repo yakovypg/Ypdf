@@ -13,9 +13,8 @@ namespace Ypdf.CommandLine.Configuration;
 
 internal sealed class AddPageNumbersSubcommand
 {
-    internal const string DefaultTextPresenter = nameof(PageNumberTextPresenter.Default);
-    internal const string DefaultMargin = "0";
-    internal const string DefaultFontColor = nameof(ColorConstants.BLACK);
+    internal const string Name = "add-page-numbers";
+    internal const string Description = "Add page numbers to PDF document";
 
     internal const string InputPathLongName = "input-file";
     internal const string OutputPathLongName = "output-file";
@@ -35,6 +34,10 @@ internal sealed class AddPageNumbersSubcommand
     internal const string FontOpacityLongName = "font-opacity";
     internal const string FontFamilyLongName = "font-family";
     internal const string FontColorLongName = "font-color";
+
+    internal const string DefaultTextPresenter = nameof(PageNumberTextPresenter.Default);
+    internal const string DefaultMargin = "0";
+    internal const string DefaultFontColor = nameof(ColorConstants.BLACK);
 
     internal AddPageNumbersSubcommand()
     {
