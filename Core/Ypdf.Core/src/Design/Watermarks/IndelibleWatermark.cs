@@ -24,7 +24,8 @@ public class IndelibleWatermark : Watermark, IIndelibleWatermark, IEquatable<Ind
         TextFontInfo fontInfo = default,
         double rotationAngleInRadians = DefaultRotationAngleInRadians,
         FloatPoint? lowerLeftPoint = null,
-        WatermarkTextAllocator textAllocator = default)
+        WatermarkTextAllocator textAllocator = default,
+        LazyBorder? border = null)
         : base(text, fontInfo, rotationAngleInRadians, lowerLeftPoint)
     {
         DefaultExceptions.ThrowIfNegativeOrZero(width, nameof(width));
@@ -34,6 +35,7 @@ public class IndelibleWatermark : Watermark, IIndelibleWatermark, IEquatable<Ind
         Width = width;
         Height = height;
         TextAllocator = textAllocator;
+        Border = border;
     }
 
     public float Width { get; }
