@@ -19,7 +19,7 @@ internal static class SubcommandDescriptions
     internal const string RemovePages = "Remove pages from PDF document";
     internal const string RemovePassword = "Remove password from PDF document";
     internal const string RemoveWatermarkAnnotation = "Remove watermark from PDF document";
-    internal const string ReoprderPages = "Reorder PDF document pages";
+    internal const string ReorderPages = "Reorder PDF document pages";
     internal const string RotatePages = "Rotate PDF document pages";
     internal const string SetPassword = "Set password to PDF document";
     internal const string Split = "Split PDF document";

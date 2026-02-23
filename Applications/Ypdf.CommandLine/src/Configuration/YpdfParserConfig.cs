@@ -82,7 +82,7 @@ internal sealed class YpdfParserConfig
     [Subcommand(SubcommandNames.RemoveWatermarkAnnotation, SubcommandDescriptions.RemoveWatermarkAnnotation)]
     internal RemoveWatermarkAnnotationSubcommand RemoveWatermarkAnnotationSubcommand { get; }
 
-    [Subcommand(SubcommandNames.ReoprderPages, SubcommandDescriptions.ReoprderPages)]
+    [Subcommand(SubcommandNames.ReorderPages, SubcommandDescriptions.ReorderPages)]
     internal ReorderPagesSubcommand ReorderPagesSubcommand { get; }
 
     [Subcommand(SubcommandNames.RotatePages, SubcommandDescriptions.RotatePages)]

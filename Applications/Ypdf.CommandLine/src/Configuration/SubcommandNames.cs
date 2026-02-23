@@ -19,7 +19,7 @@ internal static class SubcommandNames
     internal const string RemovePages = "remove-pages";
     internal const string RemovePassword = "remove-password";
     internal const string RemoveWatermarkAnnotation = "remove-watermark-annotation";
-    internal const string ReoprderPages = "reorder-pages";
+    internal const string ReorderPages = "reorder-pages";
     internal const string RotatePages = "rotate";
     internal const string SetPassword = "set-password";
     internal const string Split = "split";

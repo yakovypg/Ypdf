@@ -27,7 +27,7 @@ internal sealed class SupportedOptionRestrictionProvidersCreator : ISupportedOpt
             { SubcommandNames.RemovePages, new RemovePagesSubcommandOptionRestrictions() },
             { SubcommandNames.RemovePassword, new RemovePasswordSubcommandOptionRestrictions() },
             { SubcommandNames.RemoveWatermarkAnnotation, new RemoveWatermarkAnnotationSubcommandOptionRestrictions() },
-            { SubcommandNames.ReoprderPages, new ReorderPagesSubcommandOptionRestrictions() },
+            { SubcommandNames.ReorderPages, new ReorderPagesSubcommandOptionRestrictions() },
             { SubcommandNames.RotatePages, new RotatePagesSubcommandOptionRestrictions() },
             { SubcommandNames.SetPassword, new SetPasswordSubcommandOptionRestrictions() },
             { SubcommandNames.Split, new SplitSubcommandOptionRestrictions() },
