@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using NetArgumentParser;
 using NetArgumentParser.Informing;
+using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Configuration.Restrictions;
 using Ypdf.CommandLine.Creators;
 using Ypdf.CommandLine.Creators.Tools;
 using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
-using Ypdf.Paths;
 
 var errorMessageWriter = new ErrorMessageWriter();
 
-if (!PathManager.TryPrepareDirectories())
+if (!Directories.TryPrepare())
     errorMessageWriter.WriteLine("Cannot prepare system directories.");
 
-if (!PathManager.TryPrepareFiles())
+if (!FilePaths.TryPrepare())
     errorMessageWriter.WriteLine("Cannot prepare system files.");
+
+if (!GlobalConfig.TryLoad(FilePaths.Config, out GlobalConfig globalConfig))
+    errorMessageWriter.WriteLine("Cannot load global config.");
+
+GlobalConfig.Instance.Reset(globalConfig);
 
 YpdfParserConfig parserConfig = new();
 ArgumentParserCreator parserCreator = new();

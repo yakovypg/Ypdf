@@ -1,4 +1,4 @@
-namespace Ypdf.Paths;
+namespace Ypdf.Core.Config;
 
 public static class FileMarks
 {

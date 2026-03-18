@@ -6,12 +6,12 @@ using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout.Element;
 using Ypdf.Core.Compression;
+using Ypdf.Core.Config;
 using Ypdf.Core.Extensions;
 using Ypdf.Core.FileSystem.Naming;
 using Ypdf.Core.FileSystem.Paths;
 using Ypdf.Core.Imaging;
 using Ypdf.Core.Runtime.Logging;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.Tools;
 
@@ -40,7 +40,7 @@ public class CompressTool : ITool
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(outputPath, nameof(outputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(Directories.Temp);
+        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(CoreDirectories.Temp);
 
         if (CheckCompressionCapability)
             VerifyCompressionCapability(inputPath);

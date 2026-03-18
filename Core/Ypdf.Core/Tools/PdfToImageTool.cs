@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Ypdf.Core.Config;
 using Ypdf.Core.Extensions;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Runtime.Python;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.Tools;
 
@@ -44,7 +44,7 @@ public class PdfToImageTool : IMultipleInputTool
             outputPath = "\"\"";
 
         string paths = string.Join(" ", inputPaths);
-        string imageExtractorPath = PythonScripts.ImageExtractor;
+        string imageExtractorPath = PythonScriptPaths.ImageExtractor;
 
         var executor = new PythonExecutor()
         {

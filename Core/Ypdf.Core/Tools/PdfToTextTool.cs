@@ -1,6 +1,6 @@
+using Ypdf.Core.Config;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Runtime.Python;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.Tools;
 
@@ -21,7 +21,7 @@ public class PdfToTextTool : ITool
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(outputPath, nameof(outputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        string textExtractorPath = PythonScripts.TextExtractor;
+        string textExtractorPath = PythonScriptPaths.TextExtractor;
 
         var executor = new PythonExecutor()
         {

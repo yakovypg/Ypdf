@@ -1,21 +1,34 @@
 using System.IO;
 
-namespace Ypdf.Paths;
+namespace Ypdf.CommandLine.AppConfig;
 
-public static class Files
+internal static class FilePaths
 {
     private const string EmptyJson = "{}";
 
-    static Files()
+    static FilePaths()
     {
         Config = Path.Combine(Directories.Config, "config.json");
     }
 
-    public static string Config { get; }
+    internal static string Config { get; }
 
-    public static void Prepare()
+    internal static void Prepare()
     {
         PrepareFile(Config, EmptyJson);
+    }
+
+    internal static bool TryPrepare()
+    {
+        try
+        {
+            Prepare();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private static void PrepareFile(string path, string? content = null)

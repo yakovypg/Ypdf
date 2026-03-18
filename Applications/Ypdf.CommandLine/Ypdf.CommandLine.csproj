@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../Config/Ypdf.Paths/Ypdf.Paths.csproj" />
     <ProjectReference Include="../../Core/Ypdf.Core/Ypdf.Core.csproj" />
   </ItemGroup>
 

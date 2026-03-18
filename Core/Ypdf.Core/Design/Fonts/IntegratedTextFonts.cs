@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using iText.IO.Font.Constants;
 using iText.Kernel.Font;
+using Ypdf.Core.Config;
 using Ypdf.Core.Extensions;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.Design.Fonts;
 
@@ -58,7 +58,7 @@ public static class IntegratedTextFonts
 
     private static Dictionary<string, LazyTextFont> LoadFonts()
     {
-        string fontsDirectoryPath = Directories.Fonts;
+        string fontsDirectoryPath = CoreDirectories.Fonts;
         var fonts = new Dictionary<string, LazyTextFont>();
 
         if (!Directory.Exists(fontsDirectoryPath))

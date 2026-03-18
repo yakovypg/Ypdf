@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Globalization;
+using Ypdf.Core.Config;
 using Ypdf.Core.Imaging;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Runtime.Python;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.Tools;
 
@@ -41,7 +41,7 @@ public class CompressImageTool : IMultipleInputTool
         if (!string.IsNullOrEmpty(PythonAlias))
             executor.PythonAlias = PythonAlias;
 
-        string imageCompressorPath = PythonScripts.ImageCompressor;
+        string imageCompressorPath = PythonScriptPaths.ImageCompressor;
         string sizeFactor = ImageCompression.SizeFactor.ToString(CultureInfo.InvariantCulture);
         string qualityFactor = ImageCompression.QualityFactor.ToString(CultureInfo.InvariantCulture);
 
@@ -83,7 +83,7 @@ public class CompressImageTool : IMultipleInputTool
         if (string.IsNullOrEmpty(outputPath))
             outputPath = "\"\"";
 
-        string imageCompressorPath = PythonScripts.ImageCompressor;
+        string imageCompressorPath = PythonScriptPaths.ImageCompressor;
         string inputPathsString = string.Join(" ", inputPaths);
 
         string sizeFactor = ImageCompression.SizeFactor.ToString(CultureInfo.InvariantCulture);

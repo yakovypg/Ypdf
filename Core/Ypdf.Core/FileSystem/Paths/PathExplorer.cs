@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
+using Ypdf.Core.Config;
 using Ypdf.Core.Extensions;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.FileSystem.Paths;
 

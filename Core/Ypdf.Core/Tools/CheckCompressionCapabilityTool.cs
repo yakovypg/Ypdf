@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Ypdf.Core.Compression;
+using Ypdf.Core.Config;
 using Ypdf.Core.FileSystem.Naming;
 using Ypdf.Core.Runtime.Logging;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.Tools;
 
@@ -40,7 +40,7 @@ public class CheckCompressionCapabilityTool : ICheckingTool
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(Directories.Temp);
+        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(CoreDirectories.Temp);
         IList<FileInfo> extractedImages = ExtractImages(inputPath, uniqueDirectory);
 
         IEnumerable<string> extractedImagePaths = extractedImages

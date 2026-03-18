@@ -3,10 +3,10 @@ using System.IO;
 using System.Linq;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
+using Ypdf.Core.Config;
 using Ypdf.Core.Design.Pages;
 using Ypdf.Core.Enumeration;
 using Ypdf.Core.FileSystem.Naming;
-using Ypdf.Paths;
 
 namespace Ypdf.Core.Informing;
 
@@ -69,7 +69,7 @@ public static class PdfInfo
 
         var result = new List<IList<int>>();
 
-        var uniqueFile = new UniqueFile("pdf", Directories.Temp);
+        var uniqueFile = new UniqueFile("pdf", CoreDirectories.Temp);
         string tempFilePath = uniqueFile.GetNext();
 
         using var reader = new PdfReader(inputPath);
