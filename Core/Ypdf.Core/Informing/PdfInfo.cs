@@ -5,7 +5,7 @@ using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using Ypdf.Core.Design.Pages;
 using Ypdf.Core.Enumeration;
-using Ypdf.FileSystem.Naming;
+using Ypdf.Core.FileSystem.Naming;
 using Ypdf.Paths;
 
 namespace Ypdf.Core.Informing;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using iText.Kernel.Pdf;
 using iText.Kernel.Utils;
-using Ypdf.FileSystem.Naming;
+using Ypdf.Core.FileSystem.Naming;
 
 namespace Ypdf.Core.Utils;
 

@@ -62,6 +62,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         isRequired: true,
         valueRestriction: "min 1\n?all pages must be >= 1")
     ]
+    [OptionGroup("paging", "Paging", "Options for configuring paging")]
     internal List<PageRange> Pages { get; set; } = [];
 
     [ValueOption<string>(
@@ -71,6 +72,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         isRequired: true,
         valueRestriction: "!empty\n?text mustn't be empty")
     ]
+    [OptionGroup("appearance", "Appearance", "Options for configuring watermark appearance")]
     internal string Text { get; set; } = string.Empty;
 
     [ValueOption<int>(
@@ -91,6 +93,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 1 100000\n?with must be in [1; 100000]")
     ]
+    [OptionGroup("appearance", "", "")]
     internal float Width { get; set; }
 
     [ValueOption<float>(
@@ -101,6 +104,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 1 100000\n?height must be in [1; 100000]")
     ]
+    [OptionGroup("appearance", "", "")]
     internal float Height { get; set; }
 
     [ValueOption<FloatPoint>(
@@ -108,6 +112,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         shortName: "P",
         description: $"lower left point of the watermark annotation [default={DefaultLowerLeftPoint}] ((X;Y) -> (100;250))")
     ]
+    [OptionGroup("appearance", "", "")]
     internal FloatPoint LowerLeftPoint { get; set; } = FloatPoint.Parse(DefaultLowerLeftPoint);
 
     [ValueOption<float>(
@@ -118,6 +123,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange -100000 100000\n?X-translation must be in [-100000; 100000]")
     ]
+    [OptionGroup("appearance", "", "")]
     internal float XTranslation { get; set; }
 
     [ValueOption<float>(
@@ -128,6 +134,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         addDefaultValueToDescription: true,
         valueRestriction: "inrange -100000 100000\n?Y-translation must be in [-100000; 100000]")
     ]
+    [OptionGroup("appearance", "", "")]
     internal float YTranslation { get; set; }
 
     [ValueOption<string>(

@@ -4,7 +4,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using Ypdf.Core.Design.Pages;
-using Ypdf.Extensions;
+using Ypdf.Core.Extensions;
 
 namespace Ypdf.Core.Tools;
 

@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="../../Config/Ypdf.Paths/Ypdf.Paths.csproj" />
     <ProjectReference Include="../../Core/Ypdf.Core/Ypdf.Core.csproj" />
-    <ProjectReference Include="../../Core/Ypdf.Runtime/Ypdf.Runtime.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using iText.Kernel.Colors;
 using Ypdf.Core;
-using Ypdf.Extensions;
+using Ypdf.Core.Extensions;
 
 namespace Ypdf.CommandLine.Converters;
 

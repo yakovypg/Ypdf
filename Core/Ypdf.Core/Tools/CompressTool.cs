@@ -7,11 +7,11 @@ using iText.Kernel.Pdf;
 using iText.Layout.Element;
 using Ypdf.Core.Compression;
 using Ypdf.Core.Extensions;
+using Ypdf.Core.FileSystem.Naming;
+using Ypdf.Core.FileSystem.Paths;
 using Ypdf.Core.Imaging;
-using Ypdf.FileSystem.Naming;
-using Ypdf.FileSystem.Paths;
+using Ypdf.Core.Runtime.Logging;
 using Ypdf.Paths;
-using Ypdf.Runtime.Logging;
 
 namespace Ypdf.Core.Tools;
 

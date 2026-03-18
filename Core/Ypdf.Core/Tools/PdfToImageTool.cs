@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Ypdf.Extensions;
+using Ypdf.Core.Extensions;
+using Ypdf.Core.Runtime.Logging;
+using Ypdf.Core.Runtime.Python;
 using Ypdf.Paths;
-using Ypdf.Runtime.Logging;
-using Ypdf.Runtime.Python;
 
 namespace Ypdf.Core.Tools;
 

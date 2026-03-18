@@ -1,5 +1,5 @@
 using System;
-using Ypdf.Runtime.Logging;
+using Ypdf.Core.Runtime.Logging;
 
 namespace Ypdf.CommandLine.Informing;
 

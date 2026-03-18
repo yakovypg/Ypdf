@@ -1,6 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="../Ypdf.Extensions/Ypdf.Extensions.csproj" />
-    <ProjectReference Include="../../Config/Ypdf.Paths/Ypdf.Paths.csproj" />
-  </ItemGroup>
-</Project>

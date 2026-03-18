@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Ypdf.Core.Compression;
-using Ypdf.FileSystem.Naming;
+using Ypdf.Core.FileSystem.Naming;
+using Ypdf.Core.Runtime.Logging;
 using Ypdf.Paths;
-using Ypdf.Runtime.Logging;
 
 namespace Ypdf.Core.Tools;
 

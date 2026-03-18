@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
+using Ypdf.Core.Extensions;
 using Ypdf.Core.Utils;
-using Ypdf.Extensions;
 
 namespace Ypdf.Core.Geometry;
 

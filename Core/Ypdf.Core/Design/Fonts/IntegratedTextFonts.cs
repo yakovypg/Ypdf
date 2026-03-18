@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using iText.IO.Font.Constants;
 using iText.Kernel.Font;
-using Ypdf.Extensions;
+using Ypdf.Core.Extensions;
 using Ypdf.Paths;
 
 namespace Ypdf.Core.Design.Fonts;
