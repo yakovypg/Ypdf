@@ -39,7 +39,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: InputPathLongName,
         shortName: "i",
         description: "path to the input file",
-        isRequired: true)
+        isRequired: true,
+        valueRestriction: "fileexists\n&& extension pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
     internal string InputPath { get; set; } = string.Empty;
@@ -58,7 +59,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         shortName: "p",
         description: "page number or page range (N or S-E -> 1 or 3-5)",
         contextCaptureType: ContextCaptureType.OneOrMore,
-        isRequired: true)
+        isRequired: true,
+        valueRestriction: "min 1\n?all pages must be >= 1")
     ]
     internal List<PageRange> Pages { get; set; } = [];
 
@@ -66,7 +68,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: TextLongName,
         shortName: "t",
         description: "watermark annotation text",
-        isRequired: true)
+        isRequired: true,
+        valueRestriction: "!empty\n?text mustn't be empty")
     ]
     internal string Text { get; set; } = string.Empty;
 
@@ -85,7 +88,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: WidthLongName,
         shortName: "w",
         description: "watermark annotation object width",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 100000\n?with must be in [1; 100000]")
     ]
     internal float Width { get; set; }
 
@@ -94,7 +98,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: HeightLongName,
         shortName: "h",
         description: "watermark annotation object height",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 100000\n?height must be in [1; 100000]")
     ]
     internal float Height { get; set; }
 
@@ -110,7 +115,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: XTranslationLongName,
         shortName: "",
         description: "shift of the origin along the X-axis for the watermark annotation",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange -100000 100000\n?X-translation must be in [-100000; 100000]")
     ]
     internal float XTranslation { get; set; }
 
@@ -119,7 +125,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: YTranslationLongName,
         shortName: "",
         description: "shift of the origin along the Y-axis for the watermark annotation",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange -100000 100000\n?Y-translation must be in [-100000; 100000]")
     ]
     internal float YTranslation { get; set; }
 
@@ -127,7 +134,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         defaultValue: "",
         longName: FontPathLongName,
         shortName: "",
-        description: "font path [default=\"\"]")
+        description: "font path [default=\"\"]",
+        valueRestriction: "fileexists\n&& extension ttf\n|| empty\n?font path must point to a .ttf file")
     ]
     [OptionGroup("font", "Font", "Options for configuring watermark annotation font")]
     [MutuallyExclusiveOptionGroup(
@@ -170,7 +178,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: FontSizeLongName,
         shortName: "",
         description: "font size",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 512\n?font size must be in [1; 512]")
     ]
     [OptionGroup("font", "", "")]
     internal float FontSize { get; set; }
@@ -180,7 +189,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: FontOpacityLongName,
         shortName: "",
         description: "font opacity",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 0 1\n?font opacity must be in [0; 1]")
     ]
     [OptionGroup("font", "", "")]
     internal float FontOpacity { get; set; }

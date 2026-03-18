@@ -43,7 +43,8 @@ internal sealed class AddPageNumbersSubcommand
         longName: InputPathLongName,
         shortName: "i",
         description: "path to the input file",
-        isRequired: true)
+        isRequired: true,
+        valueRestriction: "fileexists\n&& extension pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
     internal string InputPath { get; set; } = string.Empty;
@@ -157,7 +158,8 @@ internal sealed class AddPageNumbersSubcommand
         defaultValue: "",
         longName: FontPathLongName,
         shortName: "",
-        description: "page number font path [default=\"\"]")
+        description: "page number font path [default=\"\"]",
+        valueRestriction: "fileexists\n&& extension ttf\n|| empty\n?font path must point to a .ttf file")
     ]
     [OptionGroup("font", "Font", "Options for configuring page number font")]
     [MutuallyExclusiveOptionGroup(
@@ -200,7 +202,8 @@ internal sealed class AddPageNumbersSubcommand
         longName: FontSizeLongName,
         shortName: "",
         description: "page number font size",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 512\n?font size must be in [1; 512]")
     ]
     [OptionGroup("font", "", "")]
     internal float FontSize { get; set; }
@@ -210,7 +213,8 @@ internal sealed class AddPageNumbersSubcommand
         longName: FontOpacityLongName,
         shortName: "",
         description: "page number font opacity",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 0 1\n?font opacity must be in [0; 1]")
     ]
     [OptionGroup("font", "", "")]
     internal float FontOpacity { get; set; }

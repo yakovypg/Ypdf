@@ -47,7 +47,8 @@ internal sealed class AddWatermarkSubcommand
         longName: InputPathLongName,
         shortName: "i",
         description: "path to the input file",
-        isRequired: true)
+        isRequired: true,
+        valueRestriction: "fileexists\n&& extension pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
     internal string InputPath { get; set; } = string.Empty;
@@ -66,7 +67,8 @@ internal sealed class AddWatermarkSubcommand
         shortName: "p",
         description: "page number or page range (N or S-E -> 1 or 3-5)",
         contextCaptureType: ContextCaptureType.OneOrMore,
-        isRequired: true)
+        isRequired: true,
+        valueRestriction: "min 1\n?all pages must be >= 1")
     ]
     [OptionGroup("paging", "Paging", "Options for configuring paging")]
     internal List<PageRange> Pages { get; set; } = [];
@@ -75,7 +77,8 @@ internal sealed class AddWatermarkSubcommand
         longName: TextLongName,
         shortName: "t",
         description: "watermark text",
-        isRequired: true)
+        isRequired: true,
+        valueRestriction: "!empty\n?text mustn't be empty")
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring watermark appearance")]
     internal string Text { get; set; } = string.Empty;
@@ -95,7 +98,8 @@ internal sealed class AddWatermarkSubcommand
         longName: WidthLongName,
         shortName: "w",
         description: "watermark object width",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 100000\n?with must be in [1; 100000]")
     ]
     [OptionGroup("appearance", "", "")]
     internal float Width { get; set; }
@@ -105,7 +109,8 @@ internal sealed class AddWatermarkSubcommand
         longName: HeightLongName,
         shortName: "h",
         description: "watermark object height",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 100000\n?height must be in [1; 100000]")
     ]
     [OptionGroup("appearance", "", "")]
     internal float Height { get; set; }
@@ -165,7 +170,8 @@ internal sealed class AddWatermarkSubcommand
         longName: BorderOpacityLongName,
         shortName: "",
         description: "border opacity",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 0 1\n?border opacity must be in [0; 1]")
     ]
     [OptionGroup("border", "", "")]
     internal float BorderOpacity { get; set; }
@@ -175,7 +181,8 @@ internal sealed class AddWatermarkSubcommand
         longName: BorderThicknessLongName,
         shortName: "",
         description: "border thickness",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 100000\n?border thickness must be in [1; 100000]")
     ]
     [OptionGroup("border", "", "")]
     internal float BorderThickness { get; set; }
@@ -209,7 +216,8 @@ internal sealed class AddWatermarkSubcommand
         defaultValue: "",
         longName: FontPathLongName,
         shortName: "",
-        description: "font path [default=\"\"]")
+        description: "font path [default=\"\"]",
+        valueRestriction: "fileexists\n&& extension ttf\n|| empty\n?font path must point to a .ttf file")
     ]
     [OptionGroup("font", "Font", "Options for configuring font")]
     [MutuallyExclusiveOptionGroup(
@@ -252,7 +260,8 @@ internal sealed class AddWatermarkSubcommand
         longName: FontSizeLongName,
         shortName: "",
         description: "font size",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 512\n?font size must be in [1; 512]")
     ]
     [OptionGroup("font", "", "")]
     internal float FontSize { get; set; }
@@ -262,7 +271,8 @@ internal sealed class AddWatermarkSubcommand
         longName: FontOpacityLongName,
         shortName: "",
         description: "font opacity",
-        addDefaultValueToDescription: true)
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 0 1\n?font opacity must be in [0; 1]")
     ]
     [OptionGroup("font", "", "")]
     internal float FontOpacity { get; set; }
