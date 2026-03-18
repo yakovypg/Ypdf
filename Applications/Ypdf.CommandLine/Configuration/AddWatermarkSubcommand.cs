@@ -221,8 +221,8 @@ internal sealed class AddWatermarkSubcommand
     ]
     [OptionGroup("font", "Font", "Options for configuring font")]
     [MutuallyExclusiveOptionGroup(
-        $"{nameof(AddWatermarkSubcommand)}.FontConfig",
-        "font config",
+        $"{nameof(AddWatermarkSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
+        "Font Path",
         $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
     ]
     internal string FontPath { get; set; } = string.Empty;
@@ -303,7 +303,11 @@ internal sealed class AddWatermarkSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
-    [MutuallyExclusiveOptionGroup($"{nameof(AddWatermarkSubcommand)}.FontConfig", "", "")]
+    [MutuallyExclusiveOptionGroup(
+        $"{nameof(AddWatermarkSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
+        "",
+        "")
+    ]
     internal string FontFamily { get; set; } = string.Empty;
 
     [ValueOption<Color>(

@@ -59,9 +59,14 @@ internal sealed class CompressImagesSubcommand
     ]
     [OptionGroup("compression", "", "")]
     [MutuallyExclusiveOptionGroup(
-        $"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}",
-        "size factor",
-        $"{nameof(SizeFactor)} cannot be used with the {nameof(Width)} and {nameof(Height)}")
+        $"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Width)}",
+        $"{nameof(SizeFactor)}-{nameof(Width)}",
+        $"{nameof(SizeFactor)} cannot be used with the {nameof(Width)}")
+    ]
+    [MutuallyExclusiveOptionGroup(
+        $"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Height)}",
+        $"{nameof(SizeFactor)}-{nameof(Height)}",
+        $"{nameof(SizeFactor)} cannot be used with the {nameof(Height)}")
     ]
     internal float SizeFactor { get; set; }
 
@@ -72,7 +77,7 @@ internal sealed class CompressImagesSubcommand
         valueRestriction: "inrange 1 100000\n?output image with must be in [1; 100000]")
     ]
     [OptionGroup("compression", "", "")]
-    [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}", "", "")]
+    [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Width)}", "", "")]
     internal int? Width { get; set; }
 
     [ValueOption<int>(
@@ -82,7 +87,7 @@ internal sealed class CompressImagesSubcommand
         valueRestriction: "inrange 1 100000\n?output image height must be in [1; 100000]")
     ]
     [OptionGroup("compression", "", "")]
-    [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}", "", "")]
+    [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Height)}", "", "")]
     internal int? Height { get; set; }
 
     [ValueOption<string>(

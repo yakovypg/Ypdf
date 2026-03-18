@@ -146,8 +146,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
     ]
     [OptionGroup("font", "Font", "Options for configuring watermark annotation font")]
     [MutuallyExclusiveOptionGroup(
-        $"{nameof(AddWatermarkAnnotationSubcommand)}.FontConfig",
-        "font config",
+        $"{nameof(AddWatermarkAnnotationSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
+        "Font Path",
         $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
     ]
     internal string FontPath { get; set; } = string.Empty;
@@ -228,7 +228,11 @@ internal sealed class AddWatermarkAnnotationSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
-    [MutuallyExclusiveOptionGroup($"{nameof(AddWatermarkAnnotationSubcommand)}.FontConfig", "", "")]
+    [MutuallyExclusiveOptionGroup(
+        $"{nameof(AddWatermarkAnnotationSubcommand)}.{nameof(FontPath)}-{nameof(FontFamily)}",
+        "",
+        "")
+    ]
     internal string FontFamily { get; set; } = string.Empty;
 
     [ValueOption<Color>(
