@@ -70,7 +70,7 @@ internal sealed class CompressSubcommand
     [FlagOption(
         longName: DisableCompressionCapabilityCheckLongName,
         shortName: "",
-        description: "disables compression capability check")
+        description: "disable compression capability check")
     ]
     [OptionGroup("compression", "", "")]
     internal bool DisableCompressionCapabilityCheck { get; set; }
