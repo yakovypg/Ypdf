@@ -26,8 +26,8 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { ImagesToPdfSubcommand.Name, new ImagesToPdfToolCreator() },*/
             { MergeSubcommand.Name, new MergeToolCreator() },
             { MovePageSubcommand.Name, new MovePageToolCreator() },
-            /*{ RemovePagesSubcommand.Name, new RemovePageToolCreator() },
-            { RemovePasswordSubcommand.Name, new RemovePasswordToolCreator() },
+            { RemovePagesSubcommand.Name, new RemovePageToolCreator() },
+            /*{ RemovePasswordSubcommand.Name, new RemovePasswordToolCreator() },
             { RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator() },
             { ReorderPagesSubcommand.Name, new ReorderPagesToolCreator() },
             { RotatePagesSubcommand.Name, new RotatePagesToolCreator() },
