@@ -23,9 +23,9 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { DividePageSubcommand.Name, new DividePageToolCreator() },
             /*{ ExtractImagesSubcommand.Name, new ExtractImagesToolCreator() },
             { ExtractTextSubcommand.Name, new ExtractTextToolCreator() },
-            { ImagesToPdfSubcommand.Name, new ImagesToPdfToolCreator() },
+            { ImagesToPdfSubcommand.Name, new ImagesToPdfToolCreator() },*/
             { MergeSubcommand.Name, new MergeToolCreator() },
-            { MovePageSubcommand.Name, new MovePageToolCreator() },
+            /*{ MovePageSubcommand.Name, new MovePageToolCreator() },
             { RemovePagesSubcommand.Name, new RemovePagesToolCreator() },
             { RemovePasswordSubcommand.Name, new RemovePasswordToolCreator() },
             { RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator() },
