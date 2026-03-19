@@ -14,6 +14,9 @@ internal sealed class YpdfParserConfig
     [Subcommand(AddWatermarkSubcommand.Name, AddWatermarkSubcommand.Description)]
     internal AddWatermarkSubcommand AddWatermarkSubcommand { get; } = new();
 
+    [Subcommand(CheckCompressionCapabilitySubcommand.Name, CheckCompressionCapabilitySubcommand.Description)]
+    internal CheckCompressionCapabilitySubcommand CheckCompressionCapabilitySubcommand { get; } = new();
+
     [Subcommand(CompressImagesSubcommand.Name, CompressImagesSubcommand.Description)]
     internal CompressImagesSubcommand CompressImagesSubcommand { get; } = new();
 

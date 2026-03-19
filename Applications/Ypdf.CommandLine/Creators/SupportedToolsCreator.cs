@@ -14,6 +14,7 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { AddPageNumbersSubcommand.Name, new AddPageNumbersToolCreator() },
             { AddWatermarkAnnotationSubcommand.Name, new AddWatermarkAnnotationToolCreator() },
             { AddWatermarkSubcommand.Name, new AddWatermarkToolCreator() },
+            { CheckCompressionCapabilitySubcommand.Name, new CheckCompressionCapabilityToolCreator() },
             { CompressImagesSubcommand.Name, new CompressImageToolCreator() },
             { CompressSubcommand.Name, new CompressToolCreator() },
             /*{ ConfigSubcommand.Name, new ConfigToolCreator() },

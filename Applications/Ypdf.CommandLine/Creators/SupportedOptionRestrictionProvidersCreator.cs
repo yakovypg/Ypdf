@@ -13,6 +13,7 @@ internal sealed class SupportedOptionRestrictionProvidersCreator : ISupportedOpt
             { AddPageNumbersSubcommand.Name, new AddPageNumbersSubcommandOptionRestrictions() },
             { AddWatermarkAnnotationSubcommand.Name, new AddWatermarkAnnotationSubcommandOptionRestrictions() },
             { AddWatermarkSubcommand.Name, new AddWatermarkSubcommandOptionRestrictions() },
+            { CheckCompressionCapabilitySubcommand.Name, new CheckCompressionCapabilitySubcommandOptionRestrictions() },
             { CompressImagesSubcommand.Name, new CompressImagesSubcommandOptionRestrictions() },
             { CompressSubcommand.Name, new CompressSubcommandOptionRestrictions() },
             { ConfigSubcommand.Name, new ConfigSubcommandOptionRestrictions() },
