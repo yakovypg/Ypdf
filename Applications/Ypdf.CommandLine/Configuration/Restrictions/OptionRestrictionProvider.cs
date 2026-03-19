@@ -43,6 +43,17 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         return value => value.X >= minX && value.Y >= minY;
     }
 
+    protected static Predicate<T> CreatePageCroppingCorrectPredicate<T>(float minX, float minY, int minPage = 1)
+        where T : IEnumerable<PageCropping>
+    {
+        return shifts => shifts.All(t =>
+            t.LowerLeft.X >= minX &&
+            t.LowerLeft.Y >= minY &&
+            t.UpperRight.X >= minX &&
+            t.UpperRight.Y >= minY &&
+            t.PageNumber >= minPage);
+    }
+
     protected static IValueOption<T> FindOption<T>(Subcommand subcommand, string longName)
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
@@ -107,6 +118,27 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
             subcommand,
             optionLongName,
             CreateFloatPointCorrectPredicate(minX, minY),
+            badValueMessage);
+    }
+
+    protected static void AddRestrictionForPageCroppingsOption<T>(
+        Subcommand subcommand,
+        string optionLongName,
+        float minX = 0,
+        float minY = 0,
+        int minPage = 1)
+        where T : IEnumerable<PageCropping>
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
+
+        string badValueReason = $"all pages must be >= {minPage}";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            optionLongName,
+            CreatePageCroppingCorrectPredicate<T>(minX, minY, minPage),
             badValueMessage);
     }
 }
