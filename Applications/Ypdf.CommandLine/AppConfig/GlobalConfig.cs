@@ -46,11 +46,16 @@ internal sealed class GlobalConfig
         }
     }
 
+    internal string Serialize()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
     internal void Save(string filePath)
     {
         ExtendedArgumentException.ThrowIfNullOrEmpty(filePath, nameof(filePath));
 
-        string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+        string json = Serialize();
         File.WriteAllText(filePath, json);
     }
 
@@ -58,5 +63,13 @@ internal sealed class GlobalConfig
     {
         other ??= new GlobalConfig();
         PythonAlias = other.PythonAlias;
+    }
+
+    internal GlobalConfig Copy()
+    {
+        return new GlobalConfig()
+        {
+            PythonAlias = PythonAlias
+        };
     }
 }
