@@ -14,6 +14,11 @@ internal sealed class AddWatermarkSubcommandOptionRestrictions : OptionRestricti
     private static void AddRestrictionForLowerLeftPointOption(Subcommand subcommand)
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
-        AddRestrictionForFloatPointOption(subcommand, AddWatermarkSubcommand.LowerLeftPointLongName, 0, 0);
+
+        AddRestrictionForFloatPointOption(
+            subcommand: subcommand,
+            optionLongName: AddWatermarkSubcommand.LowerLeftPointLongName,
+            minX: 0,
+            minY: 0);
     }
 }
