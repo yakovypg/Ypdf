@@ -23,7 +23,7 @@ internal sealed class CompressImagesSubcommand
         description: "paths to the input files",
         isRequired: true,
         contextCaptureType: ContextCaptureType.OneOrMore,
-        valueRestriction: "fileexists\n&& extension jpg jpeg png bmp gif tiff" +
+        valueRestriction: "file jpg jpeg png bmp gif tiff" +
             "\n?input paths must point to a .jpg|.jpeg|.png|.bmp|.gif|.tiff file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]

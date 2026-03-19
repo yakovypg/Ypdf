@@ -40,7 +40,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         shortName: "i",
         description: "path to the input file",
         isRequired: true,
-        valueRestriction: "fileexists\n&& extension pdf\n?input path must point to a .pdf file")
+        valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
     internal string InputPath { get; set; } = string.Empty;
@@ -142,7 +142,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: FontPathLongName,
         shortName: "",
         description: "font path [default=\"\"]",
-        valueRestriction: "fileexists\n&& extension ttf\n|| empty\n?font path must point to a .ttf file")
+        valueRestriction: "file ttf\n|| empty\n?font path must point to a .ttf file")
     ]
     [OptionGroup("font", "Font", "Options for configuring watermark annotation font")]
     [MutuallyExclusiveOptionGroup(
