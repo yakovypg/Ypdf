@@ -26,13 +26,15 @@ public class CheckCompressionCapabilityTool : ICheckingTool
     public void Execute(string inputPath, string outputPath)
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
-        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(outputPath, nameof(outputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
         bool checkResult = Execute(inputPath);
         string resultContent = checkResult.ToString();
 
-        File.WriteAllText(outputPath, resultContent);
+        if (string.IsNullOrWhiteSpace(outputPath))
+            OutputWriter?.WriteLine(resultContent);
+        else
+            File.WriteAllText(outputPath, resultContent);
     }
 
     public bool Execute(string inputPath)
