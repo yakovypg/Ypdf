@@ -90,7 +90,8 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
             new ValueConverter<Color>(ColorConverter.Parse),
             new MultipleValueConverter<PageRange>(PageRange.Parse),
             new ValueConverter<FloatPoint>(FloatPoint.Parse),
-            new MultipleValueConverter<PageCropping>(PageCropping.ParseMany)
+            new MultipleValueConverter<PageCropping>(PageCropping.ParseMany),
+            new MultipleValueConverter<PageDivision>(PageDivision.ParseMany)
         ];
     }
 }

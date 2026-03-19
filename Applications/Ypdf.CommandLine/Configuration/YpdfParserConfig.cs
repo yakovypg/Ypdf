@@ -29,11 +29,11 @@ internal sealed class YpdfParserConfig
     [Subcommand(CopySubcommand.Name, CopySubcommand.Description)]
     internal CopySubcommand CopySubcommand { get; } = new();
 
-    [Subcommand(CropPagesSubcommand.Name, CropPagesSubcommand.Description)]
-    internal CropPagesSubcommand CropPagesSubcommand { get; } = new();
+    [Subcommand(CropPageSubcommand.Name, CropPageSubcommand.Description)]
+    internal CropPageSubcommand CropPageSubcommand { get; } = new();
 
-    [Subcommand(DividePagesSubcommand.Name, DividePagesSubcommand.Description)]
-    internal DividePagesSubcommand DividePagesSubcommand { get; } = new();
+    [Subcommand(DividePageSubcommand.Name, DividePageSubcommand.Description)]
+    internal DividePageSubcommand DividePageSubcommand { get; } = new();
 
     [Subcommand(ExtractImagesSubcommand.Name, ExtractImagesSubcommand.Description)]
     internal ExtractImagesSubcommand ExtractImagesSubcommand { get; } = new();

@@ -4,15 +4,15 @@ using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
 
-internal sealed class CropPageToolCreator : IToolCreator
+internal sealed class DividePageToolCreator : IToolCreator
 {
     public IToolExecutionProvider Create(YpdfParserConfig config)
     {
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
-        CropPageSubcommand subcommand = config.CropPageSubcommand;
+        DividePageSubcommand subcommand = config.DividePageSubcommand;
 
-        var tool = new CropPageTool(subcommand.PageCroppings);
+        var tool = new DividePageTool(subcommand.PageDivisions);
 
         return new ToolExecutionProvider(
             tool,
