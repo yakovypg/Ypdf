@@ -11,8 +11,7 @@ internal sealed class CopyToolCreator : IToolCreator
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
         CopySubcommand subcommand = config.CopySubcommand;
-
-        var tool = new CopyTool();
+        CopyTool tool = new();
 
         return new ToolExecutionProvider(
             tool,

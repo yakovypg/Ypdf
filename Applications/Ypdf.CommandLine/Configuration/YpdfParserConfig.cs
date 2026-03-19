@@ -18,7 +18,7 @@ internal sealed class YpdfParserConfig
     internal CheckCompressionCapabilitySubcommand CheckCompressionCapabilitySubcommand { get; } = new();
 
     [Subcommand(CompressImagesSubcommand.Name, CompressImagesSubcommand.Description)]
-    internal CompressImagesSubcommand CompressImagesSubcommand { get; } = new();
+    internal CompressImagesSubcommand CompressImageSubcommand { get; } = new();
 
     [Subcommand(CompressSubcommand.Name, CompressSubcommand.Description)]
     internal CompressSubcommand CompressSubcommand { get; } = new();
@@ -29,11 +29,11 @@ internal sealed class YpdfParserConfig
     [Subcommand(CopySubcommand.Name, CopySubcommand.Description)]
     internal CopySubcommand CopySubcommand { get; } = new();
 
-    [Subcommand(CropPageSubcommand.Name, CropPageSubcommand.Description)]
-    internal CropPageSubcommand CropPageSubcommand { get; } = new();
+    [Subcommand(CropPagesSubcommand.Name, CropPagesSubcommand.Description)]
+    internal CropPagesSubcommand CropPageSubcommand { get; } = new();
 
-    [Subcommand(DividePageSubcommand.Name, DividePageSubcommand.Description)]
-    internal DividePageSubcommand DividePageSubcommand { get; } = new();
+    [Subcommand(DividePagesSubcommand.Name, DividePagesSubcommand.Description)]
+    internal DividePagesSubcommand DividePageSubcommand { get; } = new();
 
     [Subcommand(ExtractImagesSubcommand.Name, ExtractImagesSubcommand.Description)]
     internal ExtractImagesSubcommand ExtractImagesSubcommand { get; } = new();
@@ -51,7 +51,7 @@ internal sealed class YpdfParserConfig
     internal MovePageSubcommand MovePageSubcommand { get; } = new();
 
     [Subcommand(RemovePagesSubcommand.Name, RemovePagesSubcommand.Description)]
-    internal RemovePagesSubcommand RemovePagesSubcommand { get; } = new();
+    internal RemovePagesSubcommand RemovePageSubcommand { get; } = new();
 
     [Subcommand(RemovePasswordSubcommand.Name, RemovePasswordSubcommand.Description)]
     internal RemovePasswordSubcommand RemovePasswordSubcommand { get; } = new();

@@ -11,8 +11,7 @@ internal sealed class MergeToolCreator : IToolCreator
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
         MergeSubcommand subcommand = config.MergeSubcommand;
-
-        var tool = new MergeTool();
+        MergeTool tool = new();
 
         return new ToolExecutionProvider(
             tool,

@@ -18,7 +18,7 @@ internal sealed class CropPagesSubcommandOptionRestrictions : OptionRestrictionP
 
         AddRestrictionForPageCroppingsOption<List<PageCropping>>(
             subcommand: subcommand,
-            optionLongName: CropPageSubcommand.PageCroppingsLongName,
+            optionLongName: CropPagesSubcommand.PageCroppingsLongName,
             minX: 0,
             minY: 0,
             minPage: 1);

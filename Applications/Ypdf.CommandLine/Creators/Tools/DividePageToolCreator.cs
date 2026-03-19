@@ -10,9 +10,8 @@ internal sealed class DividePageToolCreator : IToolCreator
     {
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
-        DividePageSubcommand subcommand = config.DividePageSubcommand;
-
-        var tool = new DividePageTool(subcommand.PageDivisions);
+        DividePagesSubcommand subcommand = config.DividePageSubcommand;
+        DividePageTool tool = new(subcommand.PageDivisions);
 
         return new ToolExecutionProvider(
             tool,

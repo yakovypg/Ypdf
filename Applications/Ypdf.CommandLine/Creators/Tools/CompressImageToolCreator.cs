@@ -13,7 +13,7 @@ internal sealed class CompressImageToolCreator : IToolCreator
     {
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
-        CompressImagesSubcommand subcommand = config.CompressImagesSubcommand;
+        CompressImagesSubcommand subcommand = config.CompressImageSubcommand;
 
         var imageCompression = subcommand.Width is not null && subcommand.Height is not null
             ? new ImageCompression(

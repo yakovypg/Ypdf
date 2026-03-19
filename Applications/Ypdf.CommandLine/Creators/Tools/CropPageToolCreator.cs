@@ -10,9 +10,8 @@ internal sealed class CropPageToolCreator : IToolCreator
     {
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
-        CropPageSubcommand subcommand = config.CropPageSubcommand;
-
-        var tool = new CropPageTool(subcommand.PageCroppings);
+        CropPagesSubcommand subcommand = config.CropPageSubcommand;
+        CropPageTool tool = new(subcommand.PageCroppings);
 
         return new ToolExecutionProvider(
             tool,
