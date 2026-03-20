@@ -31,8 +31,8 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             /*{ RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator() },*/
             { ReorderPagesSubcommand.Name, new ReorderPagesToolCreator() },
             { RotatePagesSubcommand.Name, new RotatePagesToolCreator() },
-            /*{ SetPasswordSubcommand.Name, new SetPasswordToolCreator() },
-            { SplitSubcommand.Name, new SplitToolCreator() },
+            { SetPasswordSubcommand.Name, new SetPasswordToolCreator() },
+            /*{ SplitSubcommand.Name, new SplitToolCreator() },
             { TextToPdfSubcommand.Name, new TextToPdfToolCreator() },*/
         };
     }
