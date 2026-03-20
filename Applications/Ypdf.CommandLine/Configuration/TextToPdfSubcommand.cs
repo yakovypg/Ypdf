@@ -35,7 +35,7 @@ internal sealed class TextToPdfSubcommand
         shortName: "i",
         description: "path to the input file",
         isRequired: true,
-        valueRestriction: "file pdf\n?input path must point to a .pdf file")
+        valueRestriction: "fileexists\n?input path must point to an existing file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
     internal string InputPath { get; set; } = string.Empty;

@@ -18,7 +18,7 @@ internal sealed class MergeSubcommand
         description: "paths to the input files",
         isRequired: true,
         contextCaptureType: ContextCaptureType.OneOrMore,
-        valueRestriction: "file pdf\n?input path must point to a .pdf file")
+        valueRestriction: "file pdf\n?all input paths must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
     internal List<string> InputPaths { get; set; } = [];

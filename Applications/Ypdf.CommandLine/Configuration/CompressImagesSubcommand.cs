@@ -24,7 +24,7 @@ internal sealed class CompressImagesSubcommand
         isRequired: true,
         contextCaptureType: ContextCaptureType.OneOrMore,
         valueRestriction: "file jpg jpeg png bmp gif tiff" +
-            "\n?input paths must point to a .jpg|.jpeg|.png|.bmp|.gif|.tiff file")
+            "\n?all input paths must point to a .jpg|.jpeg|.png|.bmp|.gif|.tiff file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
     internal List<string> InputPaths { get; set; } = [];
