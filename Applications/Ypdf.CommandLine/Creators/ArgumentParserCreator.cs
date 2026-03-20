@@ -95,7 +95,8 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
             new MultipleValueConverter<PageDivision>(PageDivision.ParseMany),
             new ValueConverter<PageOrder>(PageOrder.Parse),
             new MultipleValueConverter<PageRotation>(PageRotation.ParseMany),
-            new ValueConverter<EncryptionAlgorithm>(EncryptionAlgorithm.Parse)
+            new ValueConverter<EncryptionAlgorithm>(EncryptionAlgorithm.Parse),
+            new ValueConverter<MathExpression>(MathExpression.Parse)
         ];
     }
 }
