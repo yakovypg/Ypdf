@@ -9,7 +9,7 @@ internal sealed class ExtractImagesSubcommand
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";
-    internal const string ExtractedImagesLimitLongName = "limit";
+    internal const string MaxNumberOfImagesToExtractLongName = "limit";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -32,12 +32,12 @@ internal sealed class ExtractImagesSubcommand
 
     [ValueOption<int>(
         defaultValue: 0,
-        longName: ExtractedImagesLimitLongName,
+        longName: MaxNumberOfImagesToExtractLongName,
         shortName: "l",
         description: "maximum number of images that will be extracted. Zero indicates no limitation",
         addDefaultValueToDescription: true,
-        valueRestriction: "min 0\n?extracted images limit must be non-negative")
+        valueRestriction: "min 0\n?maximum number of images must be non-negative")
     ]
-    [OptionGroup("paths", "", "")]
-    internal int ExtractedImagesLimit { get; set; }
+    [OptionGroup("extraction", "Extraction", "Options for configuring image extraction")]
+    internal int MaxNumberOfImagesToExtract { get; set; }
 }

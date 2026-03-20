@@ -21,7 +21,7 @@ internal sealed class ExtractImagesToolCreator : ToolCreator
         string? pythonAlias = Config.PythonAlias;
         IOutputWriter outputWriter = Config.OutputWriter;
 
-        PdfToImageTool tool = new(pythonAlias, subcommand.ExtractedImagesLimit, outputWriter);
+        PdfToImageTool tool = new(pythonAlias, subcommand.MaxNumberOfImagesToExtract, outputWriter);
 
         return new ToolExecutionProvider(
             tool,
