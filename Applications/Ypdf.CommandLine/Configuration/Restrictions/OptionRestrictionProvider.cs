@@ -5,6 +5,7 @@ using NetArgumentParser.Options;
 using NetArgumentParser.Options.Configuration;
 using NetArgumentParser.Subcommands;
 using Ypdf.Core.Design.Pages;
+using Ypdf.Core.Enumeration;
 using Ypdf.Core.Geometry;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
@@ -46,12 +47,51 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
     protected static Predicate<T> CreatePageCroppingCorrectPredicate<T>(float minX, float minY, int minPage = 1)
         where T : IEnumerable<PageCropping>
     {
-        return shifts => shifts.All(t =>
+        return croppings => croppings.All(t =>
             t.LowerLeft.X >= minX &&
             t.LowerLeft.Y >= minY &&
             t.UpperRight.X >= minX &&
             t.UpperRight.Y >= minY &&
             t.PageNumber >= minPage);
+    }
+
+    protected static Predicate<T> CreatePageDivisionCorrectPredicate<T>(int minPage = 1)
+        where T : IEnumerable<PageDivision>
+    {
+        return divisions => divisions.All(t => t.PageNumber >= minPage);
+    }
+
+    protected static Predicate<PageOrder> CreatePageOrderCorrectPredicate(int minPage = 1)
+    {
+        return pageOrder => pageOrder.Pages.All(t => t >= minPage);
+    }
+
+    protected static Predicate<T> CreatePageRotationCorrectPredicate<T>(int minPage = 1)
+        where T : IEnumerable<PageRotation>
+    {
+        return rotations => rotations.All(t => t.PageNumber >= minPage);
+    }
+
+    protected static Predicate<T> CreatePageRangeCorrectPredicate<T>(int minPage = 1)
+        where T : IEnumerable<PageRange>
+    {
+        return ranges => ranges.All(t => t.Start >= minPage);
+    }
+
+    protected static Predicate<MathExpression> CreateLongMathExpressionCorrectPredicate()
+    {
+        return expression =>
+        {
+            try
+            {
+                _ = expression.CalculateLong();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        };
     }
 
     protected static IValueOption<T> FindOption<T>(Subcommand subcommand, string longName)
@@ -132,13 +172,108 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
-        string badValueReason = $"all pages must be >= {minPage}";
+        string badValueReason = $"all pages must be >= {minPage}, " +
+            $"X-coordinates of all points must be >= {minX}, " +
+            $"Y-coordinates of all points must be >= {minY}";
+
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
             subcommand,
             optionLongName,
             CreatePageCroppingCorrectPredicate<T>(minX, minY, minPage),
+            badValueMessage);
+    }
+
+    protected static void AddRestrictionForPageDivisionsOption<T>(
+        Subcommand subcommand,
+        string optionLongName,
+        int minPage = 1)
+        where T : IEnumerable<PageDivision>
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
+
+        string badValueReason = $"all pages must be >= {minPage}";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            optionLongName,
+            CreatePageDivisionCorrectPredicate<T>(minPage),
+            badValueMessage);
+    }
+
+    protected static void AddRestrictionForPageOrderOption(
+        Subcommand subcommand,
+        string optionLongName,
+        int minPage = 1)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
+
+        string badValueReason = $"all pages must be >= {minPage}";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            optionLongName,
+            CreatePageOrderCorrectPredicate(minPage),
+            badValueMessage);
+    }
+
+    protected static void AddRestrictionForPageRotationsOption<T>(
+        Subcommand subcommand,
+        string optionLongName,
+        int minPage = 1)
+        where T : IEnumerable<PageRotation>
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
+
+        string badValueReason = $"all pages must be >= {minPage}";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            optionLongName,
+            CreatePageRotationCorrectPredicate<T>(minPage),
+            badValueMessage);
+    }
+
+    protected static void AddRestrictionForSplitPartsOption<T>(
+        Subcommand subcommand,
+        string optionLongName,
+        int minPage = 1)
+        where T : IEnumerable<PageRange>
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
+
+        string badValueReason = $"all pages must be >= {minPage}";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            optionLongName,
+            CreatePageRangeCorrectPredicate<T>(minPage),
+            badValueMessage);
+    }
+
+    protected static void AddRestrictionForSplitPartSizeExpressionOption(
+        Subcommand subcommand,
+        string optionLongName)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
+
+        string badValueReason = "expression must be correct";
+        string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
+
+        AddRestriction(
+            subcommand,
+            optionLongName,
+            CreateLongMathExpressionCorrectPredicate(),
             badValueMessage);
     }
 }

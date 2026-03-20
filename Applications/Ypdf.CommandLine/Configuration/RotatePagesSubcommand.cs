@@ -12,7 +12,7 @@ internal sealed class RotatePagesSubcommand
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";
-    internal const string PageCroppingsLongName = "rotation";
+    internal const string PageRotationsLongName = "rotation";
 
     [ValueOption<string>(
         longName: InputPathLongName,
@@ -34,7 +34,7 @@ internal sealed class RotatePagesSubcommand
     internal string OutputPath { get; set; } = string.Empty;
 
     [MultipleValueOption<PageRotation>(
-        longName: PageCroppingsLongName,
+        longName: PageRotationsLongName,
         shortName: "r",
         description: "page rotations (Pages:Angle -> 1:-90 or 1,3-5:90)",
         contextCaptureType: ContextCaptureType.OneOrMore,

@@ -67,8 +67,7 @@ internal sealed class AddWatermarkSubcommand
         shortName: "p",
         description: "page number or page range (N or S-E -> 1 or 3-5)",
         contextCaptureType: ContextCaptureType.OneOrMore,
-        isRequired: true,
-        valueRestriction: "min 1\n?all pages must be >= 1")
+        isRequired: true)
     ]
     [OptionGroup("paging", "Paging", "Options for configuring paging")]
     internal List<PageRange> Pages { get; set; } = [];

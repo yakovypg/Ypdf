@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NetArgumentParser.Subcommands;
+using Ypdf.Core.Enumeration;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
@@ -8,8 +9,19 @@ internal sealed class AddWatermarkAnnotationSubcommandOptionRestrictions : Optio
 {
     protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
     [
+        AddRestrictionForPagesOption,
         AddRestrictionForLowerLeftPointOption
     ];
+
+    private static void AddRestrictionForPagesOption(Subcommand subcommand)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+
+        AddRestrictionForSplitPartsOption<List<PageRange>>(
+            subcommand: subcommand,
+            optionLongName: AddWatermarkAnnotationSubcommand.PagesLongName,
+            minPage: 1);
+    }
 
     private static void AddRestrictionForLowerLeftPointOption(Subcommand subcommand)
     {

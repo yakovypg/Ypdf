@@ -39,8 +39,7 @@ internal sealed class SplitSubcommand
         longName: SplitPartsLongName,
         shortName: "p",
         description: "split parts represented by page number or page range (N or S-E -> 1 or 3-5)",
-        contextCaptureType: ContextCaptureType.OneOrMore,
-        valueRestriction: "min 1\n?all pages must be >= 1")
+        contextCaptureType: ContextCaptureType.OneOrMore)
     ]
     [OptionGroup("paging", "Paging", "Options for configuring paging")]
     internal List<PageRange> SplitParts { get; set; } = [];
