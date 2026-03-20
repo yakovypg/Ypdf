@@ -17,7 +17,7 @@ internal sealed class SplitSubcommandOptionRestrictions : OptionRestrictionProvi
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForSplitPartsOption<List<PageRange>>(
+        AddRestrictionForPageRangeEnumerableOption<List<PageRange>>(
             subcommand: subcommand,
             optionLongName: SplitSubcommand.SplitPartsLongName,
             minPage: 1);
@@ -27,7 +27,7 @@ internal sealed class SplitSubcommandOptionRestrictions : OptionRestrictionProvi
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForSplitPartSizeExpressionOption(
+        AddRestrictionForLongMathExpressionOption(
             subcommand: subcommand,
             optionLongName: SplitSubcommand.SplitPartSizeExpressionLongName);
     }

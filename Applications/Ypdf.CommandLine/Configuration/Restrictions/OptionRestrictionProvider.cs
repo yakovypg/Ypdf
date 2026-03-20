@@ -33,32 +33,56 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         return $"Value of '{optionName}' is incorrect{reason}";
     }
 
-    protected static Predicate<T> CreatePageContentShiftCorrectPredicate<T>(int minPage = 1)
-        where T : IEnumerable<PageContentShift>
+    protected static Predicate<PageContentShift> CreatePageContentShiftCorrectPredicate(int minPage = 1)
     {
-        return shifts => shifts.All(t => t.PageNumber >= minPage);
+        return t => t.PageNumber >= minPage;
     }
 
-    protected static Predicate<FloatPoint> CreateFloatPointCorrectPredicate(float minX, float minY)
+    protected static Predicate<T> CreateAllPageContentShiftsCorrectPredicate<T>(int minPage = 1)
+        where T : IEnumerable<PageContentShift>
+    {
+        Predicate<PageContentShift> correctPredicate = CreatePageContentShiftCorrectPredicate(minPage);
+        return shifts => shifts.All(t => correctPredicate(t));
+    }
+
+    protected static Predicate<FloatPoint> CreateFloatPointCorrectPredicate(float minX = 0, float minY = 0)
     {
         return value => value.X >= minX && value.Y >= minY;
     }
 
-    protected static Predicate<T> CreatePageCroppingCorrectPredicate<T>(float minX, float minY, int minPage = 1)
-        where T : IEnumerable<PageCropping>
+    protected static Predicate<PageCropping> CreatePageCroppingCorrectPredicate(
+        float minX = 0,
+        float minY = 0,
+        int minPage = 1)
     {
-        return croppings => croppings.All(t =>
+        return t =>
             t.LowerLeft.X >= minX &&
             t.LowerLeft.Y >= minY &&
             t.UpperRight.X >= minX &&
             t.UpperRight.Y >= minY &&
-            t.PageNumber >= minPage);
+            t.PageNumber >= minPage;
     }
 
-    protected static Predicate<T> CreatePageDivisionCorrectPredicate<T>(int minPage = 1)
+    protected static Predicate<T> CreateAllPageCroppingsCorrectPredicate<T>(
+        float minX = 0,
+        float minY = 0,
+        int minPage = 1)
+        where T : IEnumerable<PageCropping>
+    {
+        Predicate<PageCropping> correctPredicate = CreatePageCroppingCorrectPredicate(minX, minY, minPage);
+        return croppings => croppings.All(t => correctPredicate(t));
+    }
+
+    protected static Predicate<PageDivision> CreatePageDivisionCorrectPredicate(int minPage = 1)
+    {
+        return t => t.PageNumber >= minPage;
+    }
+
+    protected static Predicate<T> CreateAllPageDivisionsCorrectPredicate<T>(int minPage = 1)
         where T : IEnumerable<PageDivision>
     {
-        return divisions => divisions.All(t => t.PageNumber >= minPage);
+        Predicate<PageDivision> correctPredicate = CreatePageDivisionCorrectPredicate(minPage);
+        return divisions => divisions.All(t => correctPredicate(t));
     }
 
     protected static Predicate<PageOrder> CreatePageOrderCorrectPredicate(int minPage = 1)
@@ -66,16 +90,28 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         return pageOrder => pageOrder.Pages.All(t => t >= minPage);
     }
 
-    protected static Predicate<T> CreatePageRotationCorrectPredicate<T>(int minPage = 1)
-        where T : IEnumerable<PageRotation>
+    protected static Predicate<PageRotation> CreatePageRotationCorrectPredicate(int minPage = 1)
     {
-        return rotations => rotations.All(t => t.PageNumber >= minPage);
+        return t => t.PageNumber >= minPage;
     }
 
-    protected static Predicate<T> CreatePageRangeCorrectPredicate<T>(int minPage = 1)
+    protected static Predicate<T> CreateAllPageRotationsCorrectPredicate<T>(int minPage = 1)
+        where T : IEnumerable<PageRotation>
+    {
+        Predicate<PageRotation> correctPredicate = CreatePageRotationCorrectPredicate(minPage);
+        return rotations => rotations.All(t => correctPredicate(t));
+    }
+
+    protected static Predicate<PageRange> CreatePageRangeCorrectPredicate(int minPage = 1)
+    {
+        return t => t.Start >= minPage;
+    }
+
+    protected static Predicate<T> CreateAllPageRangesCorrectPredicate<T>(int minPage = 1)
         where T : IEnumerable<PageRange>
     {
-        return ranges => ranges.All(t => t.Start >= minPage);
+        Predicate<PageRange> correctPredicate = CreatePageRangeCorrectPredicate(minPage);
+        return ranges => ranges.All(t => correctPredicate(t));
     }
 
     protected static Predicate<MathExpression> CreateLongMathExpressionCorrectPredicate()
@@ -103,7 +139,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
 
         return found && foundOption is not null
             ? foundOption
-            : throw new ArgumentException("Subcommand is configured incorrectly", nameof(subcommand));
+            : throw new ArgumentException("Subcommand is configured incorrectly.", nameof(subcommand));
     }
 
     protected static void AddRestriction<T>(
@@ -123,7 +159,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
             valueNotSatisfuRestrictionMessage);
     }
 
-    protected static void AddRestrictionForPageContentShiftsOption<T>(
+    protected static void AddRestrictionForPageContentShiftEnumerableOption<T>(
         Subcommand subcommand,
         string optionLongName,
         int minPage = 1)
@@ -138,7 +174,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         AddRestriction(
             subcommand,
             optionLongName,
-            CreatePageContentShiftCorrectPredicate<T>(minPage),
+            CreateAllPageContentShiftsCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
@@ -161,7 +197,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
             badValueMessage);
     }
 
-    protected static void AddRestrictionForPageCroppingsOption<T>(
+    protected static void AddRestrictionForPageCroppingEnumerableOption<T>(
         Subcommand subcommand,
         string optionLongName,
         float minX = 0,
@@ -181,11 +217,11 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         AddRestriction(
             subcommand,
             optionLongName,
-            CreatePageCroppingCorrectPredicate<T>(minX, minY, minPage),
+            CreateAllPageCroppingsCorrectPredicate<T>(minX, minY, minPage),
             badValueMessage);
     }
 
-    protected static void AddRestrictionForPageDivisionsOption<T>(
+    protected static void AddRestrictionForPageDivisionEnumerableOption<T>(
         Subcommand subcommand,
         string optionLongName,
         int minPage = 1)
@@ -200,7 +236,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         AddRestriction(
             subcommand,
             optionLongName,
-            CreatePageDivisionCorrectPredicate<T>(minPage),
+            CreateAllPageDivisionsCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
@@ -222,7 +258,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
             badValueMessage);
     }
 
-    protected static void AddRestrictionForPageRotationsOption<T>(
+    protected static void AddRestrictionForPageRotationEnumerableOption<T>(
         Subcommand subcommand,
         string optionLongName,
         int minPage = 1)
@@ -237,11 +273,11 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         AddRestriction(
             subcommand,
             optionLongName,
-            CreatePageRotationCorrectPredicate<T>(minPage),
+            CreateAllPageRotationsCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
-    protected static void AddRestrictionForSplitPartsOption<T>(
+    protected static void AddRestrictionForPageRangeEnumerableOption<T>(
         Subcommand subcommand,
         string optionLongName,
         int minPage = 1)
@@ -256,11 +292,11 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         AddRestriction(
             subcommand,
             optionLongName,
-            CreatePageRangeCorrectPredicate<T>(minPage),
+            CreateAllPageRangesCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
-    protected static void AddRestrictionForSplitPartSizeExpressionOption(
+    protected static void AddRestrictionForLongMathExpressionOption(
         Subcommand subcommand,
         string optionLongName)
     {

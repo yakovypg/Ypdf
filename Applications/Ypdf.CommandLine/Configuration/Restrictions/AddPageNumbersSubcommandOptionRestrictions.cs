@@ -16,7 +16,7 @@ internal sealed class AddPageNumbersSubcommandOptionRestrictions : OptionRestric
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForPageContentShiftsOption<List<PageContentShift>>(
+        AddRestrictionForPageContentShiftEnumerableOption<List<PageContentShift>>(
             subcommand: subcommand,
             optionLongName: AddPageNumbersSubcommand.PageNumberShiftsLongName,
             minPage: 1);

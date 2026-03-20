@@ -16,7 +16,7 @@ internal sealed class DividePagesSubcommandOptionRestrictions : OptionRestrictio
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForPageDivisionsOption<List<PageDivision>>(
+        AddRestrictionForPageDivisionEnumerableOption<List<PageDivision>>(
             subcommand: subcommand,
             optionLongName: DividePagesSubcommand.PageDivisionsLongName,
             minPage: 1);

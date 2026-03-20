@@ -16,7 +16,7 @@ internal sealed class RemovePagesSubcommandOptionRestrictions : OptionRestrictio
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForSplitPartsOption<List<PageRange>>(
+        AddRestrictionForPageRangeEnumerableOption<List<PageRange>>(
             subcommand: subcommand,
             optionLongName: RemovePagesSubcommand.PagesLongName,
             minPage: 1);

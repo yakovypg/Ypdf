@@ -17,7 +17,7 @@ internal sealed class AddWatermarkSubcommandOptionRestrictions : OptionRestricti
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForSplitPartsOption<List<PageRange>>(
+        AddRestrictionForPageRangeEnumerableOption<List<PageRange>>(
             subcommand: subcommand,
             optionLongName: AddWatermarkSubcommand.PagesLongName,
             minPage: 1);

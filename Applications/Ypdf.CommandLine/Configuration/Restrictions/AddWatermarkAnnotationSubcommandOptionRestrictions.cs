@@ -17,7 +17,7 @@ internal sealed class AddWatermarkAnnotationSubcommandOptionRestrictions : Optio
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForSplitPartsOption<List<PageRange>>(
+        AddRestrictionForPageRangeEnumerableOption<List<PageRange>>(
             subcommand: subcommand,
             optionLongName: AddWatermarkAnnotationSubcommand.PagesLongName,
             minPage: 1);

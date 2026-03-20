@@ -16,7 +16,7 @@ internal sealed class RotatePagesSubcommandOptionRestrictions : OptionRestrictio
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForPageRotationsOption<List<PageRotation>>(
+        AddRestrictionForPageRotationEnumerableOption<List<PageRotation>>(
             subcommand: subcommand,
             optionLongName: RotatePagesSubcommand.PageRotationsLongName,
             minPage: 1);
