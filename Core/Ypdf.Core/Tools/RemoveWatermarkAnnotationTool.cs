@@ -1,11 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using iText.Kernel.Pdf;
+using Ypdf.Core.Enumeration;
 using Ypdf.Core.Informing;
 
 namespace Ypdf.Core.Tools;
 
 public class RemoveWatermarkAnnotationTool : ITool
 {
+    public RemoveWatermarkAnnotationTool(IEnumerable<PageRange>? pages)
+        : this(pages?.SelectMany(t => t.Items)) { }
+
     public RemoveWatermarkAnnotationTool(IEnumerable<int>? pages = null)
     {
         Pages = pages;
