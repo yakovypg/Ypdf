@@ -26,7 +26,7 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { DividePagesSubcommand.Name, new DividePageToolCreator(globalConfig) },
             { ExtractImagesSubcommand.Name, new ExtractImagesToolCreator(globalConfig) },
             { ExtractTextSubcommand.Name, new ExtractTextToolCreator(globalConfig) },
-            /*{ ImagesToPdfSubcommand.Name, new ImagesToPdfToolCreator(globalConfig) },*/
+            { ImagesToPdfSubcommand.Name, new ImagesToPdfToolCreator(globalConfig) },
             { MergeSubcommand.Name, new MergeToolCreator(globalConfig) },
             { MovePageSubcommand.Name, new MovePageToolCreator(globalConfig) },
             { RemovePagesSubcommand.Name, new RemovePageToolCreator(globalConfig) },

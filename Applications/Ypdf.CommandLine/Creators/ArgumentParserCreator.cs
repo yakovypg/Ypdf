@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using iText.Kernel.Colors;
+using iText.Kernel.Geom;
 using NetArgumentParser;
 using NetArgumentParser.Converters;
 using NetArgumentParser.Generators;
@@ -87,18 +88,20 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
     {
         return [
             new ValueConverter<Margin>(Margin.Parse),
-            new ValueConverter<PageNumberTextPresenter>(PageNumberTextPresenter.Parse),
-            new MultipleValueConverter<PageContentShift>(PageContentShift.ParseMany),
+            new ValueConverter<PageOrder>(PageOrder.Parse),
             new ValueConverter<Color>(ColorConverter.Parse),
-            new MultipleValueConverter<PageRange>(PageRange.Parse),
             new ValueConverter<FloatPoint>(FloatPoint.Parse),
+            new ValueConverter<PageSize>(PageSizeConverter.Parse),
+            new ValueConverter<MathExpression>(MathExpression.Parse),
+            new ValueConverter<ITextExtractor>(TextExtractors.Parse),
+            new ValueConverter<EncryptionAlgorithm>(EncryptionAlgorithm.Parse),
+            new ValueConverter<PageNumberTextPresenter>(PageNumberTextPresenter.Parse),
+
+            new MultipleValueConverter<PageRange>(PageRange.Parse),
             new MultipleValueConverter<PageCropping>(PageCropping.ParseMany),
             new MultipleValueConverter<PageDivision>(PageDivision.ParseMany),
-            new ValueConverter<PageOrder>(PageOrder.Parse),
             new MultipleValueConverter<PageRotation>(PageRotation.ParseMany),
-            new ValueConverter<EncryptionAlgorithm>(EncryptionAlgorithm.Parse),
-            new ValueConverter<MathExpression>(MathExpression.Parse),
-            new ValueConverter<ITextExtractor>(TextExtractors.Parse)
+            new MultipleValueConverter<PageContentShift>(PageContentShift.ParseMany),
         ];
     }
 }
