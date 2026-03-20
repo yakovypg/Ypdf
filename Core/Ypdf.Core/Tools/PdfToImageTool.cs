@@ -7,7 +7,7 @@ using Ypdf.Core.Runtime.Python;
 
 namespace Ypdf.Core.Tools;
 
-public class PdfToImageTool : IMultipleInputTool
+public class PdfToImageTool : IMultipleInputTool, IMultipleOutputTool
 {
     public PdfToImageTool(
         string? pythonAlias = null,

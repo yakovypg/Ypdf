@@ -7,7 +7,7 @@ using Ypdf.Core.Utils;
 
 namespace Ypdf.Core.Tools;
 
-public class SplitTool : ITool
+public class SplitTool : ITool, IMultipleOutputTool
 {
     public SplitTool(long splitPartSizeBytes = Splitter.DefaultSplitPartSizeBytes)
         : this(splitPartSizeBytes, null) { }

@@ -7,7 +7,7 @@ using Ypdf.Core.Runtime.Python;
 
 namespace Ypdf.Core.Tools;
 
-public class CompressImageTool : IMultipleInputTool
+public class CompressImageTool : IMultipleInputTool, IMultipleOutputTool
 {
     public CompressImageTool(
         ImageCompression imageCompression = default,
