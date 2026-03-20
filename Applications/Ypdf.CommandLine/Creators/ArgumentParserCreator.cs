@@ -9,6 +9,7 @@ using Ypdf.CommandLine.Converters;
 using Ypdf.Core.Design;
 using Ypdf.Core.Design.Pages;
 using Ypdf.Core.Enumeration;
+using Ypdf.Core.Extraction;
 using Ypdf.Core.Geometry;
 using Ypdf.Core.Security;
 
@@ -96,7 +97,8 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
             new ValueConverter<PageOrder>(PageOrder.Parse),
             new MultipleValueConverter<PageRotation>(PageRotation.ParseMany),
             new ValueConverter<EncryptionAlgorithm>(EncryptionAlgorithm.Parse),
-            new ValueConverter<MathExpression>(MathExpression.Parse)
+            new ValueConverter<MathExpression>(MathExpression.Parse),
+            new ValueConverter<ITextExtractor>(TextExtractors.Parse)
         ];
     }
 }
