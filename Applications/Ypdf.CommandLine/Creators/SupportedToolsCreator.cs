@@ -36,7 +36,7 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { RotatePagesSubcommand.Name, new RotatePagesToolCreator(globalConfig) },
             { SetPasswordSubcommand.Name, new SetPasswordToolCreator(globalConfig) },
             { SplitSubcommand.Name, new SplitToolCreator(globalConfig) },
-            /*{ TextToPdfSubcommand.Name, new TextToPdfToolCreator(globalConfig) },*/
+            { TextToPdfSubcommand.Name, new TextToPdfToolCreator(globalConfig) }
         };
     }
 }
