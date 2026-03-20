@@ -22,6 +22,7 @@ internal sealed class SupportedOptionRestrictionProvidersCreator : ISupportedOpt
             { DividePagesSubcommand.Name, new DividePagesSubcommandOptionRestrictions() },
             { ExtractImagesSubcommand.Name, new ExtractImagesSubcommandOptionRestrictions() },
             { ExtractTextSubcommand.Name, new ExtractTextSubcommandOptionRestrictions() },
+            { GetInfoSubcommand.Name, new GetInfoSubcommandOptionRestrictions() },
             { ImagesToPdfSubcommand.Name, new ImagesToPdfSubcommandOptionRestrictions() },
             { MergeSubcommand.Name, new MergeSubcommandOptionRestrictions() },
             { MovePageSubcommand.Name, new MovePageSubcommandOptionRestrictions() },

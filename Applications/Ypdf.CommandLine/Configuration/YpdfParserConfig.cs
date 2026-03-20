@@ -41,6 +41,9 @@ internal sealed class YpdfParserConfig
     [Subcommand(ExtractTextSubcommand.Name, ExtractTextSubcommand.Description)]
     internal ExtractTextSubcommand ExtractTextSubcommand { get; } = new();
 
+    [Subcommand(GetInfoSubcommand.Name, GetInfoSubcommand.Description)]
+    internal GetInfoSubcommand GetInfoSubcommand { get; } = new();
+
     [Subcommand(ImagesToPdfSubcommand.Name, ImagesToPdfSubcommand.Description)]
     internal ImagesToPdfSubcommand ImagesToPdfSubcommand { get; } = new();
 
