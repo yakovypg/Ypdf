@@ -13,7 +13,6 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
 
         return new()
         {
-            // TODO
             { AddPageNumbersSubcommand.Name, new AddPageNumbersToolCreator(globalConfig) },
             { AddWatermarkAnnotationSubcommand.Name, new AddWatermarkAnnotationToolCreator(globalConfig) },
             { AddWatermarkSubcommand.Name, new AddWatermarkToolCreator(globalConfig) },
@@ -31,7 +30,7 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { MovePageSubcommand.Name, new MovePageToolCreator(globalConfig) },
             { RemovePagesSubcommand.Name, new RemovePageToolCreator(globalConfig) },
             { RemovePasswordSubcommand.Name, new RemovePasswordToolCreator(globalConfig) },
-            /*{ RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator(globalConfig) },*/
+            { RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator(globalConfig) },
             { ReorderPagesSubcommand.Name, new ReorderPagesToolCreator(globalConfig) },
             { RotatePagesSubcommand.Name, new RotatePagesToolCreator(globalConfig) },
             { SetPasswordSubcommand.Name, new SetPasswordToolCreator(globalConfig) },
