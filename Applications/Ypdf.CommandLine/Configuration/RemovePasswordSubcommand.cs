@@ -7,8 +7,8 @@ internal sealed class RemovePasswordSubcommand
     internal const string Name = "remove-password";
     internal const string Description = "Remove password from PDF document";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
     internal const string CommonPasswordLongName = "password";
     internal const string UserPasswordLongName = "user-password";
     internal const string OwnerPasswordLongName = "owner-password";

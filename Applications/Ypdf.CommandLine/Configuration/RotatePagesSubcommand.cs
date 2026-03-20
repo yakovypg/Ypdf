@@ -10,8 +10,8 @@ internal sealed class RotatePagesSubcommand
     internal const string Name = "rotate";
     internal const string Description = "Rotate PDF document pages";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
     internal const string PageCroppingsLongName = "rotation";
 
     [ValueOption<string>(

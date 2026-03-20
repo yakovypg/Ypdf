@@ -7,8 +7,8 @@ internal sealed class MovePageSubcommand
     internal const string Name = "move-page";
     internal const string Description = "Move PDF document page";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
     internal const string SourcePageNumberLongName = "from";
     internal const string DestinationPageNumberLongName = "to";
 

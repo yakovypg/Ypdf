@@ -7,8 +7,8 @@ internal sealed class CheckCompressionCapabilitySubcommand
     internal const string Name = "compress";
     internal const string Description = "Compress PDF document";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
 
     [ValueOption<string>(
         longName: InputPathLongName,

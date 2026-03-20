@@ -7,8 +7,8 @@ internal sealed class CopySubcommand
     internal const string Name = "copy";
     internal const string Description = "Copy PDF document";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
 
     [ValueOption<string>(
         longName: InputPathLongName,

@@ -10,8 +10,8 @@ internal sealed class CropPagesSubcommand
     internal const string Name = "crop";
     internal const string Description = "Crop PDF document pages";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
     internal const string PageCroppingsLongName = "cropping";
 
     [ValueOption<string>(

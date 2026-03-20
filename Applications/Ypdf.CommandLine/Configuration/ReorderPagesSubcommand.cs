@@ -8,8 +8,8 @@ internal sealed class ReorderPagesSubcommand
     internal const string Name = "reorder-pages";
     internal const string Description = "Reorder PDF document pages";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
     internal const string PageOrderLongName = "page-order";
 
     [ValueOption<string>(

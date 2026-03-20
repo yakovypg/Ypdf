@@ -10,8 +10,8 @@ internal sealed class RemovePagesSubcommand
     internal const string Name = "remove-pages";
     internal const string Description = "Remove pages from PDF document";
 
-    internal const string InputPathLongName = "input-file";
-    internal const string OutputPathLongName = "output-file";
+    internal const string InputPathLongName = "input";
+    internal const string OutputPathLongName = "output";
     internal const string PagesLongName = "pages";
 
     [ValueOption<string>(
