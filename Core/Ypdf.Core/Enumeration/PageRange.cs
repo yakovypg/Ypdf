@@ -6,6 +6,8 @@ using Ypdf.Core.Utils;
 
 namespace Ypdf.Core.Enumeration;
 
+using KernelPageRange = iText.Kernel.Utils.PageRange;
+
 public readonly struct PageRange : IEquatable<PageRange>
 {
     public PageRange(int start)
@@ -87,6 +89,12 @@ public readonly struct PageRange : IEquatable<PageRange>
     {
         return value >= Start
             && value <= End;
+    }
+
+    public readonly KernelPageRange ToKernelPageRange()
+    {
+        string presenter = ToString();
+        return new KernelPageRange(presenter);
     }
 
     public readonly override string ToString()
