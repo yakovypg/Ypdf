@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +11,67 @@ using Ypdf.Core.FileSystem.Naming;
 
 namespace Ypdf.Core.Informing;
 
-public static class PdfInfo
+public class PdfInfo
 {
+    public PdfInfo(
+        string name,
+        int numberOfPages,
+        IEnumerable<Rectangle> pageSizes,
+        long sizeBytes,
+        DateTime creationTime,
+        DateTime lastAccessTime,
+        DateTime lastWriteTime)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(name, nameof(name));
+        ExtendedArgumentNullException.ThrowIfNull(pageSizes, nameof(pageSizes));
+
+        int pageSizesCount = pageSizes.Count();
+
+        DefaultExceptions.ThrowIfNegative(numberOfPages, nameof(numberOfPages));
+        DefaultExceptions.ThrowIfNotEqual(pageSizesCount, numberOfPages, nameof(pageSizesCount));
+        DefaultExceptions.ThrowIfNegative(sizeBytes, nameof(sizeBytes));
+
+        Name = name;
+        NumberOfPages = numberOfPages;
+        PageSizes = [.. pageSizes];
+        CreationTime = creationTime;
+        LastAccessTime = lastAccessTime;
+        LastWriteTime = lastWriteTime;
+    }
+
+    public string Name { get; }
+    public int NumberOfPages { get; }
+    public IReadOnlyList<Rectangle> PageSizes { get; }
+    public long SizeBytes { get; }
+    public DateTime CreationTime { get; }
+    public DateTime LastAccessTime { get; }
+    public DateTime LastWriteTime { get; }
+
+    public static PdfInfo Collect(string inputPath)
+    {
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
+        DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
+
+        int numOfPages = GetNumberOfPages(inputPath);
+        Rectangle[] pageSizes = GetPageSizes(inputPath);
+
+        var fileInfo = new FileInfo(inputPath);
+        string name = fileInfo.Name;
+        long sizeBytes = fileInfo.Length;
+        DateTime creationTime = fileInfo.CreationTime;
+        DateTime lastAccessTime = fileInfo.LastAccessTime;
+        DateTime lastWriteTime = fileInfo.LastWriteTime;
+
+        return new PdfInfo(
+            name,
+            numOfPages,
+            pageSizes,
+            sizeBytes,
+            creationTime,
+            lastAccessTime,
+            lastWriteTime);
+    }
+
     public static int GetNumberOfPages(string inputPath)
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
@@ -30,8 +90,7 @@ public static class PdfInfo
 
         int numOfPages = GetNumberOfPages(inputPath);
 
-        return Enumerable.Range(1, numOfPages)
-            .ToList();
+        return [.. Enumerable.Range(1, numOfPages)];
     }
 
     public static Rectangle[] GetPageSizes(string inputPath)
@@ -107,7 +166,7 @@ public static class PdfInfo
         ExtendedArgumentNullException.ThrowIfNull(consideredPages, nameof(consideredPages));
 
         if (consideredPages.Count < 2)
-            return new List<int>();
+            return [];
 
         Rectangle[] pageSizes = new Rectangle[consideredPages.Count];
 
@@ -143,9 +202,9 @@ public static class PdfInfo
             }
 
             if (associatedPages.Count > 1)
-                return associatedPages.ToArray();
+                return [.. associatedPages];
         }
 
-        return new List<int>();
+        return [];
     }
 }
