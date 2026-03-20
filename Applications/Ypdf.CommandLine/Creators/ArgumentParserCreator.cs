@@ -91,7 +91,8 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
             new MultipleValueConverter<PageRange>(PageRange.Parse),
             new ValueConverter<FloatPoint>(FloatPoint.Parse),
             new MultipleValueConverter<PageCropping>(PageCropping.ParseMany),
-            new MultipleValueConverter<PageDivision>(PageDivision.ParseMany)
+            new MultipleValueConverter<PageDivision>(PageDivision.ParseMany),
+            new ValueConverter<PageOrder>(PageOrder.Parse)
         ];
     }
 }
