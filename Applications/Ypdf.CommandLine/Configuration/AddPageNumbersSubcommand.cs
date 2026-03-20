@@ -151,7 +151,7 @@ internal sealed class AddPageNumbersSubcommand
         longName: PageNumberShiftsLongName,
         shortName: "",
         description: "page number shifts [default=[]] (Pages:Horizontal,Vertical -> 1:-50,0 or 1,3-5:10,15)",
-        contextCaptureType: ContextCaptureType.ZeroOrMore)
+        contextCaptureType: ContextCaptureType.OneOrMore)
     ]
     [OptionGroup("appearance", "", "")]
     internal List<PageContentShift> PageNumberShifts { get; set; } = [];
