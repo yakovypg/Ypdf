@@ -14,19 +14,19 @@ public class IndelibleWatermark : Watermark, IIndelibleWatermark, IEquatable<Ind
         float width,
         float height,
         string text = DefaultText,
-        double rotationAngleInRadians = DefaultRotationAngleInRadians)
-        : this(width, height, text, DefaultFontInfo, rotationAngleInRadians) { }
+        double rotationAngleRadians = DefaultRotationAngleRadians)
+        : this(width, height, text, DefaultFontInfo, rotationAngleRadians) { }
 
     public IndelibleWatermark(
         float width,
         float height,
         string text = DefaultText,
         TextFontInfo fontInfo = default,
-        double rotationAngleInRadians = DefaultRotationAngleInRadians,
+        double rotationAngleRadians = DefaultRotationAngleRadians,
         FloatPoint? lowerLeftPoint = null,
         WatermarkTextAllocator textAllocator = default,
         LazyBorder? border = null)
-        : base(text, fontInfo, rotationAngleInRadians, lowerLeftPoint)
+        : base(text, fontInfo, rotationAngleRadians, lowerLeftPoint)
     {
         DefaultExceptions.ThrowIfNegativeOrZero(width, nameof(width));
         DefaultExceptions.ThrowIfNegativeOrZero(height, nameof(height));

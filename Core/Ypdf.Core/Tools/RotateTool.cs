@@ -8,9 +8,9 @@ namespace Ypdf.Core.Tools;
 
 public class RotateTool : ITool
 {
-    public RotateTool(int angle)
+    public RotateTool(int angleDegrees)
     {
-        Angle = angle;
+        AngleDegrees = angleDegrees;
         Rotations = [];
     }
 
@@ -20,7 +20,7 @@ public class RotateTool : ITool
         Rotations = rotations;
     }
 
-    protected int Angle { get; }
+    protected int AngleDegrees { get; }
     protected IEnumerable<PageRotation> Rotations { get; }
 
     public void Execute(string inputPath, string outputPath)
@@ -36,19 +36,19 @@ public class RotateTool : ITool
 
         IEnumerable<PageRotation> rotations = Rotations;
 
-        if (Angle != 0)
+        if (AngleDegrees != 0)
         {
             int numOfPages = sourceDocument.GetNumberOfPages();
 
             rotations = Enumerable.Range(1, numOfPages)
-                .Select(t => new PageRotation(t, Angle));
+                .Select(t => new PageRotation(t, AngleDegrees));
         }
 
         foreach (PageRotation rotation in rotations)
         {
             _ = sourceDocument
                 .GetPage(rotation.PageNumber)
-                .SetRotation(-rotation.Angle);
+                .SetRotation(-rotation.AngleDegrees);
         }
 
         sourceDocument.CopyTo(outputDocument);

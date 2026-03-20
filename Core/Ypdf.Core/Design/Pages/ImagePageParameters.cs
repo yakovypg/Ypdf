@@ -13,17 +13,17 @@ public class ImagePageParameters : PageParameters, IImagePageParameters, IEquata
     public ImagePageParameters(
         Margin? margin = null,
         PageSize? pageSize = null,
-        double rotationAngle = 0,
+        double rotationAngleDegrees = 0,
         bool autoIncreaseSize = true,
         HorizontalAlignment horizontalAlignment = HorizontalAlignment.CENTER)
         : base(margin, pageSize)
     {
-        RotationAngle = rotationAngle;
+        RotationAngleDegrees = rotationAngleDegrees;
         AutoIncreaseSize = autoIncreaseSize;
         HorizontalAlignment = horizontalAlignment;
     }
 
-    public double RotationAngle { get; init; }
+    public double RotationAngleDegrees { get; init; }
     public bool AutoIncreaseSize { get; init; }
     public HorizontalAlignment HorizontalAlignment { get; init; }
 
@@ -56,7 +56,7 @@ public class ImagePageParameters : PageParameters, IImagePageParameters, IEquata
         ExtendedArgumentNullException.ThrowIfNull(image, nameof(image));
 
         image.SetAutoScale(true);
-        image.SetRotationAngle(RotationAngle);
+        image.SetRotationAngle(RotationAngleDegrees);
         image.SetHorizontalAlignment(HorizontalAlignment);
     }
 
@@ -64,7 +64,7 @@ public class ImagePageParameters : PageParameters, IImagePageParameters, IEquata
     {
         return other is not null
             && base.Equals(other)
-            && RotationAngle == other.RotationAngle
+            && RotationAngleDegrees == other.RotationAngleDegrees
             && AutoIncreaseSize == other.AutoIncreaseSize
             && HorizontalAlignment == other.HorizontalAlignment;
     }
@@ -78,7 +78,7 @@ public class ImagePageParameters : PageParameters, IImagePageParameters, IEquata
     {
         return HashGenerator.Generate(
             base.GetHashCode(),
-            RotationAngle,
+            RotationAngleDegrees,
             AutoIncreaseSize,
             HorizontalAlignment);
     }

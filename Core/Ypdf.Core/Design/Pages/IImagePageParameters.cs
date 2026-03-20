@@ -5,7 +5,7 @@ namespace Ypdf.Core.Design.Pages;
 
 public interface IImagePageParameters : IPageParameters
 {
-    double RotationAngle { get; }
+    double RotationAngleDegrees { get; }
     bool AutoIncreaseSize { get; }
     HorizontalAlignment HorizontalAlignment { get; }
 

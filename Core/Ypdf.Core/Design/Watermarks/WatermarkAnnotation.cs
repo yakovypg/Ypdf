@@ -16,15 +16,15 @@ public class WatermarkAnnotation : Watermark, IWatermarkAnnotation, IEquatable<W
 
     public WatermarkAnnotation(
         string text = DefaultText,
-        double rotationAngleInRadians = DefaultRotationAngleInRadians)
-        : this(text, DefaultFontInfo, rotationAngleInRadians) { }
+        double rotationAngleRadians = DefaultRotationAngleRadians)
+        : this(text, DefaultFontInfo, rotationAngleRadians) { }
 
     public WatermarkAnnotation(
         string text,
         TextFontInfo fontInfo,
-        double rotationAngleInRadians = DefaultRotationAngleInRadians,
+        double rotationAngleRadians = DefaultRotationAngleRadians,
         FloatPoint? lowerLeftPoint = null)
-        : base(text, fontInfo, rotationAngleInRadians, lowerLeftPoint)
+        : base(text, fontInfo, rotationAngleRadians, lowerLeftPoint)
     {
         TrimmingRectangleWidth = 300;
         TrimmingRectangleHeight = 450;
@@ -87,7 +87,7 @@ public class WatermarkAnnotation : Watermark, IWatermarkAnnotation, IEquatable<W
         {
             var transform = new AffineTransform();
             transform.Translate(XTranslation, YTranslation);
-            transform.Rotate(RotationAngleInRadians);
+            transform.Rotate(RotationAngleRadians);
 
             return transform;
         }
@@ -137,7 +137,7 @@ public class WatermarkAnnotation : Watermark, IWatermarkAnnotation, IEquatable<W
             TrimmingRectangleHeight,
             Text,
             FontInfo,
-            RotationAngleInRadians,
+            RotationAngleRadians,
             LowerLeftPoint);
     }
 

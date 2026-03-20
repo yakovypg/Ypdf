@@ -9,7 +9,7 @@ namespace Ypdf.Core.Design.Watermarks;
 public class Watermark : IWatermark, IEquatable<Watermark?>
 {
     protected const string DefaultText = "My watermark";
-    protected const double DefaultRotationAngleInRadians = Math.PI / 3.0;
+    protected const double DefaultRotationAngleRadians = Math.PI / 3.0;
 
     static Watermark()
     {
@@ -18,25 +18,25 @@ public class Watermark : IWatermark, IEquatable<Watermark?>
 
     public Watermark(
         string text = DefaultText,
-        double rotationAngleInRadians = DefaultRotationAngleInRadians)
-        : this(text, DefaultFontInfo, rotationAngleInRadians) { }
+        double rotationAngleRadians = DefaultRotationAngleRadians)
+        : this(text, DefaultFontInfo, rotationAngleRadians) { }
 
     public Watermark(
         string text,
         TextFontInfo fontInfo,
-        double rotationAngleInRadians = DefaultRotationAngleInRadians,
+        double rotationAngleRadians = DefaultRotationAngleRadians,
         FloatPoint? lowerLeftPoint = null)
     {
         ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
 
         Text = text;
-        RotationAngleInRadians = rotationAngleInRadians;
+        RotationAngleRadians = rotationAngleRadians;
         FontInfo = fontInfo;
         LowerLeftPoint = lowerLeftPoint;
     }
 
     public string Text { get; }
-    public double RotationAngleInRadians { get; protected set; }
+    public double RotationAngleRadians { get; protected set; }
 
     public TextFontInfo FontInfo { get; init; }
     public FloatPoint? LowerLeftPoint { get; init; }
@@ -45,19 +45,19 @@ public class Watermark : IWatermark, IEquatable<Watermark?>
 
     public double GetRotationAngleInDegrees()
     {
-        return Angle.RadiansToDegrees(RotationAngleInRadians);
+        return Angle.RadiansToDegrees(RotationAngleRadians);
     }
 
     public void SetRotationAngleInDegrees(double degrees)
     {
-        RotationAngleInRadians = Angle.DegreesToRadians(degrees);
+        RotationAngleRadians = Angle.DegreesToRadians(degrees);
     }
 
     public bool Equals(Watermark? other)
     {
         return other is not null
             && Text == other.Text
-            && RotationAngleInRadians == other.RotationAngleInRadians
+            && RotationAngleRadians == other.RotationAngleRadians
             && FontInfo == other.FontInfo
             && LowerLeftPoint == other.LowerLeftPoint;
     }
@@ -71,7 +71,7 @@ public class Watermark : IWatermark, IEquatable<Watermark?>
     {
         return HashGenerator.Generate(
             Text,
-            RotationAngleInRadians,
+            RotationAngleRadians,
             FontInfo,
             LowerLeftPoint);
     }

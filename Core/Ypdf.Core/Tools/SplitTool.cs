@@ -9,7 +9,7 @@ namespace Ypdf.Core.Tools;
 
 public class SplitTool : ITool
 {
-    public SplitTool(long splitPartSizeBytes = Splitter.DefaultSplitPartSizeInBytes)
+    public SplitTool(long splitPartSizeBytes = Splitter.DefaultSplitPartSizeBytes)
         : this(splitPartSizeBytes, null) { }
 
     public SplitTool(MathExpression splitPartSizeBytesExpression)
@@ -26,11 +26,11 @@ public class SplitTool : ITool
 
     public SplitTool(IEnumerable<PageRange> pageRanges)
         : this(
-            Splitter.DefaultSplitPartSizeInBytes,
+            Splitter.DefaultSplitPartSizeBytes,
             pageRanges ?? throw new ArgumentNullException(nameof(pageRanges))) { }
 
     protected SplitTool(
-        long splitPartSizeBytes = Splitter.DefaultSplitPartSizeInBytes,
+        long splitPartSizeBytes = Splitter.DefaultSplitPartSizeBytes,
         IEnumerable<PageRange>? pageRanges = null)
     {
         DefaultExceptions.ThrowIfNegativeOrZero(splitPartSizeBytes, nameof(splitPartSizeBytes));

@@ -12,16 +12,16 @@ public readonly struct PageRotation : IEquatable<PageRotation>
 {
     private const string _expectedStringFormat = "Pages:Angle";
 
-    public PageRotation(int pageNumber, int angle)
+    public PageRotation(int pageNumber, int angleDegrees)
     {
         DefaultExceptions.ThrowIfLessThan(pageNumber, 1, nameof(pageNumber));
 
         PageNumber = pageNumber;
-        Angle = angle;
+        AngleDegrees = angleDegrees;
     }
 
     public readonly int PageNumber { get; }
-    public readonly int Angle { get; }
+    public readonly int AngleDegrees { get; }
 
     public static bool operator ==(PageRotation left, PageRotation right)
     {
@@ -43,9 +43,9 @@ public readonly struct PageRotation : IEquatable<PageRotation>
             throw new IncorrectDataFormatException(null, data, _expectedStringFormat);
 
         int pageNumber = int.Parse(parts[0], CultureInfo.CurrentCulture);
-        int angle = int.Parse(parts[1], CultureInfo.CurrentCulture);
+        int angleDegrees = int.Parse(parts[1], CultureInfo.CurrentCulture);
 
-        return new PageRotation(pageNumber, angle);
+        return new PageRotation(pageNumber, angleDegrees);
     }
 
     public static IList<PageRotation> ParseFromRange(string data)
@@ -85,7 +85,7 @@ public readonly struct PageRotation : IEquatable<PageRotation>
     public readonly bool Equals(PageRotation other)
     {
         return PageNumber == other.PageNumber
-            && Angle == other.Angle;
+            && AngleDegrees == other.AngleDegrees;
     }
 
     public readonly override bool Equals(object? obj)
@@ -96,6 +96,6 @@ public readonly struct PageRotation : IEquatable<PageRotation>
 
     public readonly override int GetHashCode()
     {
-        return HashGenerator.Generate(PageNumber, Angle);
+        return HashGenerator.Generate(PageNumber, AngleDegrees);
     }
 }

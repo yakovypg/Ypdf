@@ -6,7 +6,7 @@ namespace Ypdf.Core.Design.Watermarks;
 public interface IWatermark
 {
     string Text { get; }
-    double RotationAngleInRadians { get; }
+    double RotationAngleRadians { get; }
     TextFontInfo FontInfo { get; }
     FloatPoint? LowerLeftPoint { get; }
 

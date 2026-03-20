@@ -9,7 +9,7 @@ namespace Ypdf.Core.Utils;
 
 public class Splitter : PdfSplitter, IDisposable
 {
-    public const long DefaultSplitPartSizeInBytes = 3 * 1024 * 1024;
+    public const long DefaultSplitPartSizeBytes = 3 * 1024 * 1024;
 
     private readonly PdfReader? _sourceDocumentReader;
     private readonly PdfDocument? _sourceDocument;
@@ -61,7 +61,7 @@ public class Splitter : PdfSplitter, IDisposable
         }
     }
 
-    public void Split(long splitPartSize = DefaultSplitPartSizeInBytes)
+    public void Split(long splitPartSize = DefaultSplitPartSizeBytes)
     {
         IList<PdfDocument> documents = SplitBySize(splitPartSize);
 

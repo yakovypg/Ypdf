@@ -75,7 +75,7 @@ public class AddIndelibleWatermarkTool : ITool
             .SetVerticalAlignment(watermark.TextAllocator.TextContainerVerticalAlignment)
             .SetWidth(watermark.Width)
             .SetHeight(watermark.Height)
-            .SetRotationAngle(watermark.RotationAngleInRadians)
+            .SetRotationAngle(watermark.RotationAngleRadians)
             .SetFixedPosition(pageNumber, lowerLeftPoint.X, lowerLeftPoint.Y, watermark.Width);
 
         if (watermark.Border is not null)
