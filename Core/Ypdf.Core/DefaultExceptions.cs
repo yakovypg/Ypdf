@@ -7,6 +7,28 @@ namespace Ypdf.Core;
 
 public static class DefaultExceptions
 {
+    public static void ThrowIfNotAllowed<T>(
+        T item,
+        Predicate<T> isItemAllowedPredicate,
+        string? paramName = null)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(isItemAllowedPredicate, nameof(isItemAllowedPredicate));
+
+        if (!isItemAllowedPredicate.Invoke(item))
+            ThrowItemNotAllowed(item, paramName);
+    }
+
+    public static void ThrowIfNotAllowed<T>(
+        T item,
+        IEnumerable<T> allowedItems,
+        string? paramName = null)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(allowedItems, nameof(allowedItems));
+
+        if (!allowedItems.Contains(item))
+            ThrowItemNotAllowed(item, paramName);
+    }
+
     public static void ThrowIfContainsNotAllowedItem<T>(
         IEnumerable<T> items,
         Predicate<T> isItemAllowedPredicate,

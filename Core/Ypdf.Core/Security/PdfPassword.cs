@@ -9,7 +9,7 @@ public readonly struct PdfPassword : IEquatable<PdfPassword>
     public PdfPassword(
         string userPassword,
         string ownerPassword = "",
-        int encryptionAlgorithm = EncryptionConstants.ENCRYPTION_AES_128)
+        EncryptionAlgorithm encryptionAlgorithm = default)
     {
         ExtendedArgumentNullException.ThrowIfNull(userPassword, nameof(userPassword));
         ExtendedArgumentNullException.ThrowIfNull(ownerPassword, nameof(ownerPassword));
@@ -24,7 +24,7 @@ public readonly struct PdfPassword : IEquatable<PdfPassword>
 
     public readonly string UserPassword { get; }
     public readonly string OwnerPassword { get; }
-    public readonly int EncryptionAlgorithm { get; }
+    public readonly EncryptionAlgorithm EncryptionAlgorithm { get; }
 
     public readonly string MainPassword => string.IsNullOrEmpty(OwnerPassword)
         ? UserPassword

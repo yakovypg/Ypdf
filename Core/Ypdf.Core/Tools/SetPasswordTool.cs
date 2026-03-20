@@ -29,7 +29,7 @@ public class SetPasswordTool : ITool
             userPassword: userPassword,
             ownerPassword: ownerPassword,
             permissions: EncryptionConstants.ALLOW_PRINTING,
-            encryptionAlgorithm: Password.EncryptionAlgorithm);
+            encryptionAlgorithm: Password.EncryptionAlgorithm.EncryptionConstant);
 
         var outputStream = new FileStream(outputPath, FileMode.Create);
 
