@@ -60,11 +60,9 @@ internal sealed class AddWatermarkToolCreator : ToolCreator
 
         watermark.SetRotationAngleInDegrees(subcommand.RotationAngleDegrees);
 
-        IEnumerable<int> pages = subcommand.Pages.SelectMany(t => t.Items);
-
         var tool = new AddIndelibleWatermarkTool(
             watermark: watermark,
-            pages: pages.Any() ? pages : null);
+            pages: subcommand.Pages.Count > 0 ? subcommand.Pages : null);
 
         return new ToolExecutionProvider(
             tool,

@@ -47,11 +47,9 @@ internal sealed class AddWatermarkAnnotationToolCreator : ToolCreator
         watermarkAnnotation.SetHeight(subcommand.Height);
         watermarkAnnotation.SetRotationAngleInDegrees(subcommand.RotationAngleDegrees);
 
-        IEnumerable<int> pages = subcommand.Pages.SelectMany(t => t.Items);
-
         var tool = new AddWatermarkAnnotationTool(
             watermark: watermarkAnnotation,
-            pages: pages.Any() ? pages : null);
+            pages: subcommand.Pages.Count > 0 ? subcommand.Pages : null);
 
         return new ToolExecutionProvider(
             tool,
