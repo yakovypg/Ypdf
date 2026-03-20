@@ -21,8 +21,6 @@ if (!FilePaths.TryPrepare())
 if (!GlobalConfig.TryLoad(FilePaths.Config, out GlobalConfig globalConfig))
     errorMessageWriter.WriteLine("Cannot load global config.");
 
-GlobalConfig.Instance.Reset(globalConfig);
-
 YpdfParserConfig parserConfig = new();
 ArgumentParserCreator parserCreator = new();
 ArgumentParser parser = parserCreator.Create(parserConfig);
@@ -38,7 +36,7 @@ optionRestrictionsSetter.SetRestrictions(parser);
 try
 {
     SupportedToolsCreator supportedToolsCreator = new();
-    Dictionary<string, IToolCreator> supportedTools = supportedToolsCreator.Create();
+    Dictionary<string, IToolCreator> supportedTools = supportedToolsCreator.Create(globalConfig);
     ParseArgumentsResult parseResult = parser.Parse(args);
 
     ToolExecutor toolExecutor = new(supportedTools);

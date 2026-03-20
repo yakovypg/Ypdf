@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Creators.Tools;
 
@@ -6,34 +7,36 @@ namespace Ypdf.CommandLine.Creators;
 
 internal sealed class SupportedToolsCreator : ISupportedToolsCreator
 {
-    public Dictionary<string, IToolCreator> Create()
+    public Dictionary<string, IToolCreator> Create(GlobalConfig globalConfig)
     {
+        ExtendedArgumentNullException.ThrowIfNull(globalConfig, nameof(globalConfig));
+
         return new()
         {
             // TODO
-            { AddPageNumbersSubcommand.Name, new AddPageNumbersToolCreator() },
-            { AddWatermarkAnnotationSubcommand.Name, new AddWatermarkAnnotationToolCreator() },
-            { AddWatermarkSubcommand.Name, new AddWatermarkToolCreator() },
-            { CheckCompressionCapabilitySubcommand.Name, new CheckCompressionCapabilityToolCreator() },
-            { CompressImagesSubcommand.Name, new CompressImageToolCreator() },
-            { CompressSubcommand.Name, new CompressToolCreator() },
-            { ConfigSubcommand.Name, new ConfigToolCreator() },
-            { CopySubcommand.Name, new CopyToolCreator() },
-            { CropPagesSubcommand.Name, new CropPageToolCreator() },
-            { DividePagesSubcommand.Name, new DividePageToolCreator() },
-            { ExtractImagesSubcommand.Name, new ExtractImagesToolCreator() },
-            { ExtractTextSubcommand.Name, new ExtractTextToolCreator() },
-            /*{ ImagesToPdfSubcommand.Name, new ImagesToPdfToolCreator() },*/
-            { MergeSubcommand.Name, new MergeToolCreator() },
-            { MovePageSubcommand.Name, new MovePageToolCreator() },
-            { RemovePagesSubcommand.Name, new RemovePageToolCreator() },
-            { RemovePasswordSubcommand.Name, new RemovePasswordToolCreator() },
-            /*{ RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator() },*/
-            { ReorderPagesSubcommand.Name, new ReorderPagesToolCreator() },
-            { RotatePagesSubcommand.Name, new RotatePagesToolCreator() },
-            { SetPasswordSubcommand.Name, new SetPasswordToolCreator() },
-            { SplitSubcommand.Name, new SplitToolCreator() },
-            /*{ TextToPdfSubcommand.Name, new TextToPdfToolCreator() },*/
+            { AddPageNumbersSubcommand.Name, new AddPageNumbersToolCreator(globalConfig) },
+            { AddWatermarkAnnotationSubcommand.Name, new AddWatermarkAnnotationToolCreator(globalConfig) },
+            { AddWatermarkSubcommand.Name, new AddWatermarkToolCreator(globalConfig) },
+            { CheckCompressionCapabilitySubcommand.Name, new CheckCompressionCapabilityToolCreator(globalConfig) },
+            { CompressImagesSubcommand.Name, new CompressImageToolCreator(globalConfig) },
+            { CompressSubcommand.Name, new CompressToolCreator(globalConfig) },
+            { ConfigSubcommand.Name, new ConfigToolCreator(globalConfig) },
+            { CopySubcommand.Name, new CopyToolCreator(globalConfig) },
+            { CropPagesSubcommand.Name, new CropPageToolCreator(globalConfig) },
+            { DividePagesSubcommand.Name, new DividePageToolCreator(globalConfig) },
+            { ExtractImagesSubcommand.Name, new ExtractImagesToolCreator(globalConfig) },
+            { ExtractTextSubcommand.Name, new ExtractTextToolCreator(globalConfig) },
+            /*{ ImagesToPdfSubcommand.Name, new ImagesToPdfToolCreator(globalConfig) },*/
+            { MergeSubcommand.Name, new MergeToolCreator(globalConfig) },
+            { MovePageSubcommand.Name, new MovePageToolCreator(globalConfig) },
+            { RemovePagesSubcommand.Name, new RemovePageToolCreator(globalConfig) },
+            { RemovePasswordSubcommand.Name, new RemovePasswordToolCreator(globalConfig) },
+            /*{ RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator(globalConfig) },*/
+            { ReorderPagesSubcommand.Name, new ReorderPagesToolCreator(globalConfig) },
+            { RotatePagesSubcommand.Name, new RotatePagesToolCreator(globalConfig) },
+            { SetPasswordSubcommand.Name, new SetPasswordToolCreator(globalConfig) },
+            { SplitSubcommand.Name, new SplitToolCreator(globalConfig) },
+            /*{ TextToPdfSubcommand.Name, new TextToPdfToolCreator(globalConfig) },*/
         };
     }
 }

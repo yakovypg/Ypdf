@@ -1,3 +1,4 @@
+using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Execution;
@@ -7,9 +8,12 @@ using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
 
-internal sealed class CompressImageToolCreator : IToolCreator
+internal sealed class CompressImageToolCreator : ToolCreator
 {
-    public IToolExecutionProvider Create(YpdfParserConfig config)
+    public CompressImageToolCreator(GlobalConfig globalConfig)
+        : base(globalConfig ?? throw new ArgumentNullException(nameof(globalConfig))) { }
+
+    public override IToolExecutionProvider Create(YpdfParserConfig config)
     {
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
@@ -26,8 +30,8 @@ internal sealed class CompressImageToolCreator : IToolCreator
                 subcommand.SizeFactor,
                 subcommand.Extension);
 
-        string? pythonAlias = GlobalConfig.Instance.PythonAlias;
-        IOutputWriter outputWriter = GlobalConfig.Instance.OutputWriter;
+        string? pythonAlias = Config.PythonAlias;
+        IOutputWriter outputWriter = Config.OutputWriter;
 
         var tool = new CompressImageTool(imageCompression, pythonAlias, outputWriter);
 

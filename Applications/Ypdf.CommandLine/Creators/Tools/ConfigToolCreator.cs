@@ -1,3 +1,4 @@
+using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Execution;
@@ -6,9 +7,12 @@ using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
 
-internal sealed class ConfigToolCreator : IToolCreator
+internal sealed class ConfigToolCreator : ToolCreator
 {
-    public IToolExecutionProvider Create(YpdfParserConfig config)
+    public ConfigToolCreator(GlobalConfig globalConfig)
+        : base(globalConfig ?? throw new ArgumentNullException(nameof(globalConfig))) { }
+
+    public override IToolExecutionProvider Create(YpdfParserConfig config)
     {
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
@@ -18,20 +22,20 @@ internal sealed class ConfigToolCreator : IToolCreator
 
         if (subcommand.SaveConfig)
         {
-            GlobalConfig newGlobalConfig = GlobalConfig.Instance.Copy();
+            GlobalConfig newGlobalConfig = Config.Copy();
 
             if (!string.IsNullOrEmpty(subcommand.PythonAlias))
                 newGlobalConfig.PythonAlias = subcommand.PythonAlias;
 
-            tool = new ResetGlobalConfigTool(GlobalConfig.Instance, newGlobalConfig);
+            tool = new ResetGlobalConfigTool(Config, newGlobalConfig);
         }
         else if (subcommand.ResetConfig)
         {
-            tool = new ResetGlobalConfigTool(GlobalConfig.Instance);
+            tool = new ResetGlobalConfigTool(Config);
         }
         else
         {
-            tool = new ShowGlobalConfigTool(GlobalConfig.Instance);
+            tool = new ShowGlobalConfigTool(Config);
         }
 
         return new ToolExecutionProvider(

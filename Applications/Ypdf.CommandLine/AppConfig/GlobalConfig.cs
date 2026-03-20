@@ -7,17 +7,10 @@ namespace Ypdf.CommandLine.AppConfig;
 
 internal sealed class GlobalConfig
 {
-    static GlobalConfig()
-    {
-        Instance = new GlobalConfig();
-    }
-
     public GlobalConfig()
     {
         OutputWriter = new ConsoleWriter();
     }
-
-    internal static GlobalConfig Instance { get; }
 
     internal string? PythonAlias { get; set; }
 
