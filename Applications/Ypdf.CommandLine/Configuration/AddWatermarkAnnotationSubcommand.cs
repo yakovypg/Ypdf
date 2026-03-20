@@ -239,6 +239,8 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: FontColorLongName,
         shortName: "c",
         description: $"font color [default={DefaultFontColor}] (name or (r,g,b))",
+        addBeforeParseChoicesToDescription: true,
+        ignoreCaseInChoices: true,
         beforeParseChoices:
         [
             nameof(ColorConstants.BLACK),
@@ -254,8 +256,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
             nameof(ColorConstants.RED),
             nameof(ColorConstants.WHITE),
             nameof(ColorConstants.YELLOW)
-        ],
-        addBeforeParseChoicesToDescription: true)
+        ])
     ]
     [OptionGroup("font", "", "")]
     internal Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);

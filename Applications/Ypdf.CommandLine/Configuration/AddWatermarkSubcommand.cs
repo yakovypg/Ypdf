@@ -191,6 +191,8 @@ internal sealed class AddWatermarkSubcommand
         longName: BorderColorLongName,
         shortName: "",
         description: $"border color [default={DefaultBorderColor}] (name or (r,g,b))",
+        addBeforeParseChoicesToDescription: true,
+        ignoreCaseInChoices: true,
         beforeParseChoices:
         [
             nameof(ColorConstants.BLACK),
@@ -206,8 +208,7 @@ internal sealed class AddWatermarkSubcommand
             nameof(ColorConstants.RED),
             nameof(ColorConstants.WHITE),
             nameof(ColorConstants.YELLOW)
-        ],
-        addBeforeParseChoicesToDescription: true)
+        ])
     ]
     [OptionGroup("border", "", "")]
     internal Color BorderColor { get; set; } = ColorConverter.Parse(DefaultBorderColor);
@@ -314,6 +315,8 @@ internal sealed class AddWatermarkSubcommand
         longName: FontColorLongName,
         shortName: "c",
         description: $"font color [default={DefaultFontColor}] (name or (r,g,b))",
+        addBeforeParseChoicesToDescription: true,
+        ignoreCaseInChoices: true,
         beforeParseChoices:
         [
             nameof(ColorConstants.BLACK),
@@ -329,8 +332,7 @@ internal sealed class AddWatermarkSubcommand
             nameof(ColorConstants.RED),
             nameof(ColorConstants.WHITE),
             nameof(ColorConstants.YELLOW)
-        ],
-        addBeforeParseChoicesToDescription: true)
+        ])
     ]
     [OptionGroup("font", "", "")]
     internal Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);

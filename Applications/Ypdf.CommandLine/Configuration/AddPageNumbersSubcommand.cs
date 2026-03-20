@@ -135,12 +135,14 @@ internal sealed class AddPageNumbersSubcommand
         longName: TextPresenterLongName,
         shortName: "P",
         description: $"page number presenter [default={DefaultTextPresenter}]",
-        beforeParseChoices: [
+        addBeforeParseChoicesToDescription: true,
+        ignoreCaseInChoices: true,
+        beforeParseChoices:
+        [
             nameof(PageNumberTextPresenter.Default),
             nameof(PageNumberTextPresenter.Fractional),
             nameof(PageNumberTextPresenter.Verbal)
-        ],
-        addBeforeParseChoicesToDescription: true)
+        ])
     ]
     [OptionGroup("appearance", "", "")]
     internal PageNumberTextPresenter TextPresenter { get; set; } = PageNumberTextPresenter.Parse(DefaultTextPresenter);
@@ -256,6 +258,8 @@ internal sealed class AddPageNumbersSubcommand
         longName: FontColorLongName,
         shortName: "c",
         description: $"page number font color [default={DefaultFontColor}] (name or (r,g,b))",
+        addBeforeParseChoicesToDescription: true,
+        ignoreCaseInChoices: true,
         beforeParseChoices:
         [
             nameof(ColorConstants.BLACK),
@@ -271,8 +275,7 @@ internal sealed class AddPageNumbersSubcommand
             nameof(ColorConstants.RED),
             nameof(ColorConstants.WHITE),
             nameof(ColorConstants.YELLOW)
-        ],
-        addBeforeParseChoicesToDescription: true)
+        ])
     ]
     [OptionGroup("font", "", "")]
     internal Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
