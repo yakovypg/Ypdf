@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Annot;
 using iText.Kernel.Pdf.Canvas;
 using iText.Kernel.Pdf.Xobject;
 using Ypdf.Core.Design.Watermarks;
+using Ypdf.Core.Enumeration;
 using Ypdf.Core.Geometry;
 using Ypdf.Core.Informing;
 
@@ -12,6 +15,13 @@ namespace Ypdf.Core.Tools;
 
 public class AddWatermarkAnnotationTool : ITool
 {
+    public AddWatermarkAnnotationTool(
+        IWatermarkAnnotation watermark,
+        IEnumerable<PageRange>? pages)
+        : this(
+            watermark ?? throw new ArgumentNullException(nameof(watermark)),
+            pages?.SelectMany(t => t.Items)) { }
+
     public AddWatermarkAnnotationTool(
         IWatermarkAnnotation watermark,
         IEnumerable<int>? pages = null)
