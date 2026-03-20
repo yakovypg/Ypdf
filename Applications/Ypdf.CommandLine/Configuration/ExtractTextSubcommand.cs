@@ -28,7 +28,7 @@ internal sealed class ExtractTextSubcommand
     [ValueOption<string>(
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output directory",
+        description: "path to the output file",
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]

@@ -32,7 +32,8 @@ internal sealed class CompressImagesSubcommand
     [ValueOption<string>(
         longName: OutputPathLongName,
         shortName: "o",
-        description: "path to the output file or directory",
+        description: "path to the output file or directory. " +
+            "A directory path is allowed only when multiple input files are provided",
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
