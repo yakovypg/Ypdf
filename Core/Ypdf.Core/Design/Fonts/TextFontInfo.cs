@@ -15,9 +15,7 @@ public readonly struct TextFontInfo : IEquatable<TextFontInfo>
     public TextFontInfo(string family)
         : this(
             family ?? throw new ArgumentNullException(nameof(family)),
-            ColorConstants.DARK_GRAY)
-    {
-    }
+            ColorConstants.DARK_GRAY) { }
 
     public TextFontInfo(string path, string encoding, float size = 12f, float opacity = 1f)
         : this(
@@ -25,9 +23,7 @@ public readonly struct TextFontInfo : IEquatable<TextFontInfo>
             encoding ?? throw new ArgumentNullException(nameof(encoding)),
             ColorConstants.DARK_GRAY,
             size,
-            opacity)
-    {
-    }
+            opacity) { }
 
     public TextFontInfo(string path, string encoding, Color color, float size = 12f, float opacity = 1f)
         : this(
@@ -47,9 +43,7 @@ public readonly struct TextFontInfo : IEquatable<TextFontInfo>
             StandardFonts.TIMES_ROMAN,
             color ?? throw new ArgumentNullException(nameof(color)),
             size,
-            opacity)
-    {
-    }
+            opacity) { }
 
     public TextFontInfo(string family, Color color, float size = 12f, float opacity = 1f)
     {

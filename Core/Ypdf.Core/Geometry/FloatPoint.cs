@@ -8,9 +8,7 @@ namespace Ypdf.Core.Geometry;
 public readonly struct FloatPoint : IEquatable<FloatPoint>
 {
     public FloatPoint()
-        : this(0, 0)
-    {
-    }
+        : this(0, 0) { }
 
     public FloatPoint(float x, float y)
     {

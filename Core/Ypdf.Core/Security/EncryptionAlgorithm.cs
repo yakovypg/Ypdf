@@ -9,9 +9,7 @@ namespace Ypdf.Core.Security;
 public readonly struct EncryptionAlgorithm : IEquatable<EncryptionAlgorithm>
 {
     public EncryptionAlgorithm()
-        : this(EncryptionConstants.ENCRYPTION_AES_128)
-    {
-    }
+        : this(EncryptionConstants.ENCRYPTION_AES_128) { }
 
     public EncryptionAlgorithm(int encryptionConstant)
     {

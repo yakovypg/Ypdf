@@ -9,9 +9,7 @@ namespace Ypdf.Core.Design.Borders;
 public readonly struct LazyBorder : IEquatable<LazyBorder>
 {
     public LazyBorder(BorderType borderType)
-        : this(borderType, new DeviceRgb(0, 0, 0))
-    {
-    }
+        : this(borderType, new DeviceRgb(0, 0, 0)) { }
 
     public LazyBorder(
         BorderType borderType,
