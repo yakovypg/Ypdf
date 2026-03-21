@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetName>ypdf</TargetName>
     <AssemblyName>ypdf</AssemblyName>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
