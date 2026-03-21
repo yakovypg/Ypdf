@@ -7,18 +7,19 @@ namespace Ypdf.CommandLine.Execution;
 [Serializable]
 internal sealed class UnknownToolException : Exception
 {
-    internal UnknownToolException() { }
+    internal UnknownToolException()
+        : this(GetDefaultMessage()) { }
 
     internal UnknownToolException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     internal UnknownToolException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+        : base(message ?? GetDefaultMessage(), innerException) { }
 
     internal UnknownToolException(
         string? message,
         string toolName)
-        : this(message, toolName, null) { }
+        : this(message ?? GetDefaultMessage(toolName), toolName, null) { }
 
     internal UnknownToolException(
         string? message,
@@ -54,9 +55,11 @@ internal sealed class UnknownToolException : Exception
         base.GetObjectData(info, context);
     }
 
-    private static string GetDefaultMessage(string toolName)
+    private static string GetDefaultMessage(string? toolName = null)
     {
-        ExtendedArgumentNullException.ThrowIfNull(toolName, nameof(toolName));
-        return $"Tool '{toolName}' is unknown.";
+        if (!string.IsNullOrEmpty(toolName))
+            toolName = $" {toolName}";
+
+        return $"Tool{toolName} is unknown.";
     }
 }

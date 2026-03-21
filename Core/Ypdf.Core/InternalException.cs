@@ -7,10 +7,11 @@ namespace Ypdf.Core;
 [Serializable]
 public class InternalException : Exception
 {
-    public InternalException() { }
+    public InternalException()
+        : this(GetDefaultMessage()) { }
 
     public InternalException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public InternalException(string? message, Exception? innerException)
         : base(message ?? GetDefaultMessage(), innerException) { }

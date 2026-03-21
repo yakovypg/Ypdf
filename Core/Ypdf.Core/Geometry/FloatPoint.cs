@@ -49,9 +49,10 @@ public readonly struct FloatPoint : IEquatable<FloatPoint>
             data = data.Remove(data.Length - 1);
 
         string[] parts = data.Split(';');
+        const string expectedStringFormat = "(x;y) or x;y";
 
         if (parts.Length != 2)
-            throw new IncorrectDataFormatException(null, data, "(x;y) or x;y");
+            throw new IncorrectDataFormatException(null, data, expectedStringFormat);
 
         float x = float.Parse(parts[0], CultureInfo.CurrentCulture);
         float y = float.Parse(parts[1], CultureInfo.CurrentCulture);

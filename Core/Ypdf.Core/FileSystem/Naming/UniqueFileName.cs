@@ -8,15 +8,8 @@ public class UniqueFileName : UniqueName
     public UniqueFileName(string extension, string workingDirectory)
         : base(t => File.Exists(Path.Combine(workingDirectory, t)), $".{extension}")
     {
-        if (string.IsNullOrWhiteSpace(extension))
-        {
-            throw new ArgumentException(
-                $"{nameof(extension)} cannot be an empty string.",
-                nameof(extension));
-        }
-
-        if (workingDirectory is null)
-            throw new ArgumentNullException(nameof(workingDirectory));
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(extension, nameof(extension));
+        ExtendedArgumentNullException.ThrowIfNull(workingDirectory, nameof(workingDirectory));
 
         Extension = extension;
         WorkingDirectory = workingDirectory;

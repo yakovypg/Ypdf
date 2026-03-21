@@ -10,15 +10,8 @@ public class UniqueFile : UniqueFileName, IUniqueFile
 
     public static FileInfo Create(string extension, string workingDirectory)
     {
-        if (string.IsNullOrWhiteSpace(extension))
-        {
-            throw new ArgumentException(
-                $"{nameof(extension)} cannot be an empty string.",
-                nameof(extension));
-        }
-
-        if (workingDirectory is null)
-            throw new ArgumentNullException(nameof(workingDirectory));
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(extension, nameof(extension));
+        ExtendedArgumentNullException.ThrowIfNull(workingDirectory, nameof(workingDirectory));
 
         var uniqueFile = new UniqueFile(extension, workingDirectory);
         return uniqueFile.Create();
@@ -26,8 +19,7 @@ public class UniqueFile : UniqueFileName, IUniqueFile
 
     public virtual string MakeUnique(string nameWithoutExtension)
     {
-        if (nameWithoutExtension is null)
-            throw new ArgumentNullException(nameof(nameWithoutExtension));
+        ExtendedArgumentNullException.ThrowIfNull(nameWithoutExtension, nameof(nameWithoutExtension));
 
         string pathWithoutExtension = Path.Combine(WorkingDirectory, nameWithoutExtension);
         string uniquePath = $"{pathWithoutExtension}.{Extension}";

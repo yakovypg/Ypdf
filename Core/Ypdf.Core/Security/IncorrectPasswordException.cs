@@ -8,16 +8,17 @@ namespace Ypdf.Core.Security;
 [Serializable]
 public class IncorrectPasswordException : Exception
 {
-    public IncorrectPasswordException() { }
+    public IncorrectPasswordException()
+        : this(GetDefaultMessage()) { }
 
     public IncorrectPasswordException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public IncorrectPasswordException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+        : base(message ?? GetDefaultMessage(), innerException) { }
 
     public IncorrectPasswordException(string? message, PdfPassword password)
-        : this(message, password, null) { }
+        : this(message ?? GetDefaultMessage(password), password, null) { }
 
     public IncorrectPasswordException(
         string? message,
@@ -55,15 +56,15 @@ public class IncorrectPasswordException : Exception
         base.GetObjectData(info, context);
     }
 
-    private static string GetDefaultMessage(PdfPassword password)
+    private static string GetDefaultMessage(PdfPassword? password = null)
     {
         var passwords = new List<string>();
 
-        if (!string.IsNullOrEmpty(password.UserPassword))
-            passwords.Add(password.UserPassword);
+        if (password is not null && !string.IsNullOrEmpty(password.Value.UserPassword))
+            passwords.Add(password.Value.UserPassword);
 
-        if (!string.IsNullOrEmpty(password.OwnerPassword))
-            passwords.Add(password.OwnerPassword);
+        if (password is not null && !string.IsNullOrEmpty(password.Value.OwnerPassword))
+            passwords.Add(password.Value.OwnerPassword);
 
         return passwords.Count switch
         {

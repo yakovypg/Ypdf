@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 namespace Ypdf.Core.FileSystem.Naming;
@@ -10,8 +9,7 @@ public class UniqueDirectory : UniqueDirectoryName, IUniqueDirectory
 
     public static DirectoryInfo Create(string workingDirectory)
     {
-        if (workingDirectory is null)
-            throw new ArgumentNullException(nameof(workingDirectory));
+        ExtendedArgumentNullException.ThrowIfNull(workingDirectory, nameof(workingDirectory));
 
         var uniqueDirectory = new UniqueDirectory(workingDirectory);
         return uniqueDirectory.Create();

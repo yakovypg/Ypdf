@@ -8,20 +8,15 @@ public class PathSequence
 {
     public PathSequence(IEnumerable<string> paths)
     {
-        Paths = paths ?? throw new ArgumentNullException(nameof(paths));
+        ExtendedArgumentNullException.ThrowIfNull(paths, nameof(paths));
+        Paths = paths;
     }
 
     public IEnumerable<string> Paths { get; }
 
     public IEnumerable<IEnumerable<string>> Group(int itemsInGroup = 5)
     {
-        if (itemsInGroup <= 0)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(itemsInGroup),
-                itemsInGroup,
-                $"{itemsInGroup} must be greater than zero.");
-        }
+        DefaultExceptions.ThrowIfNegativeOrZero(itemsInGroup, nameof(itemsInGroup));
 
         IReadOnlyList<string> remainingItems = [.. Paths];
 

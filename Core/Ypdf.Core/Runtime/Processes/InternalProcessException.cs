@@ -7,30 +7,31 @@ namespace Ypdf.Core.Runtime.Processes;
 [Serializable]
 public class InternalProcessException : Exception
 {
-    public InternalProcessException() { }
+    public InternalProcessException()
+        : this(GetDefaultMessage()) { }
 
     public InternalProcessException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public InternalProcessException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+        : base(message ?? GetDefaultMessage(), innerException) { }
 
     public InternalProcessException(
         string? message,
         string processName,
         int exitCode)
-        : this(message, processName, exitCode, null) { }
+        : this(message ?? GetDefaultMessage(processName, exitCode), processName, exitCode, null) { }
 
     public InternalProcessException(
         string? message,
         string processName,
         int exitCode,
         Exception? innerException)
-        : base(message ?? GetDefaultMessage(exitCode), innerException)
+        : base(message ?? GetDefaultMessage(processName, exitCode), innerException)
     {
-        ProcessName = processName
-            ?? throw new ArgumentNullException(nameof(processName));
+        ExtendedArgumentNullException.ThrowIfNull(processName, nameof(processName));
 
+        ProcessName = processName;
         ExitCode = exitCode;
     }
 
@@ -41,8 +42,7 @@ public class InternalProcessException : Exception
     protected InternalProcessException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
-        if (info is null)
-            throw new ArgumentNullException(nameof(info));
+        ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
 
         ProcessName = info.GetString(nameof(ProcessName));
         ExitCode = info.GetInt32(nameof(ExitCode));
@@ -57,8 +57,7 @@ public class InternalProcessException : Exception
 #endif
     public override void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        if (info is null)
-            throw new ArgumentNullException(nameof(info));
+        ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
 
         info.AddValue(nameof(ProcessName), ProcessName, typeof(string));
         info.AddValue(nameof(ExitCode), ExitCode);
@@ -66,8 +65,17 @@ public class InternalProcessException : Exception
         base.GetObjectData(info, context);
     }
 
-    private static string GetDefaultMessage(int exitCode)
+    private static string GetDefaultMessage(string? processName = null)
     {
-        return $"Process ended with error (exit code: {exitCode}).";
+        if (!string.IsNullOrEmpty(processName))
+            processName = $" {processName}";
+
+        return $"Process{processName} ended with error.";
+    }
+
+    private static string GetDefaultMessage(string? processName, int exitCode)
+    {
+        string message = GetDefaultMessage(processName);
+        return $"{message} Exit code: {exitCode}.";
     }
 }

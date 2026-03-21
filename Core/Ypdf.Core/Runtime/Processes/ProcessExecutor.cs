@@ -13,8 +13,7 @@ public abstract class ProcessExecutor : ProcessController, IProcessExecutor
 
     protected void ExecuteProcess(Process process)
     {
-        if (process is null)
-            throw new ArgumentNullException(nameof(process));
+        ExtendedArgumentNullException.ThrowIfNull(process, nameof(process));
 
         if (OutputWriter is null || (!RedirectStandardError && !RedirectStandardOutput))
         {

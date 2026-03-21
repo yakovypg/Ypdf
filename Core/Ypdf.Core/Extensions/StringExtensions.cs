@@ -16,11 +16,8 @@ public static class StringExtensions
         string? newValue,
         StringComparison comparisonType = _defaultComparisonType)
     {
-        if (text is null)
-            throw new ArgumentNullException(nameof(text));
-
-        if (oldValue is null)
-            throw new ArgumentNullException(nameof(oldValue));
+        ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
+        ExtendedArgumentNullException.ThrowIfNull(oldValue, nameof(oldValue));
 
         return text.Replace(oldValue, newValue);
     }
@@ -32,11 +29,8 @@ public static class StringExtensions
         T value,
         StringComparison comparisonType = _defaultComparisonType)
     {
-        if (text is null)
-            throw new ArgumentNullException(nameof(text));
-
-        if (value is null)
-            throw new ArgumentNullException(nameof(value));
+        ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
+        ExtendedArgumentNullException.ThrowIfNull(value, nameof(value));
 
         return text.Contains($"{value}");
     }
@@ -47,9 +41,7 @@ public static class StringExtensions
         char value,
         StringComparison comparisonType = _defaultComparisonType)
     {
-        if (text is null)
-            throw new ArgumentNullException(nameof(text));
-
+        ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
         return text.IndexOf($"{value}", comparisonType);
     }
 #endif
@@ -59,9 +51,7 @@ public static class StringExtensions
         char value,
         StringComparison comparisonType = _defaultComparisonType)
     {
-        if (text is null)
-            throw new ArgumentNullException(nameof(text));
-
+        ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
         return text.StartsWith($"{value}", comparisonType);
     }
 
@@ -70,9 +60,7 @@ public static class StringExtensions
         char value,
         StringComparison comparisonType = _defaultComparisonType)
     {
-        if (text is null)
-            throw new ArgumentNullException(nameof(text));
-
+        ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
         return text.EndsWith($"{value}", comparisonType);
     }
 }

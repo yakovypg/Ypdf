@@ -7,19 +7,24 @@ namespace Ypdf.Core;
 [Serializable]
 public class PageNumbersNotMatchException : Exception
 {
-    public PageNumbersNotMatchException() { }
+    public PageNumbersNotMatchException()
+        : this(GetDefaultMessage()) { }
 
     public PageNumbersNotMatchException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public PageNumbersNotMatchException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+        : base(message ?? GetDefaultMessage(), innerException) { }
 
     public PageNumbersNotMatchException(
         string? message,
         int expectedNumberOfPages,
         int actualNumberOfPages)
-        : this(message, expectedNumberOfPages, actualNumberOfPages, null) { }
+        : this(
+            message ?? GetDefaultMessage(expectedNumberOfPages, actualNumberOfPages),
+            expectedNumberOfPages,
+            actualNumberOfPages,
+            null) { }
 
     public PageNumbersNotMatchException(
         string? message,
@@ -39,8 +44,7 @@ public class PageNumbersNotMatchException : Exception
     protected PageNumbersNotMatchException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
-        if (info is null)
-            throw new ArgumentNullException(nameof(info));
+        ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
 
         ExpectedNumberOfPages = info.GetInt32(nameof(ExpectedNumberOfPages));
         ActualNumberOfPages = info.GetInt32(nameof(ActualNumberOfPages));
@@ -55,8 +59,7 @@ public class PageNumbersNotMatchException : Exception
 #endif
     public override void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        if (info is null)
-            throw new ArgumentNullException(nameof(info));
+        ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
 
         info.AddValue(nameof(ExpectedNumberOfPages), ExpectedNumberOfPages);
         info.AddValue(nameof(ActualNumberOfPages), ActualNumberOfPages);
@@ -64,10 +67,15 @@ public class PageNumbersNotMatchException : Exception
         base.GetObjectData(info, context);
     }
 
+    private static string GetDefaultMessage()
+    {
+        return "Number of pages is incorrect.";
+    }
+
     private static string GetDefaultMessage(int expectedNumberOfPages, int actualNumberOfPages)
     {
         return
-            $"The number of pages is incorrect. Actual number is {actualNumberOfPages}, " +
+            $"Number of pages is incorrect. Actual number is {actualNumberOfPages}, " +
             $"but {expectedNumberOfPages} is expected.";
     }
 }

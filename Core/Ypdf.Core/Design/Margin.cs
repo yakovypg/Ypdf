@@ -45,6 +45,7 @@ public readonly struct Margin : IEquatable<Margin>
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
         string[] parts = data.Split(',');
+        const string exprectedStringFormat = "M or H,V or L,T,R,B";
 
         switch (parts.Length)
         {
@@ -65,7 +66,7 @@ public readonly struct Margin : IEquatable<Margin>
                 return new Margin(left, top, right, bottom);
 
             default:
-                throw new IncorrectDataFormatException(null, data, "M or H,V or L,T,R,B");
+                throw new IncorrectDataFormatException(null, data, exprectedStringFormat);
         }
     }
 

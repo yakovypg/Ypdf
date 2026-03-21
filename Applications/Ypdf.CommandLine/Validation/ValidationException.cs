@@ -7,16 +7,17 @@ namespace Ypdf.CommandLine.Validation;
 [Serializable]
 internal sealed class ValidationException : Exception
 {
-    internal ValidationException() { }
+    internal ValidationException()
+        : this(GetDefaultMessage()) { }
 
     internal ValidationException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     internal ValidationException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+        : base(message ?? GetDefaultMessage(), innerException) { }
 
     internal ValidationException(string? message, ValidationError validationError)
-        : this(message, validationError, null) { }
+        : this(message ?? GetDefaultMessage(validationError), validationError, null) { }
 
     internal ValidationException(
         string? message,
@@ -54,9 +55,8 @@ internal sealed class ValidationException : Exception
         base.GetObjectData(info, context);
     }
 
-    private static string GetDefaultMessage(ValidationError validationError)
+    private static string GetDefaultMessage(ValidationError? validationError = null)
     {
-        ExtendedArgumentNullException.ThrowIfNull(validationError, nameof(validationError));
-        return validationError.Reason;
+        return validationError?.Reason ?? "Some validation failed.";
     }
 }

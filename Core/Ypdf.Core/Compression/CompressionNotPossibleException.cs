@@ -7,10 +7,11 @@ namespace Ypdf.Core.Compression;
 [Serializable]
 public class CompressionNotPossibleException : Exception
 {
-    public CompressionNotPossibleException() { }
+    public CompressionNotPossibleException()
+        : this(GetDefaultMessage()) { }
 
     public CompressionNotPossibleException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public CompressionNotPossibleException(string? message, Exception? innerException)
         : base(message ?? GetDefaultMessage(), innerException) { }

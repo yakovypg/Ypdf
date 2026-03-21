@@ -7,10 +7,11 @@ namespace Ypdf.Core.Runtime.Python;
 [Serializable]
 public class PythonNotInstalledException : Exception
 {
-    public PythonNotInstalledException() { }
+    public PythonNotInstalledException()
+        : this(GetDefaultMessage()) { }
 
     public PythonNotInstalledException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public PythonNotInstalledException(string? message, Exception? innerException)
         : base(message ?? GetDefaultMessage(), innerException) { }

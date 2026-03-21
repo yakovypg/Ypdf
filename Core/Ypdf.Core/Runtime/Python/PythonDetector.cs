@@ -34,12 +34,7 @@ public static class PythonDetector
 
     public static bool TryGetPythonVersion(string pythonAlias, out string version)
     {
-        if (string.IsNullOrEmpty(pythonAlias))
-        {
-            throw new ArgumentException(
-                $"{nameof(pythonAlias)} cannot be an empty string.",
-                nameof(pythonAlias));
-        }
+        ExtendedArgumentException.ThrowIfNullOrEmpty(pythonAlias, nameof(pythonAlias));
 
         var proccessOutput = new StringBuilder();
 

@@ -69,6 +69,7 @@ public readonly struct PageRange : IEquatable<PageRange>
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
         string[] parts = data.Split('-');
+        const string expectedStringFormat = "S-E";
 
         if (parts.Length == 1)
         {
@@ -77,7 +78,7 @@ public readonly struct PageRange : IEquatable<PageRange>
         }
 
         if (parts.Length != 2)
-            throw new IncorrectDataFormatException(null, data, "S-E");
+            throw new IncorrectDataFormatException(null, data, expectedStringFormat);
 
         int start = int.Parse(parts[0], CultureInfo.InvariantCulture);
         int end = int.Parse(parts[1], CultureInfo.InvariantCulture);

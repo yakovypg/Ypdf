@@ -38,9 +38,10 @@ public readonly struct PageIncrease : IEquatable<PageIncrease>
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
         string[] parts = data.Split(',');
+        const string exprectedStringFormat = "L,T,R,B";
 
         if (parts.Length != 4)
-            throw new IncorrectDataFormatException(null, data, "L,T,R,B");
+            throw new IncorrectDataFormatException(null, data, exprectedStringFormat);
 
         float left = float.Parse(parts[0], CultureInfo.InvariantCulture);
         float top = float.Parse(parts[1], CultureInfo.InvariantCulture);

@@ -31,7 +31,7 @@ internal sealed class ToolExecutor : IToolExecutor
         bool hasSubcommand = parseResult.TryGetLastHandledSubcommand(out Subcommand? subcommand);
 
         if (!hasSubcommand || subcommand is null)
-            throw new ToolNotSpecifiedException();
+            throw new ToolNotSpecifiedException(null);
 
         bool isSubcommandRegistered = Tools
             .TryGetValue(subcommand.Name, out IToolCreator? toolCreator);
@@ -47,7 +47,7 @@ internal sealed class ToolExecutor : IToolExecutor
             if (validationResult.Errors.Count > 0)
                 throw new ValidationException(null, validationResult.Errors[0]);
 
-            throw new ValidationException("Some validation failed.");
+            throw new ValidationException();
         }
 
         toolExecutionProvider.ExecuteTool();

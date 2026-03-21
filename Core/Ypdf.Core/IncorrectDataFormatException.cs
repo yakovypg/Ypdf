@@ -7,19 +7,20 @@ namespace Ypdf.Core;
 [Serializable]
 public class IncorrectDataFormatException : Exception
 {
-    public IncorrectDataFormatException() { }
+    public IncorrectDataFormatException()
+        : this(GetDefaultMessage()) { }
 
     public IncorrectDataFormatException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public IncorrectDataFormatException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+        : base(message ?? GetDefaultMessage(), innerException) { }
 
     public IncorrectDataFormatException(
         string? message,
         string receivedData,
         string expectedFormat)
-        : this(message, receivedData, expectedFormat, null) { }
+        : this(message ?? GetDefaultMessage(receivedData, expectedFormat), receivedData, expectedFormat, null) { }
 
     public IncorrectDataFormatException(
         string? message,
@@ -62,12 +63,15 @@ public class IncorrectDataFormatException : Exception
         base.GetObjectData(info, context);
     }
 
-    private static string GetDefaultMessage(string receivedData, string expectedFormat)
+    private static string GetDefaultMessage(string? receivedData = null, string? expectedFormat = null)
     {
-        ExtendedArgumentNullException.ThrowIfNull(receivedData, nameof(receivedData));
-        ExtendedArgumentNullException.ThrowIfNull(expectedFormat, nameof(expectedFormat));
+        if (!string.IsNullOrEmpty(receivedData))
+            receivedData = $" {receivedData}";
 
-        return $"Received data '{receivedData}' has incorrect format. " +
-                "Expected format: {expectedFormat}.";
+        string message = $"Received data{receivedData} has incorrect format.";
+
+        return !string.IsNullOrEmpty(expectedFormat)
+            ? $"{message} Expected format: {expectedFormat}."
+            : message;
     }
 }

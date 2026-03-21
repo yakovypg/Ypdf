@@ -7,8 +7,8 @@ public class OutputWriter : IOutputWriter
 {
     public OutputWriter(TextWriter textWriter)
     {
-        Writer = textWriter
-            ?? throw new ArgumentNullException(nameof(textWriter));
+        ExtendedArgumentNullException.ThrowIfNull(textWriter, nameof(textWriter));
+        Writer = textWriter;
     }
 
     protected TextWriter Writer { get; }

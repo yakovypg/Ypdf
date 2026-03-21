@@ -7,10 +7,11 @@ namespace Ypdf.Core.Security;
 [Serializable]
 public class NoPasswordSpecifiedException : Exception
 {
-    public NoPasswordSpecifiedException() { }
+    public NoPasswordSpecifiedException()
+        : this(GetDefaultMessage()) { }
 
     public NoPasswordSpecifiedException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public NoPasswordSpecifiedException(string? message, Exception? innerException)
         : base(message ?? GetDefaultMessage(), innerException) { }

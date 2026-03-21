@@ -7,19 +7,24 @@ namespace Ypdf.Core.Runtime.Python;
 [Serializable]
 public class PythonVersionNotSuitableException : Exception
 {
-    public PythonVersionNotSuitableException() { }
+    public PythonVersionNotSuitableException()
+        : this(GetDefaultMessage()) { }
 
     public PythonVersionNotSuitableException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     public PythonVersionNotSuitableException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+        : base(message ?? GetDefaultMessage(), innerException) { }
 
     public PythonVersionNotSuitableException(
         string? message,
         string currentVersion,
         string requiredVersion)
-        : this(message, currentVersion, requiredVersion, null) { }
+        : this(
+            message ?? GetDefaultMessage(currentVersion, requiredVersion),
+            currentVersion,
+            requiredVersion,
+            null) { }
 
     public PythonVersionNotSuitableException(
         string? message,
@@ -39,8 +44,7 @@ public class PythonVersionNotSuitableException : Exception
     protected PythonVersionNotSuitableException(SerializationInfo info, StreamingContext context)
         : base(info, context)
     {
-        if (info is null)
-            throw new ArgumentNullException(nameof(info));
+        ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
 
         CurrentVersion = info.GetString(nameof(CurrentVersion));
         RequiredVersion = info.GetString(nameof(RequiredVersion));
@@ -55,8 +59,7 @@ public class PythonVersionNotSuitableException : Exception
 #endif
     public override void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        if (info is null)
-            throw new ArgumentNullException(nameof(info));
+        ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
 
         info.AddValue(nameof(CurrentVersion), CurrentVersion, typeof(string));
         info.AddValue(nameof(RequiredVersion), RequiredVersion, typeof(string));
@@ -64,15 +67,15 @@ public class PythonVersionNotSuitableException : Exception
         base.GetObjectData(info, context);
     }
 
-    private static string GetDefaultMessage(string currentVersion, string requiredVersion)
+    private static string GetDefaultMessage(string? currentVersion = null, string? requiredVersion = null)
     {
-        if (currentVersion is null)
-            throw new ArgumentNullException(nameof(currentVersion));
+        if (!string.IsNullOrEmpty(currentVersion))
+            currentVersion = $" {currentVersion}";
 
-        if (requiredVersion is null)
-            throw new ArgumentNullException(nameof(requiredVersion));
+        string message = $"Version{currentVersion} of the python is not suitable.";
 
-        return $"Version {currentVersion} of the python is not suitable. "
-            + $"Required version is {requiredVersion}.";
+        return !string.IsNullOrEmpty(requiredVersion)
+            ? $"{message} Required version is {requiredVersion}."
+            : message;
     }
 }

@@ -73,10 +73,7 @@ public class CompressTool : ITool
         if (!canCompress)
             throw new CompressionNotPossibleException();
 
-        const string message =
-            "Compression check is complete. " +
-            "Document can be compressed.";
-
+        const string message = "Compression check is complete. Document can be compressed.";
         OutputWriter?.WriteLine(message);
     }
 

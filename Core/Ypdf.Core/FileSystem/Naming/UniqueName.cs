@@ -8,9 +8,9 @@ public class UniqueName : IUniqueName
 
     public UniqueName(Predicate<string> nameExistingVerifier, string? postfix = null)
     {
-        _nameExistingVerifier = nameExistingVerifier
-            ?? throw new ArgumentNullException(nameof(nameExistingVerifier));
+        ExtendedArgumentNullException.ThrowIfNull(nameExistingVerifier, nameof(nameExistingVerifier));
 
+        _nameExistingVerifier = nameExistingVerifier;
         Postfix = postfix ?? string.Empty;
     }
 

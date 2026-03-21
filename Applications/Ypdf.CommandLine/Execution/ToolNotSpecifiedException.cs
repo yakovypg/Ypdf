@@ -7,10 +7,11 @@ namespace Ypdf.CommandLine.Execution;
 [Serializable]
 internal sealed class ToolNotSpecifiedException : Exception
 {
-    internal ToolNotSpecifiedException() { }
+    internal ToolNotSpecifiedException()
+        : this(GetDefaultMessage()) { }
 
     internal ToolNotSpecifiedException(string? message)
-        : base(message) { }
+        : base(message ?? GetDefaultMessage()) { }
 
     internal ToolNotSpecifiedException(string? message, Exception? innerException)
         : base(message ?? GetDefaultMessage(), innerException) { }

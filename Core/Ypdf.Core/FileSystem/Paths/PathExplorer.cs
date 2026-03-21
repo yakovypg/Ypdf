@@ -11,21 +11,10 @@ public static class PathExplorer
         string path,
         string numberMark = FileMarks.ImageNumber)
     {
-        if (string.IsNullOrWhiteSpace(path))
-        {
-            throw new ArgumentException(
-                $"{nameof(path)} cannot be an empty string",
-                nameof(path));
-        }
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(path, nameof(path));
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(numberMark, nameof(numberMark));
 
-        if (string.IsNullOrWhiteSpace(numberMark))
-        {
-            throw new ArgumentException(
-                $"{nameof(numberMark)} cannot be an empty string",
-                nameof(numberMark));
-        }
-
-        string errorMessage = $"Cannot get image number from the path '{path}'.";
+        string errorMessage = $"Cannot get image number from the '{path}'.";
         int numberMarkIndex = path.LastIndexOf(numberMark, StringComparison.CurrentCulture);
 
         if (numberMarkIndex < 0 || numberMarkIndex >= path.Length - 1)

@@ -139,7 +139,7 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
 
         return found && foundOption is not null
             ? foundOption
-            : throw new ArgumentException("Subcommand is configured incorrectly.", nameof(subcommand));
+            : throw new SubcommandConfiguredIncorrectlyException(null, subcommand);
     }
 
     protected static void AddRestriction<T>(

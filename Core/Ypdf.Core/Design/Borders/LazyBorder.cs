@@ -57,7 +57,7 @@ public readonly struct LazyBorder : IEquatable<LazyBorder>
             BorderType.RoundDots => new RoundDotsBorder(Color, Thickness, Opacity),
             BorderType.FixedDashed => new FixedDashedBorder(Color, Thickness, Opacity),
 
-            _ => throw new NotSupportedException()
+            _ => throw new NotSupportedException($"Border type {BorderType} isn't supported.")
         };
     }
 

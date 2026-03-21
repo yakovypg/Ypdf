@@ -19,12 +19,7 @@ public class PythonExecutor : ProcessExecutor
 
     public override void Execute(string args)
     {
-        if (string.IsNullOrWhiteSpace(args))
-        {
-            throw new ArgumentException(
-                $"{nameof(args)} cannot be an empty string.",
-                nameof(args));
-        }
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(args, nameof(args));
 
         string assemblyLocation = Assembly.GetExecutingAssembly().Location;
 
@@ -36,15 +31,8 @@ public class PythonExecutor : ProcessExecutor
 
     public override void Execute(string args, string workingDirectory)
     {
-        if (string.IsNullOrWhiteSpace(args))
-        {
-            throw new ArgumentException(
-                $"{nameof(args)} cannot be an empty string.",
-                nameof(args));
-        }
-
-        if (workingDirectory is null)
-            throw new ArgumentNullException(nameof(workingDirectory));
+        ExtendedArgumentException.ThrowIfNullOrWhiteSpace(args, nameof(args));
+        ExtendedArgumentNullException.ThrowIfNull(workingDirectory, nameof(workingDirectory));
 
         VerifyPythonVersion();
 
@@ -75,8 +63,10 @@ public class PythonExecutor : ProcessExecutor
 
     private void VerifyPythonVersion()
     {
+        const string requiredVersion = "3.x";
+
         if (RequirePython3 && !PythonDetector.IsPython3Installed(out string python3Version))
-            throw new PythonVersionNotSuitableException(null, python3Version, "3.x");
+            throw new PythonVersionNotSuitableException(null, python3Version, requiredVersion);
         else if (!PythonDetector.IsPythonInstalled())
             throw new PythonNotInstalledException();
     }
