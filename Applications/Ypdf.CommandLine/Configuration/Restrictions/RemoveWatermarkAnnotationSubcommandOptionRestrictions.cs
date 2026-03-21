@@ -16,7 +16,7 @@ internal sealed class RemoveWatermarkAnnotationSubcommandOptionRestrictions : Op
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForPageRangeEnumerableOption<List<PageRange>>(
+        AddRestrictionForPageRangeEnumerableOption<IList<PageRange>>(
             subcommand: subcommand,
             optionLongName: RemoveWatermarkAnnotationSubcommand.PagesLongName,
             minPage: 1);

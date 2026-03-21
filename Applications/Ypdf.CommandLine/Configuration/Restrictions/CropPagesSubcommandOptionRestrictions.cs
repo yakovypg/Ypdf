@@ -16,7 +16,7 @@ internal sealed class CropPagesSubcommandOptionRestrictions : OptionRestrictionP
     {
         ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
 
-        AddRestrictionForPageCroppingEnumerableOption<List<PageCropping>>(
+        AddRestrictionForPageCroppingEnumerableOption<IList<PageCropping>>(
             subcommand: subcommand,
             optionLongName: CropPagesSubcommand.PageCroppingsLongName,
             minX: 0,
