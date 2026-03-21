@@ -27,7 +27,7 @@ internal sealed class CompressImagesSubcommand
             "\n?all input paths must point to a .jpg|.jpeg|.png|.bmp|.gif|.tiff file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal List<string> InputPaths { get; set; } = [];
+    public List<string> InputPaths { get; set; } = [];
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -37,7 +37,7 @@ internal sealed class CompressImagesSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<float>(
         defaultValue: 0.75f,
@@ -48,7 +48,7 @@ internal sealed class CompressImagesSubcommand
         valueRestriction: "inrange 0 1\n?image quality factor must be in [0; 1]")
     ]
     [OptionGroup("compression", "Compression", "Options for configuring compression")]
-    internal float QualityFactor { get; set; }
+    public float QualityFactor { get; set; }
 
     [ValueOption<float>(
         defaultValue: 1.0f,
@@ -69,7 +69,7 @@ internal sealed class CompressImagesSubcommand
         $"{nameof(SizeFactor)}-{nameof(Height)}",
         $"{nameof(SizeFactor)} cannot be used with the {nameof(Height)}")
     ]
-    internal float SizeFactor { get; set; }
+    public float SizeFactor { get; set; }
 
     [ValueOption<int>(
         longName: WidthLongName,
@@ -79,7 +79,7 @@ internal sealed class CompressImagesSubcommand
     ]
     [OptionGroup("compression", "", "")]
     [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Width)}", "", "")]
-    internal int? Width { get; set; }
+    public int? Width { get; set; }
 
     [ValueOption<int>(
         longName: HeightLongName,
@@ -89,7 +89,7 @@ internal sealed class CompressImagesSubcommand
     ]
     [OptionGroup("compression", "", "")]
     [MutuallyExclusiveOptionGroup($"{nameof(CompressImagesSubcommand)}.{nameof(SizeFactor)}-{nameof(Height)}", "", "")]
-    internal int? Height { get; set; }
+    public int? Height { get; set; }
 
     [ValueOption<string>(
         defaultValue: "jpg",
@@ -101,5 +101,5 @@ internal sealed class CompressImagesSubcommand
         addChoicesToDescription: true)
     ]
     [OptionGroup("compression", "", "")]
-    internal string Extension { get; set; } = string.Empty;
+    public string Extension { get; set; } = string.Empty;
 }

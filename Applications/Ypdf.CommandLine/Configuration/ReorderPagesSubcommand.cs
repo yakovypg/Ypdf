@@ -20,7 +20,7 @@ internal sealed class ReorderPagesSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -29,7 +29,7 @@ internal sealed class ReorderPagesSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<PageOrder>(
         longName: PageOrderLongName,
@@ -37,5 +37,5 @@ internal sealed class ReorderPagesSubcommand
         description: "order of the pages (enumerable of N or S-E -> 5,3,2,1,4 or 5,3-1,4)",
         isRequired: true)
     ]
-    internal PageOrder PageOrder { get; set; }
+    public PageOrder PageOrder { get; set; }
 }

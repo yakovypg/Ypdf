@@ -30,7 +30,7 @@ internal sealed class ImagesToPdfSubcommand
             "\n?all input paths must point to a .jpg|.jpeg|.png|.bmp|.gif|.tiff file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal List<string> InputPaths { get; set; } = [];
+    public List<string> InputPaths { get; set; } = [];
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -39,7 +39,7 @@ internal sealed class ImagesToPdfSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<Margin>(
         longName: MarginLongName,
@@ -47,7 +47,7 @@ internal sealed class ImagesToPdfSubcommand
         description: "image margin (M or H,V or L,T,R,B)")
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
-    internal Margin? Margin { get; set; }
+    public Margin? Margin { get; set; }
 
     [ValueOption<PageSize>(
         longName: PageSizeLongName,
@@ -55,7 +55,7 @@ internal sealed class ImagesToPdfSubcommand
         description: "page size (name or (width,height))")
     ]
     [OptionGroup("appearance", "", "")]
-    internal PageSize? PageSize { get; set; }
+    public PageSize? PageSize { get; set; }
 
     [ValueOption<int>(
         defaultValue: 0,
@@ -65,7 +65,7 @@ internal sealed class ImagesToPdfSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
-    internal int PageRotationAngleDegrees { get; set; }
+    public int PageRotationAngleDegrees { get; set; }
 
     [FlagOption(
         longName: DisableAutoIncreasePageSizeLongName,
@@ -73,7 +73,7 @@ internal sealed class ImagesToPdfSubcommand
         description: "disable automatic increase of the page size")
     ]
     [OptionGroup("appearance", "", "")]
-    internal bool DisableAutoIncreasePageSize { get; set; }
+    public bool DisableAutoIncreasePageSize { get; set; }
 
     [EnumValueOption<HorizontalAlignment>(
         defaultValue: HorizontalAlignment.CENTER,
@@ -84,5 +84,5 @@ internal sealed class ImagesToPdfSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
-    internal HorizontalAlignment ImageHorizontalAlignment { get; set; }
+    public HorizontalAlignment ImageHorizontalAlignment { get; set; }
 }

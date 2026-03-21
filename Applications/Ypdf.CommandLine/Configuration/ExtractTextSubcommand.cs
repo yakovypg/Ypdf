@@ -23,7 +23,7 @@ internal sealed class ExtractTextSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -32,7 +32,7 @@ internal sealed class ExtractTextSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<ITextExtractor>(
         longName: TextExtractorLongName,
@@ -47,7 +47,7 @@ internal sealed class ExtractTextSubcommand
         ])
     ]
     [OptionGroup("extraction", "Extraction", "Options for configuring text extraction")]
-    internal ITextExtractor TextExtractor { get; set; } = TextExtractors.Parse(DefaultTextExtractor);
+    public ITextExtractor TextExtractor { get; set; } = TextExtractors.Parse(DefaultTextExtractor);
 
     [FlagOption(
         longName: UseTikaLongName,
@@ -55,5 +55,5 @@ internal sealed class ExtractTextSubcommand
         description: "use Tika for text extraction")
     ]
     [OptionGroup("extraction", "", "")]
-    internal bool UseTika { get; set; }
+    public bool UseTika { get; set; }
 }

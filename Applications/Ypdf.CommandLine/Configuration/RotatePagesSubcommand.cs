@@ -22,7 +22,7 @@ internal sealed class RotatePagesSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -31,7 +31,7 @@ internal sealed class RotatePagesSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [MultipleValueOption<PageRotation>(
         longName: PageRotationsLongName,
@@ -41,5 +41,5 @@ internal sealed class RotatePagesSubcommand
         isRequired: true)
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
-    internal List<PageRotation> PageRotations { get; set; } = [];
+    public List<PageRotation> PageRotations { get; set; } = [];
 }

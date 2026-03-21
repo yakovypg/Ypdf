@@ -19,7 +19,7 @@ internal sealed class GetInfoSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -27,7 +27,7 @@ internal sealed class GetInfoSubcommand
         description: "path to the output file")
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<int>(
         defaultValue: 0,
@@ -38,5 +38,5 @@ internal sealed class GetInfoSubcommand
         valueRestriction: "min 0\n?maximum number of page sizes must be non-negative")
     ]
     [OptionGroup("limitations", "Limitations", "Options to configure print limitations")]
-    internal int MaxPageSizesToPrint { get; set; }
+    public int MaxPageSizesToPrint { get; set; }
 }

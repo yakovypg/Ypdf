@@ -24,7 +24,7 @@ internal sealed class SplitSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -33,7 +33,7 @@ internal sealed class SplitSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [MultipleValueOption<PageRange>(
         longName: SplitPartsLongName,
@@ -42,7 +42,7 @@ internal sealed class SplitSubcommand
         contextCaptureType: ContextCaptureType.OneOrMore)
     ]
     [OptionGroup("paging", "Paging", "Options for configuring paging")]
-    internal List<PageRange> SplitParts { get; set; } = [];
+    public List<PageRange> SplitParts { get; set; } = [];
 
     [ValueOption<MathExpression>(
         longName: SplitPartSizeExpressionLongName,
@@ -51,5 +51,5 @@ internal sealed class SplitSubcommand
             "It can be either a number or a an expression (1024 or (1+3)*1024)")
     ]
     [OptionGroup("paths", "", "")]
-    internal MathExpression? SplitPartSizeExpression { get; set; }
+    public MathExpression? SplitPartSizeExpression { get; set; }
 }

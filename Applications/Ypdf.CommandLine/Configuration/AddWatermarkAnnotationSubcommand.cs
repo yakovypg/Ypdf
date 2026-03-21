@@ -43,7 +43,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -52,7 +52,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [MultipleValueOption<PageRange>(
         longName: PagesLongName,
@@ -62,7 +62,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         isRequired: true)
     ]
     [OptionGroup("paging", "Paging", "Options for configuring paging")]
-    internal List<PageRange> Pages { get; set; } = [];
+    public List<PageRange> Pages { get; set; } = [];
 
     [ValueOption<string>(
         longName: TextLongName,
@@ -72,7 +72,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "!empty\n?text mustn't be empty")
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring watermark appearance")]
-    internal string Text { get; set; } = string.Empty;
+    public string Text { get; set; } = string.Empty;
 
     [ValueOption<int>(
         defaultValue: 0,
@@ -82,7 +82,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring watermark annotation appearance")]
-    internal int RotationAngleDegrees { get; set; }
+    public int RotationAngleDegrees { get; set; }
 
     [ValueOption<float>(
         defaultValue: 300f,
@@ -93,7 +93,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "inrange 1 100000\n?with must be in [1; 100000]")
     ]
     [OptionGroup("appearance", "", "")]
-    internal float Width { get; set; }
+    public float Width { get; set; }
 
     [ValueOption<float>(
         defaultValue: 450f,
@@ -104,7 +104,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "inrange 1 100000\n?height must be in [1; 100000]")
     ]
     [OptionGroup("appearance", "", "")]
-    internal float Height { get; set; }
+    public float Height { get; set; }
 
     [ValueOption<FloatPoint>(
         longName: LowerLeftPointLongName,
@@ -112,7 +112,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         description: $"lower left point of the watermark annotation [default={DefaultLowerLeftPoint}] ((X;Y) -> (100;250))")
     ]
     [OptionGroup("appearance", "", "")]
-    internal FloatPoint LowerLeftPoint { get; set; } = FloatPoint.Parse(DefaultLowerLeftPoint);
+    public FloatPoint LowerLeftPoint { get; set; } = FloatPoint.Parse(DefaultLowerLeftPoint);
 
     [ValueOption<float>(
         defaultValue: 50f,
@@ -123,7 +123,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "inrange -100000 100000\n?X-translation must be in [-100000; 100000]")
     ]
     [OptionGroup("appearance", "", "")]
-    internal float XTranslation { get; set; }
+    public float XTranslation { get; set; }
 
     [ValueOption<float>(
         defaultValue: 25f,
@@ -134,7 +134,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "inrange -100000 100000\n?Y-translation must be in [-100000; 100000]")
     ]
     [OptionGroup("appearance", "", "")]
-    internal float YTranslation { get; set; }
+    public float YTranslation { get; set; }
 
     [ValueOption<string>(
         defaultValue: "",
@@ -149,7 +149,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         "Font Path",
         $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
     ]
-    internal string FontPath { get; set; } = string.Empty;
+    public string FontPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         defaultValue: PdfEncodings.IDENTITY_H,
@@ -177,7 +177,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
-    internal string FontEncoding { get; set; } = string.Empty;
+    public string FontEncoding { get; set; } = string.Empty;
 
     [ValueOption<float>(
         defaultValue: 24f,
@@ -188,7 +188,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "inrange 1 512\n?font size must be in [1; 512]")
     ]
     [OptionGroup("font", "", "")]
-    internal float FontSize { get; set; }
+    public float FontSize { get; set; }
 
     [ValueOption<float>(
         defaultValue: 1f,
@@ -199,7 +199,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         valueRestriction: "inrange 0 1\n?font opacity must be in [0; 1]")
     ]
     [OptionGroup("font", "", "")]
-    internal float FontOpacity { get; set; }
+    public float FontOpacity { get; set; }
 
     [ValueOption<string>(
         defaultValue: StandardFonts.TIMES_ROMAN,
@@ -232,7 +232,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         "",
         "")
     ]
-    internal string FontFamily { get; set; } = string.Empty;
+    public string FontFamily { get; set; } = string.Empty;
 
     [ValueOption<Color>(
         longName: FontColorLongName,
@@ -258,5 +258,5 @@ internal sealed class AddWatermarkAnnotationSubcommand
         ])
     ]
     [OptionGroup("font", "", "")]
-    internal Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
+    public Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
 }

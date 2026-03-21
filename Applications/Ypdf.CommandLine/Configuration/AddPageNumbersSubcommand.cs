@@ -47,7 +47,7 @@ internal sealed class AddPageNumbersSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -56,7 +56,7 @@ internal sealed class AddPageNumbersSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [EnumValueOption<TabAlignment>(
         defaultValue: TabAlignment.CENTER,
@@ -67,7 +67,7 @@ internal sealed class AddPageNumbersSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring page number appearance")]
-    internal TabAlignment HorizontalNumberAlignment { get; set; }
+    public TabAlignment HorizontalNumberAlignment { get; set; }
 
     [EnumValueOption<VerticalAlignment>(
         defaultValue: VerticalAlignment.BOTTOM,
@@ -78,7 +78,7 @@ internal sealed class AddPageNumbersSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
-    internal VerticalAlignment VerticalNumberAlignment { get; set; }
+    public VerticalAlignment VerticalNumberAlignment { get; set; }
 
     [ValueOption<Margin>(
         longName: MarginLongName,
@@ -86,7 +86,7 @@ internal sealed class AddPageNumbersSubcommand
         description: $"page number margin [default={DefaultMargin}] (M or H,V or L,T,R,B)")
     ]
     [OptionGroup("appearance", "", "")]
-    internal Margin Margin { get; set; } = Margin.Parse(DefaultMargin);
+    public Margin Margin { get; set; } = Margin.Parse(DefaultMargin);
 
     [EnumValueOption<LocationMode>(
         defaultValue: LocationMode.WithoutIncrease,
@@ -97,7 +97,7 @@ internal sealed class AddPageNumbersSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
-    internal LocationMode LocationMode { get; set; }
+    public LocationMode LocationMode { get; set; }
 
     [FlagOption(
         longName: ConsiderLeftPageMarginLongName,
@@ -105,7 +105,7 @@ internal sealed class AddPageNumbersSubcommand
         description: "indicate whether the left page margin is considered")
     ]
     [OptionGroup("appearance", "", "")]
-    internal bool ConsiderLeftPageMargin { get; set; }
+    public bool ConsiderLeftPageMargin { get; set; }
 
     [FlagOption(
         longName: ConsiderTopPageMarginLongName,
@@ -113,7 +113,7 @@ internal sealed class AddPageNumbersSubcommand
         description: "indicate whether the top page margin is considered")
     ]
     [OptionGroup("appearance", "", "")]
-    internal bool ConsiderTopPageMargin { get; set; }
+    public bool ConsiderTopPageMargin { get; set; }
 
     [FlagOption(
         longName: ConsiderRightPageMarginLongName,
@@ -121,7 +121,7 @@ internal sealed class AddPageNumbersSubcommand
         description: "indicate whether the right page margin is considered")
     ]
     [OptionGroup("appearance", "", "")]
-    internal bool ConsiderRightPageMargin { get; set; }
+    public bool ConsiderRightPageMargin { get; set; }
 
     [FlagOption(
         longName: ConsiderBottomPageMarginLongName,
@@ -129,7 +129,7 @@ internal sealed class AddPageNumbersSubcommand
         description: "indicate whether the bottom page margin is considered")
     ]
     [OptionGroup("appearance", "", "")]
-    internal bool ConsiderBottomPageMargin { get; set; }
+    public bool ConsiderBottomPageMargin { get; set; }
 
     [ValueOption<PageNumberTextPresenter>(
         longName: TextPresenterLongName,
@@ -145,7 +145,7 @@ internal sealed class AddPageNumbersSubcommand
         ])
     ]
     [OptionGroup("appearance", "", "")]
-    internal PageNumberTextPresenter TextPresenter { get; set; } = PageNumberTextPresenter.Parse(DefaultTextPresenter);
+    public PageNumberTextPresenter TextPresenter { get; set; } = PageNumberTextPresenter.Parse(DefaultTextPresenter);
 
     [MultipleValueOption<PageContentShift>(
         longName: PageNumberShiftsLongName,
@@ -154,7 +154,7 @@ internal sealed class AddPageNumbersSubcommand
         contextCaptureType: ContextCaptureType.OneOrMore)
     ]
     [OptionGroup("appearance", "", "")]
-    internal List<PageContentShift> PageNumberShifts { get; set; } = [];
+    public List<PageContentShift> PageNumberShifts { get; set; } = [];
 
     [ValueOption<string>(
         defaultValue: "",
@@ -169,7 +169,7 @@ internal sealed class AddPageNumbersSubcommand
         "Font Path",
         $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
     ]
-    internal string FontPath { get; set; } = string.Empty;
+    public string FontPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         defaultValue: PdfEncodings.IDENTITY_H,
@@ -197,7 +197,7 @@ internal sealed class AddPageNumbersSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
-    internal string FontEncoding { get; set; } = string.Empty;
+    public string FontEncoding { get; set; } = string.Empty;
 
     [ValueOption<float>(
         defaultValue: 24f,
@@ -208,7 +208,7 @@ internal sealed class AddPageNumbersSubcommand
         valueRestriction: "inrange 1 512\n?font size must be in [1; 512]")
     ]
     [OptionGroup("font", "", "")]
-    internal float FontSize { get; set; }
+    public float FontSize { get; set; }
 
     [ValueOption<float>(
         defaultValue: 1f,
@@ -219,7 +219,7 @@ internal sealed class AddPageNumbersSubcommand
         valueRestriction: "inrange 0 1\n?font opacity must be in [0; 1]")
     ]
     [OptionGroup("font", "", "")]
-    internal float FontOpacity { get; set; }
+    public float FontOpacity { get; set; }
 
     [ValueOption<string>(
         defaultValue: StandardFonts.TIMES_ROMAN,
@@ -252,7 +252,7 @@ internal sealed class AddPageNumbersSubcommand
         "",
         "")
     ]
-    internal string FontFamily { get; set; } = string.Empty;
+    public string FontFamily { get; set; } = string.Empty;
 
     [ValueOption<Color>(
         longName: FontColorLongName,
@@ -278,5 +278,5 @@ internal sealed class AddPageNumbersSubcommand
         ])
     ]
     [OptionGroup("font", "", "")]
-    internal Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
+    public Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
 }

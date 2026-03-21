@@ -22,7 +22,7 @@ internal sealed class CompressSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -31,7 +31,7 @@ internal sealed class CompressSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<float>(
         defaultValue: 0.75f,
@@ -42,7 +42,7 @@ internal sealed class CompressSubcommand
         valueRestriction: "inrange 0 1\n?extracted image quality factor must be in [0; 1]")
     ]
     [OptionGroup("compression", "Compression", "Options for configuring compression")]
-    internal float QualityFactor { get; set; }
+    public float QualityFactor { get; set; }
 
     [ValueOption<float>(
         defaultValue: 1.0f,
@@ -53,7 +53,7 @@ internal sealed class CompressSubcommand
         valueRestriction: "inrange 0 1\n?extracted image size factor must be in [0; 1]")
     ]
     [OptionGroup("compression", "", "")]
-    internal float SizeFactor { get; set; }
+    public float SizeFactor { get; set; }
 
     [ValueOption<string>(
         defaultValue: "jpg",
@@ -65,7 +65,7 @@ internal sealed class CompressSubcommand
         addChoicesToDescription: true)
     ]
     [OptionGroup("compression", "", "")]
-    internal string Extension { get; set; } = string.Empty;
+    public string Extension { get; set; } = string.Empty;
 
     [FlagOption(
         longName: DisableCompressionCapabilityCheckLongName,
@@ -73,5 +73,5 @@ internal sealed class CompressSubcommand
         description: "disable compression capability check")
     ]
     [OptionGroup("compression", "", "")]
-    internal bool DisableCompressionCapabilityCheck { get; set; }
+    public bool DisableCompressionCapabilityCheck { get; set; }
 }

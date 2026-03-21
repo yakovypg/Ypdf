@@ -23,7 +23,7 @@ internal sealed class ConfigSubcommand
         "You can use only one of the following actions: " +
             $"{nameof(ShowConfig)}, {nameof(SaveConfig)}, {nameof(ResetConfig)}")
     ]
-    internal bool ShowConfig { get; set; }
+    public bool ShowConfig { get; set; }
 
     [FlagOption(
         longName: SaveConfigLongName,
@@ -31,7 +31,7 @@ internal sealed class ConfigSubcommand
         description: "save configuration")
     ]
     [MutuallyExclusiveOptionGroup($"{nameof(ConfigSubcommand)}.Action", "", "")]
-    internal bool SaveConfig { get; set; }
+    public bool SaveConfig { get; set; }
 
     [FlagOption(
         longName: ResetConfigLongName,
@@ -39,7 +39,7 @@ internal sealed class ConfigSubcommand
         description: "reset configuration")
     ]
     [MutuallyExclusiveOptionGroup($"{nameof(ConfigSubcommand)}.Action", "", "")]
-    internal bool ResetConfig { get; set; }
+    public bool ResetConfig { get; set; }
 
     [ValueOption<string>(
         longName: PythonAliasLongName,
@@ -49,5 +49,5 @@ internal sealed class ConfigSubcommand
             "\n?pthon alias mustn't be an empty string or a string consisting only of whitespace characters")
     ]
     [OptionGroup("variables", "Global Variables", "Options for configuring global variables")]
-    internal string? PythonAlias { get; set; }
+    public string? PythonAlias { get; set; }
 }

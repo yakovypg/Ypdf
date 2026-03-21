@@ -21,7 +21,7 @@ internal sealed class RemovePasswordSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -30,7 +30,7 @@ internal sealed class RemovePasswordSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: CommonPasswordLongName,
@@ -44,7 +44,7 @@ internal sealed class RemovePasswordSubcommand
         "You can use only one of the following password types: " +
             $"{nameof(CommonPassword)}, {nameof(UserPassword)}, {nameof(OwnerPassword)}")
     ]
-    internal string? CommonPassword { get; set; }
+    public string? CommonPassword { get; set; }
 
     [ValueOption<string>(
         longName: UserPasswordLongName,
@@ -53,7 +53,7 @@ internal sealed class RemovePasswordSubcommand
     ]
     [OptionGroup("passwords", "", "")]
     [MutuallyExclusiveOptionGroup($"{nameof(RemovePasswordSubcommand)}.PasswordTypes", "", "")]
-    internal string? UserPassword { get; set; }
+    public string? UserPassword { get; set; }
 
     [ValueOption<string>(
         longName: OwnerPasswordLongName,
@@ -62,5 +62,5 @@ internal sealed class RemovePasswordSubcommand
     ]
     [OptionGroup("passwords", "", "")]
     [MutuallyExclusiveOptionGroup($"{nameof(RemovePasswordSubcommand)}.PasswordTypes", "", "")]
-    internal string? OwnerPassword { get; set; }
+    public string? OwnerPassword { get; set; }
 }

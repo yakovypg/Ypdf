@@ -20,7 +20,7 @@ internal sealed class MovePageSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -29,7 +29,7 @@ internal sealed class MovePageSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<int>(
         longName: SourcePageNumberLongName,
@@ -38,7 +38,7 @@ internal sealed class MovePageSubcommand
         isRequired: true,
         valueRestriction: "min 1\n?source page number must be >= 1")
     ]
-    internal int SourcePageNumber { get; set; }
+    public int SourcePageNumber { get; set; }
 
     [ValueOption<int>(
         longName: DestinationPageNumberLongName,
@@ -47,5 +47,5 @@ internal sealed class MovePageSubcommand
         isRequired: true,
         valueRestriction: "min 1\n?destination page number must be >= 1")
     ]
-    internal int DestinationPageNumber { get; set; }
+    public int DestinationPageNumber { get; set; }
 }

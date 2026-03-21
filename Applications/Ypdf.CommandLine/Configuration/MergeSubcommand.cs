@@ -21,7 +21,7 @@ internal sealed class MergeSubcommand
         valueRestriction: "file pdf\n?all input paths must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal List<string> InputPaths { get; set; } = [];
+    public List<string> InputPaths { get; set; } = [];
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -30,5 +30,5 @@ internal sealed class MergeSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 }

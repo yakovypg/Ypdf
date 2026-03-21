@@ -38,7 +38,7 @@ internal sealed class TextToPdfSubcommand
         valueRestriction: "fileexists\n?input path must point to an existing file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -47,7 +47,7 @@ internal sealed class TextToPdfSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<Margin>(
         longName: MarginLongName,
@@ -55,7 +55,7 @@ internal sealed class TextToPdfSubcommand
         description: $"text margin [default={DefaultMargin}] (M or H,V or L,T,R,B)")
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
-    internal Margin Margin { get; set; } = Margin.Parse(DefaultMargin);
+    public Margin Margin { get; set; } = Margin.Parse(DefaultMargin);
 
     [ValueOption<PageSize>(
         longName: PageSizeLongName,
@@ -63,7 +63,7 @@ internal sealed class TextToPdfSubcommand
         description: $"page size [default={DefaultPageSize}] (name or (width,height))")
     ]
     [OptionGroup("appearance", "", "")]
-    internal PageSize PageSize { get; set; } = PageSizeConverter.Parse(DefaultPageSize);
+    public PageSize PageSize { get; set; } = PageSizeConverter.Parse(DefaultPageSize);
 
     [EnumValueOption<TextAlignment>(
         defaultValue: TextAlignment.LEFT,
@@ -74,7 +74,7 @@ internal sealed class TextToPdfSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("appearance", "", "")]
-    internal TextAlignment TextAlignment { get; set; }
+    public TextAlignment TextAlignment { get; set; }
 
     [ValueOption<string>(
         defaultValue: "",
@@ -89,7 +89,7 @@ internal sealed class TextToPdfSubcommand
         "Font Path",
         $"{nameof(FontPath)} cannot be used with the {nameof(FontFamily)}")
     ]
-    internal string FontPath { get; set; } = string.Empty;
+    public string FontPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         defaultValue: PdfEncodings.IDENTITY_H,
@@ -117,7 +117,7 @@ internal sealed class TextToPdfSubcommand
         addDefaultValueToDescription: true)
     ]
     [OptionGroup("font", "", "")]
-    internal string FontEncoding { get; set; } = string.Empty;
+    public string FontEncoding { get; set; } = string.Empty;
 
     [ValueOption<float>(
         defaultValue: 24f,
@@ -128,7 +128,7 @@ internal sealed class TextToPdfSubcommand
         valueRestriction: "inrange 1 512\n?font size must be in [1; 512]")
     ]
     [OptionGroup("font", "", "")]
-    internal float FontSize { get; set; }
+    public float FontSize { get; set; }
 
     [ValueOption<float>(
         defaultValue: 1f,
@@ -139,7 +139,7 @@ internal sealed class TextToPdfSubcommand
         valueRestriction: "inrange 0 1\n?font opacity must be in [0; 1]")
     ]
     [OptionGroup("font", "", "")]
-    internal float FontOpacity { get; set; }
+    public float FontOpacity { get; set; }
 
     [ValueOption<string>(
         defaultValue: StandardFonts.TIMES_ROMAN,
@@ -172,7 +172,7 @@ internal sealed class TextToPdfSubcommand
         "",
         "")
     ]
-    internal string FontFamily { get; set; } = string.Empty;
+    public string FontFamily { get; set; } = string.Empty;
 
     [ValueOption<Color>(
         longName: FontColorLongName,
@@ -198,5 +198,5 @@ internal sealed class TextToPdfSubcommand
         ])
     ]
     [OptionGroup("font", "", "")]
-    internal Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
+    public Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
 }

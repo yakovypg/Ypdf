@@ -19,7 +19,7 @@ internal sealed class ExtractImagesSubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         longName: OutputPathLongName,
@@ -28,7 +28,7 @@ internal sealed class ExtractImagesSubcommand
         isRequired: true)
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 
     [ValueOption<int>(
         defaultValue: 0,
@@ -39,5 +39,5 @@ internal sealed class ExtractImagesSubcommand
         valueRestriction: "min 0\n?maximum number of images must be non-negative")
     ]
     [OptionGroup("extraction", "Extraction", "Options for configuring image extraction")]
-    internal int MaxNumberOfImagesToExtract { get; set; }
+    public int MaxNumberOfImagesToExtract { get; set; }
 }

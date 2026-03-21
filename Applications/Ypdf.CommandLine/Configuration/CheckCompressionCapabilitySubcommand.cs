@@ -18,7 +18,7 @@ internal sealed class CheckCompressionCapabilitySubcommand
         valueRestriction: "file pdf\n?input path must point to a .pdf file")
     ]
     [OptionGroup("paths", "Paths", "Options for configuring paths")]
-    internal string InputPath { get; set; } = string.Empty;
+    public string InputPath { get; set; } = string.Empty;
 
     [ValueOption<string>(
         defaultValue: "",
@@ -27,5 +27,5 @@ internal sealed class CheckCompressionCapabilitySubcommand
         description: "path to the output file [default=\"\"]")
     ]
     [OptionGroup("paths", "", "")]
-    internal string OutputPath { get; set; } = string.Empty;
+    public string OutputPath { get; set; } = string.Empty;
 }
