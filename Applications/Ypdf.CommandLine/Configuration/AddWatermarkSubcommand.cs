@@ -106,7 +106,7 @@ internal sealed class AddWatermarkSubcommand
     [ValueOption<float>(
         defaultValue: 450f,
         longName: HeightLongName,
-        shortName: "h",
+        shortName: "H",
         description: "watermark object height",
         addDefaultValueToDescription: true,
         valueRestriction: "inrange 1 100000\n?height must be in [1; 100000]")

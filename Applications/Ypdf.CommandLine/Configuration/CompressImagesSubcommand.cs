@@ -83,7 +83,7 @@ internal sealed class CompressImagesSubcommand
 
     [ValueOption<int>(
         longName: HeightLongName,
-        shortName: "h",
+        shortName: "H",
         description: "output image height",
         valueRestriction: "inrange 1 100000\n?output image height must be in [1; 100000]")
     ]
