@@ -4,7 +4,7 @@ namespace Ypdf.CommandLine.Configuration;
 
 internal sealed class CheckCompressionCapabilitySubcommand
 {
-    internal const string Name = "compress";
+    internal const string Name = "can-compress";
     internal const string Description = "Compress PDF document";
 
     internal const string InputPathLongName = "input";
