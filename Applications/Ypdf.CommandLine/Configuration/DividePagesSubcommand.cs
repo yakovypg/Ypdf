@@ -33,7 +33,7 @@ internal sealed class DividePagesSubcommand
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
-    [MultipleValueOption<PageCropping>(
+    [MultipleValueOption<PageDivision>(
         longName: PageDivisionsLongName,
         shortName: "d",
         description: "page divisions (Pages:Orientation,CenterOffset -> 1:horizontal or 1,3-5:vertical,10)",
