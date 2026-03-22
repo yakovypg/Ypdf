@@ -6,19 +6,19 @@ using Ypdf.Core.Design.Pages;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class CropPagesSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class CropPagesSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPageCroppingsOption
     ];
 
-    private static void AddRestrictionForPageCroppingsOption(Subcommand subcommand)
+    private static void AddRestrictionForPageCroppingsOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageCroppingEnumerableOption<IList<PageCropping>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: CropPagesSubcommand.PageCroppingsLongName,
             minX: 0,
             minY: 0,

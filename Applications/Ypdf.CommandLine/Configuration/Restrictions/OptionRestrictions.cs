@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NetArgumentParser.Options;
-using NetArgumentParser.Options.Configuration;
 using NetArgumentParser.Subcommands;
 using Ypdf.CommandLine.Exceptions;
 using Ypdf.Core.Design.Pages;
@@ -11,29 +10,8 @@ using Ypdf.Core.Geometry;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
+internal abstract class OptionRestrictions : OptionRestrictionProvider
 {
-    protected abstract IReadOnlyCollection<Action<Subcommand>> RestrictionProviders { get; }
-
-    public virtual void AddRestrictions(Subcommand subcommand)
-    {
-        foreach (Action<Subcommand> addRestriction in RestrictionProviders)
-        {
-            addRestriction.Invoke(subcommand);
-        }
-    }
-
-    protected static string CreateValueNotSatisfuRestrictionMessage(string optionName, string? reason = null)
-    {
-        ExtendedArgumentNullException.ThrowIfNull(optionName, nameof(optionName));
-
-        reason = reason is not null
-            ? $": {reason}"
-            : null;
-
-        return $"Value of '{optionName}' is incorrect{reason}";
-    }
-
     protected static Predicate<PageContentShift> CreatePageContentShiftCorrectPredicate(int minPage = 1)
     {
         return t => t.PageNumber >= minPage;
@@ -131,82 +109,53 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         };
     }
 
-    protected static IValueOption<T> FindOption<T>(Subcommand subcommand, string longName)
-    {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
-        ExtendedArgumentNullException.ThrowIfNull(longName, nameof(longName));
-
-        bool found = subcommand.FindFirstValueOptionByLongName(longName, false, out IValueOption<T>? foundOption);
-
-        return found && foundOption is not null
-            ? foundOption
-            : throw new SubcommandConfiguredIncorrectlyException(null, subcommand);
-    }
-
-    protected static void AddRestriction<T>(
-        Subcommand subcommand,
-        string optionLongName,
-        Predicate<T> isValueAllowed,
-        string? valueNotSatisfuRestrictionMessage = null)
-    {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
-        ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
-        ExtendedArgumentNullException.ThrowIfNull(isValueAllowed, nameof(isValueAllowed));
-
-        IValueOption<T> inputPathOption = FindOption<T>(subcommand, optionLongName);
-
-        inputPathOption.ValueRestriction = new OptionValueRestriction<T>(
-            isValueAllowed,
-            valueNotSatisfuRestrictionMessage);
-    }
-
     protected static void AddRestrictionForPageContentShiftEnumerableOption<T>(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName,
         int minPage = 1)
         where T : IEnumerable<PageContentShift>
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = $"all pages must be >= {minPage}";
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreateAllPageContentShiftsCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
     protected static void AddRestrictionForFloatPointOption(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName,
         float minX = 0,
         float minY = 0)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = $"X-coordinates must be >= {minX} and Y-coordinates must be >= {minY}";
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreateFloatPointCorrectPredicate(minX, minY),
             badValueMessage);
     }
 
     protected static void AddRestrictionForPageCroppingEnumerableOption<T>(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName,
         float minX = 0,
         float minY = 0,
         int minPage = 1)
         where T : IEnumerable<PageCropping>
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = $"all pages must be >= {minPage}, " +
@@ -216,99 +165,99 @@ internal abstract class OptionRestrictionProvider : IOptionRestrictionProvider
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreateAllPageCroppingsCorrectPredicate<T>(minX, minY, minPage),
             badValueMessage);
     }
 
     protected static void AddRestrictionForPageDivisionEnumerableOption<T>(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName,
         int minPage = 1)
         where T : IEnumerable<PageDivision>
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = $"all pages must be >= {minPage}";
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreateAllPageDivisionsCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
     protected static void AddRestrictionForPageOrderOption(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName,
         int minPage = 1)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = $"all pages must be >= {minPage}";
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreatePageOrderCorrectPredicate(minPage),
             badValueMessage);
     }
 
     protected static void AddRestrictionForPageRotationEnumerableOption<T>(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName,
         int minPage = 1)
         where T : IEnumerable<PageRotation>
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = $"all pages must be >= {minPage}";
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreateAllPageRotationsCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
     protected static void AddRestrictionForPageRangeEnumerableOption<T>(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName,
         int minPage = 1)
         where T : IEnumerable<PageRange>
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = $"all pages must be >= {minPage}";
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreateAllPageRangesCorrectPredicate<T>(minPage),
             badValueMessage);
     }
 
     protected static void AddRestrictionForLongMathExpressionOption(
-        Subcommand subcommand,
+        ParserQuantum parserQuantum,
         string optionLongName)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
         ExtendedArgumentNullException.ThrowIfNull(optionLongName, nameof(optionLongName));
 
         string badValueReason = "expression must be correct";
         string badValueMessage = CreateValueNotSatisfuRestrictionMessage(optionLongName, badValueReason);
 
         AddRestriction(
-            subcommand,
+            parserQuantum,
             optionLongName,
             CreateLongMathExpressionCorrectPredicate(),
             badValueMessage);

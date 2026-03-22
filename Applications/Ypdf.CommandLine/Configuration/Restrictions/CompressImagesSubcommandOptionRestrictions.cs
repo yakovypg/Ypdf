@@ -4,7 +4,7 @@ using NetArgumentParser.Subcommands;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class CompressImagesSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class CompressImagesSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders => [];
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders => [];
 }

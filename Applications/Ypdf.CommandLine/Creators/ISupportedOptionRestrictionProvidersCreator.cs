@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Ypdf.CommandLine.Configuration.Restrictions;
+using NetArgumentParser.Options;
 
 namespace Ypdf.CommandLine.Creators;
 
 internal interface ISupportedOptionRestrictionProvidersCreator
 {
-    Dictionary<string, IOptionRestrictionProvider> Create();
+    Dictionary<string, IOptionConfigurationProvider> Create();
 }

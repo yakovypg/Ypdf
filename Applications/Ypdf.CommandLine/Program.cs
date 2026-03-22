@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using NetArgumentParser;
 using NetArgumentParser.Informing;
+using NetArgumentParser.Options;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
-using Ypdf.CommandLine.Configuration.Restrictions;
 using Ypdf.CommandLine.Creators;
 using Ypdf.CommandLine.Creators.Tools;
 using Ypdf.CommandLine.Exceptions;
@@ -68,11 +68,11 @@ static void SetRestrictions(ArgumentParser parser)
 
     SupportedOptionRestrictionProvidersCreator supportedOptionRestrictionProvidersCreator = new();
 
-    Dictionary<string, IOptionRestrictionProvider> supportedOptionRestrictionProviders =
+    Dictionary<string, IOptionConfigurationProvider> supportedOptionRestrictionProviders =
         supportedOptionRestrictionProvidersCreator.Create();
 
-    OptionRestrictionSetter optionRestrictionsSetter = new(supportedOptionRestrictionProviders);
-    optionRestrictionsSetter.SetRestrictions(parser);
+    OptionConfigurationSetter optionConfigurationSetter = new(supportedOptionRestrictionProviders);
+    optionConfigurationSetter.SetOptionConfigurations(parser);
 }
 
 static Dictionary<string, IToolCreator> GetSupportedTools(GlobalConfig globalConfig)

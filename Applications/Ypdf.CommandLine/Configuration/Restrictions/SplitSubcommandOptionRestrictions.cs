@@ -6,30 +6,30 @@ using Ypdf.Core.Enumeration;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class SplitSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class SplitSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForSplitPartsOption,
         AddRestrictionForSplitPartSizeExpressionOption
     ];
 
-    private static void AddRestrictionForSplitPartsOption(Subcommand subcommand)
+    private static void AddRestrictionForSplitPartsOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageRangeEnumerableOption<IList<PageRange>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: SplitSubcommand.SplitPartsLongName,
             minPage: 1);
     }
 
-    private static void AddRestrictionForSplitPartSizeExpressionOption(Subcommand subcommand)
+    private static void AddRestrictionForSplitPartSizeExpressionOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForLongMathExpressionOption(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: SplitSubcommand.SplitPartSizeExpressionLongName);
     }
 }

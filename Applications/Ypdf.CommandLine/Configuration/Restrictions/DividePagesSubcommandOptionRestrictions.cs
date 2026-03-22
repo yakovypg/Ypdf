@@ -6,19 +6,19 @@ using Ypdf.Core.Design.Pages;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class DividePagesSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class DividePagesSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPageDivisionsOption
     ];
 
-    private static void AddRestrictionForPageDivisionsOption(Subcommand subcommand)
+    private static void AddRestrictionForPageDivisionsOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageDivisionEnumerableOption<IList<PageDivision>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: DividePagesSubcommand.PageDivisionsLongName,
             minPage: 1);
     }

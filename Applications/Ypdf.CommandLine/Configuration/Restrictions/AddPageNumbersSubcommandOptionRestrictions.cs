@@ -6,19 +6,19 @@ using Ypdf.Core.Design.Pages;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class AddPageNumbersSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class AddPageNumbersSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPageNumberShiftsOption
     ];
 
-    private static void AddRestrictionForPageNumberShiftsOption(Subcommand subcommand)
+    private static void AddRestrictionForPageNumberShiftsOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageContentShiftEnumerableOption<IList<PageContentShift>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: AddPageNumbersSubcommand.PageNumberShiftsLongName,
             minPage: 1);
     }

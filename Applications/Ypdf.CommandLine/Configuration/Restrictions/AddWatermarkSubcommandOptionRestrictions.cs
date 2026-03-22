@@ -6,30 +6,30 @@ using Ypdf.Core.Enumeration;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class AddWatermarkSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class AddWatermarkSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPagesOption,
         AddRestrictionForLowerLeftPointOption
     ];
 
-    private static void AddRestrictionForPagesOption(Subcommand subcommand)
+    private static void AddRestrictionForPagesOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageRangeEnumerableOption<IList<PageRange>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: AddWatermarkSubcommand.PagesLongName,
             minPage: 1);
     }
 
-    private static void AddRestrictionForLowerLeftPointOption(Subcommand subcommand)
+    private static void AddRestrictionForLowerLeftPointOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForFloatPointOption(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: AddWatermarkSubcommand.LowerLeftPointLongName,
             minX: 0,
             minY: 0);

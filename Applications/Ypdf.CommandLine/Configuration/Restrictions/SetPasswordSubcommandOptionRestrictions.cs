@@ -4,7 +4,7 @@ using NetArgumentParser.Subcommands;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class SetPasswordSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class SetPasswordSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders => [];
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders => [];
 }

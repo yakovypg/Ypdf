@@ -5,19 +5,19 @@ using Ypdf.CommandLine.Exceptions;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class ReorderPagesSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class ReorderPagesSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPageOrderOption,
     ];
 
-    private static void AddRestrictionForPageOrderOption(Subcommand subcommand)
+    private static void AddRestrictionForPageOrderOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageOrderOption(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: ReorderPagesSubcommand.PageOrderLongName,
             minPage: 1);
     }

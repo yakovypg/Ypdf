@@ -6,19 +6,19 @@ using Ypdf.Core.Design.Pages;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class RotatePagesSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class RotatePagesSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPageRotationsOption,
     ];
 
-    private static void AddRestrictionForPageRotationsOption(Subcommand subcommand)
+    private static void AddRestrictionForPageRotationsOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageRotationEnumerableOption<IList<PageRotation>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: RotatePagesSubcommand.PageRotationsLongName,
             minPage: 1);
     }

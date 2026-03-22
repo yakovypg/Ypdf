@@ -6,19 +6,19 @@ using Ypdf.Core.Enumeration;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class RemoveWatermarkAnnotationSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class RemoveWatermarkAnnotationSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPagesOption
     ];
 
-    private static void AddRestrictionForPagesOption(Subcommand subcommand)
+    private static void AddRestrictionForPagesOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageRangeEnumerableOption<IList<PageRange>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: RemoveWatermarkAnnotationSubcommand.PagesLongName,
             minPage: 1);
     }

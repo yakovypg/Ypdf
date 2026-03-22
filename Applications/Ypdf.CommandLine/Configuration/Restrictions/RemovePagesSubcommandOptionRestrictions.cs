@@ -6,19 +6,19 @@ using Ypdf.Core.Enumeration;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 
-internal sealed class RemovePagesSubcommandOptionRestrictions : OptionRestrictionProvider
+internal sealed class RemovePagesSubcommandOptionRestrictions : OptionRestrictions
 {
-    protected override IReadOnlyCollection<Action<Subcommand>> RestrictionProviders =>
+    protected override IReadOnlyCollection<Action<ParserQuantum>> ConfigurationProviders =>
     [
         AddRestrictionForPagesOption,
     ];
 
-    private static void AddRestrictionForPagesOption(Subcommand subcommand)
+    private static void AddRestrictionForPagesOption(ParserQuantum parserQuantum)
     {
-        ExtendedArgumentNullException.ThrowIfNull(subcommand, nameof(subcommand));
+        ExtendedArgumentNullException.ThrowIfNull(parserQuantum, nameof(parserQuantum));
 
         AddRestrictionForPageRangeEnumerableOption<IList<PageRange>>(
-            subcommand: subcommand,
+            parserQuantum: parserQuantum,
             optionLongName: RemovePagesSubcommand.PagesLongName,
             minPage: 1);
     }
