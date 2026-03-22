@@ -1,5 +1,6 @@
 using System;
 using Ypdf.CommandLine.AppConfig;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Tools;
 

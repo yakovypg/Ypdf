@@ -7,6 +7,7 @@ using NetArgumentParser;
 using NetArgumentParser.Converters;
 using NetArgumentParser.Generators;
 using Ypdf.CommandLine.Converters;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.Core.Design;
 using Ypdf.Core.Design.Pages;
 using Ypdf.Core.Enumeration;

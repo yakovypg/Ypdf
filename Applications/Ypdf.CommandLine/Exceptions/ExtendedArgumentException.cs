@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Ypdf.CommandLine;
+namespace Ypdf.CommandLine.Exceptions;
 
 [Serializable]
 internal sealed class ExtendedArgumentException : ArgumentException

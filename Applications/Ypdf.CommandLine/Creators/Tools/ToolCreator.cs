@@ -1,5 +1,6 @@
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 
 namespace Ypdf.CommandLine.Creators.Tools;

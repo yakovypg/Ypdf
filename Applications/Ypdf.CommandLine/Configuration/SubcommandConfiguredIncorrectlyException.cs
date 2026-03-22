@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 using NetArgumentParser.Subcommands;
+using Ypdf.CommandLine.Exceptions;
 
 namespace Ypdf.CommandLine.Configuration;
 

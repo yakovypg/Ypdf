@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Ypdf.CommandLine;
+namespace Ypdf.CommandLine.Exceptions;
 
 internal static class DefaultExceptions
 {

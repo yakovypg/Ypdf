@@ -1,4 +1,5 @@
 using System.IO;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
 using Ypdf.Core.Tools;

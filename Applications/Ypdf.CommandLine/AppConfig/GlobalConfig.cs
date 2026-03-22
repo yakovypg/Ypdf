@@ -1,5 +1,6 @@
 using System.IO;
 using Newtonsoft.Json;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.Core;
 using Ypdf.Core.Runtime.Logging;
 

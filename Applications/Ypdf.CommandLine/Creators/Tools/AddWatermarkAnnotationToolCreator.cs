@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 using Ypdf.Core.Design.Fonts;
 using Ypdf.Core.Design.Watermarks;

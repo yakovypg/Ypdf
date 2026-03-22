@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using iText.Kernel.Colors;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.Core;
 using Ypdf.Core.Extensions;
 

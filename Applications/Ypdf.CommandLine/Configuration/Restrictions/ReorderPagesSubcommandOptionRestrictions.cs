@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NetArgumentParser.Subcommands;
+using Ypdf.CommandLine.Exceptions;
 
 namespace Ypdf.CommandLine.Configuration.Restrictions;
 

@@ -1,6 +1,7 @@
 using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 using Ypdf.Core.Design.Fonts;
 using Ypdf.Core.Design.Pages;

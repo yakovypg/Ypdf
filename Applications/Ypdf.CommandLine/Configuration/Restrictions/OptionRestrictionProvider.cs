@@ -4,6 +4,7 @@ using System.Linq;
 using NetArgumentParser.Options;
 using NetArgumentParser.Options.Configuration;
 using NetArgumentParser.Subcommands;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.Core.Design.Pages;
 using Ypdf.Core.Enumeration;
 using Ypdf.Core.Geometry;

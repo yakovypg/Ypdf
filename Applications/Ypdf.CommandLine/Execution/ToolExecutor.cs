@@ -3,6 +3,7 @@ using NetArgumentParser.Informing;
 using NetArgumentParser.Subcommands;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Creators.Tools;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Validation;
 
 namespace Ypdf.CommandLine.Execution;

@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace Ypdf.CommandLine;
+namespace Ypdf.CommandLine.Exceptions;
 
 [Serializable]
 internal sealed class ExtendedArgumentNullException : ArgumentNullException

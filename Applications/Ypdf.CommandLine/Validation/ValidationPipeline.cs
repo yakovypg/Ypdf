@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Validation.Middlewares;
 

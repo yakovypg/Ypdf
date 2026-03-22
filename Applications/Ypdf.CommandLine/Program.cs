@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using NetArgumentParser;
 using NetArgumentParser.Informing;
-using Ypdf.CommandLine;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Configuration.Restrictions;
 using Ypdf.CommandLine.Creators;
 using Ypdf.CommandLine.Creators.Tools;
+using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
 using Ypdf.CommandLine.Validation;

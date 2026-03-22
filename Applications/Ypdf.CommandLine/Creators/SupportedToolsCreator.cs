@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Creators.Tools;
+using Ypdf.CommandLine.Exceptions;
 
 namespace Ypdf.CommandLine.Creators;
 
