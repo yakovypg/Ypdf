@@ -23,7 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)/Config/Shared/*.cs" Visible="false" />
+    <Compile Include="$(MSBuildThisFileDirectory)/Shared/*.cs" Visible="false" />
     <AdditionalFiles Include="../../stylecop.json" />
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
