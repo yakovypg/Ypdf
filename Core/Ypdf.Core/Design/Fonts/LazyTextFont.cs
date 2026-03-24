@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using iText.IO.Font;
+using iText.Kernel.Colors;
 using Ypdf.Core.Utils;
 
 namespace Ypdf.Core.Design.Fonts;
@@ -36,6 +37,16 @@ public readonly struct LazyTextFont : IEquatable<LazyTextFont>
     public readonly TextFont Create()
     {
         return TextFont.Create(_path, _encoding);
+    }
+
+    public readonly TextFontInfo CreateTextFontInfo(float size = 12, float opacity = 1)
+    {
+        return CreateTextFontInfo(ColorConstants.DARK_GRAY, size, opacity);
+    }
+
+    public readonly TextFontInfo CreateTextFontInfo(Color color, float size = 12, float opacity = 1)
+    {
+        return new TextFontInfo(_path, _encoding, color, size, opacity);
     }
 
     public readonly bool Equals(LazyTextFont other)

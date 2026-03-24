@@ -11,7 +11,6 @@ public static class CoreDirectories
         RootDirectory = Path.GetDirectoryName(AssemblyLocation) ?? string.Empty;
 
         Temp = Path.Combine(RootDirectory, "Temp");
-        Fonts = Path.Combine(RootDirectory, "Fonts");
         Scripts = Path.Combine(RootDirectory, "Scripts");
     }
 
@@ -19,13 +18,11 @@ public static class CoreDirectories
     public static string RootDirectory { get; }
 
     public static string Temp { get; }
-    public static string Fonts { get; }
     public static string Scripts { get; }
 
     public static void Prepare()
     {
         PrepareDirectory(Temp);
-        PrepareDirectory(Fonts);
         PrepareDirectory(Scripts);
     }
 
