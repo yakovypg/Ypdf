@@ -3,12 +3,12 @@ using System.Text;
 
 namespace Ypdf.Core.Extensions;
 
-public static class StringExtensions
+internal static class StringExtensions
 {
     private const StringComparison _defaultComparisonType = StringComparison.CurrentCulture;
 
 #if !NET5_0_OR_GREATER && !NETCOREAPP3_0_OR_GREATER && !NETSTANDARD2_1_OR_GREATER
-    public static string Replace(
+    internal static string Replace(
         this string text,
         string oldValue,
         string? newValue,
@@ -42,7 +42,7 @@ public static class StringExtensions
             .ToString();
     }
 
-    public static bool Contains(
+    internal static bool Contains(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -50,7 +50,7 @@ public static class StringExtensions
         return text.Contains($"{value}", comparisonType);
     }
 
-    public static bool Contains(
+    internal static bool Contains(
         this string text,
         string? value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -62,7 +62,7 @@ public static class StringExtensions
             : false;
     }
 
-    public static int IndexOf(
+    internal static int IndexOf(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -72,7 +72,7 @@ public static class StringExtensions
     }
 #endif
 
-    public static bool StartsWith(
+    internal static bool StartsWith(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -81,7 +81,7 @@ public static class StringExtensions
         return text.StartsWith($"{value}", comparisonType);
     }
 
-    public static bool EndsWith(
+    internal static bool EndsWith(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)

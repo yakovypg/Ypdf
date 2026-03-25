@@ -2,10 +2,13 @@ using iText.Kernel.Pdf;
 
 namespace Ypdf.Core.Extensions;
 
-internal static class PdfDocumentExtensions
+public static class PdfDocumentExtensions
 {
-    internal static void CopyTo(this PdfDocument source, PdfDocument destination)
+    public static void CopyTo(this PdfDocument source, PdfDocument destination)
     {
+        ExtendedArgumentNullException.ThrowIfNull(source, nameof(source));
+        ExtendedArgumentNullException.ThrowIfNull(destination, nameof(destination));
+
         int numOfPages = source.GetNumberOfPages();
         source.CopyPagesTo(1, numOfPages, destination);
     }

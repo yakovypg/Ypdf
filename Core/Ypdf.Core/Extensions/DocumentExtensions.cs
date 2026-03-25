@@ -3,9 +3,9 @@ using Ypdf.Core.Design;
 
 namespace Ypdf.Core.Extensions;
 
-internal static class DocumentExtensions
+public static class DocumentExtensions
 {
-    internal static Margin GetMargin(this Document document)
+    public static Margin GetMargin(this Document document)
     {
         ExtendedArgumentNullException.ThrowIfNull(document, nameof(document));
 
