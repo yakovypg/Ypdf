@@ -14,23 +14,13 @@ public static class PythonDetector
     private const string _defaultMacOsPythonAlias = "python3";
     private const string _alternativePythonAlias = "python";
 
-    public static string DefaultPythonAlias
-    {
-        get
-        {
-#if NET5_0_OR_GREATER
-            return OperatingSystem.IsLinux()
-                ? _defaultLinuxPythonAlias
-                : OperatingSystem.IsWindows()
-                ? _defaultWindowsPythonAlias
-                : OperatingSystem.IsMacOS()
-                ? _defaultMacOsPythonAlias
-                : _defaultPythonAlias;
-#else
-            return _defaultPythonAlias;
-#endif
-        }
-    }
+    public static string DefaultPythonAlias => PlatformTypeDetector.IsLinux
+        ? _defaultLinuxPythonAlias
+        : PlatformTypeDetector.IsWindows
+        ? _defaultWindowsPythonAlias
+        : PlatformTypeDetector.IsMacOS
+        ? _defaultMacOsPythonAlias
+        : _defaultPythonAlias;
 
     public static bool TryGetPythonVersion(string pythonAlias, out string version)
     {
