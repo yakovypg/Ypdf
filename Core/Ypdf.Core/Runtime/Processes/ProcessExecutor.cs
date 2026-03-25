@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using System.Threading;
 
@@ -8,8 +7,8 @@ public abstract class ProcessExecutor : ProcessController, IProcessExecutor
 {
     protected ProcessExecutor() { }
 
-    public abstract void Execute(string args);
-    public abstract void Execute(string args, string workingDirectory);
+    public abstract ProcessResult Execute(string args);
+    public abstract ProcessResult Execute(string args, string workingDirectory);
 
     protected void ExecuteProcess(Process process)
     {

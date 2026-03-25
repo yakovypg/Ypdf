@@ -2,6 +2,6 @@ namespace Ypdf.Core.Runtime.Processes;
 
 public interface IProcessExecutor : IProcessController
 {
-    void Execute(string args);
-    void Execute(string args, string workingDirectory);
+    ProcessResult Execute(string args);
+    ProcessResult Execute(string args, string workingDirectory);
 }
