@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
 namespace Ypdf.Core.Extensions;
 
@@ -9,7 +8,6 @@ public static class StringExtensions
     private const StringComparison _defaultComparisonType = StringComparison.CurrentCulture;
 
 #if !NET5_0_OR_GREATER && !NETCOREAPP3_0_OR_GREATER && !NETSTANDARD2_1_OR_GREATER
-#pragma warning disable IDE0060 // Remove unused parameter
     public static string Replace(
         this string text,
         string oldValue,
@@ -17,24 +15,52 @@ public static class StringExtensions
         StringComparison comparisonType = _defaultComparisonType)
     {
         ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
-        ExtendedArgumentNullException.ThrowIfNull(oldValue, nameof(oldValue));
+        ExtendedArgumentException.ThrowIfNullOrEmpty(oldValue, nameof(oldValue));
 
-        return text.Replace(oldValue, newValue);
+        string replacement = newValue ?? string.Empty;
+
+        int currentPosition = 0;
+        int matchIndex = text.IndexOf(oldValue, currentPosition, comparisonType);
+
+        if (matchIndex < 0)
+            return text;
+
+        var builder = new StringBuilder(text.Length);
+
+        while (matchIndex >= 0)
+        {
+            _ = builder
+                .Append(text, currentPosition, matchIndex - currentPosition)
+                .Append(replacement);
+
+            currentPosition = matchIndex + oldValue.Length;
+            matchIndex = text.IndexOf(oldValue, currentPosition, comparisonType);
+        }
+
+        return builder
+            .Append(text, currentPosition, text.Length - currentPosition)
+            .ToString();
     }
-#pragma warning restore IDE0060 // Remove unused parameter
 
-#pragma warning disable IDE0060 // Remove unused parameter
-    public static bool Contains<T>(
+    public static bool Contains(
         this string text,
-        T value,
+        char value,
+        StringComparison comparisonType = _defaultComparisonType)
+    {
+        return text.Contains($"{value}", comparisonType);
+    }
+
+    public static bool Contains(
+        this string text,
+        string? value,
         StringComparison comparisonType = _defaultComparisonType)
     {
         ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
-        ExtendedArgumentNullException.ThrowIfNull(value, nameof(value));
 
-        return text.Contains($"{value}");
+        return value is not null
+            ? text.IndexOf(value, comparisonType) >= 0
+            : false;
     }
-#pragma warning restore IDE0060 // Remove unused parameter
 
     public static int IndexOf(
         this string text,
