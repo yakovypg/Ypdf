@@ -25,7 +25,7 @@ public class PageNumberTextPresenter : IPageNumberTextPresenter, IEquatable<Page
         string[] supportedValues = [nameof(Default), nameof(Fractional), nameof(Verbal)];
         string joinedSupportedValues = string.Join(", ", supportedValues);
 
-        return data.ToUpper(CultureInfo.CurrentCulture) switch
+        return data.ToUpperInvariant() switch
         {
             "DEFAULT" => Default,
             "FRACTIONAL" => Fractional,

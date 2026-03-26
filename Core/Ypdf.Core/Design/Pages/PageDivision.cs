@@ -49,7 +49,7 @@ public readonly struct PageDivision : IEquatable<PageDivision>
         if (additionalData.Length < 1 || additionalData.Length > 2)
             throw new IncorrectDataFormatException(null, data, _expectedStringFormat);
 
-        int pageNumber = int.Parse(parts[0], CultureInfo.CurrentCulture);
+        int pageNumber = int.Parse(parts[0], CultureInfo.InvariantCulture);
 
         var orientation = (PageDivisionOrientation)Enum.Parse(
             typeof(PageDivisionOrientation),
@@ -57,7 +57,7 @@ public readonly struct PageDivision : IEquatable<PageDivision>
             true);
 
         float centerOffset = additionalData.Length == 2
-            ? float.Parse(additionalData[1], CultureInfo.CurrentCulture)
+            ? float.Parse(additionalData[1], CultureInfo.InvariantCulture)
             : 0;
 
         return new PageDivision(pageNumber, orientation, centerOffset);

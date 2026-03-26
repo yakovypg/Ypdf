@@ -73,7 +73,7 @@ public static class PythonDetector
         }
 
         string outputStr = proccessOutput.ToString();
-        int spaceIndex = outputStr.IndexOf(' ', StringComparison.InvariantCulture);
+        int spaceIndex = outputStr.IndexOf(' ', StringComparison.Ordinal);
 
         version = spaceIndex <= 0 || spaceIndex >= outputStr.Length - 1
             ? outputStr

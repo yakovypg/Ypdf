@@ -42,8 +42,8 @@ public readonly struct PageRotation : IEquatable<PageRotation>
         if (parts.Length != 2)
             throw new IncorrectDataFormatException(null, data, _expectedStringFormat);
 
-        int pageNumber = int.Parse(parts[0], CultureInfo.CurrentCulture);
-        int angleDegrees = int.Parse(parts[1], CultureInfo.CurrentCulture);
+        int pageNumber = int.Parse(parts[0], CultureInfo.InvariantCulture);
+        int angleDegrees = int.Parse(parts[1], CultureInfo.InvariantCulture);
 
         return new PageRotation(pageNumber, angleDegrees);
     }

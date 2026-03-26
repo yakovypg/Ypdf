@@ -8,8 +8,8 @@ namespace Ypdf.CommandLine.Informing;
 
 internal abstract class UserInteractor : IUserInteractor
 {
-    private readonly IReadOnlyCollection<string> _defaultYesAnswersInUppercase =
-        ["YES", "Y", "True", "T", "OK", "1"];
+    private readonly IReadOnlyCollection<string> _defaultYesAnswers =
+        ["yes", "y", "true", "t", "ok", "1"];
 
     protected UserInteractor(
         TextWriter textWriter,
@@ -24,7 +24,7 @@ internal abstract class UserInteractor : IUserInteractor
 
         YesAnswers = yesAnswers is not null
             ? [.. yesAnswers]
-            : _defaultYesAnswersInUppercase;
+            : _defaultYesAnswers;
     }
 
     protected TextWriter Writer { get; }

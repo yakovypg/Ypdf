@@ -15,7 +15,7 @@ public static class PathExplorer
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(numberMark, nameof(numberMark));
 
         string errorMessage = $"Cannot get image number from the '{path}'.";
-        int numberMarkIndex = path.LastIndexOf(numberMark, StringComparison.CurrentCulture);
+        int numberMarkIndex = path.LastIndexOf(numberMark, StringComparison.Ordinal);
 
         if (numberMarkIndex < 0 || numberMarkIndex >= path.Length - 1)
             throw new FormatException(errorMessage);
@@ -24,7 +24,7 @@ public static class PathExplorer
         string tail = path.Substring(tailStartIndex);
 
         char delimiter = tail.FirstOrDefault(t => !char.IsDigit(t));
-        int delimiterIndex = tail.IndexOf(delimiter, StringComparison.CurrentCulture);
+        int delimiterIndex = tail.IndexOf(delimiter, StringComparison.Ordinal);
 
         if (delimiterIndex < 0 || delimiterIndex >= tail.Length - 1)
             throw new FormatException(errorMessage);

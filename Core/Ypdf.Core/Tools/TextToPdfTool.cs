@@ -49,7 +49,7 @@ public class TextToPdfTool : ITool
 
     private static string CorrectTextLine(string? line)
     {
-        return line?.Replace("\u0020", "\u00A0", StringComparison.CurrentCulture)
+        return line?.Replace("\u0020", "\u00A0", StringComparison.Ordinal)
             ?? string.Empty;
     }
 

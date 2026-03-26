@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Linq;
 using iText.Kernel.Geom;
 using Ypdf.CommandLine.Exceptions;
@@ -17,7 +16,7 @@ internal static class PageSizeConverter
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
-        return data.ToUpper(CultureInfo.CurrentCulture) switch
+        return data.ToUpperInvariant() switch
         {
             nameof(PageSize.A0) => PageSize.A0,
             nameof(PageSize.A1) => PageSize.A1,

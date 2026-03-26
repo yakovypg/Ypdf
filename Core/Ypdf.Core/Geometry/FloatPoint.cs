@@ -40,12 +40,12 @@ public readonly struct FloatPoint : IEquatable<FloatPoint>
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
-        data = data.Replace(" ", string.Empty, StringComparison.CurrentCulture);
+        data = data.Replace(" ", string.Empty, StringComparison.Ordinal);
 
-        if (data.StartsWith('(', StringComparison.CurrentCulture))
+        if (data.StartsWith('(', StringComparison.Ordinal))
             data = data.Substring(1);
 
-        if (data.EndsWith(')', StringComparison.CurrentCulture))
+        if (data.EndsWith(')', StringComparison.Ordinal))
             data = data.Remove(data.Length - 1);
 
         string[] parts = data.Split(';');
@@ -54,8 +54,8 @@ public readonly struct FloatPoint : IEquatable<FloatPoint>
         if (parts.Length != 2)
             throw new IncorrectDataFormatException(null, data, expectedStringFormat);
 
-        float x = float.Parse(parts[0], CultureInfo.CurrentCulture);
-        float y = float.Parse(parts[1], CultureInfo.CurrentCulture);
+        float x = float.Parse(parts[0], CultureInfo.InvariantCulture);
+        float y = float.Parse(parts[1], CultureInfo.InvariantCulture);
 
         return new FloatPoint(x, y);
     }

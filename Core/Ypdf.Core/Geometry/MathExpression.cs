@@ -23,25 +23,25 @@ public class MathExpression
     public double CalculateFloat()
     {
         object result = Calculate();
-        return Convert.ToSingle(result, CultureInfo.CurrentCulture);
+        return Convert.ToSingle(result, CultureInfo.InvariantCulture);
     }
 
     public double CalculateDouble()
     {
         object result = Calculate();
-        return Convert.ToDouble(result, CultureInfo.CurrentCulture);
+        return Convert.ToDouble(result, CultureInfo.InvariantCulture);
     }
 
     public long CalculateInt()
     {
         object result = Calculate();
-        return Convert.ToInt32(result, CultureInfo.CurrentCulture);
+        return Convert.ToInt32(result, CultureInfo.InvariantCulture);
     }
 
     public long CalculateLong()
     {
         object result = Calculate();
-        return Convert.ToInt64(result, CultureInfo.CurrentCulture);
+        return Convert.ToInt64(result, CultureInfo.InvariantCulture);
     }
 
     protected object Calculate()

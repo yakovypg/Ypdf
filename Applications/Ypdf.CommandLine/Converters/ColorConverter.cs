@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Linq;
 using iText.Kernel.Colors;
 using Ypdf.CommandLine.Exceptions;
@@ -17,7 +16,7 @@ internal static class ColorConverter
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
-        return data.ToUpper(CultureInfo.CurrentCulture) switch
+        return data.ToUpperInvariant() switch
         {
             nameof(ColorConstants.BLACK) => ColorConstants.BLACK,
             nameof(ColorConstants.BLUE) => ColorConstants.BLUE,

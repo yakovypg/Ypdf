@@ -63,7 +63,7 @@ public readonly struct PageCropping : IEquatable<PageCropping>
         if (pointsData.Length != 2)
             throw new IncorrectDataFormatException(null, data, _expectedStringFormat);
 
-        int pageNumber = int.Parse(parts[0], CultureInfo.CurrentCulture);
+        int pageNumber = int.Parse(parts[0], CultureInfo.InvariantCulture);
 
         FloatPoint lowerLeftPoint = FloatPoint.Parse(pointsData[0]);
         FloatPoint upperRightPoint = FloatPoint.Parse(pointsData[1]);

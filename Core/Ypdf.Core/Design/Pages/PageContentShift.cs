@@ -49,9 +49,9 @@ public readonly struct PageContentShift : IEquatable<PageContentShift>
         if (rightParts.Length != 2)
             throw new IncorrectDataFormatException(null, data, _expectedStringFormat);
 
-        int pageNumber = int.Parse(parts[0], CultureInfo.CurrentCulture);
-        int horizontal = int.Parse(rightParts[0], CultureInfo.CurrentCulture);
-        int vertical = int.Parse(rightParts[1], CultureInfo.CurrentCulture);
+        int pageNumber = int.Parse(parts[0], CultureInfo.InvariantCulture);
+        int horizontal = int.Parse(rightParts[0], CultureInfo.InvariantCulture);
+        int vertical = int.Parse(rightParts[1], CultureInfo.InvariantCulture);
 
         return new PageContentShift(pageNumber, horizontal, vertical);
     }

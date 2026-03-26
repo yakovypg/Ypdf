@@ -45,7 +45,7 @@ public readonly struct EncryptionAlgorithm : IEquatable<EncryptionAlgorithm>
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
-        return data.ToUpper(CultureInfo.CurrentCulture) switch
+        return data.ToUpperInvariant() switch
         {
             nameof(EncryptionConstants.STANDARD_ENCRYPTION_40) =>
                 new EncryptionAlgorithm(EncryptionConstants.STANDARD_ENCRYPTION_40),
