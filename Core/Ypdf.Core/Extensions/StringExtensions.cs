@@ -3,12 +3,12 @@ using System.Text;
 
 namespace Ypdf.Core.Extensions;
 
-internal static class StringExtensions
+public static class StringExtensions
 {
-    private const StringComparison _defaultComparisonType = StringComparison.CurrentCulture;
+    private const StringComparison _defaultComparisonType = StringComparison.Ordinal;
 
 #if !NET5_0_OR_GREATER && !NETCOREAPP3_0_OR_GREATER && !NETSTANDARD2_1_OR_GREATER
-    internal static string Replace(
+    public static string Replace(
         this string text,
         string oldValue,
         string? newValue,
@@ -42,7 +42,7 @@ internal static class StringExtensions
             .ToString();
     }
 
-    internal static bool Contains(
+    public static bool Contains(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -50,7 +50,7 @@ internal static class StringExtensions
         return text.Contains($"{value}", comparisonType);
     }
 
-    internal static bool Contains(
+    public static bool Contains(
         this string text,
         string? value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -62,7 +62,7 @@ internal static class StringExtensions
             : false;
     }
 
-    internal static int IndexOf(
+    public static int IndexOf(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -72,7 +72,7 @@ internal static class StringExtensions
     }
 #endif
 
-    internal static bool StartsWith(
+    public static bool StartsWith(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)
@@ -81,12 +81,18 @@ internal static class StringExtensions
         return text.StartsWith($"{value}", comparisonType);
     }
 
-    internal static bool EndsWith(
+    public static bool EndsWith(
         this string text,
         char value,
         StringComparison comparisonType = _defaultComparisonType)
     {
         ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
         return text.EndsWith($"{value}", comparisonType);
+    }
+
+    public static string Quoted(this string text, char quoteMark = '"')
+    {
+        ExtendedArgumentNullException.ThrowIfNull(text, nameof(text));
+        return $"{quoteMark}{text}{quoteMark}";
     }
 }
