@@ -52,7 +52,7 @@ internal static class DefaultExceptions
         IEnumerable<T> items,
         string? paramName = null)
     {
-        List<T> itemsList = new(items);
+        List<T> itemsList = [.. items];
         IEnumerable<T> distinctItems = itemsList.Distinct();
 
         if (itemsList.Count != distinctItems.Count())

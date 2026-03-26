@@ -167,7 +167,7 @@ public class CompressTool : ITool
             .Select(t => t.FullName)
             .OrderBy(t => PathExplorer.GetImageNumberFromPath(t));
 
-        return new List<string>(extractedImagePaths);
+        return [.. extractedImagePaths];
     }
 
     private List<string> CompressImages(
@@ -198,6 +198,6 @@ public class CompressTool : ITool
             .Select(t => t.FullName)
             .OrderBy(t => PathExplorer.GetImageNumberFromPath(t));
 
-        return new List<string>(compressedImagePaths);
+        return [.. compressedImagePaths];
     }
 }

@@ -94,7 +94,7 @@ public class CheckCompressionCapabilityTool : ICheckingTool
             .GetFiles()
             .OrderBy(t => t.Name);
 
-        return new List<FileInfo>(extractedImages);
+        return [.. extractedImages];
     }
 
     private List<FileInfo> CompressImages(
@@ -112,6 +112,6 @@ public class CheckCompressionCapabilityTool : ICheckingTool
             .GetFiles($"*{FileMarks.CompressedImage}.*")
             .OrderBy(t => t.Name);
 
-        return new List<FileInfo>(compressedImages);
+        return [.. compressedImages];
     }
 }

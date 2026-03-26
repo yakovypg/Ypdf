@@ -52,7 +52,7 @@ public class Splitter : PdfSplitter, IDisposable
     {
         ExtendedArgumentException.ThrowIfNullOrEmpty(pageRanges, nameof(pageRanges));
 
-        List<PageRange> pageRangesList = new(pageRanges);
+        List<PageRange> pageRangesList = [.. pageRanges];
         IList<PdfDocument> documents = ExtractPageRanges(pageRangesList);
 
         foreach (PdfDocument document in documents)
