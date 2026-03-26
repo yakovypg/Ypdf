@@ -83,7 +83,7 @@ internal sealed class AddPageNumbersSubcommand
     [ValueOption<Margin>(
         longName: MarginLongName,
         shortName: "m",
-        description: $"page number margin [default={DefaultMargin}] (M or H,V or L,T,R,B)")
+        description: $"page number margin [default={DefaultMargin}] (M or H,V or L,T,R,B -> 5 or 3,5 or 3,5,3,5)")
     ]
     [OptionGroup("appearance", "", "")]
     public Margin Margin { get; set; } = Margin.Parse(DefaultMargin);

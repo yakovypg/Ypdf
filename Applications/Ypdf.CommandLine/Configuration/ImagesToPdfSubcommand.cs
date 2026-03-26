@@ -44,7 +44,7 @@ internal sealed class ImagesToPdfSubcommand
     [ValueOption<Margin>(
         longName: MarginLongName,
         shortName: "m",
-        description: "image margin (M or H,V or L,T,R,B)")
+        description: "image margin (M or H,V or L,T,R,B -> 5 or 3,5 or 3,5,3,5)")
     ]
     [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
     public Margin? Margin { get; set; }
