@@ -1,0 +1,19 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup>
+    <PythonScripts Include="$(MSBuildThisFileDirectory)../contentFiles/any/any/Scripts/**/*.py" />
+  </ItemGroup>
+
+  <Target Name="CopyPythonScriptsToOutput" AfterTargets="Build">
+    <Copy SourceFiles="@(PythonScripts)"
+          DestinationFolder="$(OutDir)Scripts/%(RecursiveDir)"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="CopyPythonScriptsToPublish" AfterTargets="Publish">
+    <Copy SourceFiles="@(PythonScripts)"
+          DestinationFolder="$(PublishDir)Scripts/%(RecursiveDir)"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

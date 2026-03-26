@@ -21,6 +21,8 @@
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="README.md" />
+    <None Include="Ypdf.Core.targets" Pack="true" PackagePath="build/Ypdf.Core.targets" />
+    <Content Include="../PythonTools/**/*.py" Pack="true" PackagePath="contentFiles/any/any/Scripts/" />
   </ItemGroup>
 
   <ItemGroup>
