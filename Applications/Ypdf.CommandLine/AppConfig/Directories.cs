@@ -12,12 +12,14 @@ internal static class Directories
         RootDirectory = Path.GetDirectoryName(AssemblyLocation) ?? string.Empty;
 
         Config = Path.Combine(RootDirectory, "Config");
+        DefaultVirtualEnvironment = Path.Combine(RootDirectory, ".venv");
     }
 
     internal static string AssemblyLocation { get; }
     internal static string RootDirectory { get; }
 
     internal static string Config { get; }
+    internal static string DefaultVirtualEnvironment { get; }
 
     internal static void Prepare()
     {

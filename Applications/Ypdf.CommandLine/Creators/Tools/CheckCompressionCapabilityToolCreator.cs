@@ -19,11 +19,13 @@ internal sealed class CheckCompressionCapabilityToolCreator : ToolCreator
 
         CheckCompressionCapabilitySubcommand subcommand = config.CheckCompressionCapabilitySubcommand;
 
-        string? pythonAlias = Config.PythonAlias;
+        string pythonAlias = Config.PythonAlias;
+        string virtualEnvironmentPath = Config.VirtualEnvironmentPath;
         IOutputWriter outputWriter = Config.OutputWriter;
 
         var tool = new CheckCompressionCapabilityTool(
             pythonAlias,
+            virtualEnvironmentPath,
             outputWriter);
 
         return new ToolExecutionProvider(

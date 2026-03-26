@@ -19,10 +19,15 @@ internal sealed class ExtractImagesToolCreator : ToolCreator
 
         ExtractImagesSubcommand subcommand = config.ExtractImagesSubcommand;
 
-        string? pythonAlias = Config.PythonAlias;
+        string pythonAlias = Config.PythonAlias;
+        string virtualEnvironmentPath = Config.VirtualEnvironmentPath;
         IOutputWriter outputWriter = Config.OutputWriter;
 
-        PdfToImageTool tool = new(pythonAlias, subcommand.MaxNumberOfImagesToExtract, outputWriter);
+        PdfToImageTool tool = new(
+            subcommand.MaxNumberOfImagesToExtract,
+            pythonAlias,
+            virtualEnvironmentPath,
+            outputWriter);
 
         return new ToolExecutionProvider(
             tool,

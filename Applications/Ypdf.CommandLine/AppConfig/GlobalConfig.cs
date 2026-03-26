@@ -1,19 +1,36 @@
+using System;
 using System.IO;
 using Newtonsoft.Json;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.Core;
 using Ypdf.Core.Runtime.Logging;
+using Ypdf.Core.Runtime.Python;
 
 namespace Ypdf.CommandLine.AppConfig;
 
 internal sealed class GlobalConfig
 {
+    private string _pythonAlias;
+    private string _virtualEnvironmentPath;
+
     public GlobalConfig()
     {
+        _pythonAlias = GetDefaultPythonAlias();
+        _virtualEnvironmentPath = GetDefaultVirtualEnvironmentPath();
+
         OutputWriter = new ConsoleWriter();
     }
 
-    internal string? PythonAlias { get; set; }
+    public string PythonAlias
+    {
+        get => _pythonAlias;
+        set => _pythonAlias = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    public string VirtualEnvironmentPath
+    {
+        get => _virtualEnvironmentPath;
+        set => _virtualEnvironmentPath = value ?? throw new ArgumentNullException(nameof(value));
+    }
 
     [JsonIgnore]
     internal IOutputWriter OutputWriter { get; }
@@ -23,7 +40,10 @@ internal sealed class GlobalConfig
         ExtendedArgumentException.ThrowIfNullOrEmpty(filePath, nameof(filePath));
 
         string json = File.ReadAllText(filePath);
-        return JsonConvert.DeserializeObject<GlobalConfig>(json) ?? new GlobalConfig();
+        GlobalConfig config = JsonConvert.DeserializeObject<GlobalConfig>(json) ?? new GlobalConfig();
+
+        Recover(config);
+        return config;
     }
 
     internal static bool TryLoad(string filePath, out GlobalConfig config)
@@ -56,14 +76,39 @@ internal sealed class GlobalConfig
     internal void Reset(GlobalConfig? other = null)
     {
         other ??= new GlobalConfig();
+
         PythonAlias = other.PythonAlias;
+        VirtualEnvironmentPath = other.VirtualEnvironmentPath;
     }
 
     internal GlobalConfig Copy()
     {
         return new GlobalConfig()
         {
-            PythonAlias = PythonAlias
+            PythonAlias = PythonAlias,
+            VirtualEnvironmentPath = VirtualEnvironmentPath
         };
+    }
+
+    private static string GetDefaultPythonAlias()
+    {
+        PythonDetector.DetectPythonAlias(out string pythonAlias);
+        return pythonAlias;
+    }
+
+    private static string GetDefaultVirtualEnvironmentPath()
+    {
+        return Directories.DefaultVirtualEnvironment;
+    }
+
+    private static void Recover(GlobalConfig config)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
+
+        if (string.IsNullOrWhiteSpace(config.PythonAlias))
+            config.PythonAlias = GetDefaultPythonAlias();
+
+        if (string.IsNullOrWhiteSpace(config.VirtualEnvironmentPath))
+            config.VirtualEnvironmentPath = GetDefaultVirtualEnvironmentPath();
     }
 }

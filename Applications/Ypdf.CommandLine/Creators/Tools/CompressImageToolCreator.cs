@@ -31,10 +31,11 @@ internal sealed class CompressImageToolCreator : ToolCreator
                 subcommand.SizeFactor,
                 subcommand.Extension);
 
-        string? pythonAlias = Config.PythonAlias;
+        string pythonAlias = Config.PythonAlias;
+        string virtualEnvironmentPath = Config.VirtualEnvironmentPath;
         IOutputWriter outputWriter = Config.OutputWriter;
 
-        var tool = new CompressImageTool(imageCompression, pythonAlias, outputWriter);
+        var tool = new CompressImageTool(imageCompression, pythonAlias, virtualEnvironmentPath, outputWriter);
 
         return new ToolExecutionProvider(
             tool,

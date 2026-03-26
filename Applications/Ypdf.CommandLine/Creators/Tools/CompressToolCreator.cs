@@ -26,13 +26,15 @@ internal sealed class CompressToolCreator : ToolCreator
             subcommand.Extension);
 
         bool checkCompressionCapability = !subcommand.DisableCompressionCapabilityCheck;
-        string? pythonAlias = Config.PythonAlias;
+        string pythonAlias = Config.PythonAlias;
+        string virtualEnvironmentPath = Config.VirtualEnvironmentPath;
         IOutputWriter outputWriter = Config.OutputWriter;
 
         var tool = new CompressTool(
             imageCompression,
-            pythonAlias,
             checkCompressionCapability,
+            pythonAlias,
+            virtualEnvironmentPath,
             outputWriter);
 
         return new ToolExecutionProvider(

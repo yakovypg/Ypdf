@@ -11,6 +11,7 @@ internal sealed class ConfigSubcommand
     internal const string SaveConfigLongName = "save";
     internal const string ResetConfigLongName = "reset";
     internal const string PythonAliasLongName = "python-alias";
+    internal const string VirtualEnvironmentPathLongName = "python-venv";
 
     [FlagOption(
         longName: ShowConfigLongName,
@@ -43,11 +44,21 @@ internal sealed class ConfigSubcommand
 
     [ValueOption<string>(
         longName: PythonAliasLongName,
-        shortName: "i",
-        description: "path to the input file",
+        shortName: "a",
+        description: "path to the python or its alias",
         valueRestriction: "!nullOrWhiteSpace" +
             "\n?pthon alias mustn't be an empty string or a string consisting only of whitespace characters")
     ]
     [OptionGroup("variables", "Global Variables", "Options for configuring global variables")]
     public string? PythonAlias { get; set; }
+
+    [ValueOption<string>(
+        longName: VirtualEnvironmentPathLongName,
+        shortName: "e",
+        description: "path to the python virtual environment",
+        valueRestriction: "!nullOrWhiteSpace" +
+            "\n?virtual environment path mustn't be an empty string or a string consisting only of whitespace characters")
+    ]
+    [OptionGroup("variables", "", "")]
+    public string? VirtualEnvironmentPath { get; set; }
 }

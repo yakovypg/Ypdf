@@ -19,11 +19,12 @@ internal sealed class ExtractTextToolCreator : ToolCreator
 
         ExtractTextSubcommand subcommand = config.ExtractTextSubcommand;
 
-        string? pythonAlias = Config.PythonAlias;
+        string pythonAlias = Config.PythonAlias;
+        string virtualEnvironmentPath = Config.VirtualEnvironmentPath;
         IOutputWriter outputWriter = Config.OutputWriter;
 
         ITool tool = subcommand.UseTika
-            ? new PdfToTextTool(pythonAlias, outputWriter)
+            ? new PdfToTextTool(pythonAlias, virtualEnvironmentPath, outputWriter)
             : new PdfToTextSimpleTool(subcommand.TextExtractor);
 
         return new ToolExecutionProvider(

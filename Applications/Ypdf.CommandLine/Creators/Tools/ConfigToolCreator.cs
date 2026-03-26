@@ -25,8 +25,11 @@ internal sealed class ConfigToolCreator : ToolCreator
         {
             GlobalConfig newGlobalConfig = Config.Copy();
 
-            if (!string.IsNullOrEmpty(subcommand.PythonAlias))
-                newGlobalConfig.PythonAlias = subcommand.PythonAlias;
+            if (!string.IsNullOrWhiteSpace(subcommand.PythonAlias))
+                newGlobalConfig.PythonAlias = subcommand.PythonAlias!;
+
+            if (!string.IsNullOrWhiteSpace(subcommand.VirtualEnvironmentPath))
+                newGlobalConfig.VirtualEnvironmentPath = subcommand.VirtualEnvironmentPath!;
 
             tool = new ResetGlobalConfigTool(Config, newGlobalConfig);
         }
