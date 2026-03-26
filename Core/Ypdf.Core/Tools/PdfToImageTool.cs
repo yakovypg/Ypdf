@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ypdf.Core.Config;
 using Ypdf.Core.Extensions;
 using Ypdf.Core.Runtime.Logging;
@@ -7,23 +8,27 @@ using Ypdf.Core.Runtime.Python;
 
 namespace Ypdf.Core.Tools;
 
-public class PdfToImageTool : IMultipleInputTool, IMultipleOutputTool
+public class PdfToImageTool : PythonTool, IMultipleInputTool, IMultipleOutputTool
 {
     public PdfToImageTool(
-        string? pythonAlias = null,
         int extractedImagesLimit = 0,
+        string? pythonAlias = null,
+        string? virtualEnvironmentPath = null,
         IOutputWriter? outputWriter = null)
+        : base(pythonAlias, virtualEnvironmentPath, outputWriter)
     {
-        PythonAlias = pythonAlias;
         ExtractedImagesLimit = extractedImagesLimit;
-        OutputWriter = outputWriter;
     }
 
-    protected string? PythonAlias { get; init; }
     protected int ExtractedImagesLimit { get; init; }
-    protected IOutputWriter? OutputWriter { get; init; }
 
-    public void Execute(string inputPath, string outputPath)
+    protected override IEnumerable<PythonPackage> VirtualEnvironmentPackages =>
+    [
+        new("PyMuPDF", "1.27.2.2"),
+        new("tqdm", "4.67.3")
+    ];
+
+    public override void Execute(string inputPath, string outputPath)
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(outputPath, nameof(outputPath));
@@ -42,26 +47,25 @@ public class PdfToImageTool : IMultipleInputTool, IMultipleOutputTool
 
         if (string.IsNullOrEmpty(outputPath))
             outputPath = "\"\"";
+        else
+            outputPath = outputPath.Quoted();
+
+        inputPaths = inputPaths.Select(t => t.Quoted());
 
         string paths = string.Join(" ", inputPaths);
-        string imageExtractorPath = PythonScriptPaths.ImageExtractor;
+        string imageExtractorPath = PythonScriptPaths.ImageExtractor.Quoted();
+        string args = $"{imageExtractorPath} -l {ExtractedImagesLimit} -o {outputPath} -i {paths}";
 
-        var executor = new PythonExecutor()
+        PythonExecutor executor = CreateDefaultPythonExecutor();
+        executor.ErrorDataVerifier = t => !string.IsNullOrEmpty(t);
+
+        executor.ErrorDataConverter = t =>
         {
-            OutputWriter = OutputWriter,
-            RequirePython3 = true,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true,
-            ThrowExceptionIfExitWithError = true,
-            ErrorDataVerifier = t => !string.IsNullOrEmpty(t),
-
-            ErrorDataConverter = t => t is not null && t.Contains("pages", StringComparison.InvariantCulture)
-                ? $"\n{t}" : t
+            return t is not null && t.Contains(OutputMarks.PdfToImageToolPages, StringComparison.Ordinal)
+                ? $"\n{t}"
+                : t;
         };
 
-        if (PythonAlias is not null)
-            executor.PythonAlias = PythonAlias;
-
-        executor.Execute($"{imageExtractorPath} -l {ExtractedImagesLimit} -o {outputPath} -i {paths}");
+        executor.Execute(args);
     }
 }

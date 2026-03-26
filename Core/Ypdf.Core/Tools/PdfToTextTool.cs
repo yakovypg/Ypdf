@@ -1,40 +1,36 @@
+using System.Collections.Generic;
 using Ypdf.Core.Config;
+using Ypdf.Core.Extensions;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Runtime.Python;
 
 namespace Ypdf.Core.Tools;
 
-public class PdfToTextTool : ITool
+public class PdfToTextTool : PythonTool, ITool
 {
-    public PdfToTextTool(string? pythonAlias = null, IOutputWriter? outputWriter = null)
-    {
-        PythonAlias = pythonAlias;
-        OutputWriter = outputWriter;
-    }
+    public PdfToTextTool(
+        string? pythonAlias = null,
+        string? virtualEnvironmentPath = null,
+        IOutputWriter? outputWriter = null)
+        : base(pythonAlias, virtualEnvironmentPath, outputWriter) { }
 
-    protected string? PythonAlias { get; }
-    protected IOutputWriter? OutputWriter { get; }
+    protected override IEnumerable<PythonPackage> VirtualEnvironmentPackages =>
+    [
+        new("tika", "3.1.0")
+    ];
 
-    public void Execute(string inputPath, string outputPath)
+    public override void Execute(string inputPath, string outputPath)
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(outputPath, nameof(outputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        string textExtractorPath = PythonScriptPaths.TextExtractor;
+        inputPath = inputPath.Quoted();
+        outputPath = outputPath.Quoted();
 
-        var executor = new PythonExecutor()
-        {
-            OutputWriter = OutputWriter,
-            RequirePython3 = true,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true,
-            ThrowExceptionIfExitWithError = true,
-        };
+        string textExtractorPath = PythonScriptPaths.TextExtractor.Quoted();
+        string args = $"{textExtractorPath} -i {inputPath} -o {outputPath}";
 
-        if (PythonAlias is not null)
-            executor.PythonAlias = PythonAlias;
-
-        executor.Execute($"{textExtractorPath} -i {inputPath} -o {outputPath}");
+        ExecutePython(args);
     }
 }

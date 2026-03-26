@@ -1,49 +1,45 @@
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Ypdf.Core.Config;
+using Ypdf.Core.Extensions;
 using Ypdf.Core.Imaging;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Runtime.Python;
 
 namespace Ypdf.Core.Tools;
 
-public class CompressImageTool : IMultipleInputTool, IMultipleOutputTool
+public class CompressImageTool : PythonTool, IMultipleInputTool, IMultipleOutputTool
 {
     public CompressImageTool(
         ImageCompression imageCompression = default,
         string? pythonAlias = null,
+        string? virtualEnvironmentPath = null,
         IOutputWriter? outputWriter = null)
+        : base(pythonAlias, virtualEnvironmentPath, outputWriter)
     {
         ImageCompression = imageCompression;
-        PythonAlias = pythonAlias;
-        OutputWriter = outputWriter;
     }
 
     protected ImageCompression ImageCompression { get; }
-    protected string? PythonAlias { get; }
-    protected IOutputWriter? OutputWriter { get; }
 
-    public void Execute(string inputPath, string outputPath)
+    protected override IEnumerable<PythonPackage> VirtualEnvironmentPackages =>
+    [
+        new("pillow", "12.1.1")
+    ];
+
+    public override void Execute(string inputPath, string outputPath)
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(outputPath, nameof(outputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        var executor = new PythonExecutor()
-        {
-            OutputWriter = OutputWriter,
-            RequirePython3 = true,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true,
-            ThrowExceptionIfExitWithError = true
-        };
-
-        if (!string.IsNullOrEmpty(PythonAlias))
-            executor.PythonAlias = PythonAlias;
-
         string imageCompressorPath = PythonScriptPaths.ImageCompressor;
         string sizeFactor = ImageCompression.SizeFactor.ToString(CultureInfo.InvariantCulture);
         string qualityFactor = ImageCompression.QualityFactor.ToString(CultureInfo.InvariantCulture);
+
+        inputPath = inputPath.Quoted();
+        outputPath = outputPath.Quoted();
 
         string args =
             $"{imageCompressorPath} -i {inputPath} -o {outputPath} " +
@@ -55,35 +51,22 @@ public class CompressImageTool : IMultipleInputTool, IMultipleOutputTool
         if (ImageCompression.NewHeight is not null)
             args += $" -H {ImageCompression.NewHeight}";
 
-        executor.Execute(args);
+        ExecutePython(args);
     }
 
     public void Execute(IEnumerable<string> inputPaths, string outputPath)
     {
         ExtendedArgumentNullException.ThrowIfNull(inputPaths, nameof(inputPaths));
-        ExtendedArgumentNullException.ThrowIfNull(outputPath, nameof(outputPath));
         DefaultExceptions.ThrowIfContainsNotExistingFile(inputPaths, nameof(inputPaths));
-        DefaultExceptions.ThrowIfDirectoryNotExists(outputPath, nameof(outputPath));
 
-        if (string.IsNullOrEmpty(outputPath))
+        if (string.IsNullOrWhiteSpace(outputPath))
             outputPath = "\"\"";
+        else
+            outputPath = outputPath.Quoted();
 
-        var executor = new PythonExecutor()
-        {
-            OutputWriter = OutputWriter,
-            RequirePython3 = true,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true,
-            ThrowExceptionIfExitWithError = true
-        };
+        inputPaths = inputPaths.Select(t => t.Quoted());
 
-        if (!string.IsNullOrEmpty(PythonAlias))
-            executor.PythonAlias = PythonAlias;
-
-        if (string.IsNullOrEmpty(outputPath))
-            outputPath = "\"\"";
-
-        string imageCompressorPath = PythonScriptPaths.ImageCompressor;
+        string imageCompressorPath = PythonScriptPaths.ImageCompressor.Quoted();
         string inputPathsString = string.Join(" ", inputPaths);
 
         string sizeFactor = ImageCompression.SizeFactor.ToString(CultureInfo.InvariantCulture);
@@ -96,6 +79,6 @@ public class CompressImageTool : IMultipleInputTool, IMultipleOutputTool
         if (!string.IsNullOrEmpty(ImageCompression.Extension))
             args += $" -e {ImageCompression.Extension}";
 
-        executor.Execute(args);
+        ExecutePython(args);
     }
 }

@@ -14,13 +14,16 @@ public class CheckCompressionCapabilityTool : ICheckingTool
 
     public CheckCompressionCapabilityTool(
         string? pythonAlias = null,
+        string? virtualEnvironmentPath = null,
         IOutputWriter? outputWriter = null)
     {
         PythonAlias = pythonAlias;
+        VirtualEnvironmentPath = virtualEnvironmentPath;
         OutputWriter = outputWriter;
     }
 
     protected string? PythonAlias { get; }
+    protected string? VirtualEnvironmentPath { get; }
     protected IOutputWriter? OutputWriter { get; }
 
     public void Execute(string inputPath, string outputPath)
@@ -80,8 +83,9 @@ public class CheckCompressionCapabilityTool : ICheckingTool
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
         var pdfToImageTool = new PdfToImageTool(
-            PythonAlias,
             _numberOfImagesToCheckCompressionCapability,
+            PythonAlias,
+            VirtualEnvironmentPath,
             OutputWriter);
 
         pdfToImageTool.Execute(inputPath, uniqueDirectory.FullName);
@@ -101,7 +105,7 @@ public class CheckCompressionCapabilityTool : ICheckingTool
         DefaultExceptions.ThrowIfContainsNotExistingFile(inputPaths, nameof(inputPaths));
         ExtendedArgumentNullException.ThrowIfNull(uniqueDirectory, nameof(uniqueDirectory));
 
-        var compressImageTool = new CompressImageTool(default, PythonAlias, OutputWriter);
+        var compressImageTool = new CompressImageTool(default, PythonAlias, VirtualEnvironmentPath, OutputWriter);
         compressImageTool.Execute(inputPaths, uniqueDirectory.FullName);
 
         IEnumerable<FileInfo> compressedImages = uniqueDirectory

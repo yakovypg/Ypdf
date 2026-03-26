@@ -19,19 +19,22 @@ public class CompressTool : ITool
 {
     public CompressTool(
         ImageCompression imageCompression = default,
-        string? pythonAlias = null,
         bool checkCompressionCapability = true,
+        string? pythonAlias = null,
+        string? virtualEnvironmentPath = null,
         IOutputWriter? outputWriter = null)
     {
         ImageCompression = imageCompression;
-        PythonAlias = pythonAlias;
         CheckCompressionCapability = checkCompressionCapability;
+        PythonAlias = pythonAlias;
+        VirtualEnvironmentPath = virtualEnvironmentPath;
         OutputWriter = outputWriter;
     }
 
     protected ImageCompression ImageCompression { get; }
-    protected string? PythonAlias { get; }
     protected bool CheckCompressionCapability { get; }
+    protected string? PythonAlias { get; }
+    protected string? VirtualEnvironmentPath { get; }
     protected IOutputWriter? OutputWriter { get; }
 
     public void Execute(string inputPath, string outputPath)
@@ -67,7 +70,7 @@ public class CompressTool : ITool
 
         OutputWriter?.WriteLine("Compression capability is being checked...");
 
-        var checkingTool = new CheckCompressionCapabilityTool(PythonAlias, OutputWriter);
+        var checkingTool = new CheckCompressionCapabilityTool(PythonAlias, VirtualEnvironmentPath, OutputWriter);
         bool canCompress = checkingTool.Execute(inputPath);
 
         if (!canCompress)
@@ -156,7 +159,7 @@ public class CompressTool : ITool
         ExtendedArgumentNullException.ThrowIfNull(uniqueDirectory, nameof(uniqueDirectory));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        var pdfToImageTool = new PdfToImageTool(PythonAlias, 0, OutputWriter);
+        var pdfToImageTool = new PdfToImageTool(0, PythonAlias, VirtualEnvironmentPath, OutputWriter);
         pdfToImageTool.Execute(inputPath, uniqueDirectory.FullName);
 
         IEnumerable<string> extractedImagePaths = uniqueDirectory
@@ -175,7 +178,12 @@ public class CompressTool : ITool
         DefaultExceptions.ThrowIfContainsNotExistingFile(inputPaths, nameof(inputPaths));
         ExtendedArgumentNullException.ThrowIfNull(uniqueDirectory, nameof(uniqueDirectory));
 
-        var compressImageTool = new CompressImageTool(ImageCompression, PythonAlias, OutputWriter);
+        var compressImageTool = new CompressImageTool(
+            ImageCompression,
+            PythonAlias,
+            VirtualEnvironmentPath,
+            OutputWriter);
+
         var inputPathsSequence = new PathSequence(inputPaths);
 
         IEnumerable<IEnumerable<string>> inputPathGroups = inputPathsSequence.Group();
