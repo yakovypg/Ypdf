@@ -14,7 +14,7 @@ namespace Ypdf.CommandLine.Configuration;
 internal sealed class AddPageNumbersSubcommand
 {
     internal const string Name = "add-page-numbers";
-    internal const string Description = "Add page numbers to PDF document";
+    internal const string Description = "Add page numbers to the PDF document";
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";

@@ -7,7 +7,7 @@ namespace Ypdf.CommandLine.Configuration;
 internal sealed class SetPasswordSubcommand
 {
     internal const string Name = "set-password";
-    internal const string Description = "Set password to PDF document";
+    internal const string Description = "Set password to the PDF document";
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";

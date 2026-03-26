@@ -5,7 +5,7 @@ namespace Ypdf.CommandLine.Configuration;
 internal sealed class ConfigSubcommand
 {
     internal const string Name = "config";
-    internal const string Description = "Change global configuration";
+    internal const string Description = "Change the global configuration";
 
     internal const string ShowConfigLongName = "show";
     internal const string SaveConfigLongName = "save";

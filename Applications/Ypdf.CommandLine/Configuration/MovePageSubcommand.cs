@@ -5,7 +5,7 @@ namespace Ypdf.CommandLine.Configuration;
 internal sealed class MovePageSubcommand
 {
     internal const string Name = "move-page";
-    internal const string Description = "Move PDF document page";
+    internal const string Description = "Move the PDF document page";
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";

@@ -5,7 +5,7 @@ namespace Ypdf.CommandLine.Configuration;
 internal sealed class CompressSubcommand
 {
     internal const string Name = "compress";
-    internal const string Description = "Compress PDF document";
+    internal const string Description = "Compress the PDF document";
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";

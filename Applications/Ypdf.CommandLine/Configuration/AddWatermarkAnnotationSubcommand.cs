@@ -13,7 +13,7 @@ namespace Ypdf.CommandLine.Configuration;
 internal sealed class AddWatermarkAnnotationSubcommand
 {
     internal const string Name = "add-watermark-annotation";
-    internal const string Description = "Add watermark annotation to PDF document";
+    internal const string Description = "Add watermark annotation to the PDF document";
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";

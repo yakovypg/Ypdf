@@ -5,7 +5,7 @@ namespace Ypdf.CommandLine.Configuration;
 internal sealed class GetInfoSubcommand
 {
     internal const string Name = "info";
-    internal const string Description = "Get info about PDF document";
+    internal const string Description = "Get info about the PDF document";
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";
