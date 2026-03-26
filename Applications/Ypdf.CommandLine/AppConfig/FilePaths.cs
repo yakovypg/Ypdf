@@ -4,18 +4,19 @@ namespace Ypdf.CommandLine.AppConfig;
 
 internal static class FilePaths
 {
-    private const string EmptyJson = "{}";
+    private const string _emptyJson = "{}";
+    private const string _configFileName = "config.json";
 
     static FilePaths()
     {
-        Config = Path.Combine(Directories.Config, "config.json");
+        Config = GetConfigFilePath();
     }
 
     internal static string Config { get; }
 
     internal static void Prepare()
     {
-        PrepareFile(Config, EmptyJson);
+        PrepareFile(Config, _emptyJson);
     }
 
     internal static bool TryPrepare()
@@ -40,5 +41,17 @@ internal static class FilePaths
             File.Create(path).Close();
         else
             File.WriteAllText(path, content);
+    }
+
+    private static string GetConfigFilePath()
+    {
+        try
+        {
+            return Path.Combine(Directories.Config, _configFileName);
+        }
+        catch
+        {
+            return $"{Directories.Config}/{_configFileName}";
+        }
     }
 }
