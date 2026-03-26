@@ -45,7 +45,7 @@ public class CheckCompressionCapabilityTool : ICheckingTool
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(inputPath, nameof(inputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(CoreDirectories.Temp);
+        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(CoreDirectories.TempDirectory);
         IList<FileInfo> extractedImages = ExtractImages(inputPath, uniqueDirectory);
 
         IEnumerable<string> extractedImagePaths = extractedImages

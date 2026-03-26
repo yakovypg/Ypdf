@@ -128,7 +128,7 @@ public class PdfInfo
 
         var result = new List<IList<int>>();
 
-        var uniqueFile = new UniqueFile("pdf", CoreDirectories.Temp);
+        var uniqueFile = new UniqueFile("pdf", CoreDirectories.TempDirectory);
         string tempFilePath = uniqueFile.GetNext();
 
         using var reader = new PdfReader(inputPath);

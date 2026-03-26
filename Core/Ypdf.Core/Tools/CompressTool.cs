@@ -43,7 +43,7 @@ public class CompressTool : ITool
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(outputPath, nameof(outputPath));
         DefaultExceptions.ThrowIfFileNotExists(inputPath, nameof(inputPath));
 
-        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(CoreDirectories.Temp);
+        DirectoryInfo uniqueDirectory = UniqueDirectory.Create(CoreDirectories.TempDirectory);
 
         if (CheckCompressionCapability)
             VerifyCompressionCapability(inputPath);
