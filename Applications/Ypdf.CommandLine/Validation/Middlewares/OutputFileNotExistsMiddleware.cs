@@ -2,6 +2,7 @@ using System.IO;
 using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
+using Ypdf.CommandLine.Tools;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Validation.Middlewares;
@@ -26,7 +27,10 @@ internal sealed class OutputFileNotExistsMiddleware : IValidationMiddleware
         bool isSingleOutputTool = executionProvider.Tool is not IMultipleOutputTool ||
             isSingleOutputCompressTool;
 
-        bool validationOk = !isSingleOutputTool || !File.Exists(executionProvider.OutputPath);
+        bool isConfigTool = executionProvider.Tool is ShowGlobalConfigTool ||
+            executionProvider.Tool is ResetGlobalConfigTool;
+
+        bool validationOk = isConfigTool || !isSingleOutputTool || !File.Exists(executionProvider.OutputPath);
 
         if (validationOk)
             return ValidationResult.Success();
