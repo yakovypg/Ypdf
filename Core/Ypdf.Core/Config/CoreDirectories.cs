@@ -11,7 +11,7 @@ public static class CoreDirectories
         _ = TryGetCurrentDirectory(out string currentDirectory, ".");
 
         AssemblyLocation = assemblyLocation;
-        RootDirectory = GetRootDirectory(AssemblyLocation, currentDirectory);
+        RootDirectory = GetRootDirectoryPath(AssemblyLocation, currentDirectory);
         Temp = GetTempPath(RootDirectory, RootDirectory);
         Scripts = GetScriptsPath(RootDirectory);
     }
@@ -28,7 +28,20 @@ public static class CoreDirectories
         PrepareDirectory(Scripts);
     }
 
-    private static void PrepareDirectory(string path)
+    public static bool TryPrepare()
+    {
+        try
+        {
+            Prepare();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public static void PrepareDirectory(string path)
     {
         if (string.IsNullOrEmpty(path) || Directory.Exists(path))
             return;
@@ -36,7 +49,20 @@ public static class CoreDirectories
         Directory.CreateDirectory(path);
     }
 
-    private static bool TryGetAssemblyLocation(out string assemblyLocation)
+    public static bool TryPrepareDirectory(string path)
+    {
+        try
+        {
+            PrepareDirectory(path);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public static bool TryGetAssemblyLocation(out string assemblyLocation)
     {
         try
         {
@@ -50,7 +76,7 @@ public static class CoreDirectories
         }
     }
 
-    private static bool TryGetCurrentDirectory(out string currentDirectory, string defaultValue = ".")
+    public static bool TryGetCurrentDirectory(out string currentDirectory, string defaultValue = ".")
     {
         ExtendedArgumentNullException.ThrowIfNull(defaultValue, nameof(defaultValue));
 
@@ -66,7 +92,7 @@ public static class CoreDirectories
         }
     }
 
-    private static string GetRootDirectory(string assemblyLocation, string defaultValue = ".")
+    public static string GetRootDirectoryPath(string assemblyLocation, string defaultValue = ".")
     {
         ExtendedArgumentNullException.ThrowIfNull(assemblyLocation,  nameof(assemblyLocation));
         ExtendedArgumentNullException.ThrowIfNull(defaultValue, nameof(defaultValue));
@@ -81,21 +107,7 @@ public static class CoreDirectories
         }
     }
 
-    private static string GetTempPath(string rootDirectory, string defaultValue = ".")
-    {
-        ExtendedArgumentNullException.ThrowIfNull(rootDirectory, nameof(rootDirectory));
-        ExtendedArgumentNullException.ThrowIfNull(defaultValue, nameof(defaultValue));
-
-        if (TryGetUserTempPath(out string userTempPath))
-            return userTempPath;
-
-        if (TryGetLocalTempPath(rootDirectory, out string localTempPath))
-            return localTempPath;
-
-        return defaultValue;
-    }
-
-    private static bool TryGetUserTempPath(out string userTempPath)
+    public static bool TryGetUserTempPath(out string userTempPath)
     {
         try
         {
@@ -123,6 +135,20 @@ public static class CoreDirectories
             localTempPath = string.Empty;
             return false;
         }
+    }
+
+    private static string GetTempPath(string rootDirectory, string defaultValue = ".")
+    {
+        ExtendedArgumentNullException.ThrowIfNull(rootDirectory, nameof(rootDirectory));
+        ExtendedArgumentNullException.ThrowIfNull(defaultValue, nameof(defaultValue));
+
+        if (TryGetUserTempPath(out string userTempPath))
+            return userTempPath;
+
+        if (TryGetLocalTempPath(rootDirectory, out string localTempPath))
+            return localTempPath;
+
+        return defaultValue;
     }
 
     private static string GetScriptsPath(string rootDirectory, string defaultValue = ".")
