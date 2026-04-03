@@ -9,6 +9,22 @@ namespace Ypdf.CommandLine.Converters;
 
 internal static class ColorConverter
 {
+    internal const string SupportedColorNames =
+        nameof(ColorConstants.BLACK) + _supportedValueDelimiter +
+        nameof(ColorConstants.BLUE) + _supportedValueDelimiter +
+        nameof(ColorConstants.CYAN) + _supportedValueDelimiter +
+        nameof(ColorConstants.DARK_GRAY) + _supportedValueDelimiter +
+        nameof(ColorConstants.GRAY) + _supportedValueDelimiter +
+        nameof(ColorConstants.GREEN) + _supportedValueDelimiter +
+        nameof(ColorConstants.LIGHT_GRAY) + _supportedValueDelimiter +
+        nameof(ColorConstants.MAGENTA) + _supportedValueDelimiter +
+        nameof(ColorConstants.ORANGE) + _supportedValueDelimiter +
+        nameof(ColorConstants.PINK) + _supportedValueDelimiter +
+        nameof(ColorConstants.RED) + _supportedValueDelimiter +
+        nameof(ColorConstants.WHITE) + _supportedValueDelimiter +
+        nameof(ColorConstants.YELLOW);
+
+    private const string _supportedValueDelimiter = ", ";
     private const string _expectedStringFormatRgb = "(R,G,B)";
     private const string _expectedStringFormat = $"Name or {_expectedStringFormatRgb}";
 

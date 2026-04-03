@@ -237,25 +237,10 @@ internal sealed class AddWatermarkAnnotationSubcommand
     [ValueOption<Color>(
         longName: FontColorLongName,
         shortName: "c",
-        description: $"font color [default={DefaultFontColor}] (name or (r,g,b))",
-        addBeforeParseChoicesToDescription: true,
-        ignoreCaseInChoices: true,
-        beforeParseChoices:
-        [
-            nameof(ColorConstants.BLACK),
-            nameof(ColorConstants.BLUE),
-            nameof(ColorConstants.CYAN),
-            nameof(ColorConstants.DARK_GRAY),
-            nameof(ColorConstants.GRAY),
-            nameof(ColorConstants.GREEN),
-            nameof(ColorConstants.LIGHT_GRAY),
-            nameof(ColorConstants.MAGENTA),
-            nameof(ColorConstants.ORANGE),
-            nameof(ColorConstants.PINK),
-            nameof(ColorConstants.RED),
-            nameof(ColorConstants.WHITE),
-            nameof(ColorConstants.YELLOW)
-        ])
+        description:
+            $"page number font color [default={DefaultFontColor}] (name or (r,g,b)). " +
+            $"Supported names: {ColorConverter.SupportedColorNames}",
+        ignoreCaseInChoices: true)
     ]
     [OptionGroup("font", "", "")]
     public Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
