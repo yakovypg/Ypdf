@@ -77,7 +77,7 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
             UsageHeader = "Usage: ",
             OptionExamplePrefix = new string(' ', 2),
             DelimiterAfterOptionExample = new string(' ', 2),
-            SubcommandsHeader = "Subcommands:",
+            SubcommandsHeader = "Tools:",
             SubcommandNamePrefix = new string(' ', 2),
             DelimiterAfterSubcommandName = new string(' ', 2),
             OptionExampleCharsLimit = 30,
