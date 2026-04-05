@@ -2,10 +2,10 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
 using Ypdf.Core.Design;
 using Ypdf.Core.Design.Fonts;
 using Ypdf.Core.Design.Pages;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
@@ -58,9 +58,11 @@ internal sealed class AddPageNumbersToolCreator : ToolCreator
             ? new ToolsPipeline([increasePageSizeTool, addPageNumbersTool])
             : addPageNumbersTool;
 
-        return new ToolExecutionProvider(
+        ToolExecutionParameters toolExecutionParameters = new(
             tool,
             [subcommand.InputPath],
             subcommand.OutputPath);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

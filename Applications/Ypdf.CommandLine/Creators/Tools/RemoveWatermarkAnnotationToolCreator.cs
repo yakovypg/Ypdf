@@ -2,7 +2,7 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
@@ -21,9 +21,11 @@ internal sealed class RemoveWatermarkAnnotationToolCreator : ToolCreator
         RemoveWatermarkAnnotationTool tool = new(
             pages: subcommand.Pages.Count > 0 ? subcommand.Pages : null);
 
-        return new ToolExecutionProvider(
+        ToolExecutionParameters toolExecutionParameters = new(
             tool,
             [subcommand.InputPath],
             subcommand.OutputPath);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

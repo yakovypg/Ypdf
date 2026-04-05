@@ -2,7 +2,7 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Tools;
 
@@ -21,9 +21,11 @@ internal sealed class GetInfoToolCreator : ToolCreator
         IOutputWriter outputWriter = Config.OutputWriter;
         GetInfoTool tool = new(subcommand.MaxPageSizesToPrint, outputWriter);
 
-        return new ToolExecutionProvider(
+        ToolExecutionParameters toolExecutionParameters = new(
             tool,
             [subcommand.InputPath],
             subcommand.OutputPath);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

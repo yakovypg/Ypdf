@@ -1,8 +1,10 @@
 using System;
 using System.IO;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
+using Ypdf.Core.Execution;
+using Ypdf.Core.Execution.Validation;
+using Ypdf.Core.Execution.Validation.Middlewares;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Validation.Middlewares;
@@ -21,15 +23,15 @@ internal sealed class OutputDirectoryExistsMiddleware : IValidationMiddleware
     {
         ExtendedArgumentNullException.ThrowIfNull(executionProvider, nameof(executionProvider));
 
-        bool isSingleOutputCompressTool = executionProvider.Tool is CompressImageTool &&
-            executionProvider.InputPaths.Count <= 1;
+        bool isSingleOutputCompressTool = executionProvider.ExecutionParameters.Tool is CompressImageTool &&
+            executionProvider.ExecutionParameters.InputPaths.Count <= 1;
 
-        bool isSingleOutputTool = executionProvider.Tool is not IMultipleOutputTool ||
+        bool isSingleOutputTool = executionProvider.ExecutionParameters.Tool is not IMultipleOutputTool ||
             isSingleOutputCompressTool;
 
         string outputDirectoryPath = isSingleOutputTool
-            ? GetFileDirectoryPath(executionProvider.OutputPath)
-            : executionProvider.OutputPath;
+            ? GetFileDirectoryPath(executionProvider.ExecutionParameters.OutputPath)
+            : executionProvider.ExecutionParameters.OutputPath;
 
         bool validationOk = Directory.Exists(outputDirectoryPath);
 

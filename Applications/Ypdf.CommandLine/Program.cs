@@ -10,8 +10,8 @@ using Ypdf.CommandLine.Creators.Tools;
 using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
-using Ypdf.CommandLine.Validation;
 using Ypdf.CommandLine.Validation.Middlewares;
+using Ypdf.Core.Execution.Validation;
 
 PrepareSystem();
 

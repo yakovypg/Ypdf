@@ -2,7 +2,7 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
@@ -19,9 +19,11 @@ internal sealed class MergeToolCreator : ToolCreator
         MergeSubcommand subcommand = config.MergeSubcommand;
         MergeTool tool = new();
 
-        return new ToolExecutionProvider(
+        ToolExecutionParameters toolExecutionParameters = new(
             tool,
             subcommand.InputPaths,
             subcommand.OutputPath);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

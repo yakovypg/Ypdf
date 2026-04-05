@@ -2,9 +2,9 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
 using Ypdf.Core.Design.Fonts;
 using Ypdf.Core.Design.Watermarks;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
@@ -50,9 +50,11 @@ internal sealed class AddWatermarkAnnotationToolCreator : ToolCreator
             watermark: watermarkAnnotation,
             pages: subcommand.Pages.Count > 0 ? subcommand.Pages : null);
 
-        return new ToolExecutionProvider(
+        var toolExecutionParameters = new ToolExecutionParameters(
             tool,
             [subcommand.InputPath],
             subcommand.OutputPath);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

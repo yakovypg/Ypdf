@@ -2,7 +2,7 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
@@ -19,9 +19,11 @@ internal sealed class DividePageToolCreator : ToolCreator
         DividePagesSubcommand subcommand = config.DividePageSubcommand;
         DividePageTool tool = new(subcommand.PageDivisions);
 
-        return new ToolExecutionProvider(
+        ToolExecutionParameters toolExecutionParameters = new(
             tool,
             [subcommand.InputPath],
             subcommand.OutputPath);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

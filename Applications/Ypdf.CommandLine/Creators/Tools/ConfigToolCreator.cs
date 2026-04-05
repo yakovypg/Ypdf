@@ -2,8 +2,8 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Tools;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Creators.Tools;
@@ -42,9 +42,11 @@ internal sealed class ConfigToolCreator : ToolCreator
             tool = new ShowGlobalConfigTool(Config);
         }
 
-        return new ToolExecutionProvider(
+        var toolExecutionParameters = new ToolExecutionParameters(
             tool,
             [FilePaths.Config],
             FilePaths.Config);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

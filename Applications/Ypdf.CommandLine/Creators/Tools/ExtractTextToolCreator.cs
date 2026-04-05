@@ -2,7 +2,7 @@ using System;
 using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
+using Ypdf.Core.Execution;
 using Ypdf.Core.Runtime.Logging;
 using Ypdf.Core.Tools;
 
@@ -27,9 +27,11 @@ internal sealed class ExtractTextToolCreator : ToolCreator
             ? new PdfToTextTool(pythonAlias, virtualEnvironmentPath, outputWriter)
             : new PdfToTextSimpleTool(subcommand.TextExtractor);
 
-        return new ToolExecutionProvider(
+        ToolExecutionParameters toolExecutionParameters = new(
             tool,
             [subcommand.InputPath],
             subcommand.OutputPath);
+
+        return new ToolExecutionProvider(toolExecutionParameters);
     }
 }

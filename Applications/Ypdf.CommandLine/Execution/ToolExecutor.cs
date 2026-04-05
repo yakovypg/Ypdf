@@ -4,7 +4,8 @@ using NetArgumentParser.Subcommands;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Creators.Tools;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Validation;
+using Ypdf.Core.Execution;
+using Ypdf.Core.Execution.Validation;
 
 namespace Ypdf.CommandLine.Execution;
 

@@ -1,8 +1,10 @@
 using System.IO;
 using Ypdf.CommandLine.Exceptions;
-using Ypdf.CommandLine.Execution;
 using Ypdf.CommandLine.Informing;
 using Ypdf.CommandLine.Tools;
+using Ypdf.Core.Execution;
+using Ypdf.Core.Execution.Validation;
+using Ypdf.Core.Execution.Validation.Middlewares;
 using Ypdf.Core.Tools;
 
 namespace Ypdf.CommandLine.Validation.Middlewares;
@@ -21,16 +23,19 @@ internal sealed class OutputFileNotExistsMiddleware : IValidationMiddleware
     {
         ExtendedArgumentNullException.ThrowIfNull(executionProvider, nameof(executionProvider));
 
-        bool isSingleOutputCompressTool = executionProvider.Tool is CompressImageTool &&
-            executionProvider.InputPaths.Count <= 1;
+        bool isSingleOutputCompressTool = executionProvider.ExecutionParameters.Tool is CompressImageTool &&
+            executionProvider.ExecutionParameters.InputPaths.Count <= 1;
 
-        bool isSingleOutputTool = executionProvider.Tool is not IMultipleOutputTool ||
+        bool isSingleOutputTool = executionProvider.ExecutionParameters.Tool is not IMultipleOutputTool ||
             isSingleOutputCompressTool;
 
-        bool isConfigTool = executionProvider.Tool is ShowGlobalConfigTool ||
-            executionProvider.Tool is ResetGlobalConfigTool;
+        bool isConfigTool = executionProvider.ExecutionParameters.Tool is ShowGlobalConfigTool ||
+            executionProvider.ExecutionParameters.Tool is ResetGlobalConfigTool;
 
-        bool validationOk = isConfigTool || !isSingleOutputTool || !File.Exists(executionProvider.OutputPath);
+        bool validationOk =
+            isConfigTool ||
+            !isSingleOutputTool ||
+            !File.Exists(executionProvider.ExecutionParameters.OutputPath);
 
         if (validationOk)
             return ValidationResult.Success();
