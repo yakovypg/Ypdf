@@ -22,7 +22,6 @@ public readonly struct PageNumberStyle : IEquatable<PageNumberStyle>
         VerticalAlignment = VerticalAlignment.BOTTOM;
 
         Margin = new Margin(0);
-        LocationMode = LocationMode.WithoutIncrease;
 
         ConsiderLeftPageMargin = true;
         ConsiderTopPageMargin = false;
@@ -36,7 +35,6 @@ public readonly struct PageNumberStyle : IEquatable<PageNumberStyle>
     public readonly VerticalAlignment VerticalAlignment { get; init; }
 
     public readonly Margin Margin { get; init; }
-    public readonly LocationMode LocationMode { get; init; }
 
     public readonly bool ConsiderLeftPageMargin { get; init; }
     public readonly bool ConsiderTopPageMargin { get; init; }
@@ -77,7 +75,6 @@ public readonly struct PageNumberStyle : IEquatable<PageNumberStyle>
             && HorizontalAlignment == other.HorizontalAlignment
             && VerticalAlignment == other.VerticalAlignment
             && Margin == other.Margin
-            && LocationMode == other.LocationMode
             && ConsiderLeftPageMargin == other.ConsiderLeftPageMargin
             && ConsiderTopPageMargin == other.ConsiderTopPageMargin
             && ConsiderRightPageMargin == other.ConsiderRightPageMargin
@@ -98,7 +95,6 @@ public readonly struct PageNumberStyle : IEquatable<PageNumberStyle>
             HorizontalAlignment,
             VerticalAlignment,
             Margin,
-            LocationMode,
             ConsiderLeftPageMargin,
             ConsiderTopPageMargin,
             ConsiderRightPageMargin,
