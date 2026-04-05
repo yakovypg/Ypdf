@@ -69,14 +69,14 @@ public readonly struct PageRotation : IEquatable<PageRotation>
     {
         ExtendedArgumentException.ThrowIfNullOrWhiteSpace(data, nameof(data));
 
-        IList<IList<PageRotation>> allShifts = AbstractParser
+        IList<IList<PageRotation>> allRotations = AbstractParser
             .ParseManyToOne(data, ',', ':', ParseFromRange);
 
         var result = new List<PageRotation>();
 
-        foreach (IList<PageRotation> shifts in allShifts)
+        foreach (IList<PageRotation> rotations in allRotations)
         {
-            result.AddRange(shifts);
+            result.AddRange(rotations);
         }
 
         return result;
