@@ -31,13 +31,13 @@ public class IncreasePageSizeTool : ITool
 
     public IncreasePageSizeTool(
         float generalPageSizeAdjustment,
-        IncreasePageMode increasePageMode = IncreasePageMode.IncreaseBottom)
+        IncreasePageMode increasePageMode = IncreasePageMode.Bottom)
         : this(generalPageSizeAdjustment, _defaultFillColor, increasePageMode) { }
 
     public IncreasePageSizeTool(
         float generalPageSizeAdjustment,
         Color fillColor,
-        IncreasePageMode increasePageMode = IncreasePageMode.IncreaseBottom)
+        IncreasePageMode increasePageMode = IncreasePageMode.Bottom)
     {
         DefaultExceptions.ThrowIfNegativeOrZero(generalPageSizeAdjustment, nameof(generalPageSizeAdjustment));
         ExtendedArgumentNullException.ThrowIfNull(fillColor, nameof(fillColor));
@@ -127,13 +127,13 @@ public class IncreasePageSizeTool : ITool
         DefaultExceptions.ThrowIfNegativeOrZero(adjustment, nameof(adjustment));
         ExtendedArgumentNullException.ThrowIfNull(fillColor, nameof(fillColor));
 
-        if (increasePageMode == IncreasePageMode.IncreaseLeft)
+        if (increasePageMode == IncreasePageMode.Left)
             pageResizer.IncreasePageSizeLeft(adjustment, fillColor);
-        else if (increasePageMode == IncreasePageMode.IncreaseTop)
+        else if (increasePageMode == IncreasePageMode.Top)
             pageResizer.IncreasePageSizeTop(adjustment, fillColor);
-        else if (increasePageMode == IncreasePageMode.IncreaseRight)
+        else if (increasePageMode == IncreasePageMode.Right)
             pageResizer.IncreasePageSizeRight(adjustment, fillColor);
-        else if (increasePageMode == IncreasePageMode.IncreaseBottom)
+        else if (increasePageMode == IncreasePageMode.Bottom)
             pageResizer.IncreasePageSizeBottom(adjustment, fillColor);
     }
 }
