@@ -179,8 +179,7 @@ internal sealed class TextToPdfSubcommand
         shortName: "c",
         description:
             $"page number font color [default={DefaultFontColor}] (name or (r,g,b)). " +
-            $"Supported names: {ColorConverter.SupportedColorNames}",
-        ignoreCaseInChoices: true)
+            $"Supported names: {ColorConverter.SupportedColorNames}")
     ]
     [OptionGroup("font", "", "")]
     public Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
