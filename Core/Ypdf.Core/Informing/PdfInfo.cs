@@ -183,7 +183,7 @@ public class PdfInfo
             PdfPage currPage = pdfDocument.GetPage(currPageNum);
 
             var resizer = new PageResizer(currPage);
-            resizer.IncreaseBottom(50);
+            resizer.IncreasePageSizeBottom(50);
 
             pageSizes[i] = currPage.GetPageSize();
 

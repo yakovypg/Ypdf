@@ -1,6 +1,6 @@
 namespace Ypdf.Core.Design;
 
-public enum LocationMode
+public enum IncreasePageMode
 {
     WithoutIncrease,
     IncreaseLeft,
