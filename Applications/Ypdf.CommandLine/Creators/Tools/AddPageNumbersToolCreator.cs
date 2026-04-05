@@ -3,6 +3,7 @@ using Ypdf.CommandLine.AppConfig;
 using Ypdf.CommandLine.Configuration;
 using Ypdf.CommandLine.Exceptions;
 using Ypdf.CommandLine.Execution;
+using Ypdf.Core.Design;
 using Ypdf.Core.Design.Fonts;
 using Ypdf.Core.Design.Pages;
 using Ypdf.Core.Tools;
@@ -39,7 +40,6 @@ internal sealed class AddPageNumbersToolCreator : ToolCreator
             HorizontalAlignment = subcommand.HorizontalNumberAlignment,
             VerticalAlignment = subcommand.VerticalNumberAlignment,
             Margin = subcommand.Margin,
-            LocationMode = subcommand.LocationMode,
             ConsiderLeftPageMargin = subcommand.ConsiderLeftPageMargin,
             ConsiderTopPageMargin = subcommand.ConsiderTopPageMargin,
             ConsiderRightPageMargin = subcommand.ConsiderRightPageMargin,
@@ -47,7 +47,16 @@ internal sealed class AddPageNumbersToolCreator : ToolCreator
             TextPresenter = subcommand.TextPresenter
         };
 
-        var tool = new AddPageNumbersTool(pageNumberStyle, subcommand.PageNumberShifts);
+        var addPageNumbersTool = new AddPageNumbersTool(pageNumberStyle, subcommand.PageNumberShifts);
+
+        var increasePageSizeTool = new IncreasePageSizeTool(
+            subcommand.GeneralPageSizeAdjustment,
+            subcommand.FillColor,
+            subcommand.IncreasePageMode);
+
+        ITool tool = subcommand.IncreasePageMode != IncreasePageMode.WithoutIncrease
+            ? new ToolsPipeline([increasePageSizeTool, addPageNumbersTool])
+            : addPageNumbersTool;
 
         return new ToolExecutionProvider(
             tool,

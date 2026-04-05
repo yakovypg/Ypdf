@@ -21,7 +21,9 @@ internal sealed class AddPageNumbersSubcommand
     internal const string HorizontalNumberAlignmentLongName = "horizontal-alignment";
     internal const string VerticalNumberLongName = "vertical-alignment";
     internal const string MarginLongName = "margin";
-    internal const string LocationModeLongName = "num-location-mode";
+    internal const string IncreasePageModeLongName = "num-location-mode";
+    internal const string GeneralPageSizeAdjustmentLongName = "page-increase";
+    internal const string FillColorLongName = "fill-color";
     internal const string ConsiderLeftPageMarginLongName = "left-page-margin";
     internal const string ConsiderTopPageMarginLongName = "top-page-margin";
     internal const string ConsiderRightPageMarginLongName = "right-page-margin";
@@ -37,6 +39,7 @@ internal sealed class AddPageNumbersSubcommand
 
     internal const string DefaultTextPresenter = nameof(PageNumberTextPresenter.Default);
     internal const string DefaultMargin = "0";
+    internal const string DefaultFillColor = nameof(ColorConstants.WHITE);
     internal const string DefaultFontColor = nameof(ColorConstants.BLACK);
 
     [ValueOption<string>(
@@ -87,17 +90,6 @@ internal sealed class AddPageNumbersSubcommand
     ]
     [OptionGroup("appearance", "", "")]
     public Margin Margin { get; set; } = Margin.Parse(DefaultMargin);
-
-    [EnumValueOption<LocationMode>(
-        defaultValue: LocationMode.WithoutIncrease,
-        longName: LocationModeLongName,
-        shortName: "l",
-        description: "page number location mode",
-        addChoicesToDescription: true,
-        addDefaultValueToDescription: true)
-    ]
-    [OptionGroup("appearance", "", "")]
-    public LocationMode LocationMode { get; set; }
 
     [FlagOption(
         longName: ConsiderLeftPageMarginLongName,
@@ -155,6 +147,38 @@ internal sealed class AddPageNumbersSubcommand
     ]
     [OptionGroup("appearance", "", "")]
     public List<PageContentShift> PageNumberShifts { get; set; } = [];
+
+    [EnumValueOption<IncreasePageMode>(
+        defaultValue: IncreasePageMode.WithoutIncrease,
+        longName: IncreasePageModeLongName,
+        shortName: "l",
+        description: "increase page mode",
+        addChoicesToDescription: true,
+        addDefaultValueToDescription: true)
+    ]
+    [OptionGroup("appearance", "", "")]
+    public IncreasePageMode IncreasePageMode { get; set; }
+
+    [ValueOption<float>(
+        defaultValue: 40f,
+        longName: GeneralPageSizeAdjustmentLongName,
+        shortName: "",
+        description: "page size adjustment for all pages",
+        addDefaultValueToDescription: true,
+        valueRestriction: "inrange 1 100000\n?general page size adjustment must be in [1; 100000]")
+    ]
+    [OptionGroup("appearance", "", "")]
+    public float GeneralPageSizeAdjustment { get; set; }
+
+    [ValueOption<Color>(
+        longName: FillColorLongName,
+        shortName: "",
+        description:
+            $"Color that will fill the area after increasing the page size [default={DefaultFontColor}] (name or (r,g,b)). " +
+            $"Supported names: {ColorConverter.SupportedColorNames}")
+    ]
+    [OptionGroup("appearance", "", "")]
+    public Color FillColor { get; set; } = ColorConverter.Parse(DefaultFillColor);
 
     [ValueOption<string>(
         defaultValue: "",
@@ -259,8 +283,7 @@ internal sealed class AddPageNumbersSubcommand
         shortName: "c",
         description:
             $"page number font color [default={DefaultFontColor}] (name or (r,g,b)). " +
-            $"Supported names: {ColorConverter.SupportedColorNames}",
-        ignoreCaseInChoices: true)
+            $"Supported names: {ColorConverter.SupportedColorNames}")
     ]
     [OptionGroup("font", "", "")]
     public Color FontColor { get; set; } = ColorConverter.Parse(DefaultFontColor);
