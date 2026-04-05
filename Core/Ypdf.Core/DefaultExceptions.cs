@@ -105,14 +105,12 @@ internal static class DefaultExceptions
     }
 
     internal static void ThrowIfEqual<T>(T value, T other, string? paramName = null)
-        where T : IEquatable<T>
     {
         if (EqualityComparer<T>.Default.Equals(value, other))
             ThrowEqual(value, other, paramName);
     }
 
     internal static void ThrowIfNotEqual<T>(T value, T other, string? paramName = null)
-        where T : IEquatable<T>
     {
         if (!EqualityComparer<T>.Default.Equals(value, other))
             ThrowNotEqual(value, other, paramName);
