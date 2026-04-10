@@ -11,8 +11,8 @@ internal sealed class CompressImagesSubcommand
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";
-    internal const string QualityFactorLongName = "quality";
-    internal const string SizeFactorLongName = "size";
+    internal const string QualityFactorLongName = "quality-factor";
+    internal const string SizeFactorLongName = "size-factor";
     internal const string WidthLongName = "width";
     internal const string HeightLongName = "height";
     internal const string ExtensionLongName = "extension";

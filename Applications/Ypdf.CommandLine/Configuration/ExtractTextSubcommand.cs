@@ -11,7 +11,7 @@ internal sealed class ExtractTextSubcommand
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";
     internal const string TextExtractorLongName = "text-extractor";
-    internal const string UseTikaLongName = "tika";
+    internal const string UseTikaLongName = "use-tika";
 
     internal const string DefaultTextExtractor = nameof(TextExtractors.Simple);
 

@@ -17,7 +17,7 @@ internal sealed class TextToPdfSubcommand
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";
     internal const string MarginLongName = "margin";
-    internal const string PageSizeLongName = "size";
+    internal const string PageSizeLongName = "page-size";
     internal const string TextAlignmentLongName = "text-alignment";
     internal const string FontPathLongName = "font-path";
     internal const string FontEncodingLongName = "font-encoding";
