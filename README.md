@@ -1,16 +1,37 @@
-# Ypdf
-We present Ypdf, a PDF document processing application that combines the best features of existing solutions and provides the most popular and requested functionality for free to its users.
+<h1 align="center">Ypdf</h1>
+<p align="center">
+  <img alt="ypdf" height="200" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGhwNDlsbTUyYzV5NnB6Z3Zka2VpN3A1YnEwZzBtbWdscXNkM2FnMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/F3QtLoH5bsvdH315tY/giphy.gif" />
+</p>
 
-Unlike many other projects, Ypdf is a free, open source and cross-platform tool that has both a CLI and a graphical version, so that it is convenient for both command-line lovers and people who prefer graphical shells. Ypdf can also be used as a library providing all of the presented functionality, which can be used without complicated configuration.
+<p align="center">
+  <a href="https://github.com/yakovypg/Ypdf/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-AGPLv3-darkyellow.svg" alt="license" />
+  </a>
+  <img src="https://img.shields.io/badge/Version-2.0.0-red.svg" alt="version" />
+  <img src="https://img.shields.io/badge/C%23-12.0-blue" alt="csharp" />
+</p>
 
-In addition, Ypdf has no restrictions on the maximum number of files or their pages to be processed and the maximum size of these files. It also provides the ability to fine-tune each of its functions, which allows you to achieve almost any intended result.
+## About
+**Ypdf** is a cross-platform, free, open-source suite for PDF processing that provides commonly requested features via multiple front-ends and a shared core library.
 
-Confidentiality is also an important detail. Ypdf takes care of the safety of user data, does not collect any user data, does not perform any actions without the knowledge and consent of the user, does not require access to the Internet and works exclusively locally in its own directory (that is, it does not add anything extra to the operating system).
+It encompasses graphical user interface (GUI), command-line user interface (CLI) and a core library that implements the application logic (other repositories are front‑ends).
+- [Ypdf.Desktop](https://github.com/yakovypg/Ypdf.Desktop) — Desktop application
+- [Ypdf.Web](https://github.com/yakovypg/Ypdf.Web) — Web application
+- [Ypdf.CommandLine](https://github.com/yakovypg/Ypdf.CommandLine) — CLI tool
+- [Ypdf.Core](https://github.com/yakovypg/Ypdf.Core) — Core library
 
-In conclusion, the project is aimed at ensuring maximum ease of use of the program, contains documentation that details all the functionality with multiple examples, does not contain anything superfluous and distracting.
+Explore the various components to utilize **Ypdf** in the way that best suits your needs!
 
-## Supported Tools
-With **Ypdf** you will be able to perform the following actions:
+[![Contributors](https://img.shields.io/github/contributors/yakovypg/Ypdf)](https://github.com/yakovypg/Ypdf/graphs/contributors)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/yakovypg/Ypdf/dotnet.yml?branch=main)](https://github.com/yakovypg/Ypdf/actions/workflows/dotnet.yml?query=branch%3Amain)
+
+## Table of contents
+*    [Main Features](#main-features)
+*    [Contributing](#contributing)
+*    [License](#license)
+
+## Main Features
+**Ypdf** supports the following main features:
 - Split PDF document
 - Merge PDF documents
 - Compress PDF document
@@ -32,5 +53,8 @@ With **Ypdf** you will be able to perform the following actions:
 - Remove password from PDF document
 - Compress images
 
-## Acknowledgments
-Special thanks to the [NetArgumentParser](https://github.com/yakovypg/NetArgumentParser) project for making the creation of an argument parser incredibly easy and convenient.
+## Contributing
+Contributions are welcome, have a look at the [CONTRIBUTING.md](CONTRIBUTING.md) document for more information.
+
+## License
+The project is available under the [AGPLv3](LICENSE) license.
