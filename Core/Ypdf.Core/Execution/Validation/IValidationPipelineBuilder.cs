@@ -4,6 +4,7 @@ namespace Ypdf.Core.Execution.Validation;
 
 public interface IValidationPipelineBuilder
 {
-    IValidationPipelineBuilder Add(IValidationMiddleware middleware);
+    IValidationPipelineBuilder AddMiddleware(IValidationMiddleware middleware);
+    IValidationPipelineBuilder AddConfig(ValidationConfig config);
     IValidationPipeline Build();
 }

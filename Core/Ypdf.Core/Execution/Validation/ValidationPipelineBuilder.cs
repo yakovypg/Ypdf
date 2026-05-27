@@ -5,9 +5,16 @@ namespace Ypdf.Core.Execution.Validation;
 
 public class ValidationPipelineBuilder : IValidationPipelineBuilder
 {
-    private readonly List<IValidationMiddleware> _middlewares = [];
+    private readonly List<IValidationMiddleware> _middlewares;
+    private ValidationConfig _config;
 
-    public IValidationPipelineBuilder Add(IValidationMiddleware middleware)
+    public ValidationPipelineBuilder()
+    {
+        _middlewares = [];
+        _config = new();
+    }
+
+    public IValidationPipelineBuilder AddMiddleware(IValidationMiddleware middleware)
     {
         ExtendedArgumentNullException.ThrowIfNull(middleware, nameof(middleware));
 
@@ -15,8 +22,16 @@ public class ValidationPipelineBuilder : IValidationPipelineBuilder
         return this;
     }
 
+    public IValidationPipelineBuilder AddConfig(ValidationConfig config)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
+
+        _config = config;
+        return this;
+    }
+
     public IValidationPipeline Build()
     {
-        return new ValidationPipeline([.. _middlewares]);
+        return new ValidationPipeline(_middlewares, _config);
     }
 }

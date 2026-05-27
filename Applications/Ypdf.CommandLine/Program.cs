@@ -26,7 +26,8 @@ try
     ParseArgumentsResult parseResult = parser.Parse(args);
 
     Dictionary<string, IToolCreator> supportedTools = GetSupportedTools(globalConfig);
-    IValidationPipeline validationPipeline = CreateValidationPipeline(userInteractor);
+    ValidationConfig validationConfig = CreateValidationConfig(parserConfig);
+    IValidationPipeline validationPipeline = CreateValidationPipeline(userInteractor, validationConfig);
 
     ToolExecutor toolExecutor = new(supportedTools, validationPipeline);
     toolExecutor.Execute(parserConfig, parseResult);
@@ -83,13 +84,23 @@ static Dictionary<string, IToolCreator> GetSupportedTools(GlobalConfig globalCon
     return supportedToolsCreator.Create(globalConfig);
 }
 
-static IValidationPipeline CreateValidationPipeline(IUserInteractor userInteractor)
+static ValidationConfig CreateValidationConfig(YpdfParserConfig parserConfig)
+{
+    ExtendedArgumentNullException.ThrowIfNull(parserConfig, nameof(parserConfig));
+    return new ValidationConfig(parserConfig.AssumeYes);
+}
+
+static IValidationPipeline CreateValidationPipeline(
+    IUserInteractor userInteractor,
+    ValidationConfig validationConfig)
 {
     ExtendedArgumentNullException.ThrowIfNull(userInteractor, nameof(userInteractor));
+    ExtendedArgumentNullException.ThrowIfNull(validationConfig, nameof(validationConfig));
 
     var validationPipelineBuilder = new ValidationPipelineBuilder()
-        .Add(new OutputDirectoryExistsMiddleware(userInteractor))
-        .Add(new OutputFileNotExistsMiddleware(userInteractor));
+        .AddMiddleware(new OutputDirectoryExistsMiddleware(userInteractor))
+        .AddMiddleware(new OutputFileNotExistsMiddleware(userInteractor))
+        .AddConfig(validationConfig);
 
     return validationPipelineBuilder.Build();
 }

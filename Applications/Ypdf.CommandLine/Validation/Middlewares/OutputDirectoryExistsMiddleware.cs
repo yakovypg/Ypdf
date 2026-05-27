@@ -19,9 +19,10 @@ internal sealed class OutputDirectoryExistsMiddleware : IValidationMiddleware
         _userInteractor = userInteractor;
     }
 
-    public ValidationResult Validate(IToolExecutionProvider executionProvider)
+    public ValidationResult Validate(IToolExecutionProvider executionProvider, ValidationConfig config)
     {
         ExtendedArgumentNullException.ThrowIfNull(executionProvider, nameof(executionProvider));
+        ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
         bool isSingleOutputCompressTool = executionProvider.ExecutionParameters.Tool is CompressImageTool &&
             executionProvider.ExecutionParameters.InputPaths.Count <= 1;
@@ -39,7 +40,7 @@ internal sealed class OutputDirectoryExistsMiddleware : IValidationMiddleware
             return ValidationResult.Success();
 
         string question = "Specified output directory doesn't exist. Create it? [Y/n] ";
-        bool answer = _userInteractor.AskYesNo(question);
+        bool answer = config.AcceptAllSuggestrions || _userInteractor.AskYesNo(question);
 
         if (!answer)
         {

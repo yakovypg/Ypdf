@@ -5,8 +5,17 @@ namespace Ypdf.Core.Execution.Validation;
 
 public class ValidationPipeline : IValidationPipeline
 {
-    private readonly IValidationMiddleware[] _middlewares;
-    public ValidationPipeline(IValidationMiddleware[] middlewares) => _middlewares = middlewares;
+    private readonly IEnumerable<IValidationMiddleware> _middlewares;
+    private readonly ValidationConfig _config;
+
+    public ValidationPipeline(IEnumerable<IValidationMiddleware> middlewares, ValidationConfig config)
+    {
+        ExtendedArgumentNullException.ThrowIfNull(middlewares, nameof(middlewares));
+        ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
+
+        _middlewares = middlewares;
+        _config = config;
+    }
 
     public ValidationResult Run(IToolExecutionProvider executionProvider)
     {
@@ -16,7 +25,7 @@ public class ValidationPipeline : IValidationPipeline
 
         foreach (IValidationMiddleware middleware in _middlewares)
         {
-            ValidationResult validationResult = middleware.Validate(executionProvider);
+            ValidationResult validationResult = middleware.Validate(executionProvider, _config);
 
             if (!validationResult.IsValid)
             {

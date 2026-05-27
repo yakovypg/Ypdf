@@ -5,6 +5,15 @@ namespace Ypdf.CommandLine.Configuration;
 [ParserConfig]
 internal sealed class YpdfParserConfig
 {
+    internal const string AssumeYesLongName = "assumeyes";
+
+    [FlagOption(
+        longName: AssumeYesLongName,
+        shortName: "y",
+        description: "automatically answer yes for all questions")
+    ]
+    public bool AssumeYes { get; set; }
+
     [Subcommand(AddPageNumbersSubcommand.Name, AddPageNumbersSubcommand.Description)]
     public AddPageNumbersSubcommand AddPageNumbersSubcommand { get; } = new();
 
