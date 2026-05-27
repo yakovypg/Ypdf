@@ -20,7 +20,7 @@ public static class CoreDirectories
 
         UserLibConfig = GetUserLibConfigPath(UserDirectory);
         TempDirectory = GetTempDirectoryPath(UserLibConfig);
-        Scripts = GetScriptsPath(UserLibConfig);
+        Scripts = GetScriptsPath(RootDirectory);
     }
 
     public static string AssemblyLocation { get; }
