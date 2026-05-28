@@ -1,5 +1,5 @@
 # User Guide
-This document serves as a comprehensive guide for using **Ypdf**.
+This document serves as a comprehensive guide for using **Ypdf.CommandLine**.
 
 ## Basics
 First, here are some important points to keep in mind:

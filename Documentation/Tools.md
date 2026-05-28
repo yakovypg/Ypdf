@@ -54,7 +54,7 @@ ypdf split -i /path/to/input.pdf -o /path/to/output/dir
 
 You can also specify the part size as a number of bytes or an expression.
 ```bash
-ypdf split -i /path/to/input.pdf -o /path/to/output/dir --part-size "1024*1024*3"
+ypdf split -i /path/to/input.pdf -o /path/to/output/dir --part-size "10*1024*1024"
 ```
 
 ## Merge PDF Documents
@@ -152,7 +152,7 @@ You can also specify horizontal and vertical page number alignment, text present
 ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf \
     --h-num-alignment left \
     --v-num-alignment top \
-    --num-presenter=verbal \
+    --num-presenter verbal \
     --margin 0,10 \
     --left-page-margin \
     --top-page-margin \
@@ -189,13 +189,13 @@ ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf \
 
 If increasing the page causes an unexpected ~50‑pixel rightward shift of the first or all page numbers, remove it by specifying a content shift.
 ```bash
-ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf --content-shift=1-10:-50,0
+ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf --content-shift 1-10:-50,0
 ```
 
 ## Add Watermark To PDF Document
 You can add a watermark to a PDF document. Specify pages to process. If no pages are specified, the watermark will be placed on all pages of the PDF document.
 ```bash
-ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf -p 1 -p 5-10
+ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf --text "My watermark" -p 1 5-10
 ```
 
 The watermark is placed inside an enclosing rectangle that rotates with the text. If the text doesn't fit the rectangle, the watermark will not be added. By default the tool attempts to center the watermark by shifting the lower-left corner, but centering can be disrupted when the rectangle is rotated or when a non‑minimal enclosing rectangle is used. You can always set the lower-left corner position manually.
@@ -218,6 +218,7 @@ ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
 You can configure font size, family, color, and opacity.
 ```bash
 ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
+    --text "My watermark" \
     --font-size 72 \
     --font-family times_bold \
     --font-color black \
@@ -227,6 +228,7 @@ ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
 You can also use your own font instead of font family.
 ```bash
 ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
+    --text "My watermark" \
     --font-size 72 \
     --font-path /path/to/font.ttf \
     --font-encoding identity_h \
@@ -237,6 +239,7 @@ ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
 You can add a border for the watermark and specify its style, color, thickness, and opacity.
 ```bash
 ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
+    --text "My watermark" \
     --border dashed \
     --border-color blue \
     --border-thickness 5 \
@@ -278,7 +281,7 @@ ypdf add-watermark-annotation -i /path/to/input.pdf -o /path/to/output.pdf \
 ## Remove Watermark From PDF Document
 You can remove a watermark that is stored as a PDF annotation. This doesn't remove watermarks embedded in images or in other non-annotation formats. Specify pages to process. If no pages are specified, the watermark will be removed from all pages.
 ```bash
-ypdf remove-watermark-annotation -i /path/to/input.pdf -o /path/to/output.pdf -p 1 -p 5-10
+ypdf remove-watermark-annotation -i /path/to/input.pdf -o /path/to/output.pdf -p 1 5-10
 ```
 
 ## Convert Images To PDF Document
@@ -297,7 +300,7 @@ You can set the PDF page size, image margins, image rotation angle, and horizont
 ypdf image-to-pdf -i /path/to/input1.jpg /path/to/input2.png -o /path/to/output.pdf \
     --page-size a4 \
     --margin 10 \
-    --image-h-alignment left
+    --image-h-alignment left \
     --angle 90
 ```
 
@@ -395,7 +398,7 @@ ypdf compress-images -i /path/to/input.png -o /path/to/output.jpg
 
 On many platforms you can use a file pattern to specify multiple files.
 ```bash
-ypdf merge -i /path/to/files/*.jpg -o /path/to/output/directory
+ypdf compress-images -i /path/to/files/*.jpg -o /path/to/output/directory
 ```
 
 If only one input image is specified, the output format is inferred from the output file path. When processing multiple images, specify an output directory and set the output extension explicitly (JPEG is the default). To achieve a good compression ratio, it is recommended to specify the JPEG format.
