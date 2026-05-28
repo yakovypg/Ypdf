@@ -58,8 +58,7 @@ internal sealed class AddWatermarkAnnotationSubcommand
         longName: PagesLongName,
         shortName: "p",
         description: "page number or page range (N or S-E -> 1 or 3-5)",
-        contextCaptureType: ContextCaptureType.OneOrMore,
-        isRequired: true)
+        contextCaptureType: ContextCaptureType.OneOrMore)
     ]
     [OptionGroup("paging", "Paging", "Options for configuring paging")]
     public List<PageRange> Pages { get; set; } = [];
