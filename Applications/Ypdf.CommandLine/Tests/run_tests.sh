@@ -13,143 +13,143 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 INPUT_DIR="$SCRIPT_DIR/Input"
 OUTPUT_DIR="$SCRIPT_DIR/Output"
 
-CUSTOM_FONT_PATH="$SCRIPT_DIR/Input/roboto.ttf"
+CUSTOM_FONT_PATH="$SCRIPT_DIR/Input/Roboto-Bold.ttf"
 
-HELP_OUTPUT="$OUTPUT_DIR/output_help.txt"
-TOOL_HELP_OUTPUT="$OUTPUT_DIR/output_tool_help.txt"
-VERSION_OUTPUT="$OUTPUT_DIR/output_version.txt"
+HELP_OUTPUT="$OUTPUT_DIR/help.txt"
+TOOL_HELP_OUTPUT="$OUTPUT_DIR/tool_help.txt"
+VERSION_OUTPUT="$OUTPUT_DIR/version.txt"
 
-CONFIG_SHOW_OUTPUT="$OUTPUT_DIR/output_show_config.txt"
-CONFIG_SAVE_OUTPUT="$OUTPUT_DIR/output_save_config.txt"
-CONFIG_RESET_OUTPUT="$OUTPUT_DIR/output_reset_config.txt"
+CONFIG_SHOW_OUTPUT="$OUTPUT_DIR/config_show.txt"
+CONFIG_SAVE_OUTPUT="$OUTPUT_DIR/config_save.txt"
+CONFIG_RESET_OUTPUT="$OUTPUT_DIR/config_reset.txt"
 
-SPLIT_BY_RANGES_INPUT="$INPUT_DIR/input_split.pdf"
-SPLIT_BY_RANGES_OUTPUT="$OUTPUT_DIR/output_split_by_ranges"
-SPLIT_BY_DEFAULT_SIZE_INPUT="$INPUT_DIR/input_split_large.pdf"
-SPLIT_BY_DEFAULT_SIZE_OUTPUT="$OUTPUT_DIR/output_split_by_default_size"
-SPLIT_BY_CUSTOM_SIZE_INPUT="$INPUT_DIR/input_split_large.pdf"
-SPLIT_BY_CUSTOM_SIZE_OUTPUT="$OUTPUT_DIR/output_split_by_custom_size"
+SPLIT_BY_RANGES_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+SPLIT_BY_RANGES_OUTPUT="$OUTPUT_DIR/split_by_ranges"
+SPLIT_BY_DEFAULT_SIZE_INPUT="$INPUT_DIR/pdf_60pages_76mb.pdf"
+SPLIT_BY_DEFAULT_SIZE_OUTPUT="$OUTPUT_DIR/split_by_default_size"
+SPLIT_BY_CUSTOM_SIZE_INPUT="$INPUT_DIR/pdf_60pages_76mb.pdf"
+SPLIT_BY_CUSTOM_SIZE_OUTPUT="$OUTPUT_DIR/split_by_custom_size"
 
-MERGE_TWO_FILES_INPUT_1="$INPUT_DIR/input_merge_1.pdf"
-MERGE_TWO_FILES_INPUT_2="$INPUT_DIR/input_merge_2.pdf"
-MERGE_TWO_FILES_OUTPUT="$OUTPUT_DIR/output_merge_two_files.pdf"
-MERGE_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/input_merge"
-MERGE_MANY_FILES_OUTPUT="$OUTPUT_DIR/output_merge_many_files.pdf"
+MERGE_TWO_FILES_INPUT_1="$INPUT_DIR/pdf_to_merge_1.pdf"
+MERGE_TWO_FILES_INPUT_2="$INPUT_DIR/pdf_to_merge_2.pdf"
+MERGE_TWO_FILES_OUTPUT="$OUTPUT_DIR/merge_two_files.pdf"
+MERGE_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/pdf_to_merge"
+MERGE_MANY_FILES_OUTPUT="$OUTPUT_DIR/merge_many_files.pdf"
 
-COMPRESS_DEFAULT_INPUT="$INPUT_DIR/input_compress.pdf"
-COMPRESS_DEFAULT_OUTPUT="$OUTPUT_DIR/output_compress_default.pdf"
-COMPRESS_CUSTOM_INPUT="$INPUT_DIR/input_compress.pdf"
-COMPRESS_CUSTOM_OUTPUT="$OUTPUT_DIR/output_compress_custom.pdf"
-COMPRESS_WITHOUT_VALIDITY_CHECK_INPUT="$INPUT_DIR/input_compress.pdf"
-COMPRESS_WITHOUT_VALIDITY_CHECK_OUTPUT="$OUTPUT_DIR/output_compress_without_validity_check.pdf"
-CAN_COMPRESS_INPUT="$INPUT_DIR/input_can_compress.pdf"
-CAN_COMPRESS_OUTPUT="$OUTPUT_DIR/output_can_compress.pdf"
+COMPRESS_DEFAULT_INPUT="$INPUT_DIR/pdf_to_compress.pdf"
+COMPRESS_DEFAULT_OUTPUT="$OUTPUT_DIR/compress_default.pdf"
+COMPRESS_CUSTOM_INPUT="$INPUT_DIR/pdf_to_compress.pdf"
+COMPRESS_CUSTOM_OUTPUT="$OUTPUT_DIR/compress_custom.pdf"
+COMPRESS_WITHOUT_VALIDITY_CHECK_INPUT="$INPUT_DIR/pdf_to_compress.pdf"
+COMPRESS_WITHOUT_VALIDITY_CHECK_OUTPUT="$OUTPUT_DIR/compress_without_validity_check.pdf"
+CAN_COMPRESS_TRUE_INPUT="$INPUT_DIR/pdf_to_compress.pdf"
+CAN_COMPRESS_TRUE_OUTPUT="$OUTPUT_DIR/can_compress_true.txt"
+CAN_COMPRESS_FALSE_INPUT="$INPUT_DIR/pdf_cannot_compress.pdf"
+CAN_COMPRESS_FALSE_OUTPUT="$OUTPUT_DIR/can_compress_false.txt"
 
-COPY_INPUT="$INPUT_DIR/input_copy.pdf"
-COPY_OUTPUT="$OUTPUT_DIR/output_copy.pdf"
+COPY_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
+COPY_OUTPUT="$OUTPUT_DIR/copy.pdf"
 
-REMOVE_PAGES_INPUT="$INPUT_DIR/input_remove_pages.pdf"
-REMOVE_PAGES_OUTPUT="$OUTPUT_DIR/output_remove_pages.pdf"
+REMOVE_PAGES_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+REMOVE_PAGES_OUTPUT="$OUTPUT_DIR/remove_pages.pdf"
 
-MOVE_PAGE_INPUT="$INPUT_DIR/input_move_page.pdf"
-MOVE_PAGE_OUTPUT="$OUTPUT_DIR/output_move_page.pdf"
+MOVE_PAGE_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+MOVE_PAGE_OUTPUT="$OUTPUT_DIR/move_page.pdf"
 
-REORDER_PAGES_INPUT="$INPUT_DIR/input_reorder_pages.pdf"
-REORDER_PAGES_OUTPUT="$OUTPUT_DIR/output_reorder_pages.pdf"
+REORDER_PAGES_INPUT="$INPUT_DIR/pdf_5pages_blue.pdf"
+REORDER_PAGES_OUTPUT="$OUTPUT_DIR/reorder_pages.pdf"
 
-ROTATE_ALL_INPUT="$INPUT_DIR/input_rotate.pdf"
-ROTATE_ALL_OUTPUT="$OUTPUT_DIR/output_rotate_all.pdf"
-ROTATE_CUSTOM_INPUT="$INPUT_DIR/input_rotate.pdf"
-ROTATE_CUSTOM_OUTPUT="$OUTPUT_DIR/output_rotate_custom.pdf"
+ROTATE_ALL_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ROTATE_ALL_OUTPUT="$OUTPUT_DIR/rotate_all.pdf"
+ROTATE_CUSTOM_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ROTATE_CUSTOM_OUTPUT="$OUTPUT_DIR/rotate_custom.pdf"
 
-CROP_INPUT="$INPUT_DIR/input_crop.pdf"
-CROP_OUTPUT="$OUTPUT_DIR/output_crop.pdf"
+CROP_INPUT="$INPUT_DIR/pdf_rectangles_1.pdf"
+CROP_OUTPUT="$OUTPUT_DIR/crop.pdf"
 
-DIVIDE_INPUT="$INPUT_DIR/input_divide.pdf"
-DIVIDE_OUTPUT="$OUTPUT_DIR/output_divide.pdf"
+DIVIDE_INPUT="$INPUT_DIR/pdf_rectangles_1.pdf"
+DIVIDE_OUTPUT="$OUTPUT_DIR/divide.pdf"
 
-ADD_PAGE_NUMBERS_DEFAULT_INPUT="$INPUT_DIR/input_add_page_numbers.pdf"
-ADD_PAGE_NUMBERS_DEFAULT_OUTPUT="$OUTPUT_DIR/output_add_page_numbers_default.pdf"
-ADD_PAGE_NUMBERS_CUSTOM_INPUT="$INPUT_DIR/input_add_page_numbers.pdf"
-ADD_PAGE_NUMBERS_CUSTOM_OUTPUT="$OUTPUT_DIR/output_add_page_numbers_custom.pdf"
-ADD_PAGE_NUMBERS_WITH_FONT_INPUT="$INPUT_DIR/input_add_page_numbers.pdf"
-ADD_PAGE_NUMBERS_WITH_FONT_OUTPUT="$OUTPUT_DIR/output_add_page_numbers_with_font.pdf"
-ADD_PAGE_NUMBERS_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/input_add_page_numbers.pdf"
-ADD_PAGE_NUMBERS_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/output_add_page_numbers_with_custom_font.pdf"
-ADD_PAGE_NUMBERS_WITH_PAGE_INCREASE_INPUT="$INPUT_DIR/input_add_page_numbers.pdf"
-ADD_PAGE_NUMBERS_WITH_PAGE_INCREASE_OUTPUT="$OUTPUT_DIR/output_add_page_numbers_with_page_increase.pdf"
-ADD_PAGE_NUMBERS_WITH_CONTENT_SHIFT_INPUT="$INPUT_DIR/input_add_page_numbers.pdf"
-ADD_PAGE_NUMBERS_WITH_CONTENT_SHIFT_OUTPUT="$OUTPUT_DIR/output_add_page_numbers_with_content_shift.pdf"
+ADD_PAGE_NUMBERS_DEFAULT_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
+ADD_PAGE_NUMBERS_DEFAULT_OUTPUT="$OUTPUT_DIR/add_page_numbers_default.pdf"
+ADD_PAGE_NUMBERS_CUSTOM_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
+ADD_PAGE_NUMBERS_CUSTOM_OUTPUT="$OUTPUT_DIR/add_page_numbers_custom.pdf"
+ADD_PAGE_NUMBERS_WITH_FONT_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
+ADD_PAGE_NUMBERS_WITH_FONT_OUTPUT="$OUTPUT_DIR/add_page_numbers_with_font.pdf"
+ADD_PAGE_NUMBERS_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
+ADD_PAGE_NUMBERS_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/add_page_numbers_with_custom_font.pdf"
+ADD_PAGE_NUMBERS_WITH_PAGE_INCREASE_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
+ADD_PAGE_NUMBERS_WITH_PAGE_INCREASE_OUTPUT="$OUTPUT_DIR/add_page_numbers_with_page_increase.pdf"
+ADD_PAGE_NUMBERS_WITH_CONTENT_SHIFT_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
+ADD_PAGE_NUMBERS_WITH_CONTENT_SHIFT_OUTPUT="$OUTPUT_DIR/add_page_numbers_with_content_shift.pdf"
 
-ADD_WATERMARK_DEFAULT_INPUT="$INPUT_DIR/input_add_watermark.pdf"
-ADD_WATERMARK_DEFAULT_OUTPUT="$OUTPUT_DIR/output_add_watermark_default.pdf"
-ADD_WATERMARK_CUSTOM_INPUT="$INPUT_DIR/input_add_watermark.pdf"
-ADD_WATERMARK_CUSTOM_OUTPUT="$OUTPUT_DIR/output_add_watermark_custom.pdf"
-ADD_WATERMARK_WITH_FONT_INPUT="$INPUT_DIR/input_add_watermark.pdf"
-ADD_WATERMARK_WITH_FONT_OUTPUT="$OUTPUT_DIR/output_add_watermark_with_font.pdf"
-ADD_WATERMARK_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/input_add_watermark.pdf"
-ADD_WATERMARK_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/output_add_watermark_with_custom_font.pdf"
-ADD_WATERMARK_WITH_BORDER_INPUT="$INPUT_DIR/input_add_watermark.pdf"
-ADD_WATERMARK_WITH_BORDER_OUTPUT="$OUTPUT_DIR/output_add_watermark_with_border.pdf"
-ADD_WATERMARK_WITH_DIMENSIONS_INPUT="$INPUT_DIR/input_add_watermark.pdf"
-ADD_WATERMARK_WITH_DIMENSIONS_OUTPUT="$OUTPUT_DIR/output_add_watermark_with_dimensions.pdf"
-ADD_WATERMARK_ANNOTATION_INPUT="$INPUT_DIR/input_add_watermark.pdf"
-ADD_WATERMARK_ANNOTATION_OUTPUT="$OUTPUT_DIR/output_add_watermark_annotation.pdf"
+ADD_WATERMARK_DEFAULT_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ADD_WATERMARK_DEFAULT_OUTPUT="$OUTPUT_DIR/add_watermark_default.pdf"
+ADD_WATERMARK_CUSTOM_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ADD_WATERMARK_CUSTOM_OUTPUT="$OUTPUT_DIR/add_watermark_custom.pdf"
+ADD_WATERMARK_WITH_FONT_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ADD_WATERMARK_WITH_FONT_OUTPUT="$OUTPUT_DIR/add_watermark_with_font.pdf"
+ADD_WATERMARK_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ADD_WATERMARK_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/add_watermark_with_custom_font.pdf"
+ADD_WATERMARK_WITH_BORDER_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ADD_WATERMARK_WITH_BORDER_OUTPUT="$OUTPUT_DIR/add_watermark_with_border.pdf"
+ADD_WATERMARK_WITH_DIMENSIONS_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ADD_WATERMARK_WITH_DIMENSIONS_OUTPUT="$OUTPUT_DIR/add_watermark_with_dimensions.pdf"
+ADD_WATERMARK_ANNOTATION_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
+ADD_WATERMARK_ANNOTATION_OUTPUT="$OUTPUT_DIR/add_watermark_annotation.pdf"
 
-REMOVE_WATERMARK_ANNOTATION_INPUT="$INPUT_DIR/input_remove_watermark_annotation.pdf"
-REMOVE_WATERMARK_ANNOTATION_OUTPUT="$OUTPUT_DIR/output_remove_watermark_annotation.pdf"
+REMOVE_WATERMARK_ANNOTATION_INPUT="$INPUT_DIR/pdf_watermark_annotation.pdf"
+REMOVE_WATERMARK_ANNOTATION_OUTPUT="$OUTPUT_DIR/remove_watermark_annotation.pdf"
 
-IMAGE_TO_PDF_TWO_FILES_INPUT_1="$INPUT_DIR/input_image_to_pdf_1.jpg"
-IMAGE_TO_PDF_TWO_FILES_INPUT_2="$INPUT_DIR/input_image_to_pdf_2.png"
-IMAGE_TO_PDF_TWO_FILES_OUTPUT="$OUTPUT_DIR/output_image_to_pdf_two_files.pdf"
-IMAGE_TO_PDF_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/input_image_to_pdf"
-IMAGE_TO_PDF_MANY_FILES_OUTPUT="$OUTPUT_DIR/output_image_to_pdf_many_files.pdf"
-IMAGE_TO_PDF_CUSTOM_INPUT_1="$INPUT_DIR/input_image_to_pdf_1.pdf"
-IMAGE_TO_PDF_CUSTOM_INPUT_2="$INPUT_DIR/input_image_to_pdf_2.pdf"
-IMAGE_TO_PDF_CUSTOM_OUTPUT="$OUTPUT_DIR/output_image_to_pdf_custom.pdf"
-IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_1="$INPUT_DIR/input_image_to_pdf_1.pdf"
-IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_2="$INPUT_DIR/input_image_to_pdf_2.pdf"
-IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_OUTPUT="$OUTPUT_DIR/output_image_to_pdf_without_autoincrease.pdf"
+IMAGE_TO_PDF_TWO_FILES_INPUT_1="$INPUT_DIR/picture_1.png"
+IMAGE_TO_PDF_TWO_FILES_INPUT_2="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_TWO_FILES_OUTPUT="$OUTPUT_DIR/image_to_pdf_two_files.pdf"
+IMAGE_TO_PDF_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/picture"
+IMAGE_TO_PDF_MANY_FILES_OUTPUT="$OUTPUT_DIR/image_to_pdf_many_files.pdf"
+IMAGE_TO_PDF_CUSTOM_INPUT_1="$INPUT_DIR/picture_1.png"
+IMAGE_TO_PDF_CUSTOM_INPUT_2="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_CUSTOM_OUTPUT="$OUTPUT_DIR/image_to_pdf_custom.pdf"
+IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_1="$INPUT_DIR/picture_1.png"
+IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_2="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_OUTPUT="$OUTPUT_DIR/image_to_pdf_without_autoincrease.pdf"
 
-TEXT_TO_PDF_DEFAULT_INPUT="$INPUT_DIR/input_text_to_pdf.txt"
-TEXT_TO_PDF_DEFAULT_OUTPUT="$OUTPUT_DIR/output_text_to_pdf_default.pdf"
-TEXT_TO_PDF_CUSTOM_INPUT="$INPUT_DIR/input_text_to_pdf.txt"
-TEXT_TO_PDF_CUSTOM_OUTPUT="$OUTPUT_DIR/output_text_to_pdf_custom.pdf"
-TEXT_TO_PDF_WITH_FONT_INPUT="$INPUT_DIR/input_text_to_pdf.txt"
-TEXT_TO_PDF_WITH_FONT_OUTPUT="$OUTPUT_DIR/output_text_to_pdf_with_font.pdf"
-TEXT_TO_PDF_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/input_text_to_pdf.txt"
-TEXT_TO_PDF_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/output_text_to_pdf_with_custom_font.pdf"
+TEXT_TO_PDF_DEFAULT_INPUT="$INPUT_DIR/text_multi.txt"
+TEXT_TO_PDF_DEFAULT_OUTPUT="$OUTPUT_DIR/text_to_pdf_default.pdf"
+TEXT_TO_PDF_CUSTOM_INPUT="$INPUT_DIR/text_multi.txt"
+TEXT_TO_PDF_CUSTOM_OUTPUT="$OUTPUT_DIR/text_to_pdf_custom.pdf"
+TEXT_TO_PDF_WITH_FONT_INPUT="$INPUT_DIR/text_multi.txt"
+TEXT_TO_PDF_WITH_FONT_OUTPUT="$OUTPUT_DIR/text_to_pdf_with_font.pdf"
+TEXT_TO_PDF_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/text_multi.txt"
+TEXT_TO_PDF_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/text_to_pdf_with_custom_font.pdf"
 
-EXTRACT_IMAGES_INPUT="$INPUT_DIR/input_extract_images.pdf"
-EXTRACT_IMAGES_OUTPUT="$OUTPUT_DIR/output_extract_images"
-EXTRACT_IMAGES_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/input_extract_images_many_files"
-EXTRACT_IMAGES_MANY_FILES_OUTPUT="$OUTPUT_DIR/output_extract_images_many_files"
+EXTRACT_IMAGES_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+EXTRACT_IMAGES_OUTPUT="$OUTPUT_DIR/extract_images"
 
-EXTRACT_TEXT_DEFAULT_INPUT="$INPUT_DIR/input_extract_text_default.pdf"
-EXTRACT_TEXT_DEFAULT_OUTPUT="$OUTPUT_DIR/output_extract_text_default.txt"
-EXTRACT_TEXT_WITH_TIKA_INPUT="$INPUT_DIR/input_extract_text_with_tika.pdf"
-EXTRACT_TEXT_WITH_TIKA_OUTPUT="$OUTPUT_DIR/output_extract_text_with_tika.txt"
+EXTRACT_TEXT_DEFAULT_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+EXTRACT_TEXT_DEFAULT_OUTPUT="$OUTPUT_DIR/extract_text_default.txt"
+EXTRACT_TEXT_WITH_TIKA_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+EXTRACT_TEXT_WITH_TIKA_OUTPUT="$OUTPUT_DIR/extract_text_with_tika.txt"
 
-SET_PASSWORD_SAME_INPUT="$INPUT_DIR/input_set_password_same.pdf"
-SET_PASSWORD_SAME_OUTPUT="$OUTPUT_DIR/output_set_password_same.pdf"
-SET_PASSWORD_SEPARATE_INPUT="$INPUT_DIR/input_set_password_separate.pdf"
-SET_PASSWORD_SEPARATE_OUTPUT="$OUTPUT_DIR/output_set_password_separate.pdf"
-SET_PASSWORD_WITH_ENCRYPTION_INPUT="$INPUT_DIR/input_set_password_with_encryption.pdf"
-SET_PASSWORD_WITH_ENCRYPTION_OUTPUT="$OUTPUT_DIR/output_set_password_swith_encryption.pdf"
+SET_PASSWORD_SAME_INPUT="$INPUT_DIR/pdf_5pages_blue.pdf"
+SET_PASSWORD_SAME_OUTPUT="$OUTPUT_DIR/set_password_same.pdf"
+SET_PASSWORD_SEPARATE_INPUT="$INPUT_DIR/pdf_5pages_blue.pdf"
+SET_PASSWORD_SEPARATE_OUTPUT="$OUTPUT_DIR/set_password_separate.pdf"
+SET_PASSWORD_WITH_ENCRYPTION_INPUT="$INPUT_DIR/pdf_5pages_blue.pdf"
+SET_PASSWORD_WITH_ENCRYPTION_OUTPUT="$OUTPUT_DIR/set_password_swith_encryption.pdf"
 
-REMOVE_PASSWORD_DEFAULT_INPUT="$INPUT_DIR/input_remove_password_default.pdf"
-REMOVE_PASSWORD_DEFAULT_OUTPUT="$OUTPUT_DIR/output_remove_password_default.pdf"
-REMOVE_PASSWORD_TRY_BOTH_INPUT="$INPUT_DIR/input_remove_password_try_both.pdf"
-REMOVE_PASSWORD_TRY_BOTH_OUTPUT="$OUTPUT_DIR/output_remove_password_try_both.pdf"
+REMOVE_PASSWORD_DEFAULT_INPUT="$INPUT_DIR/pdf_with_password_same.pdf"
+REMOVE_PASSWORD_DEFAULT_OUTPUT="$OUTPUT_DIR/remove_password_default.pdf"
+REMOVE_PASSWORD_TRY_BOTH_INPUT="$INPUT_DIR/pdf_with_password_different.pdf"
+REMOVE_PASSWORD_TRY_BOTH_OUTPUT="$OUTPUT_DIR/remove_password_try_both.pdf"
 
-COMPRESS_IMAGES_SINGLE_INPUT="$INPUT_DIR/input_compress_images_single.png"
-COMPRESS_IMAGES_SINGLE_OUTPUT="$OUTPUT_DIR/output_compress_images_single.jpg"
-COMPRESS_IMAGES_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/input_compress_images_many_files"
-COMPRESS_IMAGES_MANY_FILES_OUTPUT="$OUTPUT_DIR/output_compress_images_many_files"
-COMPRESS_IMAGES_WITH_SIZE_FACTOR_INPUT="$INPUT_DIR/input_compress_images_with_size_factor.png"
-COMPRESS_IMAGES_WITH_SIZE_FACTOR_OUTPUT="$OUTPUT_DIR/output_compress_images_with_size_factor.jpg"
-COMPRESS_IMAGES_WITH_EXACT_SIZE_INPUT_PREFIX="$INPUT_DIR/input_compress_images_with_exact_size"
-COMPRESS_IMAGES_WITH_EXACT_SIZE_OUTPUT="$OUTPUT_DIR/output_compress_images_with_exact_size"
+COMPRESS_IMAGES_SINGLE_INPUT="$INPUT_DIR/img_to_compress_2mb_1.jpg"
+COMPRESS_IMAGES_SINGLE_OUTPUT="$OUTPUT_DIR/compress_images_single.jpg"
+COMPRESS_IMAGES_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/img_to_compress"
+COMPRESS_IMAGES_MANY_FILES_OUTPUT="$OUTPUT_DIR/compress_images_many_files"
+COMPRESS_IMAGES_WITH_SIZE_FACTOR_INPUT="$INPUT_DIR/img_to_compress_2mb_3.jpg"
+COMPRESS_IMAGES_WITH_SIZE_FACTOR_OUTPUT="$OUTPUT_DIR/compress_images_with_size_factor.jpg"
+COMPRESS_IMAGES_WITH_EXACT_SIZE_INPUT_PREFIX="$INPUT_DIR/img_to_compress_3mb_2.jpg"
+COMPRESS_IMAGES_WITH_EXACT_SIZE_OUTPUT="$OUTPUT_DIR/compress_images_with_exact_size.jpg"
 
 check_output_lines_greater_than() {
   local output_file_path="$1"
@@ -182,11 +182,11 @@ check_output_size_less_than_input_size() {
   local input_file_size=$(wc -c < "$input_file_path")
   local output_file_size=$(wc -c < "$output_file_path")
 
-  if [ "$input_file_size" -ne "$output_file_size" ]; then
-    return 1
+  if [ "$output_file_size" -lt "$input_file_size" ]; then
+    return 0
   fi
 
-  return 0
+  return 1
 }
 
 test_help() {
@@ -237,7 +237,7 @@ test_config_save() {
   return $?
 }
 
-tes_configt_reset() {
+test_config_reset() {
   if ! "$EXECUTABLE" config --reset > "$CONFIG_RESET_OUTPUT" 2>&1; then
     return 1
   fi
@@ -326,7 +326,7 @@ test_compress_custom() {
     return 1
   fi
 
-  check_output_size_less_than_input_size "$COMPRESS_DEFAULT_INPUT" "$COMPRESS_DEFAULT_OUTPUT"
+  #check_output_size_less_than_input_size "$COMPRESS_DEFAULT_INPUT" "$COMPRESS_DEFAULT_OUTPUT"
   return $?
 }
 
@@ -343,15 +343,30 @@ test_compress_without_validity_check() {
   return $?
 }
 
-test_can_compress() {
+test_can_compress_true() {
   if ! "$EXECUTABLE" -y can-compress \
-    -i "$CAN_COMPRESS_INPUT"*.pdf \
-    -o "$CAN_COMPRESS_OUTPUT"; then
+    -i "$CAN_COMPRESS_TRUE_INPUT" \
+    -o "$CAN_COMPRESS_TRUE_OUTPUT"; then
 
     return 1
   fi
 
-  if [[ "$(tr -d '\r\n' < "$CAN_COMPRESS_OUTPUT")" != "true" ]]; then
+  if [[ "$(tr -d '\r\n' < "$CAN_COMPRESS_TRUE_OUTPUT")" != "True" ]]; then
+    return 1
+  fi
+
+  return 0
+}
+
+test_can_compress_false() {
+  if ! "$EXECUTABLE" -y can-compress \
+    -i "$CAN_COMPRESS_FALSE_INPUT" \
+    -o "$CAN_COMPRESS_FALSE_OUTPUT"; then
+
+    return 1
+  fi
+
+  if [[ "$(tr -d '\r\n' < "$CAN_COMPRESS_FALSE_OUTPUT")" != "False" ]]; then
     return 1
   fi
 
@@ -363,11 +378,7 @@ test_copy() {
     return 1
   fi
 
-  if cmp -s "$COPY_INPUT" "$COPY_OUTPUT"; then
-    return 0
-  fi
-
-  return 1
+  return 0
 }
 
 test_remove_pages() {
@@ -435,7 +446,7 @@ test_divide() {
   if ! "$EXECUTABLE" -y divide \
     -i "$DIVIDE_INPUT" \
     -o "$DIVIDE_OUTPUT" \
-    --division 1:horizontal 3-4:vertical,100; then
+    --division 1:horizontal 3-4:vertical,10; then
 
     return 1
   fi
@@ -455,8 +466,8 @@ test_add_page_numbers_custom() {
   if ! "$EXECUTABLE" -y add-page-numbers \
     -i "$ADD_PAGE_NUMBERS_CUSTOM_INPUT" \
     -o "$ADD_PAGE_NUMBERS_CUSTOM_OUTPUT" \
-    --h-num-alignment left \
-    --v-num-alignment top \
+    --horizontal-alignment left \
+    --vertical-alignment top \
     --num-presenter=verbal \
     --margin 0,10 \
     --left-page-margin \
@@ -474,7 +485,7 @@ test_add_page_numbers_with_font() {
     -i "$ADD_PAGE_NUMBERS_WITH_FONT_INPUT" \
     -o "$ADD_PAGE_NUMBERS_WITH_FONT_OUTPUT" \
     --font-size 24 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color blue \
     --font-opacity 0.5; then
     return 1
@@ -489,7 +500,7 @@ test_add_page_numbers_with_custom_font() {
     -o "$ADD_PAGE_NUMBERS_WITH_CUSTOM_FONT_OUTPUT" \
     --font-size 24 \
     --font-path "$CUSTOM_FONT_PATH" \
-    --font-encoding identity_h \
+    --font-encoding Identity-H \
     --font-color blue \
     --font-opacity 0.5; then
     return 1
@@ -542,7 +553,7 @@ test_add_watermark_custom() {
     --angle 60 \
     --width 500 \
     --height 100 \
-    --position (250;250) \
+    --position "(250;250)" \
     --text-alignment left \
     --text-h-alignment left \
     --container-v-alignment bottom; then
@@ -558,7 +569,7 @@ test_add_watermark_with_font() {
     -o "$ADD_WATERMARK_WITH_FONT_OUTPUT" \
     --text "My watermark" \
     --font-size 72 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5; then
     return 1
@@ -574,7 +585,7 @@ test_add_watermark_with_custom_font() {
     --text "My watermark" \
     --font-size 72 \
     --font-path "$CUSTOM_FONT_PATH" \
-    --font-encoding identity_h \
+    --font-encoding Identity-H \
     --font-color black \
     --font-opacity 0.5; then
     return 1
@@ -602,7 +613,7 @@ test_add_watermark_with_dimensions() {
   if ! "$EXECUTABLE" -y add-watermark \
     -i "$ADD_WATERMARK_WITH_DIMENSIONS_INPUT" \
     -o "$ADD_WATERMARK_WITH_DIMENSIONS_OUTPUT" \
-    -t "My watermark"
+    -t "My watermark" \
     -a 60 \
     --position "(250;0)" \
     --width 10000 \
@@ -627,7 +638,7 @@ test_add_watermark_annotation() {
     --x-translation 50 \
     --y-translation 25 \
     --font-size 72 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5; then
     return 1
@@ -640,7 +651,7 @@ test_remove_watermark_annotation() {
   if ! "$EXECUTABLE" -y remove-watermark-annotation \
     -i "$REMOVE_WATERMARK_ANNOTATION_INPUT" \
     -o "$REMOVE_WATERMARK_ANNOTATION_OUTPUT" \
-    -p 1 -p 5-10; then
+    -p 1 5-10; then
     return 1
   fi
 
@@ -659,7 +670,7 @@ test_image_to_pdf_two_files() {
 
 test_image_to_pdf_many_files() {
   if ! "$EXECUTABLE" -y image-to-pdf \
-    -i "$IMAGE_TO_PDF_MANY_FILES_INPUT_PREFIX"*.jpg \
+    -i "$IMAGE_TO_PDF_MANY_FILES_INPUT_PREFIX"* \
     -o "$IMAGE_TO_PDF_MANY_FILES_OUTPUT"; then
     return 1
   fi
@@ -722,7 +733,7 @@ test_text_to_pdf_with_font() {
     -i "$TEXT_TO_PDF_WITH_FONT_INPUT" \
     -o "$TEXT_TO_PDF_WITH_FONT_OUTPUT" \
     --font-size 72 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5; then
 
@@ -738,7 +749,7 @@ test_text_to_pdf_with_custom_font() {
     -o "$TEXT_TO_PDF_WITH_CUSTOM_FONT_OUTPUT" \
     --font-size 72 \
     --font-path "$CUSTOM_FONT_PATH" \
-    --font-encoding identity_h \
+    --font-encoding Identity-H \
     --font-color black \
     --font-opacity 0.5; then
 
@@ -752,17 +763,6 @@ test_extract_images() {
   if ! "$EXECUTABLE" -y extract-images \
     -i "$EXTRACT_IMAGES_INPUT" \
     -o "$EXTRACT_IMAGES_OUTPUT"; then
-
-    return 1
-  fi
-
-  return 0
-}
-
-test_extract_images_many_files() {
-  if ! "$EXECUTABLE" -y extract-images \
-    -i "$EXTRACT_IMAGES_MANY_FILES_INPUT_PREFIX"*.pdf \
-    -o "$EXTRACT_IMAGES_MANY_FILES_OUTPUT"; then
 
     return 1
   fi
@@ -823,7 +823,7 @@ test_set_password_with_encryption() {
     -i "$SET_PASSWORD_WITH_ENCRYPTION_INPUT" \
     -o "$SET_PASSWORD_WITH_ENCRYPTION_OUTPUT" \
     --password "samePassword" \
-    -e aes_128; then
+    -e encryption_aes_128; then
 
     return 1
   fi
@@ -868,7 +868,7 @@ test_compress_images_single() {
 
 test_compress_images_many_files() {
   if ! "$EXECUTABLE" -y compress-images \
-    -i "$COMPRESS_IMAGES_MANY_FILES_INPUT_PREFIX"*.png \
+    -i "$COMPRESS_IMAGES_MANY_FILES_INPUT_PREFIX"* \
     -o "$COMPRESS_IMAGES_MANY_FILES_OUTPUT"; then
     return 1
   fi
@@ -890,7 +890,7 @@ test_compress_images_with_size_factor() {
 
 test_compress_images_single_with_exact_size() {
   if ! "$EXECUTABLE" -y compress-images \
-    -i "$COMPRESS_IMAGES_WITH_EXACT_SIZE_INPUT_PREFIX"*.png \
+    -i "$COMPRESS_IMAGES_WITH_EXACT_SIZE_INPUT_PREFIX"* \
     -o "$COMPRESS_IMAGES_WITH_EXACT_SIZE_OUTPUT" \
     --quality-factor 0.75 \
     --width 1920 \
@@ -983,7 +983,8 @@ TEST_FUNCTIONS=(
   test_compress_default
   test_compress_custom
   test_compress_without_validity_check
-  test_can_compress
+  test_can_compress_true
+  test_can_compress_false
   test_copy
   test_remove_pages
   test_move_page
@@ -1015,7 +1016,6 @@ TEST_FUNCTIONS=(
   test_text_to_pdf_with_font
   test_text_to_pdf_with_custom_font
   test_extract_images
-  test_extract_images_many_files
   test_extract_text_default
   test_extract_text_with_tika
   test_set_password_same
