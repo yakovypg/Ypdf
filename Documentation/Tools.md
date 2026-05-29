@@ -136,9 +136,9 @@ ypdf crop -i /path/to/input.pdf -o /path/to/output.pdf --cropping 1,3:(30;40),(6
 ```
 
 ## Divide PDF Document Pages
-You can split specific pages of a PDF into two parts. For example, the following command splits page 1 into two equal horizontal parts, and splits pages 3 and 4 vertically with the dividing line shifted 100 pixels to the right (making the right part 100 pixels narrower than the left).
+You can split specific pages of a PDF into two parts. For example, the following command splits page 1 into two equal horizontal parts, and splits pages 3 and 4 vertically with the dividing line shifted 10 pixels to the right (making the right part 10 pixels narrower than the left).
 ```bash
-ypdf divide -i /path/to/input.pdf -o /path/to/output.pdf --division 1:horizontal 3-4:vertical,100
+ypdf divide -i /path/to/input.pdf -o /path/to/output.pdf --division 1:horizontal 3-4:vertical,10
 ```
 
 ## Add Page Numbers To PDF Document
@@ -150,8 +150,8 @@ ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf
 You can also specify horizontal and vertical page number alignment, text presenter, page number margins, and whether to respect the page's existing left, top, right, and bottom margins.
 ```bash
 ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf \
-    --h-num-alignment left \
-    --v-num-alignment top \
+    --horizontal-alignment left \
+    --vertical-alignment top \
     --num-presenter verbal \
     --margin 0,10 \
     --left-page-margin \
@@ -164,7 +164,7 @@ You can configure font size, family, color, and opacity.
 ```bash
 ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf \
     --font-size 24 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color blue \
     --font-opacity 0.5
 ```
@@ -174,7 +174,7 @@ You can also use your own font instead of font family.
 ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf \
     --font-size 24 \
     --font-path /path/to/font.ttf \
-    --font-encoding identity_h \
+    --font-encoding Identity-H \
     --font-color blue \
     --font-opacity 0.5
 ```
@@ -220,7 +220,7 @@ You can configure font size, family, color, and opacity.
 ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
     --text "My watermark" \
     --font-size 72 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5 \
 ```
@@ -231,7 +231,7 @@ ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
     --text "My watermark" \
     --font-size 72 \
     --font-path /path/to/font.ttf \
-    --font-encoding identity_h \
+    --font-encoding Identity-H \
     --font-color black \
     --font-opacity 0.5 \
 ```
@@ -249,7 +249,7 @@ ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
 If you don't know the exact text dimensions, you can provide the full area for the watermark. In that case place the text at the area's lower-left corner.
 ```bash
 ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
-    -t "My watermark"
+    -t "My watermark" \
     -a 60 \
     --position (250;0) \
     --width 10000 \
@@ -273,7 +273,7 @@ ypdf add-watermark-annotation -i /path/to/input.pdf -o /path/to/output.pdf \
     --x-translation 50 \
     --y-translation 25 \
     --font-size 72 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5
 ```
@@ -324,7 +324,7 @@ You can configure font size, family, color, and opacity.
 ```bash
 ypdf text-to-pdf -i /path/to/input.txt -o /path/to/output.pdf \
     --font-size 72 \
-    --font-family times_bold \
+    --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5 \
 ```
@@ -334,22 +334,15 @@ You can also use your own font instead of font family.
 ypdf text-to-pdf -i /path/to/input.txt -o /path/to/output.pdf \
     --font-size 72 \
     --font-path /path/to/font.ttf \
-    --font-encoding identity_h \
+    --font-encoding Identity-H \
     --font-color black \
     --font-opacity 0.5 \
 ```
 
 ## Extract Images From PDF Document
 You can extract images from a PDF document. Please note that Python 3 must be installed on your system to execute this tool.
-
-Specify an output directory and one or more input PDF files.
 ```bash
 ypdf extract-images -i /path/to/input.pdf -o /path/to/output/directory
-```
-
-On many platforms you can use a file pattern to specify multiple files.
-```bash
-ypdf extract-images -i /path/to/files/*.pdf -o /path/to/output/directory
 ```
 
 ## Extract Text From PDF Document
@@ -376,7 +369,7 @@ ypdf set-password -i /path/to/input.pdf -o /path/to/output.pdf --user-password "
 
 You can also specify the encryption algorithm.
 ```bash
-ypdf set-password -i /path/to/input.pdf -o /path/to/output.pdf --password "samePassword" -e aes_128
+ypdf set-password -i /path/to/input.pdf -o /path/to/output.pdf --password "samePassword" -e encryption_aes_128
 ```
 
 ## Remove Password From PDF Document
