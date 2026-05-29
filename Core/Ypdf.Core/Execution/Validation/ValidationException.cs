@@ -36,9 +36,7 @@ public class ValidationException : Exception
         : base(info, context)
     {
         ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
-
-        ValidationError = (ValidationError?)info.GetValue(nameof(ValidationError), typeof(ValidationError))
-            ?? default;
+        ValidationError = (ValidationError?)info.GetValue(nameof(ValidationError), typeof(ValidationError));
     }
 
     public ValidationError? ValidationError { get; private set; }

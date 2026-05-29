@@ -38,9 +38,7 @@ internal sealed class SubcommandConfiguredIncorrectlyException : Exception
         : base(info, context)
     {
         ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
-
-        Subcommand = (Subcommand?)info.GetValue(nameof(Subcommand), typeof(Subcommand))
-            ?? default;
+        Subcommand = (Subcommand?)info.GetValue(nameof(Subcommand), typeof(Subcommand));
     }
 
     internal Subcommand? Subcommand { get; private set; }

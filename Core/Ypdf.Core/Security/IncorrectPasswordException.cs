@@ -37,9 +37,7 @@ public class IncorrectPasswordException : Exception
         : base(info, context)
     {
         ExtendedArgumentNullException.ThrowIfNull(info, nameof(info));
-
-        Password = (PdfPassword?)info.GetValue(nameof(Password), typeof(PdfPassword))
-            ?? default;
+        Password = (PdfPassword?)info.GetValue(nameof(Password), typeof(PdfPassword)) ?? default;
     }
 
     public PdfPassword Password { get; private set; }

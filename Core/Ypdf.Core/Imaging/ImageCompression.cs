@@ -15,8 +15,7 @@ public readonly struct ImageCompression : IEquatable<ImageCompression>
             _defaultSizeFactor,
             null,
             null,
-            _defaultExtension)
-    { }
+            _defaultExtension) { }
 
     public ImageCompression(
         float qualityFactor,
@@ -27,8 +26,7 @@ public readonly struct ImageCompression : IEquatable<ImageCompression>
             sizeFactor,
             null,
             null,
-            extension)
-    { }
+            extension) { }
 
     public ImageCompression(
         float qualityFactor,
@@ -40,8 +38,7 @@ public readonly struct ImageCompression : IEquatable<ImageCompression>
             _defaultSizeFactor,
             newWidth,
             newHeight,
-            extension)
-    { }
+            extension) { }
 
     private ImageCompression(
         float qualityFactor,
