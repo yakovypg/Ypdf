@@ -64,7 +64,7 @@ internal sealed class ArgumentParserCreator : IArgumentParserCreator
         parser.DescriptionGenerator = descriptionGenerator;
 
         parser.ChangeOutputWriter(outputWriter);
-        parser.AddConverters(true, [..converters]);
+        parser.AddConverters(true, [.. converters]);
     }
 
     private static ApplicationDescriptionGenerator CreateDescriptionGenerator(

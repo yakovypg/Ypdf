@@ -50,13 +50,9 @@ public class CompressImageTool : PythonTool, IMultipleInputTool, IMultipleOutput
         string args = $"{imageCompressorPath} -i {inputPath} -o {outputPath} -q {qualityFactor}";
 
         if (ImageCompression.NewWidth is not null && ImageCompression.NewHeight is not null)
-        {
             args += $" -W {ImageCompression.NewWidth} -H {ImageCompression.NewHeight}";
-        }
         else
-        {
             args += $" -s {sizeFactor}";
-        }
 
         ExecutePython(args);
     }

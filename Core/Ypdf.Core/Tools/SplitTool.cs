@@ -16,7 +16,8 @@ public class SplitTool : ITool, IMultipleOutputTool
         : this(
             splitPartSizeBytesExpression?.CalculateLong()
                 ?? throw new ArgumentNullException(nameof(splitPartSizeBytesExpression)),
-            null) { }
+            null)
+    { }
 
     public SplitTool(IEnumerable<string> pageRanges)
         : this(pageRanges.Select(t => new PageRange(t))) { }
@@ -27,7 +28,8 @@ public class SplitTool : ITool, IMultipleOutputTool
     public SplitTool(IEnumerable<PageRange> pageRanges)
         : this(
             Splitter.DefaultSplitPartSizeBytes,
-            pageRanges ?? throw new ArgumentNullException(nameof(pageRanges))) { }
+            pageRanges ?? throw new ArgumentNullException(nameof(pageRanges)))
+    { }
 
     protected SplitTool(
         long splitPartSizeBytes = Splitter.DefaultSplitPartSizeBytes,

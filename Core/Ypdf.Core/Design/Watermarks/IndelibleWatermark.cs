@@ -32,7 +32,8 @@ public class IndelibleWatermark : Watermark, IIndelibleWatermark, IEquatable<Ind
             text,
             rotationAngleRadians,
             lowerLeftPoint,
-            border) { }
+            border)
+    { }
 
     public IndelibleWatermark(
         TextFontInfo fontInfo,
@@ -50,7 +51,8 @@ public class IndelibleWatermark : Watermark, IIndelibleWatermark, IEquatable<Ind
             text,
             rotationAngleRadians,
             lowerLeftPoint,
-            border) { }
+            border)
+    { }
 
     public IndelibleWatermark(
         WatermarkTextAllocator textAllocator,

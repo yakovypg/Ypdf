@@ -24,7 +24,8 @@ public class PageNumbersNotMatchException : Exception
             message ?? GetDefaultMessage(expectedNumberOfPages, actualNumberOfPages),
             expectedNumberOfPages,
             actualNumberOfPages,
-            null) { }
+            null)
+    { }
 
     public PageNumbersNotMatchException(
         string? message,

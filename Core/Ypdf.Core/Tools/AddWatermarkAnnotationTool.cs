@@ -20,7 +20,8 @@ public class AddWatermarkAnnotationTool : ITool
         IEnumerable<PageRange>? pages)
         : this(
             watermark ?? throw new ArgumentNullException(nameof(watermark)),
-            pages?.SelectMany(t => t.Items)) { }
+            pages?.SelectMany(t => t.Items))
+    { }
 
     public AddWatermarkAnnotationTool(
         IWatermarkAnnotation watermark,

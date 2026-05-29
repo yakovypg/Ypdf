@@ -15,7 +15,8 @@ public class ToolExecutionParameters : IToolExecutionParameters
             tool ?? throw new ArgumentNullException(nameof(tool)),
             [inputPath ?? throw new ArgumentNullException(nameof(inputPath))],
             outputPath ?? throw new ArgumentNullException(nameof(outputPath)),
-            forceUseAsSigleInputTool) { }
+            forceUseAsSigleInputTool)
+    { }
 
     public ToolExecutionParameters(
         ITool tool,

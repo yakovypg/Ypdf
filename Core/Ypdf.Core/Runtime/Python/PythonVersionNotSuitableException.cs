@@ -24,7 +24,8 @@ public class PythonVersionNotSuitableException : Exception
             message ?? GetDefaultMessage(currentVersion, requiredVersion),
             currentVersion,
             requiredVersion,
-            null) { }
+            null)
+    { }
 
     public PythonVersionNotSuitableException(
         string? message,

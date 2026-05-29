@@ -16,7 +16,8 @@ public class IncreasePageSizeTool : ITool
     public IncreasePageSizeTool(IEnumerable<PageSizeAdjustment> pageSizeAdjustments)
         : this(
             pageSizeAdjustments ?? throw new ArgumentNullException(nameof(pageSizeAdjustments)),
-            _defaultFillColor) { }
+            _defaultFillColor)
+    { }
 
     public IncreasePageSizeTool(IEnumerable<PageSizeAdjustment> pageSizeAdjustments, Color fillColor)
         : this(0, fillColor ?? throw new ArgumentNullException(nameof(fillColor)))
