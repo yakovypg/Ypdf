@@ -47,16 +47,22 @@ internal sealed class AddPageNumbersToolCreator : ToolCreator
             TextPresenter = subcommand.TextPresenter
         };
 
-        var addPageNumbersTool = new AddPageNumbersTool(pageNumberStyle, subcommand.PageNumberShifts);
+        ITool tool;
+        AddPageNumbersTool addPageNumbersTool = new(pageNumberStyle, subcommand.PageNumberShifts);
 
-        var increasePageSizeTool = new IncreasePageSizeTool(
-            subcommand.GeneralPageSizeAdjustment,
-            subcommand.FillColor,
-            subcommand.IncreasePageMode);
+        if (subcommand.IncreasePageMode != IncreasePageMode.WithoutIncrease)
+        {
+            var increasePageSizeTool = new IncreasePageSizeTool(
+                subcommand.GeneralPageSizeAdjustment,
+                subcommand.FillColor,
+                subcommand.IncreasePageMode);
 
-        ITool tool = subcommand.IncreasePageMode != IncreasePageMode.WithoutIncrease
-            ? new ToolsPipeline([increasePageSizeTool, addPageNumbersTool])
-            : addPageNumbersTool;
+            tool = new ToolsPipeline([increasePageSizeTool, addPageNumbersTool]);
+        }
+        else
+        {
+            tool = addPageNumbersTool;
+        }
 
         ToolExecutionParameters toolExecutionParameters = new(
             tool,
