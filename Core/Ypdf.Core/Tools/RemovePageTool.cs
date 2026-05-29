@@ -31,6 +31,7 @@ public class RemovePageTool : ITool
         using var outputDocument = new PdfDocument(writer);
 
         IEnumerable<PdfPage> pdfPages = Pages
+            .OrderByDescending(t => t)
             .Select(t => sourceDocument.GetPage(t));
 
         foreach (PdfPage page in pdfPages)
