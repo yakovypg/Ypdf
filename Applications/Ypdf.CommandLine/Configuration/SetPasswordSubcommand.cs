@@ -44,10 +44,14 @@ internal sealed class SetPasswordSubcommand
     ]
     [OptionGroup("passwords", "Passwords", "Options for configuring passwords")]
     [MutuallyExclusiveOptionGroup(
-        $"{nameof(RemovePasswordSubcommand)}.PasswordTypes",
+        $"{nameof(RemovePasswordSubcommand)}.{nameof(CommonPassword)}-{nameof(UserPassword)}",
         "Password Types",
-        "You can use only one of the following password types: " +
-            $"{nameof(CommonPassword)}, {nameof(UserPassword)}, {nameof(OwnerPassword)}")
+        $"{nameof(CommonPassword)} cannot be used with the {nameof(UserPassword)}")
+    ]
+    [MutuallyExclusiveOptionGroup(
+        $"{nameof(RemovePasswordSubcommand)}.{nameof(CommonPassword)}-{nameof(OwnerPassword)}",
+        "Password Types",
+        $"{nameof(CommonPassword)} cannot be used with the {nameof(OwnerPassword)}")
     ]
     public string? CommonPassword { get; set; }
 
@@ -57,7 +61,11 @@ internal sealed class SetPasswordSubcommand
         description: "user password")
     ]
     [OptionGroup("passwords", "", "")]
-    [MutuallyExclusiveOptionGroup($"{nameof(RemovePasswordSubcommand)}.PasswordTypes", "", "")]
+    [MutuallyExclusiveOptionGroup(
+        $"{nameof(RemovePasswordSubcommand)}.{nameof(CommonPassword)}-{nameof(UserPassword)}",
+        "",
+        "")
+    ]
     public string? UserPassword { get; set; }
 
     [ValueOption<string>(
@@ -66,7 +74,11 @@ internal sealed class SetPasswordSubcommand
         description: "owner password")
     ]
     [OptionGroup("passwords", "", "")]
-    [MutuallyExclusiveOptionGroup($"{nameof(RemovePasswordSubcommand)}.PasswordTypes", "", "")]
+    [MutuallyExclusiveOptionGroup(
+        $"{nameof(RemovePasswordSubcommand)}.{nameof(CommonPassword)}-{nameof(OwnerPassword)}",
+        "",
+        "")
+    ]
     public string? OwnerPassword { get; set; }
 
     [ValueOption<EncryptionAlgorithm>(
