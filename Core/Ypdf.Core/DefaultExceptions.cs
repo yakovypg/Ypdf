@@ -195,13 +195,13 @@ internal static class DefaultExceptions
 
     private static void ThrowEqual<T>(T value, T other, string? paramName)
     {
-        string message = $"{paramName} ('{value}') must be equal to {other}.";
+        string message = $"{paramName} ('{value}') must not be equal to {other}.";
         throw new ArgumentOutOfRangeException(paramName, value, message);
     }
 
     private static void ThrowNotEqual<T>(T value, T other, string? paramName)
     {
-        string message = $"{paramName} ('{value}') must not be equal to {other}.";
+        string message = $"{paramName} ('{value}') must be equal to {other}.";
         throw new ArgumentOutOfRangeException(paramName, value, message);
     }
 
