@@ -22,7 +22,7 @@ public class MovePageTool : ITool
     protected MovePageTool(IEnumerable<int> pageOrder)
     {
         ExtendedArgumentException.ThrowIfNullOrEmpty(pageOrder, nameof(pageOrder));
-        DefaultExceptions.ThrowIfContainsNotAllowedItem(pageOrder, t => t < 1, nameof(pageOrder));
+        DefaultExceptions.ThrowIfContainsNotAllowedItem(pageOrder, t => t >= 1, nameof(pageOrder));
         DefaultExceptions.ThrowIfContainsNotUniqueItems(pageOrder, nameof(pageOrder));
 
         PageOrder = pageOrder;

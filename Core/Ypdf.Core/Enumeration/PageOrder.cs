@@ -11,7 +11,7 @@ public readonly struct PageOrder : IEquatable<PageOrder>
     public PageOrder(IEnumerable<int> pages)
     {
         ExtendedArgumentNullException.ThrowIfNull(pages, nameof(pages));
-        DefaultExceptions.ThrowIfContainsNotAllowedItem(pages, t => t < 1, nameof(pages));
+        DefaultExceptions.ThrowIfContainsNotAllowedItem(pages, t => t >= 1, nameof(pages));
         DefaultExceptions.ThrowIfContainsNotUniqueItems(pages, nameof(pages));
 
         Pages = pages.ToArray();
