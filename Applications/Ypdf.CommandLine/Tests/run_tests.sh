@@ -101,23 +101,23 @@ ADD_WATERMARK_ANNOTATION_OUTPUT="$OUTPUT_DIR/add_watermark_annotation.pdf"
 REMOVE_WATERMARK_ANNOTATION_INPUT="$INPUT_DIR/pdf_watermark_annotation.pdf"
 REMOVE_WATERMARK_ANNOTATION_OUTPUT="$OUTPUT_DIR/remove_watermark_annotation.pdf"
 
-IMAGE_TO_PDF_TWO_FILES_INPUT_1="$INPUT_DIR/picture_1.png"
-IMAGE_TO_PDF_TWO_FILES_INPUT_2="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_TWO_FILES_INPUT_1="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_TWO_FILES_INPUT_2="$INPUT_DIR/picture_3.jpg"
 IMAGE_TO_PDF_TWO_FILES_OUTPUT="$OUTPUT_DIR/image_to_pdf_two_files.pdf"
 IMAGE_TO_PDF_MANY_FILES_INPUT_PREFIX="$INPUT_DIR/picture"
 IMAGE_TO_PDF_MANY_FILES_OUTPUT="$OUTPUT_DIR/image_to_pdf_many_files.pdf"
-IMAGE_TO_PDF_CUSTOM_INPUT_1="$INPUT_DIR/picture_1.png"
-IMAGE_TO_PDF_CUSTOM_INPUT_2="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_CUSTOM_INPUT_1="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_CUSTOM_INPUT_2="$INPUT_DIR/picture_3.jpg"
 IMAGE_TO_PDF_CUSTOM_OUTPUT="$OUTPUT_DIR/image_to_pdf_custom.pdf"
-IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_1="$INPUT_DIR/picture_1.png"
-IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_2="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_1="$INPUT_DIR/picture_2.bmp"
+IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_INPUT_2="$INPUT_DIR/picture_3.jpg"
 IMAGE_TO_PDF_WITHOUT_AUTOINCREASE_OUTPUT="$OUTPUT_DIR/image_to_pdf_without_autoincrease.pdf"
 
-TEXT_TO_PDF_DEFAULT_INPUT="$INPUT_DIR/text_multi.txt"
+TEXT_TO_PDF_DEFAULT_INPUT="$INPUT_DIR/text_en.txt"
 TEXT_TO_PDF_DEFAULT_OUTPUT="$OUTPUT_DIR/text_to_pdf_default.pdf"
-TEXT_TO_PDF_CUSTOM_INPUT="$INPUT_DIR/text_multi.txt"
+TEXT_TO_PDF_CUSTOM_INPUT="$INPUT_DIR/text_en.txt"
 TEXT_TO_PDF_CUSTOM_OUTPUT="$OUTPUT_DIR/text_to_pdf_custom.pdf"
-TEXT_TO_PDF_WITH_FONT_INPUT="$INPUT_DIR/text_multi.txt"
+TEXT_TO_PDF_WITH_FONT_INPUT="$INPUT_DIR/text_en.txt"
 TEXT_TO_PDF_WITH_FONT_OUTPUT="$OUTPUT_DIR/text_to_pdf_with_font.pdf"
 TEXT_TO_PDF_WITH_CUSTOM_FONT_INPUT="$INPUT_DIR/text_multi.txt"
 TEXT_TO_PDF_WITH_CUSTOM_FONT_OUTPUT="$OUTPUT_DIR/text_to_pdf_with_custom_font.pdf"
@@ -486,7 +486,7 @@ test_add_page_numbers_with_font() {
     -o "$ADD_PAGE_NUMBERS_WITH_FONT_OUTPUT" \
     --font-size 24 \
     --font-family Times-Bold \
-    --font-color blue \
+    --font-color cyan \
     --font-opacity 0.5; then
     return 1
   fi
@@ -501,7 +501,7 @@ test_add_page_numbers_with_custom_font() {
     --font-size 24 \
     --font-path "$CUSTOM_FONT_PATH" \
     --font-encoding Identity-H \
-    --font-color blue \
+    --font-color cyan \
     --font-opacity 0.5; then
     return 1
   fi
@@ -568,7 +568,7 @@ test_add_watermark_with_font() {
     -i "$ADD_WATERMARK_WITH_FONT_INPUT" \
     -o "$ADD_WATERMARK_WITH_FONT_OUTPUT" \
     --text "My watermark" \
-    --font-size 72 \
+    --font-size 28 \
     --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5; then
@@ -583,7 +583,7 @@ test_add_watermark_with_custom_font() {
     -i "$ADD_WATERMARK_WITH_CUSTOM_FONT_INPUT" \
     -o "$ADD_WATERMARK_WITH_CUSTOM_FONT_OUTPUT" \
     --text "My watermark" \
-    --font-size 72 \
+    --font-size 28 \
     --font-path "$CUSTOM_FONT_PATH" \
     --font-encoding Identity-H \
     --font-color black \
@@ -732,7 +732,7 @@ test_text_to_pdf_with_font() {
   if ! "$EXECUTABLE" -y text-to-pdf \
     -i "$TEXT_TO_PDF_WITH_FONT_INPUT" \
     -o "$TEXT_TO_PDF_WITH_FONT_OUTPUT" \
-    --font-size 72 \
+    --font-size 28 \
     --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5; then
@@ -747,7 +747,7 @@ test_text_to_pdf_with_custom_font() {
   if ! "$EXECUTABLE" -y text-to-pdf \
     -i "$TEXT_TO_PDF_WITH_CUSTOM_FONT_INPUT" \
     -o "$TEXT_TO_PDF_WITH_CUSTOM_FONT_OUTPUT" \
-    --font-size 72 \
+    --font-size 28 \
     --font-path "$CUSTOM_FONT_PATH" \
     --font-encoding Identity-H \
     --font-color black \
