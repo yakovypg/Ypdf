@@ -6,7 +6,10 @@ namespace Ypdf.Core.Design;
 
 public readonly struct Margin : IEquatable<Margin>
 {
-    public Margin(float value = 0)
+    public Margin()
+        : this(0) { }
+
+    public Margin(float value)
         : this(value, value, value, value) { }
 
     public Margin(float horizontal, float vertical)

@@ -5,7 +5,10 @@ namespace Ypdf.Core.Geometry;
 
 public readonly struct Angle : IEquatable<Angle>, IComparable<Angle>
 {
-    public Angle(double radiansValue = 0)
+    public Angle()
+        : this(0) { }
+
+    public Angle(double radiansValue)
     {
         RadiansValue = radiansValue;
     }

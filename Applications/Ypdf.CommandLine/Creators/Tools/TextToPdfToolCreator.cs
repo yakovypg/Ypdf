@@ -35,10 +35,10 @@ internal sealed class TextToPdfToolCreator : ToolCreator
                 subcommand.FontOpacity);
 
         var textPageParameters = new TextPageParameters(
+            fontInfo,
             subcommand.Margin,
             subcommand.PageSize,
-            subcommand.TextAlignment,
-            fontInfo);
+            subcommand.TextAlignment);
 
         var tool = new TextToPdfTool(textPageParameters);
 

@@ -1,15 +1,17 @@
 using System;
-using iText.Kernel.Pdf;
 using Ypdf.Core.Utils;
 
 namespace Ypdf.Core.Security;
 
 public readonly struct PdfPassword : IEquatable<PdfPassword>
 {
+    public PdfPassword(string userPassword, string ownerPassword = "")
+        : this(new EncryptionAlgorithm(), userPassword, ownerPassword) { }
+
     public PdfPassword(
+        EncryptionAlgorithm encryptionAlgorithm,
         string userPassword,
-        string ownerPassword = "",
-        EncryptionAlgorithm encryptionAlgorithm = default)
+        string ownerPassword = "")
     {
         ExtendedArgumentNullException.ThrowIfNull(userPassword, nameof(userPassword));
         ExtendedArgumentNullException.ThrowIfNull(ownerPassword, nameof(ownerPassword));

@@ -12,15 +12,26 @@ public class TextPageParameters : PageParameters, ITextPageParameters, IEquatabl
 
     public TextPageParameters(
         PageSize? pageSize = null,
-        TextAlignment textAlignment = _defaultTextAlignment,
-        TextFontInfo fontInfo = default)
-        : this(new Margin(75.876f), pageSize, textAlignment, fontInfo) { }
+        TextAlignment textAlignment = _defaultTextAlignment)
+        : this(new TextFontInfo(), pageSize, textAlignment) { }
+
+    public TextPageParameters(
+        TextFontInfo fontInfo,
+        PageSize? pageSize = null,
+        TextAlignment textAlignment = _defaultTextAlignment)
+        : this(fontInfo, new Margin(75.876f), pageSize, textAlignment) { }
 
     public TextPageParameters(
         Margin margin,
         PageSize? pageSize = null,
-        TextAlignment textAlignment = _defaultTextAlignment,
-        TextFontInfo fontInfo = default)
+        TextAlignment textAlignment = _defaultTextAlignment)
+        : this(new TextFontInfo(), margin, pageSize, textAlignment) { }
+
+    public TextPageParameters(
+        TextFontInfo fontInfo,
+        Margin margin,
+        PageSize? pageSize = null,
+        TextAlignment textAlignment = _defaultTextAlignment)
     {
         FontInfo = fontInfo;
         HorizontalAlignment = textAlignment;

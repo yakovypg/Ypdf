@@ -29,7 +29,7 @@ internal sealed class SetPasswordToolCreator : ToolCreator
             ?? subcommand.UserPassword
             ?? string.Empty;
 
-        PdfPassword pdfPassword = new(userPassword, ownerPassword, subcommand.EncryptionAlgorithm);
+        PdfPassword pdfPassword = new(subcommand.EncryptionAlgorithm, userPassword, ownerPassword);
         SetPasswordTool tool = new(pdfPassword);
 
         ToolExecutionParameters toolExecutionParameters = new(

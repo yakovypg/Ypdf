@@ -4,6 +4,7 @@ using System.Linq;
 using Ypdf.Core.Compression;
 using Ypdf.Core.Config;
 using Ypdf.Core.FileSystem.Naming;
+using Ypdf.Core.Imaging;
 using Ypdf.Core.Runtime.Logging;
 
 namespace Ypdf.Core.Tools;
@@ -105,7 +106,14 @@ public class CheckCompressionCapabilityTool : ICheckingTool
         DefaultExceptions.ThrowIfContainsNotExistingFile(inputPaths, nameof(inputPaths));
         ExtendedArgumentNullException.ThrowIfNull(uniqueDirectory, nameof(uniqueDirectory));
 
-        var compressImageTool = new CompressImageTool(default, PythonAlias, VirtualEnvironmentPath, OutputWriter);
+        var imageCompression = new ImageCompression();
+
+        var compressImageTool = new CompressImageTool(
+            imageCompression,
+            PythonAlias,
+            VirtualEnvironmentPath,
+            OutputWriter);
+
         compressImageTool.Execute(inputPaths, uniqueDirectory.FullName);
 
         IEnumerable<FileInfo> compressedImages = uniqueDirectory

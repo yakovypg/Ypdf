@@ -18,7 +18,14 @@ namespace Ypdf.Core.Tools;
 public class CompressTool : ITool
 {
     public CompressTool(
-        ImageCompression imageCompression = default,
+        bool checkCompressionCapability = true,
+        string? pythonAlias = null,
+        string? virtualEnvironmentPath = null,
+        IOutputWriter? outputWriter = null)
+        : this(new ImageCompression(), checkCompressionCapability, pythonAlias, virtualEnvironmentPath, outputWriter) { }
+
+    public CompressTool(
+        ImageCompression imageCompression,
         bool checkCompressionCapability = true,
         string? pythonAlias = null,
         string? virtualEnvironmentPath = null,
@@ -188,7 +195,7 @@ public class CompressTool : ITool
 
         IEnumerable<IEnumerable<string>> inputPathGroups = inputPathsSequence.Group();
 
-        foreach (var part in inputPathGroups)
+        foreach (IEnumerable<string> part in inputPathGroups)
         {
             compressImageTool.Execute(part, uniqueDirectory.FullName);
         }

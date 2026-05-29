@@ -15,16 +15,51 @@ public class IndelibleWatermark : Watermark, IIndelibleWatermark, IEquatable<Ind
         float height,
         string text = DefaultText,
         double rotationAngleRadians = DefaultRotationAngleRadians)
-        : this(width, height, text, DefaultFontInfo, rotationAngleRadians) { }
+        : this(DefaultFontInfo, width, height, text, rotationAngleRadians) { }
 
     public IndelibleWatermark(
         float width,
         float height,
         string text = DefaultText,
-        TextFontInfo fontInfo = default,
         double rotationAngleRadians = DefaultRotationAngleRadians,
         FloatPoint? lowerLeftPoint = null,
-        WatermarkTextAllocator textAllocator = default,
+        LazyBorder? border = null)
+        : this(
+            new WatermarkTextAllocator(),
+            new TextFontInfo(),
+            width,
+            height,
+            text,
+            rotationAngleRadians,
+            lowerLeftPoint,
+            border) { }
+
+    public IndelibleWatermark(
+        TextFontInfo fontInfo,
+        float width,
+        float height,
+        string text = DefaultText,
+        double rotationAngleRadians = DefaultRotationAngleRadians,
+        FloatPoint? lowerLeftPoint = null,
+        LazyBorder? border = null)
+        : this(
+            new WatermarkTextAllocator(),
+            fontInfo,
+            width,
+            height,
+            text,
+            rotationAngleRadians,
+            lowerLeftPoint,
+            border) { }
+
+    public IndelibleWatermark(
+        WatermarkTextAllocator textAllocator,
+        TextFontInfo fontInfo,
+        float width,
+        float height,
+        string text = DefaultText,
+        double rotationAngleRadians = DefaultRotationAngleRadians,
+        FloatPoint? lowerLeftPoint = null,
         LazyBorder? border = null)
         : base(text, fontInfo, rotationAngleRadians, lowerLeftPoint)
     {

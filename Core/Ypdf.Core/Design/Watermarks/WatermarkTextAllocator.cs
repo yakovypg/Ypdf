@@ -6,6 +6,9 @@ namespace Ypdf.Core.Design.Watermarks;
 
 public readonly struct WatermarkTextAllocator : IEquatable<WatermarkTextAllocator>
 {
+    public WatermarkTextAllocator()
+        : this(TextAlignment.LEFT) { }
+
     public WatermarkTextAllocator(
         TextAlignment textAlignment = TextAlignment.LEFT,
         HorizontalAlignment textHorizontalAlignment = HorizontalAlignment.LEFT,

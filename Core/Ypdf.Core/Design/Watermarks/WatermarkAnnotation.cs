@@ -133,10 +133,10 @@ public class WatermarkAnnotation : Watermark, IWatermarkAnnotation, IEquatable<W
     public IIndelibleWatermark ToIndelibleWatermark()
     {
         return new IndelibleWatermark(
+            FontInfo,
             TrimmingRectangleWidth,
             TrimmingRectangleHeight,
             Text,
-            FontInfo,
             RotationAngleRadians,
             LowerLeftPoint);
     }
