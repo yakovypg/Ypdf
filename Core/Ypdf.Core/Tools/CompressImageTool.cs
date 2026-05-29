@@ -12,7 +12,13 @@ namespace Ypdf.Core.Tools;
 public class CompressImageTool : PythonTool, IMultipleInputTool, IMultipleOutputTool
 {
     public CompressImageTool(
-        ImageCompression imageCompression = default,
+        string? pythonAlias = null,
+        string? virtualEnvironmentPath = null,
+        IOutputWriter? outputWriter = null)
+        : this(new ImageCompression(), pythonAlias, virtualEnvironmentPath, outputWriter) { }
+
+    public CompressImageTool(
+        ImageCompression imageCompression,
         string? pythonAlias = null,
         string? virtualEnvironmentPath = null,
         IOutputWriter? outputWriter = null)
@@ -41,15 +47,16 @@ public class CompressImageTool : PythonTool, IMultipleInputTool, IMultipleOutput
         inputPath = inputPath.Quoted();
         outputPath = outputPath.Quoted();
 
-        string args =
-            $"{imageCompressorPath} -i {inputPath} -o {outputPath} " +
-            $"-q {qualityFactor} -s {sizeFactor}";
+        string args = $"{imageCompressorPath} -i {inputPath} -o {outputPath} -q {qualityFactor}";
 
-        if (ImageCompression.NewWidth is not null)
-            args += $" -W {ImageCompression.NewWidth}";
-
-        if (ImageCompression.NewHeight is not null)
-            args += $" -H {ImageCompression.NewHeight}";
+        if (ImageCompression.NewWidth is not null && ImageCompression.NewHeight is not null)
+        {
+            args += $" -W {ImageCompression.NewWidth} -H {ImageCompression.NewHeight}";
+        }
+        else
+        {
+            args += $" -s {sizeFactor}";
+        }
 
         ExecutePython(args);
     }
