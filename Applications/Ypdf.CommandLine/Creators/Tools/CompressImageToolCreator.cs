@@ -40,7 +40,8 @@ internal sealed class CompressImageToolCreator : ToolCreator
         var toolExecutionParameters = new ToolExecutionParameters(
             tool,
             subcommand.InputPaths,
-            subcommand.OutputPath);
+            subcommand.OutputPath,
+            subcommand.InputPaths.Count == 1);
 
         return new ToolExecutionProvider(toolExecutionParameters);
     }
