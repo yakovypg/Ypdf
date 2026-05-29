@@ -65,26 +65,26 @@ public class IncreasePageSizeTool : ITool
         using var sourceDocument = new PdfDocument(reader);
         using var outputDocument = new PdfDocument(writer);
 
-        if (PageSizeAdjustments.Any())
-            IncreasePageSizes(sourceDocument, PageSizeAdjustments, FillColor);
-        else
-            IncreasePageSizes(sourceDocument, GeneralPageSizeAdjustment, IncreasePageMode, FillColor);
-
         sourceDocument.CopyTo(outputDocument);
+
+        if (PageSizeAdjustments.Any())
+            IncreasePageSizes(outputDocument, PageSizeAdjustments, FillColor);
+        else
+            IncreasePageSizes(outputDocument, GeneralPageSizeAdjustment, IncreasePageMode, FillColor);
     }
 
     private static void IncreasePageSizes(
-        PdfDocument sourceDocument,
+        PdfDocument pdfDocument,
         IEnumerable<PageSizeAdjustment> pageSizeAdjustments,
         Color fillColor)
     {
-        ExtendedArgumentNullException.ThrowIfNull(sourceDocument, nameof(sourceDocument));
+        ExtendedArgumentNullException.ThrowIfNull(pdfDocument, nameof(pdfDocument));
         ExtendedArgumentException.ThrowIfNullOrEmpty(pageSizeAdjustments, nameof(pageSizeAdjustments));
         ExtendedArgumentNullException.ThrowIfNull(fillColor, nameof(fillColor));
 
         foreach (PageSizeAdjustment pageSizeAdjustment in pageSizeAdjustments)
         {
-            PdfPage page = sourceDocument.GetPage(pageSizeAdjustment.PageNumber);
+            PdfPage page = pdfDocument.GetPage(pageSizeAdjustment.PageNumber);
             PageResizer pageResizer = new(page);
 
             pageResizer.IncreasePageSize(
@@ -97,20 +97,20 @@ public class IncreasePageSizeTool : ITool
     }
 
     private static void IncreasePageSizes(
-        PdfDocument sourceDocument,
+        PdfDocument pdfDocument,
         float generalPageSizeAdjustment,
         IncreasePageMode increasePageMode,
         Color fillColor)
     {
-        ExtendedArgumentNullException.ThrowIfNull(sourceDocument, nameof(sourceDocument));
+        ExtendedArgumentNullException.ThrowIfNull(pdfDocument, nameof(pdfDocument));
         DefaultExceptions.ThrowIfNegativeOrZero(generalPageSizeAdjustment, nameof(generalPageSizeAdjustment));
         ExtendedArgumentNullException.ThrowIfNull(fillColor, nameof(fillColor));
 
-        int numOfPages = sourceDocument.GetNumberOfPages();
+        int numOfPages = pdfDocument.GetNumberOfPages();
 
         for (int i = 1; i <= numOfPages; ++i)
         {
-            PdfPage page = sourceDocument.GetPage(i);
+            PdfPage page = pdfDocument.GetPage(i);
             PageResizer pageResizer = new(page);
 
             IncreasePageSize(pageResizer, generalPageSizeAdjustment, increasePageMode, fillColor);
