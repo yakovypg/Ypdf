@@ -165,7 +165,7 @@ You can configure font size, family, color, and opacity.
 ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf \
     --font-size 24 \
     --font-family Times-Bold \
-    --font-color blue \
+    --font-color cyan \
     --font-opacity 0.5
 ```
 
@@ -175,7 +175,7 @@ ypdf add-page-numbers -i /path/to/input.pdf -o /path/to/output.pdf \
     --font-size 24 \
     --font-path /path/to/font.ttf \
     --font-encoding Identity-H \
-    --font-color blue \
+    --font-color cyan \
     --font-opacity 0.5
 ```
 
@@ -219,7 +219,7 @@ You can configure font size, family, color, and opacity.
 ```bash
 ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
     --text "My watermark" \
-    --font-size 72 \
+    --font-size 28 \
     --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5 \
@@ -229,7 +229,7 @@ You can also use your own font instead of font family.
 ```bash
 ypdf add-watermark -i /path/to/input.pdf -o /path/to/output.pdf \
     --text "My watermark" \
-    --font-size 72 \
+    --font-size 28 \
     --font-path /path/to/font.ttf \
     --font-encoding Identity-H \
     --font-color black \
@@ -323,7 +323,7 @@ ypdf text-to-pdf -i /path/to/input.txt -o /path/to/output.pdf -m 50,100,50,100 -
 You can configure font size, family, color, and opacity.
 ```bash
 ypdf text-to-pdf -i /path/to/input.txt -o /path/to/output.pdf \
-    --font-size 72 \
+    --font-size 28 \
     --font-family Times-Bold \
     --font-color black \
     --font-opacity 0.5 \
@@ -332,7 +332,7 @@ ypdf text-to-pdf -i /path/to/input.txt -o /path/to/output.pdf \
 You can also use your own font instead of font family.
 ```bash
 ypdf text-to-pdf -i /path/to/input.txt -o /path/to/output.pdf \
-    --font-size 72 \
+    --font-size 28 \
     --font-path /path/to/font.ttf \
     --font-encoding Identity-H \
     --font-color black \
