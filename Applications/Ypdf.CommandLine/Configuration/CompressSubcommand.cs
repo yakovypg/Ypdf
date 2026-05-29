@@ -61,6 +61,7 @@ internal sealed class CompressSubcommand
         shortName: "e",
         description: "extracted image extension",
         choices: ["jpg", "jpeg", "png", "bmp", "gif", "tiff"],
+        ignoreCaseInChoices: true,
         addDefaultValueToDescription: true,
         addChoicesToDescription: true)
     ]

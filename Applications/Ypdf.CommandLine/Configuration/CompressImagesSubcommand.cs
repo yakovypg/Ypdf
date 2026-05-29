@@ -97,6 +97,7 @@ internal sealed class CompressImagesSubcommand
         shortName: "e",
         description: "output image extension for the case where multiple input files are specified",
         choices: ["jpg", "jpeg", "png", "bmp", "gif", "tiff"],
+        ignoreCaseInChoices: true,
         addDefaultValueToDescription: true,
         addChoicesToDescription: true)
     ]

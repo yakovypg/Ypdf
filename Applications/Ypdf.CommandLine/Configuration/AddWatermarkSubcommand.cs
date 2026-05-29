@@ -248,6 +248,7 @@ internal sealed class AddWatermarkSubcommand
             PdfEncodings.WINANSI,
             PdfEncodings.ZAPFDINGBATS
         ],
+        ignoreCaseInChoices: false,
         addChoicesToDescription: true,
         addDefaultValueToDescription: true)
     ]
@@ -298,6 +299,7 @@ internal sealed class AddWatermarkSubcommand
             StandardFonts.TIMES_BOLDITALIC,
             StandardFonts.ZAPFDINGBATS
         ],
+        ignoreCaseInChoices: false,
         addChoicesToDescription: true,
         addDefaultValueToDescription: true)
     ]

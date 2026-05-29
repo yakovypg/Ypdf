@@ -113,6 +113,7 @@ internal sealed class TextToPdfSubcommand
             PdfEncodings.WINANSI,
             PdfEncodings.ZAPFDINGBATS
         ],
+        ignoreCaseInChoices: false,
         addChoicesToDescription: true,
         addDefaultValueToDescription: true)
     ]
@@ -163,6 +164,7 @@ internal sealed class TextToPdfSubcommand
             StandardFonts.TIMES_BOLDITALIC,
             StandardFonts.ZAPFDINGBATS
         ],
+        ignoreCaseInChoices: false,
         addChoicesToDescription: true,
         addDefaultValueToDescription: true)
     ]
