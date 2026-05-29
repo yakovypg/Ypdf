@@ -15,7 +15,8 @@ public class ToolExecutionProvider : IToolExecutionProvider
 
     public void ExecuteTool()
     {
-        if (ExecutionParameters.Tool is IMultipleInputTool multipleInputTool)
+        if (ExecutionParameters.Tool is IMultipleInputTool multipleInputTool &&
+            !ExecutionParameters.ForceUseAsSigleInputTool)
         {
             multipleInputTool.Execute(
                 ExecutionParameters.InputPaths,
@@ -24,7 +25,7 @@ public class ToolExecutionProvider : IToolExecutionProvider
         else
         {
             ExecutionParameters.Tool.Execute(
-                ExecutionParameters.InputPaths.First(),
+                ExecutionParameters.InputPaths.FirstOrDefault() ?? string.Empty,
                 ExecutionParameters.OutputPath);
         }
     }
