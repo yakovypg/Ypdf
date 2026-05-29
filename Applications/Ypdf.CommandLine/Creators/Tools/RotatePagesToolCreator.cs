@@ -17,7 +17,10 @@ internal sealed class RotatePagesToolCreator : ToolCreator
         ExtendedArgumentNullException.ThrowIfNull(config, nameof(config));
 
         RotatePagesSubcommand subcommand = config.RotatePagesSubcommand;
-        RotateTool tool = new(subcommand.PageRotations);
+
+        RotateTool tool = subcommand.PageRotations.Count > 0
+            ? new(subcommand.PageRotations)
+            : new(subcommand.RotationAngleDegrees);
 
         ToolExecutionParameters toolExecutionParameters = new(
             tool,

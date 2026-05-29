@@ -12,6 +12,7 @@ internal sealed class RotatePagesSubcommand
 
     internal const string InputPathLongName = "input";
     internal const string OutputPathLongName = "output";
+    internal const string RotationAngleDegreesLongName = "angle";
     internal const string PageRotationsLongName = "rotation";
 
     [ValueOption<string>(
@@ -33,13 +34,22 @@ internal sealed class RotatePagesSubcommand
     [OptionGroup("paths", "", "")]
     public string OutputPath { get; set; } = string.Empty;
 
+    [ValueOption<int>(
+        defaultValue: 0,
+        longName: RotationAngleDegreesLongName,
+        shortName: "a",
+        description: "rotation angle in degrees",
+        addDefaultValueToDescription: true)
+    ]
+    [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
+    public int RotationAngleDegrees { get; set; }
+
     [MultipleValueOption<PageRotation>(
         longName: PageRotationsLongName,
         shortName: "r",
         description: "page rotations (Pages:Angle -> 1:-90 or 1,3-5:90)",
-        contextCaptureType: ContextCaptureType.OneOrMore,
-        isRequired: true)
+        contextCaptureType: ContextCaptureType.OneOrMore)
     ]
-    [OptionGroup("appearance", "Appearance", "Options for configuring page appearance")]
+    [OptionGroup("appearance", "", "")]
     public List<PageRotation> PageRotations { get; set; } = [];
 }
