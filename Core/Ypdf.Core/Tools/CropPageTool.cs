@@ -33,7 +33,7 @@ public class CropPageTool : ITool
             PdfPage currPage = sourceDocument.GetPage(i);
             PageCropping cropping = Croppings.FirstOrDefault(t => t.PageNumber == i);
 
-            if (cropping != default)
+            if (cropping == default)
             {
                 outputDocument.AddPage(currPage.CopyTo(outputDocument));
                 continue;
