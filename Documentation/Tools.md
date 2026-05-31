@@ -41,6 +41,17 @@ All supported global configuration values you can see in help menu.
 ypdf config --help
 ```
 
+## Get PDF Document Information
+You can get information about a PDF document.
+```bash
+ypdf info -i /path/to/input.pdf
+```
+
+If the PDF document has a lot of pages, you can set maximum number of page-size entries that will be printed (zero is the default and indicates no limitation).
+```bash
+ypdf info -i /path/to/input.pdf --limit-page-sizes 5
+```
+
 ## Split PDF Document
 You can split a PDF document using custom page ranges.
 ```bash
