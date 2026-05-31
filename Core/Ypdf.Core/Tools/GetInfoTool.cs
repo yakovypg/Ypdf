@@ -70,10 +70,18 @@ public class GetInfoTool : ITool
         ExtendedArgumentNullException.ThrowIfNull(pdfInfo, nameof(pdfInfo));
         ExtendedArgumentNullException.ThrowIfNull(printLine, nameof(printLine));
 
+        double sizeKb = pdfInfo.SizeBytes / 1024.0;
         double sizeMb = pdfInfo.SizeBytes / 1024.0 / 1024.0;
-        double sizeMbRounded = Math.Round(sizeMb, 2);
 
-        printLine.Invoke($"Size (MB): {sizeMbRounded}");
+        string sizePresenter = $"{pdfInfo.SizeBytes} B";
+        const int floatDigits = 2;
+
+        if (sizeMb >= 1)
+            sizePresenter += $" ({Math.Round(sizeMb, floatDigits)} MB)";
+        else if (sizeKb >= 1)
+            sizePresenter += $" ({Math.Round(sizeKb, floatDigits)} KB)";
+
+        printLine.Invoke($"Size: {sizePresenter}");
     }
 
     protected virtual void PrintPageSizes(

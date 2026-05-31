@@ -33,6 +33,7 @@ public class PdfInfo
 
         Name = name;
         NumberOfPages = numberOfPages;
+        SizeBytes = sizeBytes;
         PageSizes = [.. pageSizes];
         CreationTime = creationTime;
         LastAccessTime = lastAccessTime;
