@@ -5,9 +5,9 @@ using Ypdf.Core.Extensions;
 
 namespace Ypdf.Core.Tools;
 
-public class ResizeTool : ITool
+public class ResizePageTool : ITool
 {
-    public ResizeTool(IEnumerable<PageResizing> pageResizings)
+    public ResizePageTool(IEnumerable<PageResizing> pageResizings)
     {
         ExtendedArgumentException.ThrowIfNullOrEmpty(pageResizings, nameof(pageResizings));
         PageResizings = pageResizings;
@@ -26,14 +26,14 @@ public class ResizeTool : ITool
         using var sourceDocument = new PdfDocument(reader);
         using var outputDocument = new PdfDocument(writer);
 
+        sourceDocument.CopyTo(outputDocument);
+
         foreach (PageResizing pageResizing in PageResizings)
         {
-            PdfPage page = sourceDocument.GetPage(pageResizing.PageNumber);
+            PdfPage page = outputDocument.GetPage(pageResizing.PageNumber);
             PageResizer pageResizer = new(page);
 
             pageResizer.ResizePage(pageResizing.Width, pageResizing.Height);
         }
-
-        sourceDocument.CopyTo(outputDocument);
     }
 }

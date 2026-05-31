@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using iText.Kernel.Colors;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using Ypdf.Core.Enumeration;
 using Ypdf.Core.Informing;
@@ -390,11 +391,10 @@ public class PageResizer
         DefaultExceptions.ThrowIfNegativeOrZero(width, nameof(width));
         DefaultExceptions.ThrowIfNegativeOrZero(height, nameof(height));
 
-        _ = new MediaBox(_page)
-        {
-            Width = width,
-            Height = height
-        };
+        var rectangle = new Rectangle(0, 0, width, height);
+
+        _page.SetMediaBox(rectangle);
+        _page.SetCropBox(rectangle);
     }
 
     public void IncreasePageSizeLeft(float value)

@@ -34,6 +34,7 @@ internal sealed class SupportedToolsCreator : ISupportedToolsCreator
             { RemovePasswordSubcommand.Name, new RemovePasswordToolCreator(globalConfig) },
             { RemoveWatermarkAnnotationSubcommand.Name, new RemoveWatermarkAnnotationToolCreator(globalConfig) },
             { ReorderPagesSubcommand.Name, new ReorderPagesToolCreator(globalConfig) },
+            { ResizePagesSubcommand.Name, new ResizePagesToolCreator(globalConfig) },
             { RotatePagesSubcommand.Name, new RotatePagesToolCreator(globalConfig) },
             { SetPasswordSubcommand.Name, new SetPasswordToolCreator(globalConfig) },
             { SplitSubcommand.Name, new SplitToolCreator(globalConfig) },

@@ -74,6 +74,9 @@ internal sealed class YpdfParserConfig
     [Subcommand(ReorderPagesSubcommand.Name, ReorderPagesSubcommand.Description)]
     public ReorderPagesSubcommand ReorderPagesSubcommand { get; } = new();
 
+    [Subcommand(ResizePagesSubcommand.Name, ResizePagesSubcommand.Description)]
+    public ResizePagesSubcommand ResizePagesSubcommand { get; } = new();
+
     [Subcommand(RotatePagesSubcommand.Name, RotatePagesSubcommand.Description)]
     public RotatePagesSubcommand RotatePagesSubcommand { get; } = new();
 
