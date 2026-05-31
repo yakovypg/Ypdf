@@ -23,6 +23,11 @@ CONFIG_SHOW_OUTPUT="$OUTPUT_DIR/config_show.txt"
 CONFIG_SAVE_OUTPUT="$OUTPUT_DIR/config_save.txt"
 CONFIG_RESET_OUTPUT="$OUTPUT_DIR/config_reset.txt"
 
+GET_INFO_INPUT="$INPUT_DIR/pdf_different_pages.pdf"
+GET_INFO_OUTPUT="$OUTPUT_DIR/get_info.txt"
+GET_INFO_WITH_LIMIT_INPUT="$INPUT_DIR/pdf_different_pages.pdf"
+GET_INFO_WITH_LIMIT_OUTPUT="$OUTPUT_DIR/get_info_with_limit.txt"
+
 SPLIT_BY_RANGES_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
 SPLIT_BY_RANGES_OUTPUT="$OUTPUT_DIR/split_by_ranges"
 SPLIT_BY_DEFAULT_SIZE_INPUT="$INPUT_DIR/pdf_60pages_76mb.pdf"
@@ -64,7 +69,7 @@ ROTATE_ALL_OUTPUT="$OUTPUT_DIR/rotate_all.pdf"
 ROTATE_CUSTOM_INPUT="$INPUT_DIR/pdf_14pages_colored.pdf"
 ROTATE_CUSTOM_OUTPUT="$OUTPUT_DIR/rotate_custom.pdf"
 
-CROP_INPUT="$INPUT_DIR/pdf_rectangles_1.pdf"
+CROP_INPUT="$INPUT_DIR/pdf_rectangles_2.pdf"
 CROP_OUTPUT="$OUTPUT_DIR/crop.pdf"
 
 DIVIDE_INPUT="$INPUT_DIR/pdf_rectangles_1.pdf"
@@ -243,6 +248,27 @@ test_config_reset() {
   fi
 
   check_output_lines_equal_to "$CONFIG_RESET_OUTPUT" 0
+  return $?
+}
+
+test_get_info() {
+  if ! "$EXECUTABLE" -y info -i "$GET_INFO_INPUT" -o "$GET_INFO_OUTPUT"; then
+    return 1
+  fi
+
+  check_output_lines_greater_than "$GET_INFO_OUTPUT" 0
+  return $?
+}
+
+test_get_info_with_limit() {
+  if ! "$EXECUTABLE" -y info \
+    -i "$GET_INFO_WITH_LIMIT_INPUT" \
+    -o "$GET_INFO_WITH_LIMIT_OUTPUT" \
+    --limit-page-sizes 5; then
+    return 1
+  fi
+
+  check_output_lines_greater_than "$GET_INFO_OUTPUT" 0
   return $?
 }
 
@@ -446,7 +472,7 @@ test_divide() {
   if ! "$EXECUTABLE" -y divide \
     -i "$DIVIDE_INPUT" \
     -o "$DIVIDE_OUTPUT" \
-    --division 1:horizontal 3-4:vertical,10; then
+    --division "1:horizontal" "3-4:vertical,10"; then
 
     return 1
   fi
@@ -975,6 +1001,8 @@ TEST_FUNCTIONS=(
   test_config_show
   test_config_save
   test_config_reset
+  test_get_info
+  test_get_info_with_limit
   test_split_by_ranges
   test_split_by_default_size
   test_split_by_custom_size
