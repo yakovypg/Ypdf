@@ -75,6 +75,9 @@ CROP_OUTPUT="$OUTPUT_DIR/crop.pdf"
 DIVIDE_INPUT="$INPUT_DIR/pdf_rectangles_1.pdf"
 DIVIDE_OUTPUT="$OUTPUT_DIR/divide.pdf"
 
+RESIZE_INPUT="$INPUT_DIR/pdf_with_images_and_text.pdf"
+RESIZE_OUTPUT="$OUTPUT_DIR/resize.pdf"
+
 ADD_PAGE_NUMBERS_DEFAULT_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
 ADD_PAGE_NUMBERS_DEFAULT_OUTPUT="$OUTPUT_DIR/add_page_numbers_default.pdf"
 ADD_PAGE_NUMBERS_CUSTOM_INPUT="$INPUT_DIR/pdf_10pages_blue.pdf"
@@ -473,6 +476,18 @@ test_divide() {
     -i "$DIVIDE_INPUT" \
     -o "$DIVIDE_OUTPUT" \
     --division "1:horizontal" "3-4:vertical,10"; then
+
+    return 1
+  fi
+
+  return 0
+}
+
+test_resize() {
+  if ! "$EXECUTABLE" -y resize \
+    -i "$RESIZE_INPUT" \
+    -o "$RESIZE_OUTPUT" \
+    --resizing "3:1920,1080" "2:500,500"; then
 
     return 1
   fi
@@ -1021,6 +1036,7 @@ TEST_FUNCTIONS=(
   test_rotate_custom
   test_crop
   test_divide
+  test_resize
   test_add_page_numbers_default
   test_add_page_numbers_custom
   test_add_page_numbers_with_font
