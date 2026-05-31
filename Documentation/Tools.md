@@ -141,16 +141,24 @@ ypdf rotate -i /path/to/input.pdf -o /path/to/output.pdf -r 2:90 1,3-5:180
 ```
 
 ## Crop PDF Document Pages
-You can crop specific pages of a PDF to a given rectangle. For example, the following command crops pages 1 and 3 to the rectangle with lower-left corner (30,40) and upper-right corner (60,60).
+You can crop specific pages of a PDF document to a given rectangle. For example, the following command crops pages 1 and 3 to the rectangle with lower-left corner (30,40) and upper-right corner (60,60).
 ```bash
 ypdf crop -i /path/to/input.pdf -o /path/to/output.pdf --cropping 1,3:(30;40),(60;60)
 ```
 
 ## Divide PDF Document Pages
-You can split specific pages of a PDF into two parts. For example, the following command splits page 1 into two equal horizontal parts, and splits pages 3 and 4 vertically with the dividing line shifted 10 pixels to the right (making the right part 10 pixels narrower than the left).
+You can split specific pages of a PDF document into two parts. For example, the following command splits page 1 into two equal horizontal parts, and splits pages 3 and 4 vertically with the dividing line shifted 10 pixels to the right (making the right part 10 pixels narrower than the left).
 ```bash
 ypdf divide -i /path/to/input.pdf -o /path/to/output.pdf --division 1:horizontal 3-4:vertical,10
 ```
+
+## Resize PDF Document Pages
+You can resize specific pages within a PDF document. For example, the following command resizes the third page to 1920x1080 and the second page to 500x500.
+```bash
+ypdf resize -i /path/to/input.pdf -o /path/to/output.pdf --resizing 3:1920,1080 2:500,500
+```
+
+Note that this action does not scale or center page content. It only crops pages or expands the page canvas to match the specified size.
 
 ## Add Page Numbers To PDF Document
 You can add page numbers to a PDF document.
