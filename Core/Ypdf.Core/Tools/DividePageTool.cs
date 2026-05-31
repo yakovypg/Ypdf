@@ -33,7 +33,7 @@ public class DividePageTool : ITool
             PdfPage currPage = sourceDocument.GetPage(i);
             PageDivision division = Divisions.FirstOrDefault(t => t.PageNumber == i);
 
-            if (division != default)
+            if (division == default)
             {
                 outputDocument.AddPage(currPage.CopyTo(outputDocument));
                 continue;
