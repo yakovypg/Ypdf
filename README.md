@@ -27,11 +27,13 @@ Explore the various components to utilize **Ypdf** in the way that best suits yo
 
 ## Table of contents
 *    [Main Features](#main-features)
+*    [Documentation](#documentation)
 *    [Contributing](#contributing)
 *    [License](#license)
 
 ## Main Features
 **Ypdf** supports the following main features:
+- Get PDF document information
 - Split PDF document
 - Merge PDF documents
 - Compress PDF document
@@ -42,6 +44,7 @@ Explore the various components to utilize **Ypdf** in the way that best suits yo
 - Rotate PDF document pages
 - Crop PDF document pages
 - Divide PDF document pages
+- Resize PDF document pages
 - Add page numbers to PDF document
 - Add watermark to PDF document
 - Remove watermark from PDF document
@@ -52,6 +55,9 @@ Explore the various components to utilize **Ypdf** in the way that best suits yo
 - Set password to PDF document
 - Remove password from PDF document
 - Compress images
+
+## Documentation
+You can read our documentation in the [DOCUMENTATION.md](DOCUMENTATION.md).
 
 ## Contributing
 Contributions are welcome, have a look at the [CONTRIBUTING.md](CONTRIBUTING.md) document for more information.
