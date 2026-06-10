@@ -1,0 +1,12 @@
+[submodule "Ypdf.Core"]
+	path = Ypdf.Core
+	url = https://github.com/yakovypg/Ypdf.Core
+[submodule "Ypdf.CommandLine"]
+	path = Ypdf.CommandLine
+	url = https://github.com/yakovypg/Ypdf.CommandLine
+[submodule "Ypdf.Web"]
+	path = Ypdf.Web
+	url = https://github.com/yakovypg/Ypdf.Web
+[submodule "Ypdf.Desktop"]
+	path = Ypdf.Desktop
+	url = https://github.com/yakovypg/Ypdf.Desktop
