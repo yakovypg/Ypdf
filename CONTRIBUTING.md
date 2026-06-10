@@ -3,7 +3,7 @@ Thank you for taking the time to contribute! All types of contributions are welc
 
 When contributing to this project, please first discuss the change you wish to make via [Discussions](https://github.com/yakovypg/Ypdf/discussions) or [Issues](https://github.com/yakovypg/Ypdf/issues) with the project owners. In addition, please follow code of conduct in all your interactions with the project.
 
-> If you don't have time to contribute, you may want to consider the following easy ways to support the project:
+> If you do not have time to contribute, you may want to consider the following easy ways to support the project:
 > - Star the project.
 > - Refer this project in your project's files.
 > - Write about the project on social media.
@@ -20,7 +20,7 @@ We actively welcome your pull requests. Follow these steps:
 7. Mark your Pull Request ready for review.
 
 ## Discussions
-If you don't understand something and need clarification, you can always ask us via [Discussions](https://github.com/yakovypg/Ypdf/discussions) or [Issues](https://github.com/yakovypg/Ypdf/issues). Before you ask a question, it is best to read available [documantation](DOCUMENTATION.md) and search for existing [Discussions](https://github.com/yakovypg/Ypdf/discussions) and [Issues](https://github.com/yakovypg/Ypdf/issues) that might help you.
+If you do not understand something and need clarification, you can always ask us via [Discussions](https://github.com/yakovypg/Ypdf/discussions) or [Issues](https://github.com/yakovypg/Ypdf/issues). Before you ask a question, it is best to read available [documantation](DOCUMENTATION.md) and search for existing [Discussions](https://github.com/yakovypg/Ypdf/discussions) and [Issues](https://github.com/yakovypg/Ypdf/issues) that might help you.
 
 If you are going to ask a question or bring attention to a problem, we recommend the following:
 * Open a Discission or an Issue.
