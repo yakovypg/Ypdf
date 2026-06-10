@@ -10,4 +10,6 @@ First, here are some important points to keep in mind:
 
 ## Installation
 
-## Building From Source
+## Build From Source
+
+## Run Tests
