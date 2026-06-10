@@ -1,2 +1,0 @@
-# Short README
-CoreDirectories.Prepare();
