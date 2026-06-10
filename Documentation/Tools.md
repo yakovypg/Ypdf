@@ -1,5 +1,32 @@
 # Tools Documentation
-This document provides essential information on using **Ypdf** and all its tools, guiding you through the functionalities and features available for effective PDF management.
+This document provides essential information on using **Ypdf.CommandLine** and all its tools, guiding you through the functionalities and features available for effective PDF management.
+
+## Table of contents
+*    [Get Help](#get-help)
+*    [Get Version](#get-version)
+*    [Change Global Config](#change-global-config)
+*    [Get PDF Document Information](#get-pdf-document-information)
+*    [Split PDF Document](#split-pdf-document)
+*    [Merge PDF Documents](#merge-pdf-documents)
+*    [Compress PDF Document](#compress-pdf-document)
+*    [Copy PDF Document](#copy-pdf-document)
+*    [Remove Pages From PDF Document](#remove-pages-from-pdf-document)
+*    [Move PDF Document Page](#move-pdf-document-page)
+*    [Reorder PDF Document Pages](#reorder-pdf-document-pages)
+*    [Rotate PDF Document Pages](#rotate-pdf-document-pages)
+*    [Crop PDF Document Pages](#crop-pdf-document-pages)
+*    [Divide PDF Document Pages](#divide-pdf-document-pages)
+*    [Resize PDF Document Pages](#resize-pdf-document-pages)
+*    [Add Page Numbers To PDF Document](#add-page-numbers-to-pdf-document)
+*    [Add Watermark To PDF Document](#add-watermark-to-pdf-document)
+*    [Remove Watermark From PDF Document](#remove-watermark-from-pdf-document)
+*    [Convert Images To PDF Document](#convert-images-to-pdf-document)
+*    [Convert Text To PDF Document](#convert-text-to-pdf-document)
+*    [Extract Images From PDF Document](#extract-images-from-pdf-document)
+*    [Extract Text From PDF Document](#extract-text-from-pdf-document)
+*    [Set Password To PDF Document](#set-password-to-pdf-document)
+*    [Remove Password From PDF Document](#remove-password-from-pdf-document)
+*    [Compress Images](#compress-images)
 
 ## Get Help
 You can get a list of parameters and tools with explanations.
