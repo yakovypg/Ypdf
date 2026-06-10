@@ -27,7 +27,7 @@ Explore the various components to utilize **Ypdf** in the way that best suits yo
 
 ## Table of contents
 *    [Main Features](#main-features)
-*    [Documentation](#documentation)
+*    [Quick Start](#quick-start)
 *    [Contributing](#contributing)
 *    [License](#license)
 
@@ -56,8 +56,12 @@ Explore the various components to utilize **Ypdf** in the way that best suits yo
 - Remove password from PDF document
 - Compress images
 
-## Documentation
-You can read our documentation in the [DOCUMENTATION.md](DOCUMENTATION.md).
+## Quick Start
+This repository aggregates individual projects — see each project's repository for details. As for this repository, you can start working with it after completing the following steps.
+```bash
+git clone https://github.com/yakovypg/Ypdf.git --recurse-submodules
+git submodule update --init --recursive
+```
 
 ## Contributing
 Contributions are welcome, have a look at the [CONTRIBUTING.md](CONTRIBUTING.md) document for more information.
