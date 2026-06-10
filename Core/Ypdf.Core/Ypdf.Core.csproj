@@ -9,7 +9,7 @@
     <Company>yakovypg</Company>
     <Copyright>Copyright © yakovypg 2022–2026</Copyright>
     <PackageTags>pdf;pdf-library;cross-platform-pdf;pdf-tools;pdf-converter;split-pdf;merge-pdf;pdf2image;pdf-watermark;pdf2text;pdf-password;rotate-pdf;image2pdf;compress-pdf;text2pdf;divide-pdf;crop-pdf;reorder-pdf;remove-pages-pdf;page-numbers-pdf</PackageTags>
-    <Description>Ypdf.Core is a cross-platform, free, and open source library for PDF document processing. It offers a simple high-level API for common tasks as well as lower-level interfaces for more advanced PDF manipulation.</Description>
+    <Description>Ypdf.Core is a cross-platform, free, open source C# library for PDF document processing. It offers a simple high-level API for common tasks as well as lower-level interfaces for more advanced PDF manipulation.</Description>
     <PackageProjectUrl>https://github.com/yakovypg/Ypdf.Core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/yakovypg/Ypdf.Core</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
