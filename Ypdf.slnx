@@ -1,1 +1,26 @@
-<Solution />
+<Solution>
+  <Folder Name="/Ypdf.CommandLine/" />
+  <Folder Name="/Ypdf.CommandLine/Application/">
+    <Project Path="Ypdf.CommandLine/Application/Ypdf.CommandLine/Ypdf.CommandLine.csproj" />
+  </Folder>
+  <Folder Name="/Ypdf.CommandLine/Core/" />
+  <Folder Name="/Ypdf.CommandLine/Core/Ypdf.Core/" />
+  <Folder Name="/Ypdf.CommandLine/Core/Ypdf.Core/Core/">
+    <Project Path="Ypdf.CommandLine/Core/Ypdf.Core/Core/Ypdf.Core/Ypdf.Core.csproj" />
+  </Folder>
+  <Folder Name="/Ypdf.Core/" />
+  <Folder Name="/Ypdf.Core/Core/">
+    <Project Path="Ypdf.Core/Core/Ypdf.Core/Ypdf.Core.csproj" />
+  </Folder>
+  <Folder Name="/Ypdf.Desktop/" />
+  <Folder Name="/Ypdf.Desktop/Application/">
+    <Project Path="Ypdf.Desktop/Application/Ypdf.Desktop/Ypdf.Desktop.csproj" />
+  </Folder>
+  <Folder Name="/Ypdf.Web/" />
+  <Folder Name="/Ypdf.Web/Applications/">
+    <Project Path="Ypdf.Web/Applications/Ypdf.Web.WebApp/Ypdf.Web.WebApp.csproj" />
+  </Folder>
+  <Folder Name="/Ypdf.Web/Domain/">
+    <Project Path="Ypdf.Web/Domain/Ypdf.Web.Domain/Ypdf.Web.Domain.csproj" />
+  </Folder>
+</Solution>
