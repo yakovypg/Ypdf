@@ -14,6 +14,8 @@
 ## About
 **Ypdf** is a cross-platform, free, open-source suite for PDF processing that provides commonly requested features via multiple front-ends and a shared core library.
 
+> **_NOTE:_** A new version of **Ypdf.Desktop** is currently under development. The previous one is available [here](https://github.com/yakovypg/Ypdf/tree/Desktop). **Ypdf.Web** also does not have a final version yet.
+
 It encompasses graphical user interface (GUI), command-line user interface (CLI) and a core library that implements the application logic (other repositories are front‑ends).
 - [Ypdf.Desktop](https://github.com/yakovypg/Ypdf.Desktop) — Desktop application
 - [Ypdf.Web](https://github.com/yakovypg/Ypdf.Web) — Web application
