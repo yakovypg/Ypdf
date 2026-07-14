@@ -50,6 +50,7 @@ Explore the various components to utilize **Ypdf** in the way that best suits yo
 - Remove watermark from PDF document
 - Convert images to PDF document
 - Convert text to PDF document
+- Convert PDF document pages to images
 - Extract images from PDF document
 - Extract text from PDF document
 - Set password to PDF document
